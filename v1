@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFusion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        header nav a:hover {
+            text-decoration: underline;
+        }
+        .hero {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+        .hero p {
+            font-size: 20px;
+            margin: 10px 0 30px;
+        }
+        .hero button {
+            padding: 15px 30px;
+            background-color: #FFC107;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .featured {
+            display: flex;
+            justify-content: space-around;
+            padding: 40px 20px;
+            background-color: white;
+        }
+        .featured div {
+            text-align: center;
+            width: 30%;
+        }
+        .featured img {
+            width: 100%;
+            height: auto;
+        }
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 40px 20px;
+        }
+        .blog-post {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">TechFusion</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Technology</a>
+            <a href="#">Entertainment</a>
+            <a href="#">Productivity</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Stay Ahead in Technology, Entertainment, and Productivity</h1>
+        <p>Your go-to source for the latest tech news, entertainment updates, and productivity tips.</p>
+        <button>Explore Now</button>
+    </section>
+
+    <section class="featured">
+        <div>
+            <img src="tech_image.jpg" alt="Technology">
+            <h2>Technology</h2>
+            <p>Discover the latest trends in tech.</p>
+            <a href="#">Read More</a>
+        </div>
+        <div>
+            <img src="entertainment_image.jpg" alt="Entertainment">
+            <h2>Entertainment</h2>
+            <p>Get updates on movies and music.</p>
+            <a href="#">Read More</a>
+        </div>
+        <div>
+            <img src="productivity_image.jpg" alt="Productivity">
+            <h2>Productivity</h2>
+            <p>Boost your workflow with our tips.</p>
+            <a href="#">Read More</a>
+        </div>
+    </section>
+
+    <section class="blog-posts">
+        <div class="blog-post">
+            <img src="post_image1.jpg" alt="Post 1">
+            <h3>Latest in Technology</h3>
+            <p>Discover new innovations in tech this week.</p>
+        </div>
+        <div class="blog-post">
+            <img src="post_image2.jpg" alt="Post 2">
+            <h3>New Movies to Watch</h3>
+            <p>Check out the latest blockbusters.</p>
+        </div>
+        <div class="blog-post">
+            <img src="post_image3.jpg" alt="Post 3">
+            <h3>Improve Your Productivity</h3>
+            <p>Learn techniques to enhance your workflow.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 TechFusion. All Rights Reserved.</p>
+        <p>
+            <a href="#">About Us</a> | 
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a>
+        </p>
+        <p>Follow us on: 
+            <a href="#">Facebook</a> | 
+            <a href="#">Twitter</a> | 
+            <a href="#">Instagram</a>
+        </p>
+    </footer>
+</body>
+</html>
