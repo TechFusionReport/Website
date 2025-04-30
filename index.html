@@ -190,14 +190,73 @@
         }
         
         /* Remove old icon styles if they exist */
-.category-icon i {
-    display: none;
-}
+        .category-icon i {
+            display: none;
+        }
 
-/* Remove text titles if they were in h2 tags */
-.category-card h2 {
-    display: none;
-}
+        /* Remove text titles if they were in h2 tags */
+        .category-card h2 {
+            display: none;
+        }
+
+        /* Base Grid Layout - 3 columns by default */
+        .subcategories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        /* Tablet - 2 columns */
+        @media (max-width: 992px) {
+            .subcategories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Mobile - 1 column */
+        @media (max-width: 576px) {
+            .subcategories {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Subcategory Card Styles (single definition) */
+        .subcategory-card {
+            background: var(--color-dark-gray);
+            border: 1px solid var(--color-divider-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            min-width: 0;
+            break-inside: avoid;
+            aspect-ratio: 1 / 1.2;
+        }
+        
+        .subcategory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
+            border-color: var(--color-bright-blue);
+        }
+        
+        .subcategory-icon {
+            font-size: 2.5rem;
+            color: var(--color-bright-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .subcategory-card h3 {
+            color: var(--color-white);
+            margin-bottom: 0.5rem;
+        }
+        
+        .subcategory-card p {
+            color: var(--color-light-gray);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
         .btn {
             display: inline-block;
             padding: 0.6rem 1.2rem;
@@ -386,7 +445,7 @@
             <div class="header-content">
                 <div class="logo">
                     <a href="index.html">
-                        <img src="/Users/kzn/Documents/TechFusion/Website v2/Images/TFR Header Logo_NB.png" alt="TechFusion Report Logo" class="logo-image">
+                        <img src="Images/TFR Header Logo_NB.png" alt="TechFusion Report Logo" class="logo-image">
                     </a>
                 </div>
                 <nav>
@@ -419,7 +478,7 @@
             <div class="category-cards">
                 <div class="category-card">
                     <div class="category-icon">
-                        <img src="/Users/kzn/Documents/TechFusion/Website v2/Images/Tech_NB.png" alt="Technology" class="category-image">
+                        <img src="/Images/Tech_NB.png" alt="Technology" class="category-image">
                     </div>
                     <h2>Technology</h2>
                     <p>Latest tech news, reviews, and guides covering smartphones, AI, smart home devices and more.</p>
@@ -428,7 +487,7 @@
                 
                 <div class="category-card">
                     <div class="category-icon">
-                        <img src="/Users/kzn/Documents/TechFusion/Website v2/Images/Entertainment_NB.png" alt="Entertainment" class="category-image">
+                        <img src="/Images/Entertainment_NB.png" alt="Entertainment" class="category-image">
                     </div>
                     <h2>Entertainment</h2>
                     <p>Streaming recommendations, gaming news, and digital entertainment trends.</p>
@@ -437,7 +496,7 @@
                 
                 <div class="category-card">
                     <div class="category-icon">
-                        <img src="/Users/kzn/Documents/TechFusion/Website v2/Images/prod_NB.png" alt="Productivity" class="category-image">
+                        <img src="/Images/prod_NB.png" alt="Productivity" class="category-image">
                     </div>
                     <h2>Productivity</h2>
                     <p>Tools and techniques to maximize your efficiency in work and life.</p>
