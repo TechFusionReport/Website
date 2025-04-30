@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFusion Report | Technology, Entertainment & Productivity</title>
+    <meta name="description" content="Your source for Technology, Entertainment, and Productivity insights">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-dark-gray: #1A1A1A;
+            --color-divider-gray: #333333;
+            --color-light-gray: #CCCCCC;
+            --color-bright-blue: #00AEEF;
+            --color-lime-green: #A4C639;
+            --color-cyan: #00FFFF;
+            --color-electric-green: #00FF66;
+            --color-white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--color-black);
+            color: var(--color-light-gray);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--color-dark-gray);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 50px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-image {
+            height: 100%;
+            width: auto;
+            max-width: 200px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .logo-image:hover {
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--color-bright-blue);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--color-dark-gray), var(--color-black));
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-white);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--color-light-gray);
+        }
+        
+        /* Category Cards */
+        .category-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .category-card {
+            background: var(--color-dark-gray);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-divider-gray);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
+            border-color: var(--color-bright-blue);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--color-bright-blue);
+        }
+        
+        .category-card h2 {
+            margin-bottom: 1rem;
+            color: var(--color-white);
+        }
+        
+        .category-card p {
+            margin-bottom: 1.5rem;
+            color: var(--color-light-gray);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--color-bright-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #0088cc;
+        }
+        
+        /* Featured Articles */
+        .featured-section {
+            margin: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--color-white);
+            margin-bottom: 0.5rem;
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .featured-card {
+            background-color: var(--color-dark-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-divider-gray);
+        }
+        
+        .featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
+        }
+        
+        .featured-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .featured-card:hover .featured-img img {
+            transform: scale(1.05);
+        }
+        
+        .featured-content {
+            padding: 1.5rem;
+        }
+        
+        .featured-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-white);
+        }
+        
+        .featured-content p {
+            color: var(--color-light-gray);
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-dark-gray);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--color-divider-gray);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--color-white);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column ul li a {
+            color: var(--color-light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--color-bright-blue);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--color-bright-blue);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-divider-gray);
+            color: var(--color-light-gray);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Same header as technology.html -->
+    
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> &raquo; <span>Entertainment</span>
+            </div>
+            
+            <!-- Category Header -->
+            <div class="category-header">
+                <h1>Entertainment</h1>
+                <p>Your guide to the latest in movies, TV shows, music, and pop culture news that tech-savvy consumers care about.</p>
+            </div>
+            
+            <!-- Subcategories -->
+            <div class="subcategories">
+                <div class="subcategory-card">
+                    <div class="subcategory-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Music</h3>
+                    <p>Latest releases, tech in music, and streaming guides</p>
+                    <a href="music.html" class="btn">Explore</a>
+                </div>
+                <div class="subcategory-card">
+                    <div class="subcategory-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>Movies</h3>
+                    <p>Film reviews, streaming options, and cinema tech</p>
+                    <a href="movies.html" class="btn">Explore</a>
+                </div>
+                <div class="subcategory-card">
+                    <div class="subcategory-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h3>TV Shows</h3>
+                    <p>Series reviews, streaming guides, and binge-worthy tech</p>
+                    <a href="tv-shows.html" class="btn">Explore</a>
+                </div>
+            </div>
+            
+            <!-- Featured Entertainment Articles -->
+            <div class="featured-section">
+                <div class="section-title">
+                    <h2>Featured Entertainment Articles</h2>
+                </div>
+                <div class="featured-grid">
+                    <div class="featured-card">
+                        <div class="featured-img">
+                            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Summer Movies">
+                        </div>
+                        <div class="featured-content">
+                            <div class="featured-meta">
+                                <span>Movies</span>
+                                <span>June 18, 2023</span>
+                            </div>
+                            <h3>Summer 2023 Blockbuster Preview: What to Watch</h3>
+                            <p>The most anticipated films hitting theaters and streaming platforms this season.</p>
+                            <a href="summer-movies.html" class="btn">Read More</a>
+                        </div>
+                    </div>
+                    <div class="featured-card">
+                        <div class="featured-img">
+                            <img src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Music Tech">
+                        </div>
+                        <div class="featured-content">
+                            <div class="featured-meta">
+                                <span>Music</span>
+                                <span>June 15, 2023</span>
+                            </div>
+                            <h3>How AI is Changing Music Production in 2023</h3>
+                            <p>Exploring the revolutionary tools transforming how music is made.</p>
+                            <a href="ai-music.html" class="btn">Read More</a>
+                        </div>
+                    </div>
+                    <div class="featured-card">
+                        <div class="featured-img">
+                            <img src="https://images.unsplash.com/photo-1608889825103-eb5b0774cf54?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="TV Shows">
+                        </div>
+                        <div class="featured-content">
+                            <div class="featured-meta">
+                                <span>TV Shows</span>
+                                <span>June 12, 2023</span>
+                            </div>
+                            <h3>The Best Sci-Fi Series to Stream Right Now</h3>
+                            <p>Our curated selection of mind-bending shows for tech enthusiasts.</p>
+                            <a href="sci-fi-tv.html" class="btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Back to Blog -->
+            <div class="back-to-blog">
+                <a href="index.html" class="btn">&larr; Back to Main Blog</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Same footer as technology.html -->
+</body>
+</html>
