@@ -4,470 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechFusion Report | Technology, Entertainment & Productivity</title>
-    <meta name="description" content="Your source for Technology, Entertainment, and Productivity insights">
+    <meta name="description" content="Your source for Technology, Entertainment, and Productivity insights, reviews, and guides.">
+    
+    <!-- Additional meta tags for SEO and sharing -->
+    <meta name="author" content="TechFusion Report">
+    <meta name="keywords" content="technology, entertainment, productivity, tech news, streaming, smart home, AI tools">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techfusionreport.com/">
+    <meta property="og:title" content="TechFusion Report | Technology, Entertainment & Productivity">
+    <meta property="og:description" content="Your source for Technology, Entertainment, and Productivity insights, reviews, and guides.">
+    <meta property="og:image" content="./images/tfr-social-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://techfusionreport.com/">
+    <meta property="twitter:title" content="TechFusion Report | Technology, Entertainment & Productivity">
+    <meta property="twitter:description" content="Your source for Technology, Entertainment, and Productivity insights, reviews, and guides.">
+    <meta property="twitter:image" content="./images/tfr-social-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="./images/favicon.ico">
+    <link rel="apple-touch-icon" href="./images/apple-touch-icon.png">
+    
+    <!-- External CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --color-black: #000000;
-            --color-dark-gray: #1A1A1A;
-            --color-divider-gray: #333333;
-            --color-light-gray: #CCCCCC;
-            --color-bright-blue: #00AEEF;
-            --color-lime-green: #A4C639;
-            --color-cyan: #00FFFF;
-            --color-electric-green: #00FF66;
-            --color-white: #FFFFFF;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--color-black);
-                color: var(--color-light-gray);
-            line-height: 1.6;
-        }
-        
-        /* Header Styles */
-        header {
-            background: linear-gradient( 
-            135deg, 
-            var(--color-bright-blue) 0%, 
-            var(--color-electric-green) 100%
-            );
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .header-content {
-            position: relative; /* For pseudo-element */
-        }
-
-        /* Optional: Gradient overlay for better contrast */
-        .header-content::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.2);
-            z-index: -1;
-    }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            height: 100px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-image {
-            height: 50%;
-            width: 300px;
-            transition: opacity 0.3s ease;
-            filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
-        }
-        
-        .logo-image:hover {
-            opacity: 0.9;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 1.5rem;
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        nav ul li a:hover {
-            color: var(--color-bright-blue);
-        }
-        
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(135deg, var(--color-dark-gray), var(--color-black));
-            margin-bottom: 2rem;
-            border-radius: 8px;
-        }
-        
-        .logo {
-            height: 100px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-image {
-            height: 100%;
-            width: 300px;
-            transition: opacity 0.3s ease;
-            filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
-        }
-        
-        .logo-image:hover {
-            opacity: 0.9;
-        }
-        
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--color-white);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--color-light-gray);
-        }
-        
-        /* Category Cards */
-        .category-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .category-card {
-            background: var(--color-dark-gray);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid var(--color-divider-gray);
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
-            border-color: var(--color-bright-blue);
-        }
-        
-        .category-icon {
-            height: 80px; /* Fixed height for all icons */
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .category-image {
-             height: 100%; /* Maintain aspect ratio */
-            width: auto;
-            max-width: 350px; /* Prevent overflow */
-            object-fit: contain;
-        }   
-
-        .category-card h2 {
-            margin-bottom: 1rem;
-            color: var(--color-white);
-        }
-        
-        .category-card p {
-            margin-bottom: 1.5rem;
-            color: var(--color-light-gray);
-        }
-        
-        /* Remove old icon styles if they exist */
-        .category-icon i {
-             display: none;
-        }
-
-        /* Remove text titles if they were in h2 tags */
-        .category-card h2 {
-        display: none;
-        }
-
-        /* Base Grid Layout - 3 columns by default */
-        .subcategories {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        /* Tablet - 2 columns */
-        @media (max-width: 992px) {
-            .subcategories {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Mobile - 1 column */
-        @media (max-width: 576px) {
-            .subcategories {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Subcategory Card Styles (single definition) */
-        .subcategory-card {
-            background: var(--color-dark-gray);
-            border: 1px solid var(--color-divider-gray);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            min-width: 0;
-            break-inside: avoid;
-            aspect-ratio: 1 / 1.2;
-        }
-
-        .subcategory-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
-            border-color: var(--color-bright-blue);
-        }
-
-        .subcategory-icon {
-            font-size: 2.5rem;
-            color: var(--color-bright-blue);
-            margin-bottom: 1rem;
-        }
-
-        .subcategory-card h3 {
-            color: var(--color-white);
-            margin-bottom: 0.5rem;
-        }
-
-        .subcategory-card p {
-            color: var(--color-light-gray);
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-        }
-            
-        .btn {
-            display: inline-block;
-            padding: 0.6rem 1.2rem;
-            background-color: var(--color-bright-blue);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            background-color: #0088cc;
-        }
-        
-        /* Featured Articles */
-        .featured-section {
-            margin: 4rem 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .section-title h2 {
-            font-size: 2rem;
-            color: var(--color-white);
-            margin-bottom: 0.5rem;
-        }
-        
-        .featured-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .featured-card {
-            background-color: var(--color-dark-gray);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid var(--color-divider-gray);
-        }
-        
-        .featured-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
-        }
-        
-        .featured-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .featured-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .featured-card:hover .featured-img img {
-            transform: scale(1.05);
-        }
-        
-        .featured-content {
-            padding: 1.5rem;
-        }
-        
-        .featured-content h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--color-white);
-        }
-        
-        .featured-content p {
-            color: var(--color-light-gray);
-            margin-bottom: 1rem;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--color-dark-gray);
-            color: white;
-            padding: 3rem 0 1rem;
-            margin-top: 3rem;
-            border-top: 1px solid var(--color-divider-gray);
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--color-white);
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer-column ul li a {
-            color: var(--color-light-gray);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-column ul li a:hover {
-            color: var(--color-bright-blue);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .social-links a {
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            color: var(--color-bright-blue);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 1rem;
-            border-top: 1px solid var(--color-divider-gray);
-            color: var(--color-light-gray);
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav ul {
-                margin-top: 1rem;
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul li {
-                margin: 0.5rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            nav ul {
-                display: none;
-            }
-            
-            nav ul.show {
-                display: flex;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
                     <a href="index.html">
-                        <img src="Images/TFR Header Logo_NB.png" alt="TechFusion Report Logo" class="logo-image">
+                        <img src="./images/TFR_Header_Logo_NB.png" alt="TechFusion Report Logo" class="logo-image" width="200" height="50">
                     </a>
                 </div>
-                <nav>
+                <button class="mobile-menu" id="mobile-menu" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav aria-label="Main navigation">
                     <ul id="nav-menu">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html" class="active">Home</a></li>
                         <li><a href="technology.html">Technology</a></li>
                         <li><a href="entertainment.html">Entertainment</a></li>
                         <li><a href="productivity.html">Productivity</a></li>
@@ -475,27 +58,29 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
-                <div class="mobile-menu" id="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="main">
+    <main class="main" id="main-content">
         <div class="container">
             <!-- Hero Section -->
             <section class="hero">
-                <img src="Images/banner_NB.png" alt="Technology" class="category-image">
-            <p>Your premier s for Technology, Entertainment, and Productivity insights</p>
+                <div class="hero-image-container">
+                    <img src="Images/banner_NB.png" alt="TechFusion Report Banner" class="hero-image">
+                    </div>
+                    <p>Your premier source for Technology, Entertainment, and Productivity insights</p>
             </section>
+           
+            <style>
+
             
             <!-- Category Cards -->
             <div class="category-cards">
                 <div class="category-card">
                     <div class="category-icon">
-                        <img src="/Users/kzn/Documents/TechFusion/Website v2/Images/Tech_NB.png" alt="Technology" class="category-image">
+                        <img src="./images/Tech_NB.png" alt="" class="category-image" width="350" height="80">
                     </div>
                     <h2>Technology</h2>
                     <p>Latest tech news, reviews, and guides covering smartphones, AI, smart home devices and more.</p>
@@ -504,7 +89,7 @@
                 
                 <div class="category-card">
                     <div class="category-icon">
-                        <img src="/Users/kzn/Documents/TechFusion/Website v2/Images/Entertainment_NB.png" alt="Entertainment" class="category-image">
+                        <img src="./images/Entertainment_NB.png" alt="" class="category-image" width="350" height="80">
                     </div>
                     <h2>Entertainment</h2>
                     <p>Streaming recommendations, gaming news, and digital entertainment trends.</p>
@@ -513,7 +98,7 @@
                 
                 <div class="category-card">
                     <div class="category-icon">
-                        <img src="/Users/kzn/Documents/TechFusion/Website v2/Images/prod_NB.png" alt="Productivity" class="category-image">
+                        <img src="./images/prod_NB.png" alt="" class="category-image" width="350" height="80">
                     </div>
                     <h2>Productivity</h2>
                     <p>Tools and techniques to maximize your efficiency in work and life.</p>
@@ -522,46 +107,62 @@
             </div>
             
             <!-- Featured Articles -->
-            <div class="featured-section">
+            <section class="featured-section">
                 <div class="section-title">
                     <h2>Latest Articles</h2>
                     <p>Discover our most recent publications</p>
                 </div>
                 <div class="featured-grid">
-                    <div class="featured-card">
+                    <article class="featured-card">
                         <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Tech Article">
+                            <img src="./images/galaxy-s23-ultra.jpg" alt="Samsung Galaxy S23 Ultra smartphone" width="600" height="400">
                         </div>
                         <div class="featured-content">
                             <h3>Samsung Galaxy S23 Ultra Review</h3>
                             <p>We put Samsung's latest flagship through its paces to see if it lives up to the hype.</p>
                             <a href="samsung-galaxy-review.html" class="btn">Read More</a>
                         </div>
-                    </div>
+                    </article>
                     
-                    <div class="featured-card">
+                    <article class="featured-card">
                         <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Productivity Article">
+                            <img src="./images/productivity-coding.jpg" alt="Person coding on a laptop" width="600" height="400">
                         </div>
                         <div class="featured-content">
                             <h3>10 Productivity Hacks for Developers</h3>
                             <p>Boost your coding efficiency with these proven techniques.</p>
                             <a href="productivity-hacks.html" class="btn">Read More</a>
                         </div>
-                    </div>
+                    </article>
                     
-                    <div class="featured-card">
+                    <article class="featured-card">
                         <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1603190287605-e6ade32fa852?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Entertainment Article">
+                            <img src="./images/streaming-shows.jpg" alt="TV streaming services on a tablet" width="600" height="400">
                         </div>
                         <div class="featured-content">
                             <h3>Best Streaming Shows This Month</h3>
                             <p>Our curated list of must-watch series across all platforms.</p>
                             <a href="streaming-shows.html" class="btn">Read More</a>
                         </div>
-                    </div>
+                    </article>
                 </div>
-            </div>
+            </section>
+            
+            <!-- Newsletter Signup -->
+            <section class="newsletter">
+                <div class="section-title">
+                    <h2>Stay Updated</h2>
+                    <p>Subscribe to our newsletter for the latest tech news and insights</p>
+                </div>
+                <form class="newsletter-form" action="/subscribe" method="post">
+                    <div class="form-group">
+                        <label for="email" class="visually-hidden">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </div>
+                    <p class="form-disclaimer">We respect your privacy. Unsubscribe at any time.</p>
+                </form>
+            </section>
         </div>
     </main>
 
@@ -573,10 +174,10 @@
                     <h3>TechFusion Report</h3>
                     <p>Your premier source for technology, entertainment, and productivity content.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://twitter.com/techfusionreport" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/techfusionreport" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com/techfusionreport" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/techfusionreport" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
@@ -600,20 +201,60 @@
                     <ul>
                         <li><a href="privacy.html">Privacy Policy</a></li>
                         <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="sitemap.html">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 TechFusion Report. All rights reserved.</p>
+                <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu').addEventListener('click', function() {
-            document.getElementById('nav-menu').classList.toggle('show');
+        // Mobile menu toggle with improved accessibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu');
+            const navMenu = document.getElementById('nav-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                const isExpanded = navMenu.classList.contains('show');
+                navMenu.classList.toggle('show');
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mobileMenuButton.contains(event.target) && 
+                    !navMenu.contains(event.target) && 
+                    navMenu.classList.contains('show')) {
+                    navMenu.classList.remove('show');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Add keyboard support
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+            mobileMenuButton.setAttribute('aria-controls', 'nav-menu');
         });
+        
+        // Preload important images
+        const preloadImages = () => {
+            const imagesToPreload = [
+                './images/TFR_Header_Logo_NB.png',
+                './images/Tech_NB.png',
+                './images/Entertainment_NB.png',
+                './images/prod_NB.png'
+            ];
+            
+            imagesToPreload.forEach(imageSrc => {
+                const img = new Image();
+                img.src = imageSrc;
+            });
+        };
+        
+        // Execute preloading after critical content is loaded
+        window.addEventListener('load', preloadImages);
     </script>
 </body>
 </html>
