@@ -43,9 +43,10 @@
         }
         
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
         
         .header-content {
@@ -85,10 +86,25 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            position: relative;
         }
         
         nav ul li a:hover {
             color: var(--color-bright-blue);
+        }
+        
+        nav ul li a.active {
+            color: var(--color-bright-blue);
+        }
+        
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-bright-blue);
         }
         
         .mobile-menu {
@@ -117,6 +133,37 @@
             max-width: 700px;
             margin: 0 auto;
             color: var(--color-light-gray);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            margin: 1rem 0 2rem;
+            color: var(--color-light-gray);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-bright-blue);
+            text-decoration: none;
+        }
+        
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Category Header */
+        .category-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .category-header img {
+            max-width: 250px;
+            margin-bottom: 1rem;
+        }
+        
+        .category-header p {
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         /* Category Cards */
@@ -158,6 +205,79 @@
             color: var(--color-light-gray);
         }
         
+       /* Base Grid Layout - 3 columns by default */
+        .subcategories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        /* Tablet - 2 columns */
+        @media (max-width: 992px) {
+            .subcategories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile - 1 column */
+        @media (max-width: 576px) {
+            .subcategories {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Subcategory Card Styles */
+        .subcategory-card {
+            background: var(--color-dark-gray);
+            border: 1px solid var(--color-divider-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            min-width: 0;
+            break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .subcategory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
+            border-color: var(--color-bright-blue);
+        }
+
+        .subcategory-icon {
+            font-size: 2.5rem;
+            color: var(--color-bright-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .subcategory-image {
+            width: 80%;
+            max-width: 150px;
+            height: auto;
+            margin: 0 auto 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .subcategory-card:hover .subcategory-image {
+            transform: scale(1.05);
+        }
+
+        .subcategory-card h3 {
+            color: var(--color-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .subcategory-card p {
+            color: var(--color-light-gray);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+
         .btn {
             display: inline-block;
             padding: 0.6rem 1.2rem;
@@ -200,6 +320,9 @@
             overflow: hidden;
             transition: all 0.3s ease;
             border: 1px solid var(--color-divider-gray);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
         .featured-card:hover {
@@ -217,6 +340,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
+            loading: lazy;
         }
         
         .featured-card:hover .featured-img img {
@@ -225,6 +349,9 @@
         
         .featured-content {
             padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .featured-content h3 {
@@ -236,6 +363,11 @@
         .featured-content p {
             color: var(--color-light-gray);
             margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        
+        .back-to-blog {
+            margin: 2rem 0;
         }
         
         /* Footer */
@@ -319,6 +451,9 @@
             
             .mobile-menu {
                 display: block;
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
             }
             
             nav ul {
@@ -340,108 +475,172 @@
     </style>
 </head>
 <body>
-    <!-- Same header as technology.html -->
-    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="/Images/TFR Header Logo.png" alt="TechFusion Report Logo" class="logo-image">
+                    </a>
+                </div>
+                <nav>
+                    <ul id="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="technology.html" class="active">Technology</a></li>
+                        <li><a href="entertainment.html">Entertainment</a></li>
+                        <li><a href="productivity.html">Productivity</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu" id="mobile-menu" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <!-- Main Content -->
     <main class="main">
         <div class="container">
             <!-- Breadcrumbs -->
-            <div class="breadcrumbs">
+            <div class="breadcrumbs" aria-label="breadcrumb">
                 <a href="index.html">Home</a> &raquo; <span>Entertainment</span>
             </div>
             
             <!-- Category Header -->
             <div class="category-header">
-                <h1>Entertainment</h1>
-                <p>Your guide to the latest in movies, TV shows, music, and pop culture news that tech-savvy consumers care about.</p>
+                <img src="Images/Entertainment_NB.png" alt="Entertainment" class="logo-image">
+                <p>Your guide to the latest in movies, TV shows, music, and pop culture news.</p>
             </div>
             
             <!-- Subcategories -->
             <div class="subcategories">
                 <div class="subcategory-card">
                     <div class="subcategory-icon">
-                        <i class="fas fa-music"></i>
+                        <i class="fas fa-film" aria-hidden="true"></i>
                     </div>
-                    <h3>Music</h3>
-                    <p>Latest releases, tech in music, and streaming guides</p>
-                    <a href="music.html" class="btn">Explore</a>
-                </div>
-                <div class="subcategory-card">
-                    <div class="subcategory-icon">
-                        <i class="fas fa-film"></i>
-                    </div>
-                    <h3>Movies</h3>
+                    <img src="Images/MOVIES_NB.png" alt="Movies Icon" class="subcategory-image">
                     <p>Film reviews, streaming options, and cinema tech</p>
                     <a href="movies.html" class="btn">Explore</a>
                 </div>
+                
                 <div class="subcategory-card">
                     <div class="subcategory-icon">
-                        <i class="fas fa-tv"></i>
+                        <i class="fas fa-music" aria-hidden="true"></i>
                     </div>
-                    <h3>TV Shows</h3>
-                    <p>Series reviews, streaming guides, and binge-worthy tech</p>
-                    <a href="tv-shows.html" class="btn">Explore</a>
+                    <img src="Images/MUSIC _NB.png" alt="Music" class="subcategory-image">
+                    <p>Latest releases, tech in music, and streaming guides</p>
+                    <a href="music.html" class="btn">Explore</a>
                 </div>
-            </div>
-            
-            <!-- Featured Entertainment Articles -->
+                
+                <div class="subcategory-card">
+                    <div class="subcategory-icon">
+                        <i class="fas fa-tv" aria-hidden="true"></i>
+                    </div>
+                    <img src="Images/TV_NB.png" alt="TV Shows" class="subcategory-image">
+                    <p>
+                    <p>Series reviews, streaming guides, and binge-worthy tech.</p>
+                    <a href="tv_shows.html" class="btn">Explore</a>
+                </div>
+                          
+            <!-- Featured Articles -->
             <div class="featured-section">
                 <div class="section-title">
                     <h2>Featured Entertainment Articles</h2>
+                    <p>Our most popular entertainment content</p>
                 </div>
                 <div class="featured-grid">
                     <div class="featured-card">
                         <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Summer Movies">
+                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Samsung Galaxy S23 Ultra smartphone" loading="lazy">
                         </div>
                         <div class="featured-content">
-                            <div class="featured-meta">
-                                <span>Movies</span>
-                                <span>June 18, 2023</span>
-                            </div>
-                            <h3>Summer 2023 Blockbuster Preview: What to Watch</h3>
-                            <p>The most anticipated films hitting theaters and streaming platforms this season.</p>
-                            <a href="summer-movies.html" class="btn">Read More</a>
+                            <h3>Samsung Galaxy S23 Ultra Review</h3>
+                            <p>We put Samsung's latest flagship through its paces to see if it lives up to the hype.</p>
+                            <a href="samsung-galaxy-review.html" class="btn">Read More</a>
                         </div>
                     </div>
+                    
                     <div class="featured-card">
                         <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Music Tech">
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Person using AI tools on laptop" loading="lazy">
                         </div>
                         <div class="featured-content">
-                            <div class="featured-meta">
-                                <span>Music</span>
-                                <span>June 15, 2023</span>
-                            </div>
-                            <h3>How AI is Changing Music Production in 2023</h3>
-                            <p>Exploring the revolutionary tools transforming how music is made.</p>
-                            <a href="ai-music.html" class="btn">Read More</a>
+                            <h3>10 AI Tools That Will Transform Your Workflow</h3>
+                            <p>Discover the most powerful AI applications for productivity and creativity.</p>
+                            <a href="ai-tools.html" class="btn">Read More</a>
                         </div>
                     </div>
+                    
                     <div class="featured-card">
                         <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1608889825103-eb5b0774cf54?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="TV Shows">
+                            <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Smart home automation devices" loading="lazy">
                         </div>
                         <div class="featured-content">
-                            <div class="featured-meta">
-                                <span>TV Shows</span>
-                                <span>June 12, 2023</span>
-                            </div>
-                            <h3>The Best Sci-Fi Series to Stream Right Now</h3>
-                            <p>Our curated selection of mind-bending shows for tech enthusiasts.</p>
-                            <a href="sci-fi-tv.html" class="btn">Read More</a>
+                            <h3>Building the Ultimate Smart Home on a Budget</h3>
+                            <p>Affordable devices and setups to automate your home without breaking the bank.</p>
+                            <a href="smart-home-guide.html" class="btn">Read More</a>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Back to Blog -->
             <div class="back-to-blog">
-                <a href="index.html" class="btn">&larr; Back to Main Blog</a>
+                <a href="index.html" class="btn">&larr; Back to Home</a>
             </div>
         </div>
     </main>
 
-    <!-- Same footer as technology.html -->
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TechFusion Report</h3>
+                    <p>Your premier source for technology news and reviews.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="technology.html">Technology</a></li>
+                        <li><a href="entertainment.html">Entertainment</a></li>
+                        <li><a href="productivity.html">Productivity</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        });
+
+        // Add event listener for escape key to close mobile menu
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && document.getElementById('nav-menu').classList.contains('show')) {
+                document.getElementById('nav-menu').classList.remove('show');
+            }
+        });
+    </script>
 </body>
 </html>
