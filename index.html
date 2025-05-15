@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFusion Report | Technology, Entertainment & Productivity</title>
+    <meta name="description" content="Your source for Technology, Entertainment, and Productivity insights, reviews, and guides.">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="TechFusion Report">
+    <meta name="keywords" content="technology, entertainment, productivity, tech news, streaming, smart home, AI tools">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techfusionreport.com/">
+    <meta property="og:title" content="TechFusion Report | Technology, Entertainment & Productivity">
+    <meta property="og:description" content="Your source for Technology, Entertainment, and Productivity insights, reviews, and guides.">
+    <meta property="og:image" content="./images/tfr-social-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://techfusionreport.com/">
+    <meta property="twitter:title" content="TechFusion Report | Technology, Entertainment & Productivity">
+    <meta property="twitter:description" content="Your source for Technology, Entertainment, and Productivity insights, reviews, and guides.">
+    <meta property="twitter:image" content="./images/tfr-social-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="./images/favicon.ico">
+    <link rel="apple-touch-icon" href="./images/apple-touch-icon.png">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    
+    <style>
+        /* Additional styles for featured articles section */
+        .featured-articles {
+            padding: 4rem 0;
+            background-color: var(--color-black);
+        }
+        
+        .featured-articles .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .featured-articles .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--color-white);
+            margin-bottom: 0.5rem;
+        }
+        
+        .featured-articles .section-title p {
+            color: var(--color-light-gray);
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .featured-card {
+            background-color: var(--color-dark-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-divider-gray);
+        }
+        
+        .featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
+        }
+        
+        .featured-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .featured-card:hover .featured-img img {
+            transform: scale(1.05);
+        }
+        
+        .featured-content {
+            padding: 1.5rem;
+        }
+        
+        .article-category {
+            display: inline-block;
+            background-color: var(--color-bright-blue);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .featured-content h3 {
+            font-size: 1.25rem;
+            color: var(--color-white);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+        
+        .featured-content p {
+            color: var(--color-light-gray);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--color-light-gray);
+            margin-bottom: 1.25rem;
+        }
+        
+        .view-all {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--color-bright-blue);
+            color: var(--color-bright-blue);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--color-bright-blue);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-articles {
+                padding: 2.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="./images/TFR_Header_Logo_NB.png" alt="    TechFusion Report Logo" class="logo-image" width="200" height="50">
+                    </a>
+                </div>
+                <button class="mobile-menu" id="mobile-menu" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav aria-label="Main navigation">
+                    <ul id="nav-menu">
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="technology.html">Technology</a></li>
+                        <li><a href="entertainment.html">Entertainment</a></li>
+                        <li><a href="productivity.html">Productivity</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main" id="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-image-container">
+                    <img src="./images/banner_NB.png" alt="TechFusion Report Banner" class="hero-image">
+                </div>
+                <p>Your premier source for Technology, Entertainment, and Productivity insights</p>
+            </section>
+            
+            <!-- Featured Articles Section -->
+            <section class="featured-articles">
+                <div class="section-title">
+                    <h2>Featured Articles</h2>
+                    <p>Handpicked tech insights you shouldn't miss</p>
+                </div>
+
+                <div class="featured-grid">
+                    <!-- Article 1 -->
+                    <article class="featured-card">
+                        <div class="featured-img">
+                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" 
+                                 alt="Samsung Galaxy S23 Ultra" 
+                                 loading="lazy">
+                        </div>
+                        <div class="featured-content">
+                            <span class="article-category">Smartphones</span>
+                            <h3>Samsung Galaxy S23 Ultra Review</h3>
+                            <p>We test Samsung's latest flagship to see if it lives up to the hype.</p>
+                            <div class="article-meta">
+                                <span class="date">May 15, 2025</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                            <a href="samsung-galaxy-review.html" class="btn">Read Now</a>
+                        </div>
+                    </article>
+
+                    <!-- Article 2 -->
+                    <article class="featured-card">
+                        <div class="featured-img">
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" 
+                                 alt="AI Tools on Laptop" 
+                                 loading="lazy">
+                        </div>
+                        <div class="featured-content">
+                            <span class="article-category">AI</span>
+                            <h3>10 AI Tools That Will Transform Your Workflow</h3>
+                            <p>Discover the most powerful AI applications for productivity.</p>
+                            <div class="article-meta">
+                                <span class="date">May 10, 2025</span>
+                                <span class="read-time">7 min read</span>
+                            </div>
+                            <a href="ai-tools.html" class="btn">Read Now</a>
+                        </div>
+                    </article>
+
+                    <!-- Article 3 -->
+                    <article class="featured-card">
+                        <div class="featured-img">
+                            <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" 
+                                 alt="Smart Home Devices" 
+                                 loading="lazy">
+                        </div>
+                        <div class="featured-content">
+                            <span class="article-category">Smart Home</span>
+                            <h3>Building the Ultimate Smart Home on a Budget</h3>
+                            <p>Affordable devices to automate your home without breaking the bank.</p>
+                            <div class="article-meta">
+                                <span class="date">May 5, 2025</span>
+                                <span class="read-time">6 min read</span>
+                            </div>
+                            <a href="smart-home-guide.html" class="btn">Read Now</a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="view-all">
+                    <a href="articles.html" class="btn btn-outline">View All Articles</a>
+                </div>
+            </section>
+            
+            <!-- Category Cards -->
+            <div class="category-cards">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <img src=./images/Tech_NB.png" alt="" class="category-image" width="350" height="80">
+                    </div>
+                    <h2>Technology</h2>
+                    <p>Latest tech news, reviews, and guides covering smartphones, AI, smart home devices and more.</p>
+                    <a href="technology.html" class="btn">Explore Technology</a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <img src=./images/Entertainment_NB.png" alt="" class="category-image" width="350" height="80">
+                    </div>
+                    <h2>Entertainment</h2>
+                    <p>Streaming recommendations, gaming news, and digital entertainment trends.</p>
+                    <a href="entertainment.html" class="btn">Explore Entertainment</a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <img src="./images/prod_NB.png" alt="" class="category-image" width="350" height="80">
+                    </div>
+                    <h2>Productivity</h2>
+                    <p>Tools and techniques to maximize your efficiency in work and life.</p>
+                    <a href="productivity.html" class="btn">Explore Productivity</a>
+                </div>
+            </div>
+            
+            <!-- Newsletter Signup -->
+            <section class="newsletter">
+                <div class="section-title">
+                    <h2>Stay Updated</h2>
+                    <p>Subscribe to our newsletter for the latest tech news and insights</p>
+                </div>
+                <form class="newsletter-form" action="/subscribe" method="post">
+                    <div class="form-group">
+                        <label for="email" class="visually-hidden">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </div>
+                    <p class="form-disclaimer">We respect your privacy. Unsubscribe at any time.</p>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TechFusion Report</h3>
+                    <p>Your premier source for technology, entertainment, and productivity content.</p>
+                    <div class="social-links">
+                        <a href="https://twitter.com/techfusionreport" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/techfusionreport" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com/techfusionreport" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/techfusionreport" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="technology.html">Technology</a></li>
+                        <li><a href="entertainment.html">Entertainment</a></li>
+                        <li><a href="productivity.html">Productivity</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle with improved accessibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu');
+            const navMenu = document.getElementById('nav-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                const isExpanded = navMenu.classList.contains('show');
+                navMenu.classList.toggle('show');
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mobileMenuButton.contains(event.target) && 
+                    !navMenu.contains(event.target) && 
+                    navMenu.classList.contains('show')) {
+                    navMenu.classList.remove('show');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Add keyboard support
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+            mobileMenuButton.setAttribute('aria-controls', 'nav-menu');
+        });
+        
+        // Preload important images
+        const preloadImages = () => {
+            const imagesToPreload = [
+                './images/TFR_Header_Logo_NB.png',
+                './images/Tech_NB.png',
+                './images/Entertainment_NB.png',
+                './images/prod_NB.png'
+            ];
+            
+            imagesToPreload.forEach(imageSrc => {
+                const img = new Image();
+                img.src = imageSrc;
+            });
+        };
+        
+        // Execute preloading after critical content is loaded
+        window.addEventListener('load', preloadImages);
+    </script>
+</body>
+</html>
