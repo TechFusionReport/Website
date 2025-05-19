@@ -6,20 +6,19 @@ on:
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
-  fetch_and_sync:
+  sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Dependencies
-        run: |
-          pip install requests
+      - name: Set up environment
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
 
-      - name: Fetch Notion Data
-        run: |
-          python notion_fetch.py
-
+      - name: Run Notion fetch script
+        run: python notion_fetch.py
+      
       - name: Check for Changes
         id: check_changes
         run: |
