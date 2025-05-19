@@ -17,6 +17,23 @@ response = requests.post(
 )
 new_data = response.json()["results"]
 
+# Fetch data from Notion
+response = requests.post(
+    f"https://api.notion.com/v1/databases/{DB_ID}/query", headers=HEADERS
+)
+
+# Check if the response is successful
+if response.status_code == 200:
+    try:
+        new_data = response.json().get("results", [])
+    except (ValueError, KeyError) as e:
+        print("Error parsing response:", e)
+        new_data = []
+else:
+    print(f"Failed to fetch data from Notion. Status code: {response.status_code}")
+    print(f"Response: {response.text}")
+    new_data = []
+
 # Load previous data if exists
 if os.path.exists("data.json"):
     with open("data.json", "r") as f:
@@ -31,3 +48,4 @@ if new_data != old_data:
     print("Notion data changed! Updating...")
 else:
     print("No changes detected.")
+
