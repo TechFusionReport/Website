@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Apps | TechFusion Report</title>
+    <meta name="description" content="Discover the best apps for your Android or iOS device">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+  <script>
+fetch("https://your-repo.github.io/data.json")
+.then(response => response.json())
+.then(data => {
+    let content = "";
+    data.forEach(item => {
+        content += `<h2>${item.properties.Title.title[0].text.content}</h2>`;
+    });
+    document.getElementById("notion-content").innerHTML = content;
+});
+</script>
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="./images/TFR_Header_Logo_NB.png" alt="TechFusion Report Logo" class="logo-image" width="200" height="50">
+                    </a>
+                </div>
+                <button class="mobile-menu" id="mobile-menu" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav aria-label="Main navigation">
+                    <ul id="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="technology.html" class="active">Technology</a></li>
+                        <li><a href="entertainment.html">Entertainment</a></li>
+                        <li><a href="productivity.html">Productivity</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs" aria-label="breadcrumb">
+                <a href="index.html">Home</a> &raquo; <a href="technology.html">Technology</a> &raquo; <span>Smartphone Apps</span>
+            </div>
+            
+            <!-- Category Header -->
+            <div class="category-header">
+                <img src="./images/Smartphone Apps no background.png" alt="Smartphone Apps" class="logo-image">
+                <h1>Android Apps</h1>
+                <p>Discover the best applications for your Android or iOS device to enhance productivity, creativity, and entertainment.</p>
+            </div>
+            
+            <!-- Featured Apps -->
+            <section class="featured-section">
+                <div class="section-title">
+                    <h2>Featured Mobile Apps</h2>
+                    <p>Our top picks for this month</p>
+                </div>
+                
+                <div class="featured-grid">
+                    <article class="featured-card">
+                        <div class="featured-img">
+                            <img src="./images/app1.jpg" alt="Productivity App Screenshot" loading="lazy" width="600" height="400">
+                        </div>
+                        <div class="featured-content">
+                            <h3>Notion Mobile</h3>
+                            <p>The all-in-one workspace for notes, tasks, wikis, and databases - now optimized for mobile.</p>
+                            <div class="platform-tags">
+                                <span class="tag ios">iOS</span>
+                                <span class="tag android">Android</span>
+                            </div>
+                            <a href="notion-mobile-review.html" class="btn">Read Review</a>
+                        </div>
+                    </article>
+                    
+                    <article class="featured-card">
+                        <div class="featured-img">
+                            <img src="./images/app2.jpg" alt="Photo Editing App Screenshot" loading="lazy" width="600" height="400">
+                        </div>
+                        <div class="featured-content">
+                            <h3>Snapseed</h3>
+                            <p>Professional-grade photo editing right in your pocket with this powerful app from Google.</p>
+                            <div class="platform-tags">
+                                <span class="tag ios">iOS</span>
+                                <span class="tag android">Android</span>
+                            </div>
+                            <a href="snapseed-review.html" class="btn">Read Review</a>
+                        </div>
+                    </article>
+                    
+                    <article class="featured-card">
+                        <div class="featured-img">
+                            <img src="./images/app3.jpg" alt="Health App Screenshot" loading="lazy" width="600" height="400">
+                        </div>
+                        <div class="featured-content">
+                            <h3>Strong</h3>
+                            <p>The ultimate workout tracker for fitness enthusiasts with detailed exercise tracking.</p>
+                            <div class="platform-tags">
+                                <span class="tag ios">iOS</span>
+                                <span class="tag android">Android</span>
+                            </div>
+                            <a href="strong-app-review.html" class="btn">Read Review</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            
+            <!-- App Categories -->
+            <section class="category-section">
+                <div class="section-title">
+                    <h2>App Categories</h2>
+                    <p>Browse by your interests</p>
+                </div>
+                
+                <div class="category-cards">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Productivity</h3>
+                        <p>Apps to help you work smarter and get more done</p>
+                        <a href="productivity-apps.html" class="btn">View Apps</a>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3>Photo & Video</h3>
+                        <p>Creative tools for photographers and videographers</p>
+                        <a href="photo-video-apps.html" class="btn">View Apps</a>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Games</h3>
+                        <p>Top mobile games for casual and hardcore gamers</p>
+                        <a href="mobile-games.html" class="btn">View Games</a>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="back-to-category">
+                <a href="technology.html" class="btn">&larr; Back to Technology</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TechFusion Report</h3>
+                    <p>Your premier source for technology, entertainment, and productivity content.</p>
+                    <div class="social-links">
+                        <a href="https://twitter.com/techfusionreport" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/techfusionreport" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com/techfusionreport" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/techfusionreport" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="technology.html">Technology</a></li>
+                        <li><a href="entertainment.html">Entertainment</a></li>
+                        <li><a href="productivity.html">Productivity</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>
