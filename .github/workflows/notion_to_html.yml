@@ -1,12 +1,12 @@
-name: Notion to HTML Sync
+name: Notion to HTML Sync (Only on Changes)
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Runs every 6 hours
+    - cron: '0 * * * *'  # Check for changes every hour
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
-  fetch_notation_data:
+  fetch_and_sync:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -14,16 +14,22 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install requests markdown
+          pip install requests
 
       - name: Fetch Notion Data
         run: |
           python notion_fetch.py
 
-      - name: Commit and Push Updates
+      - name: Check for Changes
+        id: check_changes
+        run: |
+          git add data.json
+          git diff --quiet && echo "No changes detected, skipping commit." || echo "Changes found!"
+
+      - name: Commit and Push (If Changed)
+        if: steps.check_changes.outputs.exit_code != 0
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add data.json
           git commit -m "Auto-update Notion data"
           git push
