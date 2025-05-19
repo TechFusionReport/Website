@@ -4,18 +4,14 @@ import os
 
 # Set API Credentials
 NOTION_TOKEN = os.getenv("NOTION_TOKEN")
+if not NOTION_TOKEN:
+    raise EnvironmentError("NOTION_TOKEN is not set. Please configure it in your environment.")
 DB_ID = "your_notion_database_id"
 HEADERS = {
     "Authorization": f"Bearer {NOTION_TOKEN}",
     "Notion-Version": "2022-06-28",
     "Content-Type": "application/json",
 }
-
-# Fetch data from Notion
-response = requests.post(
-    f"https://api.notion.com/v1/databases/{DB_ID}/query", headers=HEADERS
-)
-new_data = response.json()["results"]
 
 # Fetch data from Notion
 response = requests.post(
@@ -30,9 +26,8 @@ if response.status_code == 200:
         print("Error parsing response:", e)
         new_data = []
 else:
-    
     print(f"Failed to fetch data from Notion. Status code: {response.status_code}")
-    print("Debugging API Response:", response.json())
+    print(f"Response: {response.text}")
     new_data = []
 
 # Load previous data if exists
@@ -49,4 +44,3 @@ if new_data != old_data:
     print("Notion data changed! Updating...")
 else:
     print("No changes detected.")
-
