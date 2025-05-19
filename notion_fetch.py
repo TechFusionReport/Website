@@ -30,8 +30,9 @@ if response.status_code == 200:
         print("Error parsing response:", e)
         new_data = []
 else:
+    
     print(f"Failed to fetch data from Notion. Status code: {response.status_code}")
-    print(f"Response: {response.text}")
+    print("Debugging API Response:", response.json())
     new_data = []
 
 # Load previous data if exists
