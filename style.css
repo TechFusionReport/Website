@@ -41,12 +41,7 @@ body {
 
 /* Header */
 header {
-  background: linear-gradient(90deg, 
-    var(--color-black) 0%, 
-    var(--color-black) 30%, 
-    var(--color-bright-blue) 65%, 
-    var(--color-electric-green) 100%
-);
+  background: linear-gradient(135deg, var(--color-bright-blue) 0%, var(--color-electric-green) 100%);
   color: white;
   padding: 1rem 0;
   position: sticky;
@@ -174,6 +169,20 @@ nav ul li a.active {
 .category-card h2 {
   margin-bottom: 1rem;
   color: var(--color-white);
+}
+
+.category-title-image {
+  max-height: 50px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+}
+
+.category-title-image:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
 }
 
 .category-card p {
