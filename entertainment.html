@@ -3,492 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechFusion Report | Technology, Entertainment & Productivity</title>
-    <meta name="description" content="Your source for Technology, Entertainment, and Productivity insights">
+    <title>Entertainment | TechFusion Report</title>
+    <meta name="description" content="Explore the latest in entertainment - movies, music, TV shows, and more">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --color-black: #000000;
-            --color-dark-gray: #1A1A1A;
-            --color-divider-gray: #333333;
-            --color-light-gray: #CCCCCC;
-            --color-bright-blue: #00AEEF;
-            --color-lime-green: #A4C639;
-            --color-cyan: #00FFFF;
-            --color-electric-green: #00FF66;
-            --color-white: #FFFFFF;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--color-black);
-            color: var(--color-light-gray);
-            line-height: 1.6;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: var(--color-dark-gray);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            height: 50px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-image {
-            height: 100%;
-            width: auto;
-            max-width: 200px;
-            transition: opacity 0.3s ease;
-        }
-        
-        .logo-image:hover {
-            opacity: 0.9;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 1.5rem;
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        nav ul li a:hover {
-            color: var(--color-bright-blue);
-        }
-        
-        nav ul li a.active {
-            color: var(--color-bright-blue);
-        }
-        
-        nav ul li a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--color-bright-blue);
-        }
-        
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(135deg, var(--color-dark-gray), var(--color-black));
-            margin-bottom: 2rem;
-            border-radius: 8px;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--color-white);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--color-light-gray);
-        }
-        
-        /* Breadcrumbs */
-        .breadcrumbs {
-            margin: 1rem 0 2rem;
-            color: var(--color-light-gray);
-        }
-        
-        .breadcrumbs a {
-            color: var(--color-bright-blue);
-            text-decoration: none;
-        }
-        
-        .breadcrumbs a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Category Header */
-        .category-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .category-header img {
-            max-width: 250px;
-            margin-bottom: 1rem;
-        }
-        
-        .category-header p {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* Category Cards */
-        .category-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .category-card {
-            background: var(--color-dark-gray);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid var(--color-divider-gray);
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
-            border-color: var(--color-bright-blue);
-        }
-        
-        .category-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--color-bright-blue);
-        }
-        
-        .category-card h2 {
-            margin-bottom: 1rem;
-            color: var(--color-white);
-        }
-        
-        .category-card p {
-            margin-bottom: 1.5rem;
-            color: var(--color-light-gray);
-        }
-        
-       /* Base Grid Layout - 3 columns by default */
-        .subcategories {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        /* Tablet - 2 columns */
-        @media (max-width: 992px) {
-            .subcategories {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Mobile - 1 column */
-        @media (max-width: 576px) {
-            .subcategories {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Subcategory Card Styles */
-        .subcategory-card {
-            background: var(--color-dark-gray);
-            border: 1px solid var(--color-divider-gray);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            min-width: 0;
-            break-inside: avoid;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .subcategory-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
-            border-color: var(--color-bright-blue);
-        }
-
-        .subcategory-icon {
-            font-size: 2.5rem;
-            color: var(--color-bright-blue);
-            margin-bottom: 1rem;
-        }
-        
-        .subcategory-image {
-            width: 80%;
-            max-width: 150px;
-            height: auto;
-            margin: 0 auto 1rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .subcategory-card:hover .subcategory-image {
-            transform: scale(1.05);
-        }
-
-        .subcategory-card h3 {
-            color: var(--color-white);
-            margin-bottom: 0.5rem;
-        }
-
-        .subcategory-card p {
-            color: var(--color-light-gray);
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            flex-grow: 1;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.6rem 1.2rem;
-            background-color: var(--color-bright-blue);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            background-color: #0088cc;
-        }
-        
-        /* Featured Articles */
-        .featured-section {
-            margin: 4rem 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .section-title h2 {
-            font-size: 2rem;
-            color: var(--color-white);
-            margin-bottom: 0.5rem;
-        }
-        
-        .featured-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .featured-card {
-            background-color: var(--color-dark-gray);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid var(--color-divider-gray);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .featured-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
-        }
-        
-        .featured-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .featured-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-            loading: lazy;
-        }
-        
-        .featured-card:hover .featured-img img {
-            transform: scale(1.05);
-        }
-        
-        .featured-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .featured-content h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--color-white);
-        }
-        
-        .featured-content p {
-            color: var(--color-light-gray);
-            margin-bottom: 1rem;
-            flex-grow: 1;
-        }
-        
-        .back-to-blog {
-            margin: 2rem 0;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--color-dark-gray);
-            color: white;
-            padding: 3rem 0 1rem;
-            margin-top: 3rem;
-            border-top: 1px solid var(--color-divider-gray);
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--color-white);
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer-column ul li a {
-            color: var(--color-light-gray);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-column ul li a:hover {
-            color: var(--color-bright-blue);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .social-links a {
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            color: var(--color-bright-blue);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 1rem;
-            border-top: 1px solid var(--color-divider-gray);
-            color: var(--color-light-gray);
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav ul {
-                margin-top: 1rem;
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul li {
-                margin: 0.5rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-                position: absolute;
-                right: 1rem;
-                top: 1rem;
-            }
-            
-            nav ul {
-                display: none;
-            }
-            
-            nav ul.show {
-                display: flex;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="graphics/tfr_header_logo_nb.png" as="image">
+    <link rel="icon" href="graphics/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- Header -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
                     <a href="index.html">
-                        <img src="Images/TFR Header Logo.png" alt="TechFusion Report Logo" class="logo-image">
+                        <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" class="logo-image">
                     </a>
                 </div>
                 <nav>
                     <ul id="nav-menu">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="technology.html" class="active">Technology</a></li>
-                        <li><a href="entertainment.html">Entertainment</a></li>
+                        <li><a href="technology.html">Technology</a></li>
+                        <li><a href="entertainment.html" class="active">Entertainment</a></li>
                         <li><a href="productivity.html">Productivity</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
@@ -501,99 +38,44 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main">
+    <main id="main-content" class="main entertainment">
         <div class="container">
-            <!-- Breadcrumbs -->
-            <div class="breadcrumbs" aria-label="breadcrumb">
-                <a href="index.html">Home</a> &raquo; <span>Entertainment</span>
-            </div>
+            <section class="hero">
+                <h1>Entertainment</h1>
+                <p>The latest in movies, music, TV shows and pop culture news</p>
+            </section>
             
-            <!-- Category Header -->
-            <div class="category-header">
-                <img src="Images/Entertainment_NB.png" alt="Entertainment" class="logo-image">
-                <p>Your guide to the latest in movies, TV shows, music, and pop culture news.</p>
-            </div>
-            
-            <!-- Subcategories -->
-            <div class="subcategories">
+            <section class="subcategories">
                 <div class="subcategory-card">
                     <div class="subcategory-icon">
-                        <i class="fas fa-film" aria-hidden="true"></i>
+                        <i class="fas fa-film"></i>
                     </div>
-                    <img src="Images/MOVIES_NB.png" alt="Movies Icon" class="subcategory-image">
-                    <p>Film reviews, streaming options, and cinema tech</p>
-                    <a href="movies.html" class="btn">Explore</a>
+                    <h3>Movies</h3>
+                    <p>Latest movie reviews, trailers, and box office news</p>
+                    <a href="movies.html" class="btn">Explore Movies</a>
                 </div>
                 
                 <div class="subcategory-card">
                     <div class="subcategory-icon">
-                        <i class="fas fa-music" aria-hidden="true"></i>
+                        <i class="fas fa-music"></i>
                     </div>
-                    <img src="Images/MUSIC _NB.png" alt="Music" class="subcategory-image">
-                    <p>Latest releases, tech in music, and streaming guides</p>
-                    <a href="music.html" class="btn">Explore</a>
+                    <h3>Music</h3>
+                    <p>New releases, artist spotlights, and music industry news</p>
+                    <a href="music.html" class="btn">Explore Music</a>
                 </div>
                 
                 <div class="subcategory-card">
                     <div class="subcategory-icon">
-                        <i class="fas fa-tv" aria-hidden="true"></i>
+                        <i class="fas fa-tv"></i>
                     </div>
-                    <img src="Images/TV_NB.png" alt="TV Shows" class="subcategory-image">
-                    <p>
-                    <p>Series reviews, streaming guides, and binge-worthy tech.</p>
-                    <a href="tv_shows.html" class="btn">Explore</a>
+                    <h3>TV Shows</h3>
+                    <p>Series reviews, streaming updates, and binge-worthy recommendations</p>
+                    <a href="tv-shows.html" class="btn">Explore TV Shows</a>
                 </div>
-                          
-            <!-- Featured Articles -->
-            <div class="featured-section">
-                <div class="section-title">
-                    <h2>Featured Entertainment Articles</h2>
-                    <p>Our most popular entertainment content</p>
-                </div>
-                <div class="featured-grid">
-                    <div class="featured-card">
-                        <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Samsung Galaxy S23 Ultra smartphone" loading="lazy">
-                        </div>
-                        <div class="featured-content">
-                            <h3>Samsung Galaxy S23 Ultra Review</h3>
-                            <p>We put Samsung's latest flagship through its paces to see if it lives up to the hype.</p>
-                            <a href="samsung-galaxy-review.html" class="btn">Read More</a>
-                        </div>
-                    </div>
-                    
-                    <div class="featured-card">
-                        <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Person using AI tools on laptop" loading="lazy">
-                        </div>
-                        <div class="featured-content">
-                            <h3>10 AI Tools That Will Transform Your Workflow</h3>
-                            <p>Discover the most powerful AI applications for productivity and creativity.</p>
-                            <a href="ai-tools.html" class="btn">Read More</a>
-                        </div>
-                    </div>
-                    
-                    <div class="featured-card">
-                        <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Smart home automation devices" loading="lazy">
-                        </div>
-                        <div class="featured-content">
-                            <h3>Building the Ultimate Smart Home on a Budget</h3>
-                            <p>Affordable devices and setups to automate your home without breaking the bank.</p>
-                            <a href="smart-home-guide.html" class="btn">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="back-to-blog">
-                <a href="index.html" class="btn">&larr; Back to Home</a>
-            </div>
+            </section>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -601,9 +83,9 @@
                     <h3>TechFusion Report</h3>
                     <p>Your premier source for technology news and reviews.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
@@ -635,10 +117,21 @@
             document.getElementById('nav-menu').classList.toggle('show');
         });
 
-        // Add event listener for escape key to close mobile menu
+        // Close menu on escape key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape' && document.getElementById('nav-menu').classList.contains('show')) {
                 document.getElementById('nav-menu').classList.remove('show');
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (navMenu.classList.contains('show') && 
+                !event.target.closest('nav') && 
+                !event.target.closest('.mobile-menu')) {
+                navMenu.classList.remove('show');
             }
         });
     </script>
