@@ -174,9 +174,8 @@ nav ul li a.active {
 .category-title-image {
   max-height: 50px;
   width: auto;
-  display: inline-block;
-  vertical-align: middle;
-  margin-bottom: 0.5rem;
+  display: block; /* Change from inline-block to block */
+  margin: 0 auto 0.5rem; /* Add horizontal centering with auto margins */
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
 }
 
