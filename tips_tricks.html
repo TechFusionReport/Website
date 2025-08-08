@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Tips & Tricks | TechFusion Report</title>
     <meta name="description" content="Expert tech advice and clever tricks to help you get the most from your devices and software.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="graphics/tfr_header_logo_nb.png" as="image">
+    <link rel="icon" href="graphics/favicon.ico" type="image/x-icon">
     
     <!-- SEO Meta Tags -->
     <meta name="keywords" content="tech tips, technology tricks, how-to guides, tech hacks, device optimization">
@@ -12,45 +16,38 @@
     <!-- Social Media Meta Tags -->
     <meta property="og:title" content="Tech Tips & Tricks | TechFusion Report">
     <meta property="og:description" content="Expert tech advice and clever tricks to help you get the most from your devices and software.">
-    <meta property="og:image" content="./images/tech-tips-social.jpg">
-    
-    <!-- Favicon and Styles -->
-    <link rel="icon" href="./images/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <meta property="og:image" content="graphics/tech-tips-social.jpg">
 </head>
 <body>
-    <!-- Skip to main content link for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
                     <a href="index.html">
-                        <img src="./images/TFR_Header_Logo_NB.png" alt="TechFusion Report Logo" class="logo-image" width="200" height="50">
+                        <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" class="logo-image">
                     </a>
                 </div>
-                <button class="mobile-menu" id="mobile-menu" aria-label="Toggle mobile menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <nav aria-label="Main navigation">
+                <nav>
                     <ul id="nav-menu">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="technology.html">Technology</a></li>
+                        <li><a href="technology.html" class="active">Technology</a></li>
                         <li><a href="entertainment.html">Entertainment</a></li>
                         <li><a href="productivity.html">Productivity</a></li>
+                        <li><a href="blog.html">Blog</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
+                <div class="mobile-menu" id="mobile-menu" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main" id="main-content">
+    <main id="main-content" class="main">
         <div class="container">
             <!-- Breadcrumbs -->
             <div class="breadcrumbs" aria-label="breadcrumb">
@@ -62,7 +59,7 @@
             <!-- Subcategory Header -->
             <section class="subcategory-header">
                 <div class="subcategory-image">
-                    <img src="./images/Tips_&_Tricks_NB.png" alt="Tech Tips & Tricks" width="300" height="150">
+                    <img src="graphics/Tips_&_Tricks_NB.png" alt="Tech Tips & Tricks" class="category-title-image">
                 </div>
                 <h1>Tech Tips & Tricks</h1>
                 <p>Expert advice and clever hacks to help you master your devices, software, and digital life.</p>
@@ -168,27 +165,17 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>TechFusion Report</h3>
-                    <p>Your premier source for technology, entertainment, and productivity content.</p>
+                    <p>Your source for Technology, Entertainment, and Productivity insights</p>
                     <div class="social-links">
-                        <a href="https://twitter.com/techfusionreport" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="https://facebook.com/techfusionreport" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://instagram.com/techfusionreport" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com/techfusionreport" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                     </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Categories</h3>
@@ -199,11 +186,11 @@
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Legal</h3>
+                    <h3>Company</h3>
                     <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                         <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
-                        <li><a href="sitemap.html">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
@@ -213,8 +200,30 @@
         </div>
     </footer>
 
-    <script src="./js/main.js"></script>
     <script>
+        // Mobile menu toggle - matches index.html functionality
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && document.getElementById('nav-menu').classList.contains('show')) {
+                document.getElementById('nav-menu').classList.remove('show');
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (navMenu.classList.contains('show') && 
+                !event.target.closest('nav') && 
+                !event.target.closest('.mobile-menu')) {
+                navMenu.classList.remove('show');
+            }
+        });
+
         // Tab functionality for device-specific tips
         document.addEventListener('DOMContentLoaded', function() {
             const tabBtns = document.querySelectorAll('.tab-btn');
