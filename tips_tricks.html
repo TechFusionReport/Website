@@ -49,117 +49,103 @@
 
     <main id="main-content" class="main">
         <div class="container">
-            <!-- Breadcrumbs -->
-            <div class="breadcrumbs" aria-label="breadcrumb">
-                <a href="index.html">Home</a> &raquo; 
-                <a href="technology.html">Technology</a> &raquo; 
-                <span>Tips & Tricks</span>
-            </div>
-            
-            <!-- Subcategory Header -->
-            <section class="subcategory-header">
-                <div class="subcategory-image">
-                    <img src="graphics/Tips_&_Tricks_NB.png" alt="Tech Tips & Tricks" class="category-title-image">
-                </div>
+            <!-- Hero Section -->
+            <section class="hero">
                 <h1>Tech Tips & Tricks</h1>
-                <p>Expert advice and clever hacks to help you master your devices, software, and digital life.</p>
+                <p>Expert advice and clever hacks to help you master your devices, software, and digital life</p>
             </section>
             
-            <!-- Popular Tips Section -->
-            <section class="tips-section">
+            <!-- Most Popular Tips Section -->
+            <section class="featured-section">
                 <div class="section-title">
                     <h2>Most Popular Tips</h2>
                     <p>Our readers' favorite tech advice</p>
                 </div>
                 
-                <div class="tips-grid">
-                    <article class="tip-card">
-                        <div class="tip-icon">
-                            <i class="fas fa-mobile-alt"></i>
+                <div class="featured-grid">
+                    <article class="featured-card">
+                        <div class="featured-img">
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Smartphone Battery" loading="lazy">
                         </div>
-                        <h3>Smartphone Battery Life</h3>
-                        <p>10 proven ways to extend your phone's battery throughout the day.</p>
-                        <a href="battery-tips.html" class="btn">View Tips</a>
+                        <div class="featured-content">
+                            <h3>Smartphone Battery Life</h3>
+                            <p>10 proven ways to extend your phone's battery throughout the day.</p>
+                            <a href="battery-tips.html" class="btn">View Tips</a>
+                        </div>
                     </article>
                     
-                    <article class="tip-card">
-                        <div class="tip-icon">
-                            <i class="fas fa-laptop"></i>
+                    <article class="featured-card">
+                        <div class="featured-img">
+                            <img src="https://images.unsplash.com/photo-1541746972996-4e0b0f93e586?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Windows Laptop Keyboard" loading="lazy">
                         </div>
-                        <h3>Windows Shortcuts</h3>
-                        <p>Keyboard shortcuts that will make you a Windows power user.</p>
-                        <a href="windows-shortcuts.html" class="btn">View Tips</a>
+                        <div class="featured-content">
+                            <h3>Windows Shortcuts</h3>
+                            <p>Keyboard shortcuts that will make you a Windows power user.</p>
+                            <a href="windows-shortcuts.html" class="btn">View Tips</a>
+                        </div>
                     </article>
                     
-                    <article class="tip-card">
-                        <div class="tip-icon">
-                            <i class="fas fa-wifi"></i>
+                    <article class="featured-card">
+                        <div class="featured-img">
+                            <img src="https://images.unsplash.com/photo-1606868306217-dbf5046868d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Wi-Fi Router" loading="lazy">
                         </div>
-                        <h3>Wi-Fi Optimization</h3>
-                        <p>Boost your home network speed with these simple adjustments.</p>
-                        <a href="wifi-tips.html" class="btn">View Tips</a>
+                        <div class="featured-content">
+                            <h3>Wi-Fi Optimization</h3>
+                            <p>Boost your home network speed with these simple adjustments.</p>
+                            <a href="wifi-tips.html" class="btn">View Tips</a>
+                        </div>
                     </article>
                 </div>
             </section>
             
-            <!-- Device-Specific Tips -->
-            <section class="device-tips">
-                <div class="section-title">
-                    <h2>Device-Specific Guides</h2>
-                    <p>Optimize your specific devices</p>
+            <!-- Device-Specific Tips Section -->
+            <section class="category-cards">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h2>Smartphone Tips</h2>
+                    <p>How to take professional-quality photos, organize apps efficiently, and enable essential security settings</p>
+                    <a href="smartphone-tips.html" class="btn">Explore Tips</a>
                 </div>
                 
-                <div class="device-tabs">
-                    <div class="tab-buttons">
-                        <button class="tab-btn active" data-tab="smartphones">Smartphones</button>
-                        <button class="tab-btn" data-tab="laptops">Laptops</button>
-                        <button class="tab-btn" data-tab="smart-tv">Smart TVs</button>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop"></i>
                     </div>
-                    
-                    <div class="tab-content active" id="smartphones">
-                        <h3>Smartphone Tips</h3>
-                        <ul class="tip-list">
-                            <li>How to take professional-quality photos with your phone</li>
-                            <li>Hidden features in your camera app you're not using</li>
-                            <li>Organizing your apps for maximum efficiency</li>
-                            <li>Security settings everyone should enable</li>
-                        </ul>
-                        <a href="smartphone-tips.html" class="btn">More Smartphone Tips</a>
+                    <h2>Laptop Tips</h2>
+                    <p>Speed up slow laptops, essential maintenance tasks, and must-have free software for peak performance</p>
+                    <a href="laptop-tips.html" class="btn">Explore Tips</a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tv"></i>
                     </div>
-                    
-                    <div class="tab-content" id="laptops">
-                        <h3>Laptop Tips</h3>
-                        <ul class="tip-list">
-                            <li>Speed up a slow laptop without upgrading hardware</li>
-                            <li>Essential maintenance tasks for peak performance</li>
-                            <li>Must-have free software for new laptops</li>
-                            <li>Extending battery life on the go</li>
-                        </ul>
-                        <a href="laptop-tips.html" class="btn">More Laptop Tips</a>
-                    </div>
-                    
-                    <div class="tab-content" id="smart-tv">
-                        <h3>Smart TV Tips</h3>
-                        <ul class="tip-list">
-                            <li>Hidden streaming features you're missing</li>
-                            <li>Optimizing picture quality for your room</li>
-                            <li>Turning your TV into a smart home hub</li>
-                            <li>Parental controls that actually work</li>
-                        </ul>
-                        <a href="smarttv-tips.html" class="btn">More TV Tips</a>
-                    </div>
+                    <h2>Smart TV Tips</h2>
+                    <p>Hidden streaming features, picture optimization, and turning your TV into a smart home hub</p>
+                    <a href="smarttv-tips.html" class="btn">Explore Tips</a>
                 </div>
             </section>
             
-            <!-- Weekly Tip -->
-            <section class="weekly-tip">
+            <!-- Weekly Tip Section -->
+            <section class="featured-section">
                 <div class="section-title">
                     <h2>Tip of the Week</h2>
+                    <p>Fresh insights to improve your tech experience</p>
                 </div>
-                <div class="tip-card featured">
-                    <h3>Free Up Storage Space Automatically</h3>
-                    <p>Did you know both Android and iOS have built-in tools to automatically remove old backups, cached files, and unused apps? We show you how to set it up in seconds.</p>
-                    <a href="storage-tip.html" class="btn">Read This Week's Tip</a>
+                
+                <div class="featured-grid">
+                    <article class="featured-card">
+                        <div class="featured-img">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Storage Management" loading="lazy">
+                        </div>
+                        <div class="featured-content">
+                            <h3>Free Up Storage Space Automatically</h3>
+                            <p>Did you know both Android and iOS have built-in tools to automatically remove old backups, cached files, and unused apps? We show you how to set it up in seconds.</p>
+                            <a href="storage-tip.html" class="btn">Read This Week's Tip</a>
+                        </div>
+                    </article>
                 </div>
             </section>
         </div>
@@ -201,7 +187,7 @@
     </footer>
 
     <script>
-        // Mobile menu toggle - matches index.html functionality
+        // Mobile menu toggle
         document.getElementById('mobile-menu').addEventListener('click', function() {
             document.getElementById('nav-menu').classList.toggle('show');
         });
@@ -222,26 +208,6 @@
                 !event.target.closest('.mobile-menu')) {
                 navMenu.classList.remove('show');
             }
-        });
-
-        // Tab functionality for device-specific tips
-        document.addEventListener('DOMContentLoaded', function() {
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const tabContents = document.querySelectorAll('.tab-content');
-            
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    
-                    // Remove active class from all buttons and contents
-                    tabBtns.forEach(btn => btn.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    
-                    // Add active class to clicked button and corresponding content
-                    this.classList.add('active');
-                    document.getElementById(tabId).classList.add('active');
-                });
-            });
         });
     </script>
 </body>
