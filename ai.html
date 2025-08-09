@@ -3,187 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tools | TechFusion Report</title>
-    <meta name="description" content="Discover the latest AI tools and machine learning applications to boost your productivity and creativity.">
-    <meta name="keywords" content="AI tools, artificial intelligence, machine learning, productivity, automation">
-    <meta property="og:title" content="AI Tools | TechFusion Report">
-    <meta property="og:description" content="Discover the latest AI tools and machine learning applications to boost your productivity and creativity.">
-    <meta property="og:image" content="./images/ai-tools-social.jpg">
-    <link rel="icon" href="./images/favicon.ico">
+    <title>Artificial Intelligence | TechFusion Report</title>
+    <meta name="description" content="Latest AI developments, tools, and applications">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <style>
-        /* Inline styles, if absolutely necessary */
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="graphics/tfr_header_logo_nb.png" as="image">
+    <link rel="icon" href="graphics/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- Skip to main content link for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
                     <a href="index.html">
-                        <img src="./images/TFR_Header_Logo_NB.png" alt="TechFusion Report Logo" class="logo-image" width="200" height="50">
+                        <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" class="logo-image">
                     </a>
                 </div>
-                <button class="mobile-menu" id="mobile-menu" aria-label="Toggle mobile menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <nav aria-label="Main navigation">
+                <nav>
                     <ul id="nav-menu">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="technology.html">Technology</a></li>
+                        <li><a href="technology.html" class="active">Technology</a></li>
                         <li><a href="entertainment.html">Entertainment</a></li>
                         <li><a href="productivity.html">Productivity</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
+                <div class="mobile-menu" id="mobile-menu" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main" id="main-content">
+    <main id="main-content" class="main technology">
         <div class="container">
-            <!-- Breadcrumbs -->
-            <div class="breadcrumbs" aria-label="breadcrumb">
-                <a href="index.html">Home</a> &raquo; 
-                <a href="technology.html">Technology</a> &raquo; 
-                <span>AI Tools</span>
-            </div>
-            
-            <!-- Subcategory Header -->
-            <section class="subcategory-header">
-                <div class="subcategory-image">
-                    <img src="./images/AI_Tools_NB.png" alt="AI Tools" width="300" height="150">
-                </div>
-                <h1>AI Tools</h1>
-                <p>Discover the most powerful artificial intelligence applications that are transforming how we work, create, and solve problems.</p>
+            <section class="hero">
+                <h1>Artificial Intelligence</h1>
+                <p>Latest AI developments, tools, and applications</p>
             </section>
             
-            <!-- Featured AI Tools -->
-            <section class="featured-section">
-                <div class="section-title">
-                    <h2>Featured AI Tools</h2>
-                    <p>Hand-picked selection of the most useful AI applications</p>
-                </div>
-                
-                <div class="featured-grid">
-                    <article class="featured-card">
-                        <div class="featured-img">
-                            <img src="./images/ai-writing-tool.jpg" alt="AI Writing Assistant" width="600" height="400">
+            <section class="content-section">
+                <h2>AI Tools & Applications</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-image">
+                            <img src="graphics/placeholder-ai1.jpg" alt="AI Tool" class="article-image">
                         </div>
-                        <div class="featured-content">
-                            <h3>Top AI Writing Assistants</h3>
-                            <p>Compare the best AI tools for content creation, from blog posts to marketing copy.</p>
-                            <a href="ai-writing-tools.html" class="btn">Explore Tools</a>
-                        </div>
-                    </article>
-                    
-                    <article class="featured-card">
-                        <div class="featured-img">
-                            <img src="./images/ai-image-generation.jpg" alt="AI Image Generation" width="600" height="400">
-                        </div>
-                        <div class="featured-content">
-                            <h3>AI Image Generators</h3>
-                            <p>Create stunning visuals with these powerful text-to-image AI platforms.</p>
-                            <a href="ai-image-tools.html" class="btn">Explore Tools</a>
-                        </div>
-                    </article>
-                    
-                    <article class="featured-card">
-                        <div class="featured-img">
-                            <img src="./images/ai-coding-assistant.jpg" alt="AI Coding Assistant" width="600" height="400">
-                        </div>
-                        <div class="featured-content">
-                            <h3>AI Coding Assistants</h3>
-                            <p>Boost your development workflow with these intelligent programming tools.</p>
-                            <a href="ai-coding-tools.html" class="btn">Explore Tools</a>
-                        </div>
-                    </article>
-                </div>
-            </section>
-            
-            <!-- AI Guides Section -->
-            <section class="guides-section">
-                <div class="section-title">
-                    <h2>AI Guides & Tutorials</h2>
-                    <p>Learn how to get the most from AI technology</p>
-                </div>
-                
-                <div class="guides-grid">
-                    <article class="guide-card">
-                        <div class="guide-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3>Getting Started with AI</h3>
-                        <p>A beginner's guide to understanding and using artificial intelligence tools.</p>
-                        <a href="ai-beginners-guide.html" class="btn">Read Guide</a>
-                    </article>
-                    
-                    <article class="guide-card">
-                        <div class="guide-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>AI for Business</h3>
-                        <p>How small businesses can leverage AI to improve operations and customer service.</p>
-                        <a href="ai-for-business.html" class="btn">Read Guide</a>
-                    </article>
-                    
-                    <article class="guide-card">
-                        <div class="guide-icon">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <h3>AI Privacy Concerns</h3>
-                        <p>Understanding the privacy implications of using AI tools and how to protect yourself.</p>
-                        <a href="ai-privacy.html" class="btn">Read Guide</a>
-                    </article>
-                </div>
-            </section>
-            
-            <!-- Newsletter Signup -->
-            <section class="newsletter">
-                <div class="section-title">
-                    <h2>AI Tools Newsletter</h2>
-                    <p>Get monthly updates on the latest AI developments and tools</p>
-                </div>
-                <form class="newsletter-form" action="/subscribe" method="post">
-                    <div class="form-group">
-                        <label for="ai-email" class="visually-hidden">Email</label>
-                        <input type="email" id="ai-email" name="email" placeholder="Your email address" required>
-                        <button type="submit" class="btn">Subscribe</button>
+                        <h3>ChatGPT-5</h3>
+                        <p>OpenAI's latest language model brings unprecedented reasoning capabilities and multimodal understanding.</p>
+                        <a href="#" class="btn">Read Review</a>
                     </div>
-                    <p class="form-disclaimer">We'll never share your email. Unsubscribe anytime.</p>
-                </form>
+                    
+                    <div class="content-card">
+                        <div class="content-image">
+                            <img src="graphics/placeholder-ai2.jpg" alt="AI Tool" class="article-image">
+                        </div>
+                        <h3>DALL-E 4</h3>
+                        <p>The newest AI image generation model creates photorealistic images with incredible detail and accuracy.</p>
+                        <a href="#" class="btn">Read Review</a>
+                    </div>
+                    
+                    <div class="content-card">
+                        <div class="content-image">
+                            <img src="graphics/placeholder-ai3.jpg" alt="AI Tool" class="article-image">
+                        </div>
+                        <h3>Midjourney V7</h3>
+                        <p>The latest version of this popular AI art generator offers unprecedented control over artistic styles.</p>
+                        <a href="#" class="btn">Read Review</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <h2>AI in Business</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-image">
+                            <img src="graphics/placeholder-business1.jpg" alt="AI Business" class="article-image">
+                        </div>
+                        <h3>AI-Powered Customer Service</h3>
+                        <p>How businesses are using AI chatbots and virtual assistants to transform customer support.</p>
+                        <a href="#" class="btn">Read Article</a>
+                    </div>
+                    
+                    <div class="content-card">
+                        <div class="content-image">
+                            <img src="graphics/placeholder-business2.jpg" alt="AI Business" class="article-image">
+                        </div>
+                        <h3>Predictive Analytics</h3>
+                        <p>Using AI to forecast market trends and make data-driven business decisions.</p>
+                        <a href="#" class="btn">Read Article</a>
+                    </div>
+                    
+                    <div class="content-card">
+                        <div class="content-image">
+                            <img src="graphics/placeholder-business3.jpg" alt="AI Business" class="article-image">
+                        </div>
+                        <h3>AI in Supply Chain Management</h3>
+                        <p>How artificial intelligence is optimizing logistics and inventory management.</p>
+                        <a href="#" class="btn">Read Article</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <h2>Ethical AI</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-image">
+                            <img src="graphics/placeholder-ethics1.jpg" alt="AI Ethics" class="article-image">
+                        </div>
+                        <h3>Bias in AI Systems</h3>
+                        <p>Understanding and addressing algorithmic bias in artificial intelligence applications.</p>
+                        <a href="#" class="btn">Read Article</a>
+                    </div>
+                    
+                    <div class="content-card">
+                        <div class="content-image">
+                            <img src="graphics/placeholder-ethics2.jpg" alt="AI Ethics" class="article-image">
+                        </div>
+                        <h3>AI Regulation</h3>
+                        <p>The evolving landscape of AI governance and policy around the world.</p>
+                        <a href="#" class="btn">Read Article</a>
+                    </div>
+                    
+                    <div class="content-card">
+                        <div class="content-image">
+                            <img src="graphics/placeholder-ethics3.jpg" alt="AI Ethics" class="article-image">
+                        </div>
+                        <h3>The Future of Work</h3>
+                        <p>How AI is reshaping employment and what it means for the workforce of tomorrow.</p>
+                        <a href="#" class="btn">Read Article</a>
+                    </div>
+                </div>
             </section>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>TechFusion Report</h3>
-                    <p>Your premier source for technology, entertainment, and productivity content.</p>
+                    <p>Your premier source for technology news and reviews.</p>
                     <div class="social-links">
-                        <a href="https://twitter.com/techfusionreport" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="https://facebook.com/techfusionreport" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://instagram.com/techfusionreport" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com/techfusionreport" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                     </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Categories</h3>
@@ -194,20 +164,43 @@
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Legal</h3>
+                    <h3>Company</h3>
                     <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                         <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
-                        <li><a href="sitemap.html">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
+                <p>© 2025 TechFusion Report. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="./js/main.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && document.getElementById('nav-menu').classList.contains('show')) {
+                document.getElementById('nav-menu').classList.remove('show');
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (navMenu.classList.contains('show') && 
+                !event.target.closest('nav') && 
+                !event.target.closest('.mobile-menu')) {
+                navMenu.classList.remove('show');
+            }
+        });
+    </script>
 </body>
 </html>
