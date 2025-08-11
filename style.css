@@ -127,6 +127,12 @@ nav ul li a.active {
   text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
+.hero-image {
+    max-width: 100%;    /* Ensures responsiveness */
+    height: auto;      /* Maintains aspect ratio */
+    margin-bottom: 1rem; /* Space between image and paragraph */
+}
+
 .hero p {
   font-size: 1.2rem;
   max-width: 700px;
@@ -134,6 +140,14 @@ nav ul li a.active {
   color: var(--color-light-gray);
 }
 
+.visually-hidden {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
 /* ===== Category Cards ===== */
 .category-cards {
   display: grid;
