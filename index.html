@@ -24,9 +24,39 @@
                 <nav>
                     <ul id="nav-menu">
                         <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="technology.html">Technology</a></li>
-                        <li><a href="entertainment.html">Entertainment</a></li>
-                        <li><a href="productivity.html">Productivity</a></li><li><a href="blog.html">Blog</a></li>
+                        <!-- Technology Category with Dropdown -->
+        <li class="dropdown">
+            <a href="technology.html">Technology</a>
+            <ul class="dropdown-menu">
+                <li><a href="smartphones.html">Smartphones</a></li>
+                <li><a href="smart_home.html">Smart Home</a></li>
+                <li><a href="gtk_websites.html">GTK Websites</a></li>
+                <li><a href="ai.html">Artificial Intelligence</a></li>
+                <li><a href="tips_tricks.html">Tips & Tricks</a></li>
+                <li><a href="computers.html">Co</a></li>
+            </ul>
+        </li>
+        
+        <!-- Entertainment Category with Dropdown -->
+        <li class="dropdown">
+            <a href="entertainment.html">Entertainment</a>
+            <ul class="dropdown-menu">
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="tv-shows.html">TV Shows</a></li>
+                <li><a href="music.html">Music</a></li>
+            </ul>
+        </li>
+        
+        <!-- Productivity Category with Dropdown -->
+        <li class="dropdown">
+            <a href="productivity.html">Productivity</a>
+            <ul class="dropdown-menu">
+                <li><a href="apps.html">Apps</a></li>
+                <li><a href="time-management.html">Time Management</a></li>
+                <li><a href="workflows.html">Workflows</a></li>
+            </ul>
+        </li>
+        <li><a href="blog.html">Blog</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -41,10 +71,10 @@
     <main id="main-content" class="main">
         <div class="container">
             <section class="hero">
-    <h1 class="visually-hidden">TechFusion Report</h1>
-    <img src="graphics/tfr-hero-background_upscaled.png" alt="TechFusion Report" class="hero-image">
-    <p>Discover the latest in technology, entertainment, and productivity tools</p>
-</section>
+                <h1 class="visually-hidden">TechFusion Report</h1>
+                <img src="graphics/tfr-hero-background_upscaled.png" alt="TechFusion Report" class="hero-image">
+                <p>Discover the latest in technology, entertainment, and productivity tools</p>
+                </section>
             
             <section class="category-cards">
                 <div class="category-card">
@@ -181,6 +211,17 @@
                 !event.target.closest('.mobile-menu')) {
                 navMenu.classList.remove('show');
             }
+        });
+    </script>
+    <script>
+     // Toggle dropdowns on mobile when clicked
+        document.querySelectorAll('.dropdown > a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    this.nextElementSibling.classList.toggle('show');
+                }
+            });
         });
     </script>
 </body>
