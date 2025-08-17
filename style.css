@@ -139,13 +139,13 @@ nav {
 
 nav ul {
   display: flex;
-  list-style: none;
-  align-items: center;
+  flex-direction: column; /* Change from row to column */
+  align-items: flex-start; /* Align items to the left */
 }
 
 nav ul li {
-  position: relative;
-  margin-left: var(--spacing-md);
+  margin: 0.5rem 0; /* Vertical spacing instead of horizontal */
+  width: 100%; /* Full width for vertical layout */
 }
 
 nav ul li:first-child {
