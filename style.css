@@ -1,6 +1,6 @@
 /* ===================================
-   TECHFUSION REPORT - COMPLETE STYLESHEET
-   FIXED VERSION with Navigation Dropdowns
+   TECHFUSION REPORT - NEON TECH THEME
+   Color Palette: Cyan #00D4FF, Lime #A4FF00, White #FFFFFF, Black #0A0A0A
    =================================== */
 
 /* ===================================
@@ -20,8 +20,8 @@ html {
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #ffffff;
+    color: #FFFFFF;
+    background-color: #0A0A0A;
 }
 
 img {
@@ -31,20 +31,19 @@ img {
 }
 
 a {
-    color: #3498db;
+    color: #00D4FF;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #2980b9;
+    color: #A4FF00;
 }
 
 /* ===================================
    ACCESSIBILITY
    =================================== */
 
-/* Skip to main content link */
 .skip-link {
     position: absolute;
     top: -40px;
@@ -60,7 +59,6 @@ a:hover {
     top: 0;
 }
 
-/* Visually hidden but accessible to screen readers */
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -73,96 +71,92 @@ a:hover {
     border-width: 0;
 }
 
-/* Focus states */
 a:focus,
 button:focus,
 input:focus,
 textarea:focus {
-    outline: 2px solid #3498db;
+    outline: 2px solid #00D4FF;
     outline-offset: 2px;
 }
 
 /* ===================================
-   HEADER
-   =================================== */
-
-header {
-    background-color: #ffffff;
-    padding: 20px 0;
-    border-bottom: 1px solid #e0e0e0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo img {
-    height: 60px;
-    width: auto;
-}
-
-/* ===================================
-   NAVIGATION - FIXED VERTICAL DROPDOWNS
+   NAVIGATION WITH LOGO INSIDE
    =================================== */
 
 nav {
-    background-color: #2c3e50;
+    background: linear-gradient(to right, 
+        #0A0A0A 0%,           /* Deep Black */
+        #00D4FF 33.33%,       /* Cyan Blue */
+        #A4FF00 66.66%,       /* Lime Green */
+        #FFFFFF 100%          /* Pure White */
+    );
     padding: 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     position: sticky;
     top: 0;
     z-index: 999;
 }
 
-/* Main Navigation List */
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-logo {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(10, 10, 10, 0.9);
+}
+
+.nav-logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
 .main-nav {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    flex: 1;
 }
 
-/* Main Navigation Items */
 .main-nav > li {
     position: relative;
     margin: 0;
 }
 
-/* Main Navigation Links */
 .main-nav > li > a {
     display: block;
     padding: 18px 20px;
-    color: #ffffff;
+    color: #FFFFFF;
     text-decoration: none;
     font-weight: 500;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Hover Effect on Main Links */
 .main-nav > li > a:hover,
 .main-nav > li:hover > a,
 .main-nav > li > a[aria-current="page"] {
-    background-color: #34495e;
+    background-color: rgba(0, 0, 0, 0.6);
+    transform: translateY(-2px);
 }
 
-/* Dropdown Indicator Arrow */
 .has-dropdown > a::after {
     content: ' ▼';
     font-size: 0.7em;
     margin-left: 5px;
 }
 
-/* DROPDOWN STYLES - VERTICAL (THIS IS THE FIX!) */
+/* DROPDOWN STYLES - VERTICAL */
 .dropdown {
     list-style: none;
     margin: 0;
@@ -171,18 +165,17 @@ nav {
     top: 100%;
     left: 0;
     min-width: 220px;
-    background-color: #34495e;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    background-color: #0F0F0F;
+    border: 1px solid #1a1a1a;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.7);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
     z-index: 1000;
-    /* KEY FIX: Make dropdowns stack vertically */
     display: block;
 }
 
-/* Show Dropdown on Hover */
 .has-dropdown:hover .dropdown,
 .has-dropdown:focus-within .dropdown {
     opacity: 1;
@@ -190,32 +183,29 @@ nav {
     transform: translateY(0);
 }
 
-/* Dropdown Items - VERTICAL STACK */
 .dropdown li {
-    /* KEY FIX: Full width, block display */
     display: block;
     width: 100%;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid #1a1a1a;
 }
 
 .dropdown li:last-child {
     border-bottom: none;
 }
 
-/* Dropdown Links */
 .dropdown li a {
     display: block;
     padding: 12px 20px;
-    color: #ffffff;
+    color: #FFFFFF;
     text-decoration: none;
     white-space: nowrap;
-    transition: background-color 0.3s ease, padding-left 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-/* Dropdown Link Hover */
 .dropdown li a:hover {
-    background-color: #2c3e50;
+    background-color: #151515;
     padding-left: 25px;
+    color: #00D4FF;
 }
 
 /* ===================================
@@ -237,8 +227,8 @@ main {
    =================================== */
 
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #ffffff;
+    background: linear-gradient(135deg, #00D4FF 0%, #A4FF00 100%);
+    color: #0A0A0A;
     padding: 80px 20px;
     text-align: center;
 }
@@ -275,7 +265,7 @@ main {
     display: inline-block;
     padding: 12px 30px;
     border-radius: 5px;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -284,25 +274,26 @@ main {
 }
 
 .btn-primary {
-    background-color: #3498db;
-    color: #ffffff;
+    background-color: #00D4FF;
+    color: #0A0A0A;
 }
 
 .btn-primary:hover {
-    background-color: #2980b9;
+    background-color: #A4FF00;
+    color: #0A0A0A;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(164, 255, 0, 0.5);
 }
 
 .btn-secondary {
     background-color: transparent;
-    color: #ffffff;
-    border: 2px solid #ffffff;
+    color: #0A0A0A;
+    border: 2px solid #0A0A0A;
 }
 
 .btn-secondary:hover {
-    background-color: #ffffff;
-    color: #667eea;
+    background-color: #0A0A0A;
+    color: #FFFFFF;
 }
 
 /* ===================================
@@ -311,14 +302,14 @@ main {
 
 .categories {
     padding: 60px 20px;
-    background-color: #f8f9fa;
+    background-color: #0F0F0F;
 }
 
 .categories h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 50px;
-    color: #2c3e50;
+    color: #FFFFFF;
 }
 
 .category-grid {
@@ -330,40 +321,45 @@ main {
 }
 
 .category-card {
-    background: #ffffff;
+    background: #151515;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #1a1a1a;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
 }
 
 .category-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+    border-color: #00D4FF;
 }
 
-.category-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
+.category-image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto 20px;
+    display: block;
 }
 
 .category-card h3 {
     font-size: 1.75rem;
     margin-bottom: 15px;
-    color: #2c3e50;
+    color: #FFFFFF;
 }
 
 .category-card h3 a {
-    color: #2c3e50;
+    color: #FFFFFF;
 }
 
 .category-card h3 a:hover {
-    color: #3498db;
+    color: #00D4FF;
 }
 
 .category-card p {
     margin-bottom: 20px;
-    color: #666;
+    color: #cccccc;
 }
 
 .category-links {
@@ -376,12 +372,12 @@ main {
 }
 
 .category-links a {
-    color: #3498db;
+    color: #00D4FF;
     font-weight: 500;
 }
 
 .category-links a:hover {
-    color: #2980b9;
+    color: #A4FF00;
     text-decoration: underline;
 }
 
@@ -391,13 +387,14 @@ main {
 
 .latest-posts {
     padding: 60px 20px;
+    background-color: #0A0A0A;
 }
 
 .latest-posts h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 50px;
-    color: #2c3e50;
+    color: #FFFFFF;
 }
 
 .posts-grid {
@@ -408,16 +405,18 @@ main {
 }
 
 .post-card {
-    background: #ffffff;
+    background: #151515;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #1a1a1a;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
 }
 
 .post-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 20px rgba(164, 255, 0, 0.3);
+    border-color: #A4FF00;
 }
 
 .post-card img {
@@ -432,37 +431,37 @@ main {
 
 .post-category {
     display: inline-block;
-    background-color: #3498db;
-    color: #ffffff;
+    background-color: #00D4FF;
+    color: #0A0A0A;
     padding: 5px 15px;
     border-radius: 20px;
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 10px;
 }
 
 .post-card h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
-    color: #2c3e50;
+    color: #FFFFFF;
 }
 
 .post-card h3 a {
-    color: #2c3e50;
+    color: #FFFFFF;
 }
 
 .post-card h3 a:hover {
-    color: #3498db;
+    color: #00D4FF;
 }
 
 .post-excerpt {
-    color: #666;
+    color: #cccccc;
     margin-bottom: 15px;
     line-height: 1.6;
 }
 
 .post-card time {
-    color: #999;
+    color: #888888;
     font-size: 0.9rem;
 }
 
@@ -475,8 +474,8 @@ main {
    =================================== */
 
 .newsletter {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #ffffff;
+    background: linear-gradient(135deg, #00D4FF 0%, #A4FF00 100%);
+    color: #0A0A0A;
     padding: 60px 20px;
     text-align: center;
 }
@@ -505,9 +504,17 @@ main {
     flex: 1;
     min-width: 250px;
     padding: 12px 20px;
-    border: none;
+    border: 2px solid #1a1a1a;
     border-radius: 5px;
     font-size: 1rem;
+    background-color: #151515;
+    color: #FFFFFF;
+}
+
+.newsletter-form input[type="email"]:focus {
+    outline: none;
+    border-color: #00D4FF;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
 }
 
 .newsletter-form button {
@@ -558,13 +565,13 @@ footer {
 }
 
 .footer-section a:hover {
-    color: #3498db;
+    color: #00D4FF;
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 20px;
-    border-top: 1px solid #34495e;
+    border-top: 1px solid #333;
     color: #bdc3c7;
 }
 
@@ -573,7 +580,17 @@ footer {
    =================================== */
 
 @media (max-width: 768px) {
-    /* Navigation */
+    .nav-container {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .nav-logo {
+        width: 100%;
+        justify-content: center;
+        padding: 15px;
+    }
+    
     .main-nav {
         flex-direction: column;
         width: 100%;
@@ -587,7 +604,6 @@ footer {
         text-align: center;
     }
     
-    /* Dropdowns full width on mobile */
     .dropdown {
         position: static;
         width: 100%;
@@ -613,7 +629,6 @@ footer {
         padding-left: 45px;
     }
     
-    /* Hero */
     .hero h1 {
         font-size: 2rem;
     }
@@ -627,17 +642,14 @@ footer {
         gap: 15px;
     }
     
-    /* Categories */
     .category-grid {
         grid-template-columns: 1fr;
     }
     
-    /* Posts */
     .posts-grid {
         grid-template-columns: 1fr;
     }
     
-    /* Newsletter */
     .newsletter-form {
         flex-direction: column;
     }
@@ -646,7 +658,6 @@ footer {
         width: 100%;
     }
     
-    /* Footer */
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
