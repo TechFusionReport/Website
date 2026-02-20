@@ -38,10 +38,6 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
     
-    <!-- Preconnect for Performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
@@ -65,18 +61,13 @@
     <!-- Skip to Main Content (Accessibility) -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    <!-- Header -->
-    <header>
-        <div class="header-content">
-            <a href="index.html" class="logo" aria-label="TechFusion Report Home">
-                <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" width="200" height="60">
-            </a>
-        </div>
-    </header>
-    
-    <!-- Navigation with Dropdown Menus -->
+    <!-- Navigation with Logo Inside -->
     <nav role="navigation" aria-label="Main Navigation">
-        <ul class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo" aria-label="TechFusion Report Home">
+                <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" height="50">
+            </a>
+            <ul class="main-nav">
             <li><a href="index.html" aria-current="page">Home</a></li>
             
             <li class="has-dropdown">
@@ -115,6 +106,7 @@
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
+        </div>
     </nav>
     
     <!-- Main Content -->
@@ -177,13 +169,13 @@
             </div>
         </section>
         
-        <!-- Latest Blog Posts Section (Will be populated by automation) -->
+        <!-- Latest Blog Posts Section -->
         <section class="latest-posts" aria-labelledby="latest-heading">
             <div class="container">
                 <h2 id="latest-heading">Latest from Our Blog</h2>
                 
                 <div class="posts-grid">
-                    <!-- Example Post Card (Replace with dynamic content) -->
+                    <!-- Example Post Card -->
                     <article class="post-card">
                         <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
                         <div class="post-content">
@@ -193,8 +185,6 @@
                             <time datetime="2025-02-19">February 19, 2025</time>
                         </div>
                     </article>
-                    
-                    <!-- More post cards will be added here via automation -->
                 </div>
                 
                 <div class="section-cta">
