@@ -85,10 +85,11 @@ textarea:focus {
 
 nav {
     background: linear-gradient(to right, 
-        #0A0A0A 0%,           /* Deep Black */
-        #00D4FF 33.33%,       /* Cyan Blue */
-        #A4FF00 66.66%,       /* Lime Green */
-        #FFFFFF 100%          /* Pure White */
+        #0A0A0A 0%,           /* Deep Black starts */
+        #0A0A0A 30%,          /* Black ends at logo edge */
+        #00D4FF 53.33%,       /* Cyan Blue (30% + 23.33%) */
+        #A4FF00 76.66%,       /* Lime Green (30% + 46.66%) */
+        #FFFFFF 100%          /* Pure White ends */
     );
     padding: 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.4);
