@@ -1,797 +1,265 @@
-/* ===================================
-   TECHFUSION REPORT - NEON TECH THEME
-   Color Palette: Cyan #00D4FF, Lime #A4FF00, White #FFFFFF, Black #0A0A0A
-   =================================== */
-
-/* ===================================
-   RESET & BASE STYLES
-   =================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    line-height: 1.6;
-    color: #FFFFFF;
-    background-color: #0A0A0A;
-    background-image: 
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 212, 255, 0.02) 2px, rgba(0, 212, 255, 0.02) 4px),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(164, 255, 0, 0.02) 2px, rgba(164, 255, 0, 0.02) 4px);
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-a {
-    color: #00D4FF;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #A4FF00;
-}
-
-/* ===================================
-   ACCESSIBILITY
-   =================================== */
-
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: #000;
-    color: #fff;
-    padding: 8px;
-    text-decoration: none;
-    z-index: 100;
-}
-
-.skip-link:focus {
-    top: 0;
-}
-
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-a:focus,
-button:focus,
-input:focus,
-textarea:focus {
-    outline: 2px solid #00D4FF;
-    outline-offset: 2px;
-}
-
-/* ===================================
-   NAVIGATION WITH LOGO INSIDE
-   =================================== */
-
-nav {
-    background: linear-gradient(to right, 
-        #0A0A0A 0%,           /* Deep Black starts */
-        #0A0A0A 30%,          /* Black ends at logo edge */
-        #00D4FF 53.33%,       /* Cyan Blue (30% + 23.33%) */
-        #A4FF00 76.66%,       /* Lime Green (30% + 46.66%) */
-        #FFFFFF 100%          /* Pure White ends */
-    );
-    padding: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    position: sticky;
-    top: 0;
-    z-index: 999;
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.nav-logo {
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    background-color: rgba(10, 10, 10, 0.9);
-}
-
-.nav-logo img {
-    height: 50px;
-    width: auto;
-    display: block;
-}
-
-.main-nav {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    flex: 1;
-}
-
-.main-nav > li {
-    position: relative;
-    margin: 0;
-}
-
-.main-nav > li > a {
-    display: block;
-    padding: 18px 20px;
-    color: #FFFFFF;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    background-color: rgba(0, 0, 0, 0.4);
-    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.3);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.main-nav > li > a:hover,
-.main-nav > li:hover > a,
-.main-nav > li > a[aria-current="page"] {
-    background-color: rgba(0, 0, 0, 0.7);
-    box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.5);
-    transform: translateY(-2px);
-}
-
-.has-dropdown > a::after {
-    content: ' ▼';
-    font-size: 0.7em;
-    margin-left: 5px;
-}
-
-/* DROPDOWN STYLES - VERTICAL */
-.dropdown {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 220px;
-    background-color: #0F0F0F;
-    border: 2px solid #1a1a1a;
-    border-radius: 5px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.7), 0 0 0 1px rgba(0, 212, 255, 0.1);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 1000;
-    display: block;
-    overflow: hidden;
-}
-
-.has-dropdown:hover .dropdown,
-.has-dropdown:focus-within .dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.7), 0 0 15px rgba(0, 212, 255, 0.2);
-}
-
-.dropdown li {
-    display: block;
-    width: 100%;
-    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-}
-
-.dropdown li:last-child {
-    border-bottom: none;
-}
-
-.dropdown li a {
-    display: block;
-    padding: 12px 20px;
-    color: #FFFFFF;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-    border-left: 3px solid transparent;
-    position: relative;
-}
-
-.dropdown li a:hover {
-    background-color: #1a1a1a;
-    color: #00D4FF;
-    border-left-color: #00D4FF;
-    padding-left: 25px;
-    transform: translateX(5px);
-    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
-    font-weight: 600;
-}
-
-/* ===================================
-   MAIN CONTENT
-   =================================== */
-
-main {
-    min-height: calc(100vh - 400px);
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* ===================================
-   HERO SECTION
-   =================================== */
-
-.hero {
-    background: linear-gradient(135deg, #00D4FF 0%, #A4FF00 100%);
-    color: #0A0A0A;
-    padding: 80px 20px;
-    text-align: center;
-}
-
-.hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-.hero-subtitle {
-    font-size: 1.25rem;
-    margin-bottom: 30px;
-    opacity: 0.95;
-}
-
-.hero-cta {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* ===================================
-   BUTTONS
-   =================================== */
-
-.btn {
-    display: inline-block;
-    padding: 12px 30px;
-    border-radius: 5px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-    font-size: 1rem;
-}
-
-.btn-primary {
-    background-color: #00D4FF;
-    color: #0A0A0A;
-}
-
-.btn-primary:hover {
-    background-color: #A4FF00;
-    color: #0A0A0A;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(164, 255, 0, 0.5);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: #0A0A0A;
-    border: 2px solid #0A0A0A;
-}
-
-.btn-secondary:hover {
-    background-color: #0A0A0A;
-    color: #FFFFFF;
-}
-
-/* ===================================
-   CATEGORIES SECTION
-   =================================== */
-
-.categories {
-    padding: 60px 20px;
-    background-color: #0F0F0F;
-    position: relative;
-}
-
-.categories::before {
-    content: '';
-    display: block;
-    height: 3px;
-    width: 60%;
-    max-width: 800px;
-    margin: 0 auto 60px;
-    background: linear-gradient(to right, transparent, #00D4FF 20%, #A4FF00 50%, #00D4FF 80%, transparent);
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-}
-
-.categories h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    color: #FFFFFF;
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-}
-
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(280px, 380px));
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-    justify-content: center;
-}
-
-.category-card {
-    background: #151515;
-    padding: 30px;
-    border-radius: 10px;
-    border: 2px solid #1a1a1a;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.category-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, transparent 50%, rgba(0, 212, 255, 0.1) 50%);
-    transition: all 0.3s ease;
-}
-
-.category-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
-    border-color: #00D4FF;
-}
-
-.category-card:hover::before {
-    background: linear-gradient(135deg, transparent 50%, rgba(0, 212, 255, 0.3) 50%);
-}
-
-.category-image {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    margin: 0 auto 20px;
-    display: block;
-}
-
-.category-card h3 {
-    font-size: 1.75rem;
-    margin-bottom: 15px;
-    color: #FFFFFF;
-}
-
-.category-card h3 a {
-    color: #FFFFFF;
-}
-
-.category-card h3 a:hover {
-    color: #00D4FF;
-}
-
-.category-card p {
-    margin-bottom: 20px;
-    font-size: 1.05rem;
-    font-weight: 400;
-    line-height: 1.7;
-    background: linear-gradient(135deg, #FFFFFF 0%, #00D4FF 50%, #A4FF00 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% auto;
-}
-
-.category-links {
-    list-style: none;
-    padding: 0;
-}
-
-.category-links li {
-    margin-bottom: 10px;
-}
-
-.category-links a {
-    color: #00D4FF;
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.category-links a:hover {
-    color: #A4FF00;
-    text-decoration: none;
-    padding-left: 8px;
-}
-
-.link-icon {
-    display: inline-block;
-    margin-right: 8px;
-    font-size: 0.9em;
-    color: #00D4FF;
-    transition: all 0.3s ease;
-}
-
-.category-links a:hover .link-icon {
-    color: #A4FF00;
-    transform: translateX(4px);
-}
-
-/* ===================================
-   BLOG POSTS SECTION
-   =================================== */
-
-.latest-posts {
-    padding: 60px 20px;
-    background-color: #0A0A0A;
-    position: relative;
-}
-
-.latest-posts::before {
-    content: '';
-    display: block;
-    height: 3px;
-    width: 60%;
-    max-width: 800px;
-    margin: 0 auto 60px;
-    background: linear-gradient(to right, transparent, #A4FF00 20%, #00D4FF 50%, #A4FF00 80%, transparent);
-    box-shadow: 0 0 10px rgba(164, 255, 0, 0.5);
-}
-
-.latest-posts h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    color: #FFFFFF;
-    text-shadow: 0 0 20px rgba(164, 255, 0, 0.3);
-}
-
-.posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
-}
-
-.post-card {
-    background: #151515;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid #1a1a1a;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    transition: all 0.3s ease;
-}
-
-.post-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(164, 255, 0, 0.3);
-    border-color: #A4FF00;
-}
-
-.post-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.post-content {
-    padding: 20px;
-}
-
-.post-category {
-    display: inline-block;
-    background-color: #00D4FF;
-    color: #0A0A0A;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
-.post-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #FFFFFF;
-}
-
-.post-card h3 a {
-    color: #FFFFFF;
-}
-
-.post-card h3 a:hover {
-    color: #00D4FF;
-}
-
-.post-excerpt {
-    color: #cccccc;
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
-
-.post-card time {
-    color: #888888;
-    font-size: 0.9rem;
-}
-
-.section-cta {
-    text-align: center;
-}
-
-/* ===================================
-   NEWSLETTER SECTION
-   =================================== */
-
-.newsletter {
-    background: linear-gradient(135deg, #00D4FF 0%, #A4FF00 100%);
-    color: #0A0A0A;
-    padding: 60px 20px;
-    text-align: center;
-}
-
-.newsletter h2 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-}
-
-.newsletter p {
-    font-size: 1.15rem;
-    margin-bottom: 30px;
-    opacity: 0.95;
-}
-
-.newsletter-form {
-    display: flex;
-    gap: 10px;
-    max-width: 500px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.newsletter-form input[type="email"] {
-    flex: 1;
-    min-width: 250px;
-    padding: 12px 20px;
-    border: 2px solid #1a1a1a;
-    border-radius: 5px;
-    font-size: 1rem;
-    background-color: #151515;
-    color: #FFFFFF;
-}
-
-.newsletter-form input[type="email"]:focus {
-    outline: none;
-    border-color: #00D4FF;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
-}
-
-.newsletter-form button {
-    padding: 12px 30px;
-}
-
-/* ===================================
-   FOOTER
-   =================================== */
-
-footer {
-    background-color: #2c3e50;
-    color: #ffffff;
-    padding: 40px 20px 20px;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    margin-bottom: 30px;
-}
-
-.footer-section h3,
-.footer-section h4 {
-    margin-bottom: 15px;
-    color: #ffffff;
-}
-
-.footer-section p {
-    color: #bdc3c7;
-    line-height: 1.6;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section li {
-    margin-bottom: 10px;
-}
-
-.footer-section a {
-    color: #bdc3c7;
-    transition: color 0.3s ease;
-}
-
-.footer-section a:hover {
-    color: #00D4FF;
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid #333;
-    color: #bdc3c7;
-}
-
-/* ===================================
-   MOBILE RESPONSIVE
-   =================================== */
-
-@media (max-width: 992px) {
-    .category-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .nav-container {
-        flex-direction: column;
-        width: 100%;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    .nav-logo {
-        width: 100%;
-        justify-content: center;
-        padding: 15px;
-    }
+    <!-- SEO Meta Tags -->
+    <title>TechFusion Report | Technology, Entertainment & Productivity News</title>
+    <meta name="description" content="Your premier source for technology news, entertainment reviews, and productivity tips. Stay informed with TechFusion Report's expert insights and guides.">
+    <meta name="keywords" content="technology news, tech reviews, entertainment, productivity, smartphones, smart home, apps, software">
+    <meta name="author" content="TechFusion Report">
+    <meta name="robots" content="index, follow">
     
-    .main-nav {
-        flex-direction: column;
-        width: 100%;
-    }
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="TechFusion Report | Technology, Entertainment & Productivity News">
+    <meta property="og:description" content="Your premier source for technology news, entertainment reviews, and productivity tips.">
+    <meta property="og:image" content="https://www.techfusionreport.com/graphics/og-image.jpg">
+    <meta property="og:url" content="https://www.techfusionreport.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TechFusion Report">
     
-    .main-nav > li {
-        width: 100%;
-    }
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TechFusion Report | Technology, Entertainment & Productivity News">
+    <meta name="twitter:description" content="Your premier source for technology news, entertainment reviews, and productivity tips.">
+    <meta name="twitter:image" content="https://www.techfusionreport.com/graphics/twitter-card.jpg">
     
-    .main-nav > li > a {
-        text-align: center;
-    }
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.techfusionreport.com/">
     
-    .dropdown {
-        position: static;
-        width: 100%;
-        min-width: unset;
-        opacity: 0;
-        max-height: 0;
-        overflow: hidden;
-        transform: none;
-        box-shadow: none;
-    }
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="graphics/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="graphics/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="graphics/apple-touch-icon.png">
     
-    .has-dropdown:hover .dropdown,
-    .has-dropdown:focus-within .dropdown {
-        opacity: 1;
-        max-height: 500px;
-    }
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
     
-    .dropdown li a {
-        padding-left: 40px;
-        border-left: 3px solid transparent;
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "TechFusion Report",
+        "url": "https://www.techfusionreport.com",
+        "description": "Your premier source for technology news, entertainment reviews, and productivity tips",
+        "publisher": {
+            "@type": "Organization",
+            "name": "TechFusion Report",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.techfusionreport.com/graphics/logo.png"
+            }
+        }
     }
+    </script>
+</head>
+<body>
+    <!-- Skip to Main Content (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    .dropdown li a:hover {
-        padding-left: 45px;
-        color: #00D4FF;
-        border-left-color: #00D4FF;
-        background-color: #1a1a1a;
-        transform: translateX(5px);
-        box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
-        font-weight: 600;
-    }
+    <!-- Navigation with Logo Inside -->
+    <nav role="navigation" aria-label="Main Navigation">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo" aria-label="TechFusion Report Home">
+                <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" height="50">
+            </a>
+            <ul class="main-nav">
+            <li><a href="index.html" aria-current="page">Home</a></li>
+            
+            <li class="has-dropdown">
+                <a href="technology.html" aria-haspopup="true" aria-expanded="false">Technology</a>
+                <ul class="dropdown" role="menu">
+                    <li role="none"><a href="ai.html" role="menuitem">AI Tools</a></li>
+                    <li role="none"><a href="smartphones.html" role="menuitem">Smartphones</a></li>
+                    <li role="none"><a href="smart_home.html" role="menuitem">Smart Home</a></li>
+                    <li role="none"><a href="android_apps.html" role="menuitem">Android Apps</a></li>
+                    <li role="none"><a href="mac-apps.html" role="menuitem">Mac Apps</a></li>
+                    <li role="none"><a href="smartphone-apps.html" role="menuitem">Smartphone Apps</a></li>
+                    <li role="none"><a href="tips_tricks.html" role="menuitem">Tips & Tricks</a></li>
+                    <li role="none"><a href="gtk_websites.html" role="menuitem">Good to Know Websites</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-dropdown">
+                <a href="entertainment.html" aria-haspopup="true" aria-expanded="false">Entertainment</a>
+                <ul class="dropdown" role="menu">
+                    <li role="none"><a href="movies.html" role="menuitem">Movies</a></li>
+                    <li role="none"><a href="tv_shows.html" role="menuitem">TV Shows</a></li>
+                    <li role="none"><a href="music.html" role="menuitem">Music</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-dropdown">
+                <a href="productivity.html" aria-haspopup="true" aria-expanded="false">Productivity</a>
+                <ul class="dropdown" role="menu">
+                    <li role="none"><a href="office.html" role="menuitem">Office Tools</a></li>
+                    <li role="none"><a href="workflows.html" role="menuitem">Workflows</a></li>
+                    <li role="none"><a href="productivity_apps.html" role="menuitem">Productivity Apps</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        </div>
+    </nav>
     
-    .hero h1 {
-        font-size: 2rem;
-    }
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero-content">
+                <h1 id="hero-heading">Welcome to TechFusion Report</h1>
+                <p class="hero-subtitle">Your premier source for technology, entertainment, and productivity insights</p>
+                <div class="hero-cta">
+                    <a href="blog.html" class="btn btn-primary">Read Our Blog</a>
+                    <a href="about.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Featured Categories -->
+        <section class="categories" aria-labelledby="categories-heading">
+            <div class="container">
+                <h2 id="categories-heading">Explore Our Content</h2>
+                
+                <div class="category-grid">
+                    <!-- Technology Category -->
+                    <article class="category-card">
+                        <div class="category-icon">⚡</div>
+                        <a href="technology.html">
+                            <img src="graphics/tech_nb.png" alt="Technology" class="category-image" loading="lazy">
+                        </a>
+                        <p>Stay updated with the latest tech news, reviews, and guides</p>
+                        <ul class="category-links">
+                            <li><a href="smartphones.html"><span class="link-icon">▸</span> Smartphones</a></li>
+                            <li><a href="smart_home.html"><span class="link-icon">▸</span> Smart Home</a></li>
+                            <li><a href="ai.html"><span class="link-icon">▸</span> AI Tools</a></li>
+                            <li><a href="android_apps.html"><span class="link-icon">▸</span> Apps</a></li>
+                        </ul>
+                    </article>
+                    
+                    <!-- Entertainment Category -->
+                    <article class="category-card">
+                        <div class="category-icon">▶</div>
+                        <a href="entertainment.html">
+                            <img src="graphics/ent_nb.png" alt="Entertainment" class="category-image" loading="lazy">
+                        </a>
+                        <p>Discover reviews and recommendations for movies, TV shows, and music</p>
+                        <ul class="category-links">
+                            <li><a href="movies.html"><span class="link-icon">▸</span> Movies</a></li>
+                            <li><a href="tv_shows.html"><span class="link-icon">▸</span> TV Shows</a></li>
+                            <li><a href="music.html"><span class="link-icon">▸</span> Music</a></li>
+                        </ul>
+                    </article>
+                    
+                    <!-- Productivity Category -->
+                    <article class="category-card">
+                        <div class="category-icon">▲</div>
+                        <a href="productivity.html">
+                            <img src="graphics/prod_nb.png" alt="Productivity" class="category-image" loading="lazy">
+                        </a>
+                        <p>Boost your efficiency with tools, tips, and workflows</p>
+                        <ul class="category-links">
+                            <li><a href="office.html"><span class="link-icon">▸</span> Office Tools</a></li>
+                            <li><a href="workflows.html"><span class="link-icon">▸</span> Workflows</a></li>
+                            <li><a href="productivity_apps.html"><span class="link-icon">▸</span> Productivity Apps</a></li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Latest Blog Posts Section -->
+        <section class="latest-posts" aria-labelledby="latest-heading">
+            <div class="container">
+                <h2 id="latest-heading">Latest from Our Blog</h2>
+                
+                <div class="posts-grid">
+                    <!-- Example Post Card -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Technology</span>
+                            <h3><a href="blog/posts/example-post.html">Example Blog Post Title</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-19">February 19, 2025</time>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="section-cta">
+                    <a href="blog.html" class="btn btn-primary">View All Posts</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Newsletter Signup -->
+        <section class="newsletter" aria-labelledby="newsletter-heading">
+            <div class="container">
+                <h2 id="newsletter-heading">Stay in the Loop</h2>
+                <p>Get the latest tech news, reviews, and tips delivered to your inbox weekly</p>
+                <form action="#" method="post" class="newsletter-form">
+                    <label for="email" class="visually-hidden">Email address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email" 
+                        required 
+                        aria-required="true"
+                    >
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
     
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-    
-    .hero-cta {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .category-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .posts-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .newsletter-form {
-        flex-direction: column;
-    }
-    
-    .newsletter-form input[type="email"] {
-        width: 100%;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 1.75rem;
-    }
-    
-    .categories h2,
-    .latest-posts h2,
-    .newsletter h2 {
-        font-size: 2rem;
-    }
-}
-
-/* ===================================
-   UTILITY CLASSES
-   =================================== */
-
-.text-center {
-    text-align: center;
-}
-
-.mt-20 {
-    margin-top: 20px;
-}
-
-.mb-20 {
-    margin-bottom: 20px;
-}
-
-.mt-40 {
-    margin-top: 40px;
-}
-
-.mb-40 {
-    margin-bottom: 40px;
-}
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TechFusion Report</h3>
+                <p>Your premier source for technology, entertainment, and productivity content.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="technology.html">Technology</a></li>
+                    <li><a href="entertainment.html">Entertainment</a></li>
+                    <li><a href="productivity.html">Productivity</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
