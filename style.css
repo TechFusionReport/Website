@@ -22,6 +22,9 @@ body {
     line-height: 1.6;
     color: #FFFFFF;
     background-color: #0A0A0A;
+    background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 212, 255, 0.02) 2px, rgba(0, 212, 255, 0.02) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(164, 255, 0, 0.02) 2px, rgba(164, 255, 0, 0.02) 4px);
 }
 
 img {
@@ -140,14 +143,16 @@ nav {
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.3);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .main-nav > li > a:hover,
 .main-nav > li:hover > a,
 .main-nav > li > a[aria-current="page"] {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.5);
     transform: translateY(-2px);
 }
 
@@ -167,14 +172,16 @@ nav {
     left: 0;
     min-width: 220px;
     background-color: #0F0F0F;
-    border: 1px solid #1a1a1a;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.7);
+    border: 2px solid #1a1a1a;
+    border-radius: 5px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7), 0 0 0 1px rgba(0, 212, 255, 0.1);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
     z-index: 1000;
     display: block;
+    overflow: hidden;
 }
 
 .has-dropdown:hover .dropdown,
@@ -182,12 +189,13 @@ nav {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7), 0 0 15px rgba(0, 212, 255, 0.2);
 }
 
 .dropdown li {
     display: block;
     width: 100%;
-    border-bottom: 1px solid #1a1a1a;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
 }
 
 .dropdown li:last-child {
@@ -201,12 +209,18 @@ nav {
     text-decoration: none;
     white-space: nowrap;
     transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    position: relative;
 }
 
 .dropdown li a:hover {
-    background-color: #151515;
-    padding-left: 25px;
+    background-color: #1a1a1a;
     color: #00D4FF;
+    border-left-color: #00D4FF;
+    padding-left: 25px;
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+    font-weight: 600;
 }
 
 /* ===================================
@@ -304,6 +318,18 @@ main {
 .categories {
     padding: 60px 20px;
     background-color: #0F0F0F;
+    position: relative;
+}
+
+.categories::before {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 60%;
+    max-width: 800px;
+    margin: 0 auto 60px;
+    background: linear-gradient(to right, transparent, #00D4FF 20%, #A4FF00 50%, #00D4FF 80%, transparent);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
 .categories h2 {
@@ -311,29 +337,48 @@ main {
     font-size: 2.5rem;
     margin-bottom: 50px;
     color: #FFFFFF;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
 }
 
 .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, minmax(280px, 380px));
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
+    justify-content: center;
 }
 
 .category-card {
     background: #151515;
     padding: 30px;
     border-radius: 10px;
-    border: 1px solid #1a1a1a;
+    border: 2px solid #1a1a1a;
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, transparent 50%, rgba(0, 212, 255, 0.1) 50%);
     transition: all 0.3s ease;
 }
 
 .category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
     border-color: #00D4FF;
+}
+
+.category-card:hover::before {
+    background: linear-gradient(135deg, transparent 50%, rgba(0, 212, 255, 0.3) 50%);
 }
 
 .category-image {
@@ -360,7 +405,14 @@ main {
 
 .category-card p {
     margin-bottom: 20px;
-    color: #cccccc;
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.7;
+    background: linear-gradient(135deg, #FFFFFF 0%, #00D4FF 50%, #A4FF00 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
 }
 
 .category-links {
@@ -375,11 +427,28 @@ main {
 .category-links a {
     color: #00D4FF;
     font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
 }
 
 .category-links a:hover {
     color: #A4FF00;
-    text-decoration: underline;
+    text-decoration: none;
+    padding-left: 8px;
+}
+
+.link-icon {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 0.9em;
+    color: #00D4FF;
+    transition: all 0.3s ease;
+}
+
+.category-links a:hover .link-icon {
+    color: #A4FF00;
+    transform: translateX(4px);
 }
 
 /* ===================================
@@ -389,6 +458,18 @@ main {
 .latest-posts {
     padding: 60px 20px;
     background-color: #0A0A0A;
+    position: relative;
+}
+
+.latest-posts::before {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 60%;
+    max-width: 800px;
+    margin: 0 auto 60px;
+    background: linear-gradient(to right, transparent, #A4FF00 20%, #00D4FF 50%, #A4FF00 80%, transparent);
+    box-shadow: 0 0 10px rgba(164, 255, 0, 0.5);
 }
 
 .latest-posts h2 {
@@ -396,6 +477,7 @@ main {
     font-size: 2.5rem;
     margin-bottom: 50px;
     color: #FFFFFF;
+    text-shadow: 0 0 20px rgba(164, 255, 0, 0.3);
 }
 
 .posts-grid {
@@ -580,6 +662,12 @@ footer {
    MOBILE RESPONSIVE
    =================================== */
 
+@media (max-width: 992px) {
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
@@ -624,10 +712,17 @@ footer {
     
     .dropdown li a {
         padding-left: 40px;
+        border-left: 3px solid transparent;
     }
     
     .dropdown li a:hover {
         padding-left: 45px;
+        color: #00D4FF;
+        border-left-color: #00D4FF;
+        background-color: #1a1a1a;
+        transform: translateX(5px);
+        box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+        font-weight: 600;
     }
     
     .hero h1 {
