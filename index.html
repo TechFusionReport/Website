@@ -1,411 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechFusion Report | Technology, Entertainment & Productivity</title>
-    <meta name="description" content="Your source for Technology, Entertainment, and Productivity insights">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>TechFusion Report | Technology, Entertainment & Productivity News</title>
+    <meta name="description" content="Your premier source for technology news, entertainment reviews, and productivity tips. Stay informed with TechFusion Report's expert insights and guides.">
+    <meta name="keywords" content="technology news, tech reviews, entertainment, productivity, smartphones, smart home, apps, software">
+    <meta name="author" content="TechFusion Report">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="TechFusion Report | Technology, Entertainment & Productivity News">
+    <meta property="og:description" content="Your premier source for technology news, entertainment reviews, and productivity tips.">
+    <meta property="og:image" content="https://www.techfusionreport.com/images/og-image.jpg">
+    <meta property="og:url" content="https://www.techfusionreport.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TechFusion Report">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TechFusion Report | Technology, Entertainment & Productivity News">
+    <meta name="twitter:description" content="Your premier source for technology news, entertainment reviews, and productivity tips.">
+    <meta name="twitter:image" content="https://www.techfusionreport.com/images/twitter-card.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.techfusionreport.com/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" href="graphics/tfr_header_logo_nb.png" as="image">
-    <link rel="icon" href="graphics/favicon.ico" type="image/x-icon">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "TechFusion Report",
+        "url": "https://www.techfusionreport.com",
+        "description": "Your premier source for technology news, entertainment reviews, and productivity tips",
+        "publisher": {
+            "@type": "Organization",
+            "name": "TechFusion Report",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.techfusionreport.com/images/logo.png"
+            }
+        }
+    }
+    </script>
 </head>
 <body>
+    <!-- Skip to Main Content (Accessibility) -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
+    <!-- Header -->
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" class="logo-image">
-                    </a>
-                </div>
-                <nav role="navigation" aria-label="Main navigation">
-                    <ul id="nav-menu">
-                        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-                        <!-- Technology Category with Dropdown -->
-                        <li class="dropdown">
-                            <a href="technology.html" aria-haspopup="true" aria-expanded="false">Technology</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li role="none"><a href="smartphones.html" role="menuitem">Smartphones</a></li>
-                                <li role="none"><a href="smart_home.html" role="menuitem">Smart Home</a></li>
-                                <li role="none"><a href="gtk_websites.html" role="menuitem">GTK Websites</a></li>
-                                <li role="none"><a href="ai.html" role="menuitem">Artificial Intelligence</a></li>
-                                <li role="none"><a href="tips_tricks.html" role="menuitem">Tips & Tricks</a></li>
-                                <li role="none"><a href="computers.html" role="menuitem">Computers</a></li>
-                            </ul>
-                        </li>
-                        
-                        <!-- Entertainment Category with Dropdown -->
-                        <li class="dropdown">
-                            <a href="entertainment.html" aria-haspopup="true" aria-expanded="false">Entertainment</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li role="none"><a href="movies.html" role="menuitem">Movies</a></li>
-                                <li role="none"><a href="tv-shows.html" role="menuitem">TV Shows</a></li>
-                                <li role="none"><a href="music.html" role="menuitem">Music</a></li>
-                            </ul>
-                        </li>
-                        
-                        <!-- Productivity Category with Dropdown -->
-                        <li class="dropdown">
-                            <a href="productivity.html" aria-haspopup="true" aria-expanded="false">Productivity</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li role="none"><a href="apps.html" role="menuitem">Apps</a></li>
-                                <li role="none"><a href="time-management.html" role="menuitem">Time Management</a></li>
-                                <li role="none"><a href="workflows.html" role="menuitem">Workflows</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
-                <button class="mobile-menu" id="mobile-menu" aria-label="Toggle navigation menu" aria-expanded="false">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
-            </div>
+        <div class="header-content">
+            <a href="index.html" class="logo" aria-label="TechFusion Report Home">
+                <img src="images/TFR_Header_Logo_NB.png" alt="TechFusion Report Logo" width="200" height="60">
+            </a>
         </div>
     </header>
-
-    <main id="main-content" class="main">
-        <div class="container">
-            <section class="hero">
-                <h1 class="visually-hidden">TechFusion Report - Technology, Entertainment & Productivity</h1>
-                <div class="hero-content">
-                    <img src="graphics/tfr-hero-background_upscaled.png" alt="TechFusion Report Hero Banner" class="hero-image">
-                    <div class="hero-text">
-                        <p class="hero-subtitle">Discover the latest in technology, entertainment, and productivity tools</p>
-                    </div>
-                </div>
-            </section>
+    
+    <!-- Navigation with Dropdown Menus -->
+    <nav role="navigation" aria-label="Main Navigation">
+        <ul class="main-nav">
+            <li><a href="index.html" aria-current="page">Home</a></li>
             
-            <section class="category-cards" aria-labelledby="categories-heading">
-                <h2 id="categories-heading" class="visually-hidden">Main Categories</h2>
-                
-                <div class="category-card">
-                    <div class="category-icon" aria-hidden="true">
-                        <i class="fas fa-microchip"></i>
-                    </div>
-                    <h3>
-                        <img src="graphics/tech_nb.png" alt="Technology" class="category-title-image">
-                    </h3>
-                    <p>Cutting-edge tech reviews and guides to help you stay ahead in the digital world</p>
-                    <a href="technology.html" class="btn">Explore Tech</a>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-icon" aria-hidden="true">
-                        <i class="fas fa-film"></i>
-                    </div>
-                    <h3>
-                        <img src="graphics/ent_nb.png" alt="Entertainment" class="category-title-image">
-                    </h3>
-                    <p>The latest in movies, music, TV shows and pop culture news</p>
-                    <a href="entertainment.html" class="btn">Explore Entertainment</a>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-icon" aria-hidden="true">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <h3>
-                        <img src="graphics/prod_nb.png" alt="Productivity" class="category-title-image">
-                    </h3>
-                    <p>Tools and techniques to supercharge your efficiency and workflow</p>
-                    <a href="productivity.html" class="btn">Explore Productivity</a>
-                </div>
-            </section>
+            <li class="has-dropdown">
+                <a href="technology.html" aria-haspopup="true" aria-expanded="false">Technology</a>
+                <ul class="dropdown" role="menu">
+                    <li role="none"><a href="ai.html" role="menuitem">AI Tools</a></li>
+                    <li role="none"><a href="smartphones.html" role="menuitem">Smartphones</a></li>
+                    <li role="none"><a href="smart_home.html" role="menuitem">Smart Home</a></li>
+                    <li role="none"><a href="android_apps.html" role="menuitem">Android Apps</a></li>
+                    <li role="none"><a href="mac-apps.html" role="menuitem">Mac Apps</a></li>
+                    <li role="none"><a href="smartphone-apps.html" role="menuitem">Smartphone Apps</a></li>
+                    <li role="none"><a href="tips_tricks.html" role="menuitem">Tips & Tricks</a></li>
+                    <li role="none"><a href="gtk_websites.html" role="menuitem">Good to Know Websites</a></li>
+                </ul>
+            </li>
             
-            <section class="featured-section" aria-labelledby="featured-heading">
-                <div class="section-title">
-                    <h2 id="featured-heading">Featured Articles</h2>
-                    <p>Our most popular content across all categories</p>
+            <li class="has-dropdown">
+                <a href="entertainment.html" aria-haspopup="true" aria-expanded="false">Entertainment</a>
+                <ul class="dropdown" role="menu">
+                    <li role="none"><a href="movies.html" role="menuitem">Movies</a></li>
+                    <li role="none"><a href="tv_shows.html" role="menuitem">TV Shows</a></li>
+                    <li role="none"><a href="music.html" role="menuitem">Music</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-dropdown">
+                <a href="productivity.html" aria-haspopup="true" aria-expanded="false">Productivity</a>
+                <ul class="dropdown" role="menu">
+                    <li role="none"><a href="office.html" role="menuitem">Office Tools</a></li>
+                    <li role="none"><a href="workflows.html" role="menuitem">Workflows</a></li>
+                    <li role="none"><a href="productivity_apps.html" role="menuitem">Productivity Apps</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero-content">
+                <h1 id="hero-heading">Welcome to TechFusion Report</h1>
+                <p class="hero-subtitle">Your premier source for technology, entertainment, and productivity insights</p>
+                <div class="hero-cta">
+                    <a href="blog.html" class="btn btn-primary">Read Our Blog</a>
+                    <a href="about.html" class="btn btn-secondary">Learn More</a>
                 </div>
-                <div class="featured-grid">
-                    <article class="featured-card">
-                        <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                                 alt="Samsung Galaxy S23 Ultra smartphone displaying home screen" 
-                                 loading="lazy"
-                                 width="600"
-                                 height="400">
-                        </div>
-                        <div class="featured-content">
-                            <h3>Samsung Galaxy S23 Ultra Review</h3>
-                            <p>We put Samsung's latest flagship through its paces to see if it lives up to the hype.</p>
-                            <a href="technology.html" class="btn" aria-label="Read Samsung Galaxy S23 Ultra Review">Read More</a>
+            </div>
+        </section>
+        
+        <!-- Featured Categories -->
+        <section class="categories" aria-labelledby="categories-heading">
+            <div class="container">
+                <h2 id="categories-heading">Explore Our Content</h2>
+                
+                <div class="category-grid">
+                    <!-- Technology Category -->
+                    <article class="category-card">
+                        <div class="category-icon" aria-hidden="true">💻</div>
+                        <h3><a href="technology.html">Technology</a></h3>
+                        <p>Stay updated with the latest tech news, reviews, and guides</p>
+                        <ul class="category-links">
+                            <li><a href="smartphones.html">Smartphones</a></li>
+                            <li><a href="smart_home.html">Smart Home</a></li>
+                            <li><a href="ai.html">AI Tools</a></li>
+                            <li><a href="android_apps.html">Apps</a></li>
+                        </ul>
+                    </article>
+                    
+                    <!-- Entertainment Category -->
+                    <article class="category-card">
+                        <div class="category-icon" aria-hidden="true">🎬</div>
+                        <h3><a href="entertainment.html">Entertainment</a></h3>
+                        <p>Discover reviews and recommendations for movies, TV shows, and music</p>
+                        <ul class="category-links">
+                            <li><a href="movies.html">Movies</a></li>
+                            <li><a href="tv_shows.html">TV Shows</a></li>
+                            <li><a href="music.html">Music</a></li>
+                        </ul>
+                    </article>
+                    
+                    <!-- Productivity Category -->
+                    <article class="category-card">
+                        <div class="category-icon" aria-hidden="true">⚡</div>
+                        <h3><a href="productivity.html">Productivity</a></h3>
+                        <p>Boost your efficiency with tools, tips, and workflows</p>
+                        <ul class="category-links">
+                            <li><a href="office.html">Office Tools</a></li>
+                            <li><a href="workflows.html">Workflows</a></li>
+                            <li><a href="productivity_apps.html">Productivity Apps</a></li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Latest Blog Posts Section (Will be populated by automation) -->
+        <section class="latest-posts" aria-labelledby="latest-heading">
+            <div class="container">
+                <h2 id="latest-heading">Latest from Our Blog</h2>
+                
+                <div class="posts-grid">
+                    <!-- Example Post Card (Replace with dynamic content) -->
+                    <article class="post-card">
+                        <img src="images/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Technology</span>
+                            <h3><a href="blog/posts/example-post.html">Example Blog Post Title</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-19">February 19, 2025</time>
                         </div>
                     </article>
                     
-                    <article class="featured-card">
-                        <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                                 alt="Movie theater with red seats and large screen" 
-                                 loading="lazy"
-                                 width="600"
-                                 height="400">
-                        </div>
-                        <div class="featured-content">
-                            <h3>Top 10 Must-Watch Movies of 2025</h3>
-                            <p>The most anticipated films coming this year across all streaming platforms.</p>
-                            <a href="entertainment.html" class="btn" aria-label="Read Top 10 Must-Watch Movies of 2025">Read More</a>
-                        </div>
-                    </article>
-                    
-                    <article class="featured-card">
-                        <div class="featured-img">
-                            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                                 alt="Laptop with productivity tools and charts on screen" 
-                                 loading="lazy"
-                                 width="600"
-                                 height="400">
-                        </div>
-                        <div class="featured-content">
-                            <h3>10 Productivity Tools You're Not Using (But Should Be)</h3>
-                            <p>Discover hidden gems that can transform your workflow.</p>
-                            <a href="productivity.html" class="btn" aria-label="Read 10 Productivity Tools You're Not Using">Read More</a>
-                        </div>
-                    </article>
+                    <!-- More post cards will be added here via automation -->
                 </div>
-            </section>
-        </div>
+                
+                <div class="section-cta">
+                    <a href="blog.html" class="btn btn-primary">View All Posts</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Newsletter Signup -->
+        <section class="newsletter" aria-labelledby="newsletter-heading">
+            <div class="container">
+                <h2 id="newsletter-heading">Stay in the Loop</h2>
+                <p>Get the latest tech news, reviews, and tips delivered to your inbox weekly</p>
+                <form action="#" method="post" class="newsletter-form">
+                    <label for="email" class="visually-hidden">Email address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email" 
+                        required 
+                        aria-required="true"
+                    >
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
     </main>
-
-    <footer role="contentinfo">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>TechFusion Report</h3>
-                    <p>Your premier source for technology news and reviews.</p>
-                    <div class="social-links">
-                        <a href="https://twitter.com" aria-label="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-twitter" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://facebook.com" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-facebook" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://instagram.com" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-instagram" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Categories</h3>
-                    <ul>
-                        <li><a href="technology.html">Technology</a></li>
-                        <li><a href="entertainment.html">Entertainment</a></li>
-                        <li><a href="productivity.html">Productivity</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Company</h3>
-                    <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TechFusion Report</h3>
+                <p>Your premier source for technology, entertainment, and productivity content.</p>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
             </div>
+            
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="technology.html">Technology</a></li>
+                    <li><a href="entertainment.html">Entertainment</a></li>
+                    <li><a href="productivity.html">Productivity</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        class NavigationManager {
-            constructor() {
-                this.mobileMenuButton = document.getElementById('mobile-menu');
-                this.navMenu = document.getElementById('nav-menu');
-                this.dropdownLinks = document.querySelectorAll('.dropdown > a');
-                this.init();
-            }
-
-            init() {
-                this.setupMobileMenu();
-                this.setupDropdowns();
-                this.setupKeyboardNavigation();
-                this.setupClickOutside();
-            }
-
-            setupMobileMenu() {
-                if (this.mobileMenuButton && this.navMenu) {
-                    this.mobileMenuButton.addEventListener('click', () => {
-                        this.toggleMobileMenu();
-                    });
-                }
-            }
-
-            toggleMobileMenu() {
-                const isOpen = this.navMenu.classList.toggle('show');
-                this.mobileMenuButton.setAttribute('aria-expanded', isOpen.toString());
-                
-                if (isOpen) {
-                    this.mobileMenuButton.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    this.mobileMenuButton.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            }
-
-            setupDropdowns() {
-                this.dropdownLinks.forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        if (window.innerWidth <= 768) {
-                            e.preventDefault();
-                            const isExpanded = link.getAttribute('aria-expanded') === 'true';
-                            const dropdown = link.nextElementSibling;
-                            
-                            // Close other dropdowns
-                            this.closeAllDropdowns();
-                            
-                            if (!isExpanded) {
-                                dropdown.classList.add('show');
-                                link.setAttribute('aria-expanded', 'true');
-                            }
-                        }
-                    });
-
-                    // Desktop hover functionality
-                    const parentLi = link.parentElement;
-                    parentLi.addEventListener('mouseenter', () => {
-                        if (window.innerWidth > 768) {
-                            link.setAttribute('aria-expanded', 'true');
-                        }
-                    });
-
-                    parentLi.addEventListener('mouseleave', () => {
-                        if (window.innerWidth > 768) {
-                            link.setAttribute('aria-expanded', 'false');
-                        }
-                    });
-                });
-            }
-
-            closeAllDropdowns() {
-                this.dropdownLinks.forEach(link => {
-                    link.setAttribute('aria-expanded', 'false');
-                    const dropdown = link.nextElementSibling;
-                    if (dropdown) {
-                        dropdown.classList.remove('show');
-                    }
-                });
-            }
-
-            setupKeyboardNavigation() {
-                document.addEventListener('keydown', (event) => {
-                    if (event.key === 'Escape') {
-                        if (this.navMenu.classList.contains('show')) {
-                            this.toggleMobileMenu();
-                        }
-                        this.closeAllDropdowns();
-                    }
-                });
-            }
-
-            setupClickOutside() {
-                document.addEventListener('click', (event) => {
-                    if (this.navMenu.classList.contains('show') && 
-                        !event.target.closest('nav') && 
-                        !event.target.closest('.mobile-menu')) {
-                        this.toggleMobileMenu();
-                    }
-                });
-            }
-        }
-
-        // Initialize navigation when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            new NavigationManager();
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                const navMenu = document.getElementById('nav-menu');
-                const mobileMenuButton = document.getElementById('mobile-menu');
-                
-                if (navMenu.classList.contains('show')) {
-                    navMenu.classList.remove('show');
-                    mobileMenuButton.setAttribute('aria-expanded', 'false');
-                    mobileMenuButton.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            }
-        });
-    </script>
-
-    <style>
-        /* Additional CSS for improved mobile menu button */
-        .mobile-menu {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 3px;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger-line {
-            width: 25px;
-            height: 3px;
-            background-color: currentColor;
-            transition: all 0.3s ease;
-            border-radius: 2px;
-        }
-
-        .mobile-menu.active .hamburger-line:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-
-        .mobile-menu.active .hamburger-line:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu.active .hamburger-line:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-        }
-
-        /* Improved hero section */
-        .hero-content {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .hero-text {
-            margin-top: 1rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            text-align: center;
-            max-width: 600px;
-        }
-
-        /* Better spacing for category cards */
-        .category-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        @media (max-width: 768px) {
-            .category-cards {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-        }
-    </style>
 </body>
 </html>
