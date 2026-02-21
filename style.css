@@ -391,20 +391,29 @@ main {
     text-align: center;
     margin-bottom: 20px;
     transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Technology Icon - CYAN (from "Tech" in logo) */
+.category-icon svg {
+    width: 48px;
+    height: 48px;
+    transition: all 0.3s ease;
+}
+
+/* Technology Icon - BLUE-CYAN Lightning Bolt (from "Tech" in logo) */
 .category-card:nth-child(1) .category-icon {
-    color: #00D4FF;
-    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+    color: #0099FF;
+    filter: drop-shadow(0 0 10px rgba(0, 153, 255, 0.5));
 }
 
 .category-card:nth-child(1):hover .category-icon {
     transform: scale(1.15) rotate(5deg) !important;
-    filter: drop-shadow(0 0 25px rgba(0, 212, 255, 0.8)) !important;
+    filter: drop-shadow(0 0 25px rgba(0, 153, 255, 0.8)) !important;
 }
 
-/* Entertainment Icon - LIME (from "Fusion" in logo) */
+/* Entertainment Icon - GREEN (from "Fusion" in logo) */
 .category-card:nth-child(2) .category-icon {
     color: #A4FF00;
     filter: drop-shadow(0 0 10px rgba(164, 255, 0, 0.5));
