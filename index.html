@@ -53,6 +53,14 @@
                 "@type": "ImageObject",
                 "url": "https://www.techfusionreport.com/graphics/logo.png"
             }
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://www.techfusionreport.com/search?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
         }
     }
     </script>
@@ -62,50 +70,56 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
     <!-- Navigation with Logo Inside -->
-    <nav role="navigation" aria-label="Main Navigation">
+    <nav aria-label="Main Navigation">
         <div class="nav-container">
             <a href="index.html" class="nav-logo" aria-label="TechFusion Report Home">
-                <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" height="50">
+                <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" width="150" height="50">
             </a>
             <ul class="main-nav">
-            <li><a href="index.html" aria-current="page">Home</a></li>
-            
-            <li class="has-dropdown">
-                <a href="technology.html" aria-haspopup="true" aria-expanded="false">Technology</a>
-                <ul class="dropdown" role="menu">
-                    <li role="none"><a href="ai.html" role="menuitem">AI Tools</a></li>
-                    <li role="none"><a href="smartphones.html" role="menuitem">Smartphones</a></li>
-                    <li role="none"><a href="smart_home.html" role="menuitem">Smart Home</a></li>
-                    <li role="none"><a href="android_apps.html" role="menuitem">Android Apps</a></li>
-                    <li role="none"><a href="mac-apps.html" role="menuitem">Mac Apps</a></li>
-                    <li role="none"><a href="smartphone-apps.html" role="menuitem">Smartphone Apps</a></li>
-                    <li role="none"><a href="tips_tricks.html" role="menuitem">Tips & Tricks</a></li>
-                    <li role="none"><a href="gtk_websites.html" role="menuitem">Good to Know Websites</a></li>
-                </ul>
-            </li>
-            
-            <li class="has-dropdown">
-                <a href="entertainment.html" aria-haspopup="true" aria-expanded="false">Entertainment</a>
-                <ul class="dropdown" role="menu">
-                    <li role="none"><a href="movies.html" role="menuitem">Movies</a></li>
-                    <li role="none"><a href="tv_shows.html" role="menuitem">TV Shows</a></li>
-                    <li role="none"><a href="music.html" role="menuitem">Music</a></li>
-                </ul>
-            </li>
-            
-            <li class="has-dropdown">
-                <a href="productivity.html" aria-haspopup="true" aria-expanded="false">Productivity</a>
-                <ul class="dropdown" role="menu">
-                    <li role="none"><a href="office.html" role="menuitem">Office Tools</a></li>
-                    <li role="none"><a href="workflows.html" role="menuitem">Workflows</a></li>
-                    <li role="none"><a href="productivity_apps.html" role="menuitem">Productivity Apps</a></li>
-                </ul>
-            </li>
-            
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+                <li><a href="index.html" aria-current="page">Home</a></li>
+                
+                <li class="has-dropdown">
+                    <button aria-expanded="false" aria-controls="tech-menu" class="nav-toggle">
+                        Technology
+                    </button>
+                    <ul id="tech-menu" class="dropdown" hidden>
+                        <li><a href="ai.html">AI Tools</a></li>
+                        <li><a href="smartphones.html">Smartphones</a></li>
+                        <li><a href="smart_home.html">Smart Home</a></li>
+                        <li><a href="android_apps.html">Android Apps</a></li>
+                        <li><a href="mac-apps.html">Mac Apps</a></li>
+                        <li><a href="smartphone-apps.html">Smartphone Apps</a></li>
+                        <li><a href="tips_tricks.html">Tips & Tricks</a></li>
+                        <li><a href="gtk_websites.html">Good to Know Websites</a></li>
+                    </ul>
+                </li>
+                
+                <li class="has-dropdown">
+                    <button aria-expanded="false" aria-controls="ent-menu" class="nav-toggle">
+                        Entertainment
+                    </button>
+                    <ul id="ent-menu" class="dropdown" hidden>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="tv_shows.html">TV Shows</a></li>
+                        <li><a href="music.html">Music</a></li>
+                    </ul>
+                </li>
+                
+                <li class="has-dropdown">
+                    <button aria-expanded="false" aria-controls="prod-menu" class="nav-toggle">
+                        Productivity
+                    </button>
+                    <ul id="prod-menu" class="dropdown" hidden>
+                        <li><a href="office.html">Office Tools</a></li>
+                        <li><a href="workflows.html">Workflows</a></li>
+                        <li><a href="productivity_apps.html">Productivity Apps</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </div>
     </nav>
     
@@ -131,44 +145,59 @@
                 <div class="category-grid">
                     <!-- Technology Category -->
                     <article class="category-card">
-                        <div class="category-icon">⚡</div>
-                        <a href="technology.html">
-                            <img src="graphics/tech_nb.png" alt="Technology" class="category-image" loading="lazy">
+                        <a href="technology.html" class="card-link">
+                            <div class="category-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48" aria-hidden="true">
+                                    <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+                                </svg>
+                            </div>
+                            <img src="graphics/tech_nb.png" alt="" class="category-image" loading="lazy" width="200" height="150">
+                            <h3>Technology</h3>
+                            <p>Stay updated with the latest tech news, reviews, and guides</p>
                         </a>
-                        <p>Stay updated with the latest tech news, reviews, and guides</p>
                         <ul class="category-links">
-                            <li><a href="smartphones.html"><span class="link-icon">▸</span> Smartphones</a></li>
-                            <li><a href="smart_home.html"><span class="link-icon">▸</span> Smart Home</a></li>
-                            <li><a href="ai.html"><span class="link-icon">▸</span> AI Tools</a></li>
-                            <li><a href="android_apps.html"><span class="link-icon">▸</span> Apps</a></li>
+                            <li><a href="smartphones.html"><span class="link-icon" aria-hidden="true">▸</span> Smartphones</a></li>
+                            <li><a href="smart_home.html"><span class="link-icon" aria-hidden="true">▸</span> Smart Home</a></li>
+                            <li><a href="ai.html"><span class="link-icon" aria-hidden="true">▸</span> AI Tools</a></li>
+                            <li><a href="android_apps.html"><span class="link-icon" aria-hidden="true">▸</span> Apps</a></li>
                         </ul>
                     </article>
                     
                     <!-- Entertainment Category -->
                     <article class="category-card">
-                        <div class="category-icon">▶</div>
-                        <a href="entertainment.html">
-                            <img src="graphics/ent_nb.png" alt="Entertainment" class="category-image" loading="lazy">
+                        <a href="entertainment.html" class="card-link">
+                            <div class="category-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48" aria-hidden="true">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                            <img src="graphics/ent_nb.png" alt="" class="category-image" loading="lazy" width="200" height="150">
+                            <h3>Entertainment</h3>
+                            <p>Discover reviews and recommendations for movies, TV shows, and music</p>
                         </a>
-                        <p>Discover reviews and recommendations for movies, TV shows, and music</p>
                         <ul class="category-links">
-                            <li><a href="movies.html"><span class="link-icon">▸</span> Movies</a></li>
-                            <li><a href="tv_shows.html"><span class="link-icon">▸</span> TV Shows</a></li>
-                            <li><a href="music.html"><span class="link-icon">▸</span> Music</a></li>
+                            <li><a href="movies.html"><span class="link-icon" aria-hidden="true">▸</span> Movies</a></li>
+                            <li><a href="tv_shows.html"><span class="link-icon" aria-hidden="true">▸</span> TV Shows</a></li>
+                            <li><a href="music.html"><span class="link-icon" aria-hidden="true">▸</span> Music</a></li>
                         </ul>
                     </article>
                     
                     <!-- Productivity Category -->
                     <article class="category-card">
-                        <div class="category-icon">▲</div>
-                        <a href="productivity.html">
-                            <img src="graphics/prod_nb.png" alt="Productivity" class="category-image" loading="lazy">
+                        <a href="productivity.html" class="card-link">
+                            <div class="category-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48" aria-hidden="true">
+                                    <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20H5.5L12 5.5z"/>
+                                </svg>
+                            </div>
+                            <img src="graphics/prod_nb.png" alt="" class="category-image" loading="lazy" width="200" height="150">
+                            <h3>Productivity</h3>
+                            <p>Boost your efficiency with tools, tips, and workflows</p>
                         </a>
-                        <p>Boost your efficiency with tools, tips, and workflows</p>
                         <ul class="category-links">
-                            <li><a href="office.html"><span class="link-icon">▸</span> Office Tools</a></li>
-                            <li><a href="workflows.html"><span class="link-icon">▸</span> Workflows</a></li>
-                            <li><a href="productivity_apps.html"><span class="link-icon">▸</span> Productivity Apps</a></li>
+                            <li><a href="office.html"><span class="link-icon" aria-hidden="true">▸</span> Office Tools</a></li>
+                            <li><a href="workflows.html"><span class="link-icon" aria-hidden="true">▸</span> Workflows</a></li>
+                            <li><a href="productivity_apps.html"><span class="link-icon" aria-hidden="true">▸</span> Productivity Apps</a></li>
                         </ul>
                     </article>
                 </div>
@@ -183,12 +212,39 @@
                 <div class="posts-grid">
                     <!-- Example Post Card -->
                     <article class="post-card">
-                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <a href="blog/posts/example-post.html" aria-labelledby="post-title-1">
+                            <img src="graphics/placeholder-post.jpg" alt="Smartphone with futuristic interface displaying AI assistant" loading="lazy" width="400" height="200">
+                        </a>
                         <div class="post-content">
                             <span class="post-category">Technology</span>
-                            <h3><a href="blog/posts/example-post.html">Example Blog Post Title</a></h3>
-                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <h3 id="post-title-1"><a href="blog/posts/example-post.html">The Future of AI in Everyday Smartphones</a></h3>
+                            <p class="post-excerpt">Explore how on-device AI is transforming mobile photography, battery life, and personal assistance in 2025...</p>
                             <time datetime="2025-02-19">February 19, 2025</time>
+                        </div>
+                    </article>
+                    
+                    <!-- Additional example posts for better grid demonstration -->
+                    <article class="post-card">
+                        <a href="blog/posts/productivity-post.html" aria-labelledby="post-title-2">
+                            <img src="graphics/placeholder-post2.jpg" alt="Minimalist desk setup with multiple monitors" loading="lazy" width="400" height="200">
+                        </a>
+                        <div class="post-content">
+                            <span class="post-category">Productivity</span>
+                            <h3 id="post-title-2"><a href="blog/posts/productivity-post.html">10 Workflow Automations That Save Hours</a></h3>
+                            <p class="post-excerpt">Learn how to connect your apps and automate repetitive tasks with these no-code solutions...</p>
+                            <time datetime="2025-02-18">February 18, 2025</time>
+                        </div>
+                    </article>
+                    
+                    <article class="post-card">
+                        <a href="blog/posts/entertainment-post.html" aria-labelledby="post-title-3">
+                            <img src="graphics/placeholder-post3.jpg" alt="Movie theater with neon lights" loading="lazy" width="400" height="200">
+                        </a>
+                        <div class="post-content">
+                            <span class="post-category">Entertainment</span>
+                            <h3 id="post-title-3"><a href="blog/posts/entertainment-post.html">Streaming Wars: Best Platforms Compared</a></h3>
+                            <p class="post-excerpt">We break down the top streaming services by content library, price, and exclusive features...</p>
+                            <time datetime="2025-02-17">February 17, 2025</time>
                         </div>
                     </article>
                 </div>
@@ -204,7 +260,7 @@
             <div class="container">
                 <h2 id="newsletter-heading">Stay in the Loop</h2>
                 <p>Get the latest tech news, reviews, and tips delivered to your inbox weekly</p>
-                <form action="#" method="post" class="newsletter-form">
+                <form action="/subscribe" method="post" class="newsletter-form" onsubmit="return false;">
                     <label for="email" class="visually-hidden">Email address</label>
                     <input 
                         type="email" 
@@ -213,6 +269,7 @@
                         placeholder="Enter your email" 
                         required 
                         aria-required="true"
+                        autocomplete="email"
                     >
                     <button type="submit" class="btn btn-primary">Subscribe</button>
                 </form>
@@ -261,5 +318,59 @@
             <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
         </div>
     </footer>
+    
+    <!-- JavaScript for dropdown functionality -->
+    <script>
+        // Dropdown toggle functionality
+        document.querySelectorAll('.has-dropdown > button').forEach(button => {
+            button.addEventListener('click', function() {
+                const expanded = this.getAttribute('aria-expanded') === 'true';
+                const menu = document.getElementById(this.getAttribute('aria-controls'));
+                
+                // Close all other dropdowns
+                document.querySelectorAll('.has-dropdown > button').forEach(otherButton => {
+                    if (otherButton !== this) {
+                        otherButton.setAttribute('aria-expanded', 'false');
+                        document.getElementById(otherButton.getAttribute('aria-controls')).hidden = true;
+                        document.getElementById(otherButton.getAttribute('aria-controls')).classList.remove('is-open');
+                    }
+                });
+                
+                // Toggle current dropdown
+                this.setAttribute('aria-expanded', !expanded);
+                menu.hidden = expanded;
+                if (!expanded) {
+                    menu.classList.add('is-open');
+                } else {
+                    menu.classList.remove('is-open');
+                }
+            });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.has-dropdown')) {
+                document.querySelectorAll('.has-dropdown > button').forEach(button => {
+                    button.setAttribute('aria-expanded', 'false');
+                    const menu = document.getElementById(button.getAttribute('aria-controls'));
+                    menu.hidden = true;
+                    menu.classList.remove('is-open');
+                });
+            }
+        });
+        
+        // Keyboard navigation support
+        document.querySelectorAll('.dropdown').forEach(menu => {
+            menu.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const button = document.querySelector(`[aria-controls="${this.id}"]`);
+                    button.setAttribute('aria-expanded', 'false');
+                    this.hidden = true;
+                    this.classList.remove('is-open');
+                    button.focus();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
