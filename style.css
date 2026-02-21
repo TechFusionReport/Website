@@ -151,9 +151,9 @@ nav {
 .main-nav > li > a:hover,
 .main-nav > li:hover > a,
 .main-nav > li > a[aria-current="page"] {
-    background-color: rgba(0, 0, 0, 0.7);
-    box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.5);
-    transform: translateY(-2px);
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.5) !important;
+    transform: translateY(-2px) !important;
 }
 
 .has-dropdown > a::after {
@@ -190,10 +190,10 @@ nav {
 
 .has-dropdown:hover .dropdown,
 .has-dropdown:focus-within .dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.7), 0 0 15px rgba(0, 212, 255, 0.2);
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7), 0 0 15px rgba(0, 212, 255, 0.2) !important;
 }
 
 .dropdown li {
@@ -217,13 +217,13 @@ nav {
 }
 
 .dropdown li a:hover {
-    background-color: #1a1a1a;
-    color: #00D4FF;
-    border-left-color: #00D4FF;
-    padding-left: 25px;
-    transform: translateX(5px);
-    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
-    font-weight: 600;
+    background-color: #1a1a1a !important;
+    color: #00D4FF !important;
+    border-left-color: #00D4FF !important;
+    padding-left: 25px !important;
+    transform: translateX(5px) !important;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4) !important;
+    font-weight: 600 !important;
 }
 
 /* ===================================
@@ -297,10 +297,10 @@ main {
 }
 
 .btn-primary:hover {
-    background-color: #A4FF00;
-    color: #0A0A0A;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(164, 255, 0, 0.5);
+    background-color: #A4FF00 !important;
+    color: #0A0A0A !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 15px rgba(164, 255, 0, 0.5) !important;
 }
 
 .btn-secondary {
@@ -310,8 +310,8 @@ main {
 }
 
 .btn-secondary:hover {
-    background-color: #0A0A0A;
-    color: #FFFFFF;
+    background-color: #0A0A0A !important;
+    color: #FFFFFF !important;
 }
 
 /* ===================================
@@ -376,30 +376,54 @@ main {
 }
 
 .category-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
-    border-color: #00D4FF;
+    transform: translateY(-8px) !important;
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5) !important;
+    border-color: #00D4FF !important;
 }
 
 .category-card:hover::before {
-    background: linear-gradient(135deg, transparent 50%, rgba(0, 212, 255, 0.3) 50%);
+    background: linear-gradient(135deg, transparent 50%, rgba(0, 212, 255, 0.3) 50%) !important;
 }
 
+/* ICON COLORS MATCHING LOGO */
 .category-icon {
     font-size: 3rem;
     text-align: center;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #00D4FF, #A4FF00);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
     transition: all 0.3s ease;
 }
 
-.category-card:hover .category-icon {
-    transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));
+/* Technology Icon - CYAN (from "Tech" in logo) */
+.category-card:nth-child(1) .category-icon {
+    color: #00D4FF;
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+}
+
+.category-card:nth-child(1):hover .category-icon {
+    transform: scale(1.15) rotate(5deg) !important;
+    filter: drop-shadow(0 0 25px rgba(0, 212, 255, 0.8)) !important;
+}
+
+/* Entertainment Icon - LIME (from "Fusion" in logo) */
+.category-card:nth-child(2) .category-icon {
+    color: #A4FF00;
+    filter: drop-shadow(0 0 10px rgba(164, 255, 0, 0.5));
+}
+
+.category-card:nth-child(2):hover .category-icon {
+    transform: scale(1.15) rotate(5deg) !important;
+    filter: drop-shadow(0 0 25px rgba(164, 255, 0, 0.8)) !important;
+}
+
+/* Productivity Icon - WHITE (from "Report" in logo) */
+.category-card:nth-child(3) .category-icon {
+    color: #FFFFFF;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.category-card:nth-child(3):hover .category-icon {
+    transform: scale(1.15) rotate(5deg) !important;
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.8)) !important;
 }
 
 .category-image {
@@ -412,7 +436,7 @@ main {
 }
 
 .category-card:hover .category-image {
-    transform: scale(1.05);
+    transform: scale(1.05) !important;
 }
 
 .category-card > a {
@@ -449,9 +473,9 @@ main {
 }
 
 .category-links a:hover {
-    color: #A4FF00;
-    text-decoration: none;
-    padding-left: 8px;
+    color: #A4FF00 !important;
+    text-decoration: none !important;
+    padding-left: 8px !important;
 }
 
 .link-icon {
@@ -463,8 +487,8 @@ main {
 }
 
 .category-links a:hover .link-icon {
-    color: #A4FF00;
-    transform: translateX(4px);
+    color: #A4FF00 !important;
+    transform: translateX(4px) !important;
 }
 
 /* ===================================
@@ -513,9 +537,9 @@ main {
 }
 
 .post-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(164, 255, 0, 0.3);
-    border-color: #A4FF00;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 5px 20px rgba(164, 255, 0, 0.3) !important;
+    border-color: #A4FF00 !important;
 }
 
 .post-card img {
@@ -550,7 +574,7 @@ main {
 }
 
 .post-card h3 a:hover {
-    color: #00D4FF;
+    color: #00D4FF !important;
 }
 
 .post-excerpt {
@@ -612,8 +636,8 @@ main {
 
 .newsletter-form input[type="email"]:focus {
     outline: none;
-    border-color: #00D4FF;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+    border-color: #00D4FF !important;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3) !important;
 }
 
 .newsletter-form button {
@@ -664,7 +688,7 @@ footer {
 }
 
 .footer-section a:hover {
-    color: #00D4FF;
+    color: #00D4FF !important;
 }
 
 .footer-bottom {
@@ -722,8 +746,8 @@ footer {
     
     .has-dropdown:hover .dropdown,
     .has-dropdown:focus-within .dropdown {
-        opacity: 1;
-        max-height: 500px;
+        opacity: 1 !important;
+        max-height: 500px !important;
     }
     
     .dropdown li a {
@@ -732,13 +756,13 @@ footer {
     }
     
     .dropdown li a:hover {
-        padding-left: 45px;
-        color: #00D4FF;
-        border-left-color: #00D4FF;
-        background-color: #1a1a1a;
-        transform: translateX(5px);
-        box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
-        font-weight: 600;
+        padding-left: 45px !important;
+        color: #00D4FF !important;
+        border-left-color: #00D4FF !important;
+        background-color: #1a1a1a !important;
+        transform: translateX(5px) !important;
+        box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4) !important;
+        font-weight: 600 !important;
     }
     
     .hero h1 {
