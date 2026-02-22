@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#00D4FF">
+    <meta name="msapplication-TileColor" content="#00D4FF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TechFusion">
     
     <!-- SEO Meta Tags -->
     <title>TechFusion Report | Technology, Entertainment & Productivity News</title>
@@ -34,6 +41,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="graphics/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="graphics/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="graphics/apple-touch-icon.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
@@ -66,15 +80,28 @@
     </script>
 </head>
 <body>
-    <!-- Skip to Main Content (Accessibility) -->
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Reading progress"></div>
+    
+    <!-- Skip to Main Content -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    <!-- Navigation with Logo Inside -->
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
+        <span class="toggle-icon" aria-hidden="true">🌙</span>
+    </button>
+    
+    <!-- Navigation -->
     <nav aria-label="Main Navigation">
         <div class="nav-container">
             <a href="index.html" class="nav-logo" aria-label="TechFusion Report Home">
                 <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" width="150" height="50">
             </a>
+            
+            <button class="search-trigger" id="search-trigger" aria-label="Open search">
+                🔍
+            </button>
+            
             <ul class="main-nav">
                 <li><a href="index.html" aria-current="page">Home</a></li>
                 
@@ -123,6 +150,35 @@
         </div>
     </nav>
     
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Site search">
+        <button class="search-close" id="search-close" aria-label="Close search">×</button>
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <span class="search-icon" aria-hidden="true">🔍</span>
+                <input type="search" class="search-input" id="search-input" placeholder="Search articles..." autocomplete="off">
+            </div>
+            <div class="search-results" id="search-results" role="listbox"></div>
+        </div>
+    </div>
+    
+    <!-- Bookmarks Panel -->
+    <div class="bookmarks-panel" id="bookmarks-panel" role="dialog" aria-label="Saved bookmarks">
+        <div class="bookmarks-header">
+            <h3>🔖 Saved Articles</h3>
+            <button class="bookmarks-close" id="bookmarks-close" aria-label="Close bookmarks">×</button>
+        </div>
+        <div class="bookmarks-list" id="bookmarks-list">
+            <div class="bookmarks-empty">No saved articles yet. Click the bookmark icon on any article to save it for later.</div>
+        </div>
+    </div>
+    
+    <!-- Bookmarks Trigger -->
+    <button class="bookmarks-trigger" id="bookmarks-trigger" aria-label="Open saved bookmarks">
+        🔖
+        <span class="bookmarks-count" id="bookmarks-count" aria-hidden="true">0</span>
+    </button>
+    
     <!-- Main Content -->
     <main id="main-content">
         <!-- Hero Section -->
@@ -131,7 +187,7 @@
                 <h1 id="hero-heading">Welcome to TechFusion Report</h1>
                 <p class="hero-subtitle">Your premier source for technology, entertainment, and productivity insights</p>
                 <div class="hero-cta">
-                    <a href="blog.html" class="btn btn-primary">Read Our Blog</a>
+                    <a href="blog.html" class="btn btn-primary btn-glow">Read Our Blog</a>
                     <a href="about.html" class="btn btn-secondary">Learn More</a>
                 </div>
             </div>
@@ -210,167 +266,4 @@
                 <h2 id="latest-heading">Latest from Our Blog</h2>
                 
                 <div class="posts-grid">
-                    <!-- Example Post Card -->
-                    <article class="post-card">
-                        <a href="blog/posts/example-post.html" aria-labelledby="post-title-1">
-                            <img src="graphics/placeholder-post.jpg" alt="Smartphone with futuristic interface displaying AI assistant" loading="lazy" width="400" height="200">
-                        </a>
-                        <div class="post-content">
-                            <span class="post-category">Technology</span>
-                            <h3 id="post-title-1"><a href="blog/posts/example-post.html">The Future of AI in Everyday Smartphones</a></h3>
-                            <p class="post-excerpt">Explore how on-device AI is transforming mobile photography, battery life, and personal assistance in 2025...</p>
-                            <time datetime="2025-02-19">February 19, 2025</time>
-                        </div>
-                    </article>
-                    
-                    <!-- Additional example posts for better grid demonstration -->
-                    <article class="post-card">
-                        <a href="blog/posts/productivity-post.html" aria-labelledby="post-title-2">
-                            <img src="graphics/placeholder-post2.jpg" alt="Minimalist desk setup with multiple monitors" loading="lazy" width="400" height="200">
-                        </a>
-                        <div class="post-content">
-                            <span class="post-category">Productivity</span>
-                            <h3 id="post-title-2"><a href="blog/posts/productivity-post.html">10 Workflow Automations That Save Hours</a></h3>
-                            <p class="post-excerpt">Learn how to connect your apps and automate repetitive tasks with these no-code solutions...</p>
-                            <time datetime="2025-02-18">February 18, 2025</time>
-                        </div>
-                    </article>
-                    
-                    <article class="post-card">
-                        <a href="blog/posts/entertainment-post.html" aria-labelledby="post-title-3">
-                            <img src="graphics/placeholder-post3.jpg" alt="Movie theater with neon lights" loading="lazy" width="400" height="200">
-                        </a>
-                        <div class="post-content">
-                            <span class="post-category">Entertainment</span>
-                            <h3 id="post-title-3"><a href="blog/posts/entertainment-post.html">Streaming Wars: Best Platforms Compared</a></h3>
-                            <p class="post-excerpt">We break down the top streaming services by content library, price, and exclusive features...</p>
-                            <time datetime="2025-02-17">February 17, 2025</time>
-                        </div>
-                    </article>
-                </div>
-                
-                <div class="section-cta">
-                    <a href="blog.html" class="btn btn-primary">View All Posts</a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Newsletter Signup -->
-        <section class="newsletter" aria-labelledby="newsletter-heading">
-            <div class="container">
-                <h2 id="newsletter-heading">Stay in the Loop</h2>
-                <p>Get the latest tech news, reviews, and tips delivered to your inbox weekly</p>
-                <form action="/subscribe" method="post" class="newsletter-form" onsubmit="return false;">
-                    <label for="email" class="visually-hidden">Email address</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        placeholder="Enter your email" 
-                        required 
-                        aria-required="true"
-                        autocomplete="email"
-                    >
-                    <button type="submit" class="btn btn-primary">Subscribe</button>
-                </form>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>TechFusion Report</h3>
-                <p>Your premier source for technology, entertainment, and productivity content.</p>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Categories</h4>
-                <ul>
-                    <li><a href="technology.html">Technology</a></li>
-                    <li><a href="entertainment.html">Entertainment</a></li>
-                    <li><a href="productivity.html">Productivity</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                    <li><a href="sitemap.html">Sitemap</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
-        </div>
-    </footer>
-    
-    <!-- JavaScript for dropdown functionality -->
-    <script>
-        // Dropdown toggle functionality
-        document.querySelectorAll('.has-dropdown > button').forEach(button => {
-            button.addEventListener('click', function() {
-                const expanded = this.getAttribute('aria-expanded') === 'true';
-                const menu = document.getElementById(this.getAttribute('aria-controls'));
-                
-                // Close all other dropdowns
-                document.querySelectorAll('.has-dropdown > button').forEach(otherButton => {
-                    if (otherButton !== this) {
-                        otherButton.setAttribute('aria-expanded', 'false');
-                        document.getElementById(otherButton.getAttribute('aria-controls')).hidden = true;
-                        document.getElementById(otherButton.getAttribute('aria-controls')).classList.remove('is-open');
-                    }
-                });
-                
-                // Toggle current dropdown
-                this.setAttribute('aria-expanded', !expanded);
-                menu.hidden = expanded;
-                if (!expanded) {
-                    menu.classList.add('is-open');
-                } else {
-                    menu.classList.remove('is-open');
-                }
-            });
-        });
-        
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.has-dropdown')) {
-                document.querySelectorAll('.has-dropdown > button').forEach(button => {
-                    button.setAttribute('aria-expanded', 'false');
-                    const menu = document.getElementById(button.getAttribute('aria-controls'));
-                    menu.hidden = true;
-                    menu.classList.remove('is-open');
-                });
-            }
-        });
-        
-        // Keyboard navigation support
-        document.querySelectorAll('.dropdown').forEach(menu => {
-            menu.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    const button = document.querySelector(`[aria-controls="${this.id}"]`);
-                    button.setAttribute('aria-expanded', 'false');
-                    this.hidden = true;
-                    this.classList.remove('is-open');
-                    button.focus();
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                    <!-- Post Card 
