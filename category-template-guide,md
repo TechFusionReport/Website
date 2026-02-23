@@ -1,0 +1,187 @@
+# CATEGORY PAGE TEMPLATE - FILL-IN GUIDE
+
+## 📋 HOW TO USE THIS TEMPLATE
+
+1. Copy `category-template.html` → Rename to category name (e.g., `technology.html`)
+2. Find & Replace the placeholders below with category-specific content
+3. Upload to GitHub
+
+---
+
+## 🔵 TECHNOLOGY PAGE (technology.html)
+
+### FIND & REPLACE:
+```
+[CATEGORY] → Technology
+[CATEGORY_LOWER] → technology
+[SUBCATS] → AI tools, smartphones, smart home, and more
+[DESCRIPTION] → Stay updated with the latest tech news, reviews, and guides
+[COLOR1] → #0099FF
+[COLOR2] → #00D4FF
+[ICON] → <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="80" height="80"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg>
+```
+
+### SUBCATEGORIES:
+```
+[SUBCAT1_LINK] → ai.html
+[SUBCAT1_ICON] → 🤖
+[SUBCAT1_NAME] → AI Tools
+[SUBCAT1_DESC] → Discover the latest AI-powered tools and applications
+
+[SUBCAT2_LINK] → smartphones.html
+[SUBCAT2_ICON] → 📱
+[SUBCAT2_NAME] → Smartphones
+[SUBCAT2_DESC] → Reviews, comparisons, and news about the latest mobile devices
+
+[SUBCAT3_LINK] → smart_home.html
+[SUBCAT3_ICON] → 🏠
+[SUBCAT3_NAME] → Smart Home
+[SUBCAT3_DESC] → Transform your home with connected devices and automation
+
+[SUBCAT4_LINK] → android_apps.html
+[SUBCAT4_ICON] → 📲
+[SUBCAT4_NAME] → Android Apps
+[SUBCAT4_DESC] → Must-have apps and hidden gems for Android users
+```
+
+**ADD MORE SUBCATEGORY CARDS:**
+Copy a subcategory-card block and add:
+- Mac Apps (mac-apps.html)
+- Smartphone Apps (smartphone-apps.html)
+- Tips & Tricks (tips_tricks.html)
+- Good to Know Websites (gtk_websites.html)
+
+---
+
+## 🟢 ENTERTAINMENT PAGE (entertainment.html)
+
+### FIND & REPLACE:
+```
+[CATEGORY] → Entertainment
+[CATEGORY_LOWER] → entertainment
+[SUBCATS] → movies, TV shows, music, and more
+[DESCRIPTION] → Discover reviews and recommendations for movies, TV shows, and music
+[COLOR1] → #A4FF00
+[COLOR2] → #7ACC00
+[ICON] → ▶
+```
+
+### SUBCATEGORIES:
+```
+[SUBCAT1_LINK] → movies.html
+[SUBCAT1_ICON] → 🎬
+[SUBCAT1_NAME] → Movies
+[SUBCAT1_DESC] → Latest movie reviews, recommendations, and streaming guides
+
+[SUBCAT2_LINK] → tv_shows.html
+[SUBCAT2_ICON] → 📺
+[SUBCAT2_NAME] → TV Shows
+[SUBCAT2_DESC] → Binge-worthy series, episode guides, and what to watch next
+
+[SUBCAT3_LINK] → music.html
+[SUBCAT3_ICON] → 🎵
+[SUBCAT3_NAME] → Music
+[SUBCAT3_DESC] → New releases, artist profiles, and playlist recommendations
+
+[SUBCAT4_LINK] → #
+[SUBCAT4_ICON] → 
+[SUBCAT4_NAME] → 
+[SUBCAT4_DESC] → 
+```
+
+**DELETE SUBCAT4 CARD** (only 3 subcategories) or leave for future expansion
+
+---
+
+## ⚪ PRODUCTIVITY PAGE (productivity.html)
+
+### FIND & REPLACE:
+```
+[CATEGORY] → Productivity
+[CATEGORY_LOWER] → productivity
+[SUBCATS] → office tools, workflows, productivity apps, and more
+[DESCRIPTION] → Boost your efficiency with tools, tips, and workflows
+[COLOR1] → #E0E0E0
+[COLOR2] → #FFFFFF
+[ICON] → ▲
+```
+
+### SUBCATEGORIES:
+```
+[SUBCAT1_LINK] → office.html
+[SUBCAT1_ICON] → 💼
+[SUBCAT1_NAME] → Office Tools
+[SUBCAT1_DESC] → Essential software and services for modern workplaces
+
+[SUBCAT2_LINK] → workflows.html
+[SUBCAT2_ICON] → ⚙️
+[SUBCAT2_NAME] → Workflows
+[SUBCAT2_DESC] → Streamline your tasks with efficient automation and processes
+
+[SUBCAT3_LINK] → productivity_apps.html
+[SUBCAT3_ICON] → 📊
+[SUBCAT3_NAME] → Productivity Apps
+[SUBCAT3_DESC] → Apps that help you work smarter, not harder
+
+[SUBCAT4_LINK] → #
+[SUBCAT4_ICON] → 
+[SUBCAT4_NAME] → 
+[SUBCAT4_DESC] → 
+```
+
+**DELETE SUBCAT4 CARD** (only 3 subcategories) or leave for future expansion
+
+---
+
+## 🔧 QUICK TIP: Using Find & Replace in GitHub Editor
+
+1. Edit the file in GitHub
+2. Press `Ctrl+F` (Windows) or `Cmd+F` (Mac)
+3. Click the arrow to expand to Find & Replace
+4. Enter placeholder in "Find" field
+5. Enter replacement in "Replace" field
+6. Click "Replace All"
+7. Repeat for each placeholder
+
+---
+
+## 📝 NOTES:
+
+- **Placeholder images:** The template uses `graphics/placeholder-post.jpg` for blog posts. Replace with real post images when you have content.
+- **Blog post links:** All point to `blog/posts/example-post.html` - update when you have real posts.
+- **Newsletter form:** Currently has `action="#"` - connect to your email service (Mailchimp, ConvertKit, etc.)
+- **Category filtering:** The "View All Posts" button links to `blog.html?category=technology` - you'll need to implement filtering in your blog page.
+
+---
+
+## ✅ CHECKLIST:
+
+**For Each Category Page:**
+- [ ] Copy template
+- [ ] Rename file
+- [ ] Find & Replace all `[PLACEHOLDERS]`
+- [ ] Verify all links work
+- [ ] Check colors match brand
+- [ ] Test on mobile
+- [ ] Upload to GitHub
+- [ ] Verify navigation works
+
+---
+
+## 🎨 COLOR CODES REFERENCE:
+
+**Technology (Blue-Cyan):**
+- Primary: `#0099FF`
+- Secondary: `#00D4FF`
+
+**Entertainment (Green):**
+- Primary: `#A4FF00`
+- Darker: `#7ACC00`
+
+**Productivity (White/Gray):**
+- Light: `#FFFFFF`
+- Medium: `#E0E0E0`
+
+---
+
+**Need help?** The template is designed to be self-explanatory, but if you get stuck, just ask!
