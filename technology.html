@@ -4,165 +4,277 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technology | TechFusion Report</title>
-    <meta name="description" content="Explore the latest in technology - smartphones, smart home, AI, and more">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="Explore technology content including AI tools, smartphones, smart home, and more. Stay informed with TechFusion Report.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.techfusionreport.com/technology.html">
+    <meta property="og:title" content="Technology | TechFusion Report">
+    <meta property="og:description" content="Explore technology content including AI tools, smartphones, smart home, and more.">
+    <meta property="og:image" content="https://www.techfusionreport.com/graphics/tfr_header_logo_nb.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.techfusionreport.com/technology.html">
+    <meta property="twitter:title" content="Technology | TechFusion Report">
+    <meta property="twitter:description" content="Explore technology content including AI tools, smartphones, smart home, and more.">
+    <meta property="twitter:image" content="https://www.techfusionreport.com/graphics/tfr_header_logo_nb.png">
+    
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" href="graphics/tfr_header_logo_nb.png" as="image">
-    <link rel="icon" href="graphics/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://www.techfusionreport.com/technology.html">
 </head>
 <body>
+    <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" class="logo-image">
-                    </a>
-                </div>
-                <nav>
-                    <ul id="nav-menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="technology.html" class="active">Technology</a></li>
-                        <li><a href="entertainment.html">Entertainment</a></li>
-                        <li><a href="productivity.html">Productivity</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo">
+            </a>
+            <ul class="main-nav">
+                <li><a href="index.html">Home</a></li>
+                <li class="has-dropdown">
+                    <a href="technology.html" aria-current="page">Technology</a>
+                    <ul class="dropdown">
+                        <li><a href="ai.html">AI Tools</a></li>
+                        <li><a href="smartphones.html">Smartphones</a></li>
+                        <li><a href="smart_home.html">Smart Home</a></li>
+                        <li><a href="android_apps.html">Android Apps</a></li>
+                        <li><a href="mac-apps.html">Mac Apps</a></li>
+                        <li><a href="smartphone-apps.html">Smartphone Apps</a></li>
+                        <li><a href="tips_tricks.html">Tips & Tricks</a></li>
+                        <li><a href="gtk_websites.html">Good to Know Websites</a></li>
                     </ul>
-                </nav>
-                <div class="mobile-menu" id="mobile-menu" aria-label="Toggle navigation menu">
-                    <i class="fas fa-bars"></i>
+                </li>
+                <li class="has-dropdown">
+                    <a href="entertainment.html">Entertainment</a>
+                    <ul class="dropdown">
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="tv_shows.html">TV Shows</a></li>
+                        <li><a href="music.html">Music</a></li>
+                    </ul>
+                </li>
+                <li class="has-dropdown">
+                    <a href="productivity.html">Productivity</a>
+                    <ul class="dropdown">
+                        <li><a href="office.html">Office Tools</a></li>
+                        <li><a href="workflows.html">Workflows</a></li>
+                        <li><a href="productivity_apps.html">Productivity Apps</a></li>
+                    </ul>
+                </li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Category Hero -->
+        <section class="category-hero" style="background: linear-gradient(135deg, #0099FF 0%, #00D4FF 100%);">
+            <div class="container">
+                <div class="category-hero-content">
+                    <div class="category-icon-large">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="80" height="80">
+                            <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+                        </svg>
+                    </div>
+                    <h1>Technology</h1>
+                    <p class="category-hero-subtitle">Stay updated with the latest tech news, reviews, and guides</p>
                 </div>
             </div>
-        </div>
-    </header>
+        </section>
 
-    <main id="main-content" class="main technology">
-        <div class="container">
-            <section class="hero">
-    <h1 class="visually-hidden">Technology</h1>
-    <img src="graphics/tech_nb.png" alt="TechFusion Report" class="hero-image">
-    <p>Cutting-edge tech reviews and guides to help you stay ahead in the digital world
-</p>
-</section>
-            
-            <section class="subcategories">
-                <div class="subcategory-card">
-                    <div class="subcategory-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Smartphones</h3>
-                    <p>Latest smartphone reviews, comparisons, and buying guides</p>
-                    <a href="smartphones.html" class="btn">Explore Smartphones</a>
+        <!-- Subcategories Grid -->
+        <section class="subcategories">
+            <div class="container">
+                <h2>Explore Technology Topics</h2>
+                <div class="subcategory-grid">
+                    
+                    <!-- AI Tools -->
+                    <article class="subcategory-card">
+                        <a href="ai.html">
+                            <div class="subcategory-icon">🤖</div>
+                            <h3>AI Tools</h3>
+                            <p>Discover the latest AI-powered tools and applications</p>
+                            <span class="read-more">Explore →</span>
+                        </a>
+                    </article>
+
+                    <!-- Smartphones -->
+                    <article class="subcategory-card">
+                        <a href="smartphones.html">
+                            <div class="subcategory-icon">📱</div>
+                            <h3>Smartphones</h3>
+                            <p>Reviews, comparisons, and news about the latest mobile devices</p>
+                            <span class="read-more">Explore →</span>
+                        </a>
+                    </article>
+
+                    <!-- Smart Home -->
+                    <article class="subcategory-card">
+                        <a href="smart_home.html">
+                            <div class="subcategory-icon">🏠</div>
+                            <h3>Smart Home</h3>
+                            <p>Transform your home with connected devices and automation</p>
+                            <span class="read-more">Explore →</span>
+                        </a>
+                    </article>
+
+                    <!-- Android Apps -->
+                    <article class="subcategory-card">
+                        <a href="android_apps.html">
+                            <div class="subcategory-icon">📲</div>
+                            <h3>Android Apps</h3>
+                            <p>Must-have apps and hidden gems for Android users</p>
+                            <span class="read-more">Explore →</span>
+                        </a>
+                    </article>
+
+                    <!-- Mac Apps -->
+                    <article class="subcategory-card">
+                        <a href="mac-apps.html">
+                            <div class="subcategory-icon">💻</div>
+                            <h3>Mac Apps</h3>
+                            <p>Essential applications to supercharge your Mac productivity</p>
+                            <span class="read-more">Explore →</span>
+                        </a>
+                    </article>
+
+                    <!-- Smartphone Apps -->
+                    <article class="subcategory-card">
+                        <a href="smartphone-apps.html">
+                            <div class="subcategory-icon">📱</div>
+                            <h3>Smartphone Apps</h3>
+                            <p>Cross-platform mobile apps that work on any device</p>
+                            <span class="read-more">Explore →</span>
+                        </a>
+                    </article>
+
+                    <!-- Tips & Tricks -->
+                    <article class="subcategory-card">
+                        <a href="tips_tricks.html">
+                            <div class="subcategory-icon">💡</div>
+                            <h3>Tips & Tricks</h3>
+                            <p>Hidden features and expert techniques to master your tech</p>
+                            <span class="read-more">Explore →</span>
+                        </a>
+                    </article>
+
+                    <!-- Good to Know Websites -->
+                    <article class="subcategory-card">
+                        <a href="gtk_websites.html">
+                            <div class="subcategory-icon">🌐</div>
+                            <h3>Good to Know Websites</h3>
+                            <p>Useful websites and online tools every tech enthusiast should know</p>
+                            <span class="read-more">Explore →</span>
+                        </a>
+                    </article>
+
                 </div>
-                
-                <div class="subcategory-card">
-                    <div class="subcategory-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <h3>Smart Home</h3>
-                    <p>Transform your home with smart devices and automation</p>
-                    <a href="smart_home.html" class="btn">Explore Smart Home</a>
+            </div>
+        </section>
+
+        <!-- Latest Posts in This Category -->
+        <section class="latest-posts">
+            <div class="container">
+                <h2>Latest Technology Articles</h2>
+                <div class="posts-grid">
+                    
+                    <!-- Post Card 1 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Technology</span>
+                            <h3><a href="blog/posts/example-post.html">Example Technology Article Title</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-23">February 23, 2025</time>
+                        </div>
+                    </article>
+
+                    <!-- Post Card 2 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Technology</span>
+                            <h3><a href="blog/posts/example-post.html">Another Great Technology Post</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-22">February 22, 2025</time>
+                        </div>
+                    </article>
+
+                    <!-- Post Card 3 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Technology</span>
+                            <h3><a href="blog/posts/example-post.html">Must-Read Technology Guide</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-21">February 21, 2025</time>
+                        </div>
+                    </article>
+
                 </div>
-                
-                <div class="subcategory-card">
-                    <div class="subcategory-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h3>Good to Know Websites</h3>
-                    <p>Discover useful websites and online tools for tech enthusiasts</p>
-                    <a href="gtk_websites.html" class="btn">Explore Websites</a>
+                <div class="section-cta">
+                    <a href="blog.html?category=technology" class="btn btn-primary">View All Technology Posts</a>
                 </div>
-                
-                <div class="subcategory-card">
-                    <div class="subcategory-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>Artificial Intelligence</h3>
-                    <p>Latest AI developments, tools, and applications</p>
-                    <a href="ai.html" class="btn">Explore AI</a>
-                </div>
-                
-                <div class="subcategory-card">
-                    <div class="subcategory-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h3>Tips & Tricks</h3>
-                    <p>Helpful tech tips and tricks to improve your digital life</p>
-                    <a href="tips_tricks.html" class="btn">Explore Tips & Tricks</a>
-                </div>
-                
-                <div class="subcategory-card">
-                    <div class="subcategory-icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <h3>Computers</h3>
-                    <p>PC builds, laptop reviews, and computing guides</p>
-                    <a href="computers.html" class="btn">Explore Computers</a>
-                </div>
-            </section>
-        </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="container">
+                <h2>Stay in the Loop</h2>
+                <p>Get the latest technology news, reviews, and tips delivered to your inbox weekly</p>
+                <form class="newsletter-form" action="#" method="post">
+                    <input type="email" placeholder="Enter your email" required aria-label="Email address">
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
+                <div class="footer-section">
                     <h3>TechFusion Report</h3>
-                    <p>Your premier source for technology news and reviews.</p>
-                    <div class="social-links">
-                        <a href="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-                        <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-                        <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                    </div>
+                    <p>Your premier source for technology, entertainment, and productivity content.</p>
                 </div>
-                <div class="footer-column">
-                    <h3>Categories</h3>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
                     <ul>
                         <li><a href="technology.html">Technology</a></li>
                         <li><a href="entertainment.html">Entertainment</a></li>
                         <li><a href="productivity.html">Productivity</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Company</h3>
+                <div class="footer-section">
+                    <h4>Legal</h4>
                     <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
                         <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="sitemap.html">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
+            <div class="footer-bottom">
                 <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu').addEventListener('click', function() {
-            document.getElementById('nav-menu').classList.toggle('show');
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && document.getElementById('nav-menu').classList.contains('show')) {
-                document.getElementById('nav-menu').classList.remove('show');
-            }
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navMenu = document.getElementById('nav-menu');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (navMenu.classList.contains('show') && 
-                !event.target.closest('nav') && 
-                !event.target.closest('.mobile-menu')) {
-                navMenu.classList.remove('show');
-            }
-        });
-    </script>
 </body>
 </html>
