@@ -829,6 +829,466 @@ footer {
 }
 
 /* ===================================
+   SUBCATEGORY PAGES
+   =================================== */
+
+.subcategory-hero {
+    background: linear-gradient(135deg, #0A0A0A 0%, #151515 100%);
+    padding: 40px 20px 60px;
+    text-align: center;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+    color: #999999;
+}
+
+.breadcrumb a {
+    color: #00D4FF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: #A4FF00;
+}
+
+.breadcrumb span:last-child {
+    color: #FFFFFF;
+}
+
+.subcategory-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.subcategory-icon-large {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #00D4FF;
+    filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.5));
+}
+
+.subcategory-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+}
+
+.subcategory-description {
+    font-size: 1.2rem;
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+.subcategory-posts {
+    padding: 80px 20px;
+}
+
+.subcategory-posts h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    color: #FFFFFF;
+}
+
+.load-more {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* ===================================
+   ABOUT & CONTACT PAGES
+   =================================== */
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.stat-card {
+    background: #151515;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    border-color: #00D4FF !important;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3) !important;
+    transform: translateY(-5px) !important;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #00D4FF;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    color: #cccccc;
+    font-size: 1rem;
+}
+
+/* Timeline Section */
+.timeline-section {
+    padding: 80px 20px;
+    background-color: #0F0F0F;
+}
+
+.timeline {
+    max-width: 800px;
+    margin: 40px auto 0;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 40px;
+    border-left: 2px solid #00D4FF;
+}
+
+.timeline-year {
+    position: absolute;
+    left: -15px;
+    top: 0;
+    background: #00D4FF;
+    color: #0A0A0A;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.timeline-item h3 {
+    margin: 10px 0 10px;
+    color: #FFFFFF;
+}
+
+.timeline-item p {
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+/* Team Section */
+.team-section {
+    padding: 80px 20px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.team-member {
+    text-align: center;
+    background: #151515;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    border-color: #00D4FF !important;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3) !important;
+    transform: translateY(-5px) !important;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 3px solid #00D4FF;
+    object-fit: cover;
+}
+
+.team-member h3 {
+    margin-bottom: 5px;
+    color: #FFFFFF;
+}
+
+.team-role {
+    color: #00D4FF;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.team-member p {
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+/* Values Section */
+.values-section {
+    padding: 80px 20px;
+    background-color: #0F0F0F;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.value-card {
+    background: #151515;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.value-card:hover {
+    border-color: #A4FF00 !important;
+    box-shadow: 0 4px 15px rgba(164, 255, 0, 0.3) !important;
+    transform: translateY(-5px) !important;
+}
+
+.value-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.value-card h3 {
+    color: #FFFFFF;
+    margin-bottom: 15px;
+}
+
+.value-card p {
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+/* Contact Methods */
+.contact-methods {
+    padding: 80px 20px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.contact-card {
+    background: #151515;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+    border-color: #00D4FF !important;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3) !important;
+    transform: translateY(-5px) !important;
+}
+
+.contact-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.contact-card h3 {
+    color: #FFFFFF;
+    margin-bottom: 15px;
+}
+
+.contact-card a {
+    color: #00D4FF;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-card a:hover {
+    color: #A4FF00;
+}
+
+.contact-detail {
+    color: #999999;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Contact Form Section */
+.contact-form-section {
+    padding: 80px 20px;
+    background-color: #0F0F0F;
+}
+
+.contact-form {
+    max-width: 700px;
+    margin: 40px auto 0;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    background: #151515;
+    border: 2px solid #1a1a1a;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #00D4FF;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 80px 20px;
+}
+
+.faq-grid {
+    display: grid;
+    gap: 30px;
+    margin-top: 50px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.faq-item {
+    background: #151515;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: #00D4FF !important;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2) !important;
+}
+
+.faq-item h3 {
+    color: #00D4FF;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.faq-item p {
+    color: #cccccc;
+    line-height: 1.7;
+}
+
+/* Social Section */
+.social-section {
+    padding: 80px 20px;
+    background-color: #0F0F0F;
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.social-card {
+    background: #151515;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.social-card:hover {
+    border-color: #A4FF00 !important;
+    box-shadow: 0 4px 15px rgba(164, 255, 0, 0.3) !important;
+    transform: translateY(-5px) !important;
+}
+
+.social-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.social-card h3 {
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.social-card p {
+    color: #cccccc;
+}
+
+/* Content Section */
+.content-section {
+    padding: 80px 20px;
+}
+
+.content-section h2 {
+    color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+.content-section p {
+    color: #cccccc;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #cccccc;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+/* ===================================
    MOBILE RESPONSIVE
    =================================== */
 
