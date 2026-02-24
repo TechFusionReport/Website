@@ -4,227 +4,223 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music | TechFusion Report</title>
-    <meta name="description" content="New releases, artist spotlights, and music industry news">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="New releases, artist profiles, album reviews, and curated playlist recommendations">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.techfusionreport.com/music.html">
+    <meta property="og:title" content="Music | TechFusion Report">
+    <meta property="og:description" content="New releases, artist profiles, album reviews, and curated playlist recommendations">
+    <meta property="og:image" content="https://www.techfusionreport.com/graphics/tfr_header_logo_nb.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.techfusionreport.com/music.html">
+    <meta property="twitter:title" content="Music | TechFusion Report">
+    <meta property="twitter:description" content="New releases, artist profiles, album reviews, and curated playlist recommendations">
+    <meta property="twitter:image" content="https://www.techfusionreport.com/graphics/tfr_header_logo_nb.png">
+    
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" href="graphics/tfr_header_logo_nb.png" as="image">
-    <link rel="icon" href="graphics/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://www.techfusionreport.com/music.html">
 </head>
 <body>
+    <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" class="logo-image">
-                    </a>
-                </div>
-                <nav>
-                    <ul id="nav-menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="technology.html">Technology</a></li>
-                        <li><a href="entertainment.html" class="active">Entertainment</a></li>
-                        <li><a href="productivity.html">Productivity</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo">
+            </a>
+            <ul class="main-nav">
+                <li><a href="index.html">Home</a></li>
+                <li class="has-dropdown">
+                    <a href="technology.html">Technology</a>
+                    <ul class="dropdown">
+                        <li><a href="ai.html">AI Tools</a></li>
+                        <li><a href="smartphones.html">Smartphones</a></li>
+                        <li><a href="smart_home.html">Smart Home</a></li>
+                        <li><a href="android_apps.html">Android Apps</a></li>
+                        <li><a href="mac-apps.html">Mac Apps</a></li>
+                        <li><a href="smartphone-apps.html">Smartphone Apps</a></li>
+                        <li><a href="tips_tricks.html">Tips & Tricks</a></li>
+                        <li><a href="gtk_websites.html">Good to Know Websites</a></li>
                     </ul>
+                </li>
+                <li class="has-dropdown">
+                    <a href="entertainment.html">Entertainment</a>
+                    <ul class="dropdown">
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="tv_shows.html">TV Shows</a></li>
+                        <li><a href="music.html">Music</a></li>
+                    </ul>
+                </li>
+                <li class="has-dropdown">
+                    <a href="productivity.html">Productivity</a>
+                    <ul class="dropdown">
+                        <li><a href="office.html">Office Tools</a></li>
+                        <li><a href="workflows.html">Workflows</a></li>
+                        <li><a href="productivity_apps.html">Productivity Apps</a></li>
+                    </ul>
+                </li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Subcategory Hero -->
+        <section class="subcategory-hero">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>›</span>
+                    <a href="entertainment.html">Entertainment</a>
+                    <span>›</span>
+                    <span>Music</span>
                 </nav>
-                <div class="mobile-menu" id="mobile-menu" aria-label="Toggle navigation menu">
-                    <i class="fas fa-bars"></i>
+                <div class="subcategory-hero-content">
+                    <div class="subcategory-icon-large">🎵</div>
+                    <h1>Music</h1>
+                    <p class="subcategory-description">New releases, artist profiles, album reviews, and curated playlist recommendations</p>
                 </div>
             </div>
-        </div>
-    </header>
+        </section>
 
-    <main id="main-content" class="main entertainment">
-        <div class="container">
-            <section class="hero">
-                <h1>Music</h1>
-                <p>New releases, artist spotlights, and music industry news</p>
-            </section>
-            
-            <section class="content-section">
-                <h2>New Releases</h2>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <div class="content-image">
-                            <img src="graphics/placeholder-album1.jpg" alt="Album Cover" class="article-image">
+        <!-- Posts Grid -->
+        <section class="subcategory-posts">
+            <div class="container">
+                <h2>Latest Music Content</h2>
+                
+                <div class="posts-grid">
+                    <!-- Post Card 1 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Music</span>
+                            <h3><a href="blog/posts/example-post.html">Example Music Article</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-23">February 23, 2025</time>
                         </div>
-                        <h3>Cosmic Harmony</h3>
-                        <p>The latest album from electronic music pioneer Stella Nova blends ambient soundscapes with pulsing beats.</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.5/5</span>
+                    </article>
+
+                    <!-- Post Card 2 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Music</span>
+                            <h3><a href="blog/posts/example-post.html">Top Music Picks for 2025</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-22">February 22, 2025</time>
                         </div>
-                        <a href="#" class="btn">Read Review</a>
-                    </div>
-                    
-                    <div class="content-card">
-                        <div class="content-image">
-                            <img src="graphics/placeholder-album2.jpg" alt="Album Cover" class="article-image">
+                    </article>
+
+                    <!-- Post Card 3 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Music</span>
+                            <h3><a href="blog/posts/example-post.html">Essential Music Guide</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-21">February 21, 2025</time>
                         </div>
-                        <h3>Midnight Memories</h3>
-                        <p>Indie rock band The Lunar Tides deliver a nostalgic yet fresh collection of songs on their sophomore album.</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>4/5</span>
+                    </article>
+
+                    <!-- Post Card 4 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Music</span>
+                            <h3><a href="blog/posts/example-post.html">How to Choose the Best Music</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-20">February 20, 2025</time>
                         </div>
-                        <a href="#" class="btn">Read Review</a>
-                    </div>
-                    
-                    <div class="content-card">
-                        <div class="content-image">
-                            <img src="graphics/placeholder-album3.jpg" alt="Album Cover" class="article-image">
+                    </article>
+
+                    <!-- Post Card 5 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Music</span>
+                            <h3><a href="blog/posts/example-post.html">Music Review: Worth It?</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-19">February 19, 2025</time>
                         </div>
-                        <h3>Rhythmic Soul</h3>
-                        <p>R&B sensation Maya Johnson's latest release showcases her powerful vocals and thoughtful songwriting.</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>5/5</span>
+                    </article>
+
+                    <!-- Post Card 6 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Music</span>
+                            <h3><a href="blog/posts/example-post.html">The Future of Music</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-18">February 18, 2025</time>
                         </div>
-                        <a href="#" class="btn">Read Review</a>
-                    </div>
+                    </article>
                 </div>
-            </section>
-            
-            <section class="content-section">
-                <h2>Artist Spotlights</h2>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <div class="content-image">
-                            <img src="graphics/placeholder-artist1.jpg" alt="Artist" class="article-image">
-                        </div>
-                        <h3>The Rise of Alex Chen</h3>
-                        <p>How this bedroom producer became one of the most sought-after names in modern electronic music.</p>
-                        <a href="#" class="btn">Read Feature</a>
-                    </div>
-                    
-                    <div class="content-card">
-                        <div class="content-image">
-                            <img src="graphics/placeholder-artist2.jpg" alt="Artist" class="article-image">
-                        </div>
-                        <h3>Harmony Collective</h3>
-                        <p>This diverse group of musicians is redefining collaboration in the digital age.</p>
-                        <a href="#" class="btn">Read Feature</a>
-                    </div>
-                    
-                    <div class="content-card">
-                        <div class="content-image">
-                            <img src="graphics/placeholder-artist3.jpg" alt="Artist" class="article-image">
-                        </div>
-                        <h3>The Evolution of Sarah James</h3>
-                        <p>Tracking the artistic journey of one of pop music's most innovative voices.</p>
-                        <a href="#" class="btn">Read Feature</a>
-                    </div>
+
+                <div class="load-more">
+                    <a href="blog.html?subcategory=music" class="btn btn-primary">View All Music Posts</a>
                 </div>
-            </section>
-            
-            <section class="content-section">
-                <h2>Music Technology</h2>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <div class="content-image">
-                            <img src="graphics/placeholder-music-tech1.jpg" alt="Music Tech" class="article-image">
-                        </div>
-                        <h3>Best Wireless Earbuds of 2025</h3>
-                        <p>Our comprehensive guide to the top wireless earbuds for music lovers.</p>
-                        <a href="#" class="btn">Read Guide</a>
-                    </div>
-                    
-                    <div class="content-card">
-                        <div class="content-image">
-                            <img src="graphics/placeholder-music-tech2.jpg" alt="Music Tech" class="article-image">
-                        </div>
-                        <h3>AI Music Production Tools</h3>
-                        <p>How artificial intelligence is changing the way music is created and produced.</p>
-                        <a href="#" class="btn">Read Article</a>
-                    </div>
-                    
-                    <div class="content-card">
-                        <div class="content-image">
-                            <img src="graphics/placeholder-music-tech3.jpg" alt="Music Tech" class="article-image">
-                        </div>
-                        <h3>Vinyl Revival</h3>
-                        <p>The continued resurgence of vinyl records in a digital streaming world.</p>
-                        <a href="#" class="btn">Read Article</a>
-                    </div>
-                </div>
-            </section>
-        </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="container">
+                <h2>Stay Updated</h2>
+                <p>Get the latest Music content delivered to your inbox weekly</p>
+                <form class="newsletter-form" action="#" method="post">
+                    <input type="email" placeholder="Enter your email" required aria-label="Email address">
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
+                <div class="footer-section">
                     <h3>TechFusion Report</h3>
-                    <p>Your premier source for technology news and reviews.</p>
-                    <div class="social-links">
-                        <a href="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-                        <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-                        <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                    </div>
+                    <p>Your premier source for technology, entertainment, and productivity content.</p>
                 </div>
-                <div class="footer-column">
-                    <h3>Categories</h3>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
                     <ul>
                         <li><a href="technology.html">Technology</a></li>
                         <li><a href="entertainment.html">Entertainment</a></li>
                         <li><a href="productivity.html">Productivity</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Company</h3>
+                <div class="footer-section">
+                    <h4>Legal</h4>
                     <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
                         <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="sitemap.html">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                <p>© 2025 TechFusion Report. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu').addEventListener('click', function() {
-            document.getElementById('nav-menu').classList.toggle('show');
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && document.getElementById('nav-menu').classList.contains('show')) {
-                document.getElementById('nav-menu').classList.remove('show');
-            }
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navMenu = document.getElementById('nav-menu');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (navMenu.classList.contains('show') && 
-                !event.target.closest('nav') && 
-                !event.target.closest('.mobile-menu')) {
-                navMenu.classList.remove('show');
-            }
-        });
-    </script>
 </body>
 </html>
