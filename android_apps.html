@@ -4,194 +4,212 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Android Apps | TechFusion Report</title>
-    <meta name="description" content="Discover the best apps for your Android or iOS device">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-  <script>
-fetch("https://your-repo.github.io/data.json")
-.then(response => response.json())
-.then(data => {
-    let content = "";
-    data.forEach(item => {
-        content += `<h2>${item.properties.Title.title[0].text.content}</h2>`;
-    });
-    document.getElementById("notion-content").innerHTML = content;
-});
-</script>
-
+    <meta name="description" content="Must-have applications and hidden gems for Android users to boost productivity and entertainment">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.techfusionreport.com/android_apps.html">
+    <meta property="og:title" content="Android Apps | TechFusion Report">
+    <meta property="og:description" content="Must-have applications and hidden gems for Android users to boost productivity and entertainment">
+    <meta property="og:image" content="https://www.techfusionreport.com/graphics/tfr_header_logo_nb.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.techfusionreport.com/android_apps.html">
+    <meta property="twitter:title" content="Android Apps | TechFusion Report">
+    <meta property="twitter:description" content="Must-have applications and hidden gems for Android users to boost productivity and entertainment">
+    <meta property="twitter:image" content="https://www.techfusionreport.com/graphics/tfr_header_logo_nb.png">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="canonical" href="https://www.techfusionreport.com/android_apps.html">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="./images/TFR_Header_Logo_NB.png" alt="TechFusion Report Logo" class="logo-image" width="200" height="50">
-                    </a>
-                </div>
-                <button class="mobile-menu" id="mobile-menu" aria-label="Toggle mobile menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <nav aria-label="Main navigation">
-                    <ul id="nav-menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="technology.html" class="active">Technology</a></li>
-                        <li><a href="entertainment.html">Entertainment</a></li>
-                        <li><a href="productivity.html">Productivity</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo">
+            </a>
+            <ul class="main-nav">
+                <li><a href="index.html">Home</a></li>
+                <li class="has-dropdown">
+                    <a href="technology.html">Technology</a>
+                    <ul class="dropdown">
+                        <li><a href="ai.html">AI Tools</a></li>
+                        <li><a href="smartphones.html">Smartphones</a></li>
+                        <li><a href="smart_home.html">Smart Home</a></li>
+                        <li><a href="android_apps.html">Android Apps</a></li>
+                        <li><a href="mac-apps.html">Mac Apps</a></li>
+                        <li><a href="smartphone-apps.html">Smartphone Apps</a></li>
+                        <li><a href="tips_tricks.html">Tips & Tricks</a></li>
+                        <li><a href="gtk_websites.html">Good to Know Websites</a></li>
                     </ul>
-                </nav>
-            </div>
+                </li>
+                <li class="has-dropdown">
+                    <a href="entertainment.html">Entertainment</a>
+                    <ul class="dropdown">
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="tv_shows.html">TV Shows</a></li>
+                        <li><a href="music.html">Music</a></li>
+                    </ul>
+                </li>
+                <li class="has-dropdown">
+                    <a href="productivity.html">Productivity</a>
+                    <ul class="dropdown">
+                        <li><a href="office.html">Office Tools</a></li>
+                        <li><a href="workflows.html">Workflows</a></li>
+                        <li><a href="productivity_apps.html">Productivity Apps</a></li>
+                    </ul>
+                </li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
     <!-- Main Content -->
-    <main class="main">
-        <div class="container">
-            <!-- Breadcrumbs -->
-            <div class="breadcrumbs" aria-label="breadcrumb">
-                <a href="index.html">Home</a> &raquo; <a href="technology.html">Technology</a> &raquo; <span>Smartphone Apps</span>
-            </div>
-            
-            <!-- Category Header -->
-            <div class="category-header">
-                <img src="./images/Smartphone Apps no background.png" alt="Smartphone Apps" class="logo-image">
-                <h1>Android Apps</h1>
-                <p>Discover the best applications for your Android or iOS device to enhance productivity, creativity, and entertainment.</p>
-            </div>
-            
-            <!-- Featured Apps -->
-            <section class="featured-section">
-                <div class="section-title">
-                    <h2>Featured Mobile Apps</h2>
-                    <p>Our top picks for this month</p>
+    <main id="main-content">
+        <!-- Subcategory Hero -->
+        <section class="subcategory-hero">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>›</span>
+                    <a href="technology.html">Technology</a>
+                    <span>›</span>
+                    <span>Android Apps</span>
+                </nav>
+                <div class="subcategory-hero-content">
+                    <div class="subcategory-icon-large">📲</div>
+                    <h1>Android Apps</h1>
+                    <p class="subcategory-description">Must-have applications and hidden gems for Android users to boost productivity and entertainment</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Posts Grid -->
+        <section class="subcategory-posts">
+            <div class="container">
+                <h2>Latest Android Apps Content</h2>
                 
-                <div class="featured-grid">
-                    <article class="featured-card">
-                        <div class="featured-img">
-                            <img src="./images/app1.jpg" alt="Productivity App Screenshot" loading="lazy" width="600" height="400">
-                        </div>
-                        <div class="featured-content">
-                            <h3>Notion Mobile</h3>
-                            <p>The all-in-one workspace for notes, tasks, wikis, and databases - now optimized for mobile.</p>
-                            <div class="platform-tags">
-                                <span class="tag ios">iOS</span>
-                                <span class="tag android">Android</span>
-                            </div>
-                            <a href="notion-mobile-review.html" class="btn">Read Review</a>
+                <div class="posts-grid">
+                    <!-- Post Card 1 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Android Apps</span>
+                            <h3><a href="blog/posts/example-post.html">Example Android Apps Article</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-23">February 23, 2025</time>
                         </div>
                     </article>
-                    
-                    <article class="featured-card">
-                        <div class="featured-img">
-                            <img src="./images/app2.jpg" alt="Photo Editing App Screenshot" loading="lazy" width="600" height="400">
-                        </div>
-                        <div class="featured-content">
-                            <h3>Snapseed</h3>
-                            <p>Professional-grade photo editing right in your pocket with this powerful app from Google.</p>
-                            <div class="platform-tags">
-                                <span class="tag ios">iOS</span>
-                                <span class="tag android">Android</span>
-                            </div>
-                            <a href="snapseed-review.html" class="btn">Read Review</a>
+
+                    <!-- Post Card 2 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Android Apps</span>
+                            <h3><a href="blog/posts/example-post.html">Top Android Apps Picks for 2025</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-22">February 22, 2025</time>
                         </div>
                     </article>
-                    
-                    <article class="featured-card">
-                        <div class="featured-img">
-                            <img src="./images/app3.jpg" alt="Health App Screenshot" loading="lazy" width="600" height="400">
+
+                    <!-- Post Card 3 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Android Apps</span>
+                            <h3><a href="blog/posts/example-post.html">Essential Android Apps Guide</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-21">February 21, 2025</time>
                         </div>
-                        <div class="featured-content">
-                            <h3>Strong</h3>
-                            <p>The ultimate workout tracker for fitness enthusiasts with detailed exercise tracking.</p>
-                            <div class="platform-tags">
-                                <span class="tag ios">iOS</span>
-                                <span class="tag android">Android</span>
-                            </div>
-                            <a href="strong-app-review.html" class="btn">Read Review</a>
+                    </article>
+
+                    <!-- Post Card 4 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Android Apps</span>
+                            <h3><a href="blog/posts/example-post.html">How to Choose the Best Android Apps</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-20">February 20, 2025</time>
+                        </div>
+                    </article>
+
+                    <!-- Post Card 5 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Android Apps</span>
+                            <h3><a href="blog/posts/example-post.html">Android Apps Review: Worth It?</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-19">February 19, 2025</time>
+                        </div>
+                    </article>
+
+                    <!-- Post Card 6 (Placeholder) -->
+                    <article class="post-card">
+                        <img src="graphics/placeholder-post.jpg" alt="Blog post featured image" loading="lazy">
+                        <div class="post-content">
+                            <span class="post-category">Android Apps</span>
+                            <h3><a href="blog/posts/example-post.html">The Future of Android Apps</a></h3>
+                            <p class="post-excerpt">This is a preview of the blog post content. It gives readers a quick idea of what the post is about...</p>
+                            <time datetime="2025-02-18">February 18, 2025</time>
                         </div>
                     </article>
                 </div>
-            </section>
-            
-            <!-- App Categories -->
-            <section class="category-section">
-                <div class="section-title">
-                    <h2>App Categories</h2>
-                    <p>Browse by your interests</p>
+
+                <div class="load-more">
+                    <a href="blog.html?subcategory=android_apps" class="btn btn-primary">View All Android Apps Posts</a>
                 </div>
-                
-                <div class="category-cards">
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-                        <h3>Productivity</h3>
-                        <p>Apps to help you work smarter and get more done</p>
-                        <a href="productivity-apps.html" class="btn">View Apps</a>
-                    </div>
-                    
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-camera"></i>
-                        </div>
-                        <h3>Photo & Video</h3>
-                        <p>Creative tools for photographers and videographers</p>
-                        <a href="photo-video-apps.html" class="btn">View Apps</a>
-                    </div>
-                    
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-gamepad"></i>
-                        </div>
-                        <h3>Games</h3>
-                        <p>Top mobile games for casual and hardcore gamers</p>
-                        <a href="mobile-games.html" class="btn">View Games</a>
-                    </div>
-                </div>
-            </section>
-            
-            <div class="back-to-category">
-                <a href="technology.html" class="btn">&larr; Back to Technology</a>
             </div>
-        </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="container">
+                <h2>Stay Updated</h2>
+                <p>Get the latest Android Apps content delivered to your inbox weekly</p>
+                <form class="newsletter-form" action="#" method="post">
+                    <input type="email" placeholder="Enter your email" required aria-label="Email address">
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
+                <div class="footer-section">
                     <h3>TechFusion Report</h3>
                     <p>Your premier source for technology, entertainment, and productivity content.</p>
-                    <div class="social-links">
-                        <a href="https://twitter.com/techfusionreport" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="https://facebook.com/techfusionreport" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://instagram.com/techfusionreport" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com/techfusionreport" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
                 </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Categories</h3>
+                <div class="footer-section">
+                    <h4>Categories</h4>
                     <ul>
                         <li><a href="technology.html">Technology</a></li>
                         <li><a href="entertainment.html">Entertainment</a></li>
                         <li><a href="productivity.html">Productivity</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
+                <div class="footer-section">
+                    <h4>Legal</h4>
                     <ul>
                         <li><a href="privacy.html">Privacy Policy</a></li>
                         <li><a href="terms.html">Terms of Service</a></li>
@@ -199,12 +217,10 @@ fetch("https://your-repo.github.io/data.json")
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
+            <div class="footer-bottom">
                 <p>&copy; 2025 TechFusion Report. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
-    <script src="./js/script.js"></script>
 </body>
 </html>
