@@ -1,0 +1,42 @@
+ame: SVG to PNG Converter
+
+on:
+  push:
+    paths:
+      - 'graphics/svg/**.svg'
+  workflow_dispatch:
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install rsvg-convert
+        run: sudo apt-get install -y librsvg2-bin
+
+      - name: Create output directory
+        run: mkdir -p graphics/png-final
+
+      - name: Convert all SVGs to PNG at 192dpi
+        run: |
+          for f in graphics/svg/*.svg; do
+            filename=$(basename "${f%.svg}")
+            echo "Converting: $filename.svg → $filename.png"
+            rsvg-convert -d 192 -p 192 "$f" -o "graphics/png-final/${filename}.png"
+          done
+          echo "Done. $(ls graphics/png-final/*.png | wc -l) PNGs created."
+
+      - name: Commit PNGs to repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add graphics/png-final/
+          git diff --staged --quiet && echo "No changes to commit" || \
+            git commit -m "chore: convert SVGs to PNG at 192dpi → graphics/png-final"
+          git push
