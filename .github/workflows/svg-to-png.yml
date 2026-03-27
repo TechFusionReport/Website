@@ -1,4 +1,4 @@
-Name: SVG to PNG Converter
+name: SVG to PNG Converter
 
 on:
   push:
