@@ -1243,5 +1243,204 @@ l<!DOCTYPE html>
             <div class="container">
                 <h2 id="latest-heading">Latest from Our Blog</h2>
                 
-                <div class="posts-grid">
-                    <!-- Post Card 
+                <div id="posts-container">
+                  <div class="posts-layout" id="posts-layout" style="display:none"></div>
+                  <div class="posts-empty" id="posts-empty" style="display:none">
+                    <p>No posts yet — check back soon.</p>
+                  </div>
+                  <div class="posts-empty" id="posts-loading">
+                    <p>Loading latest posts...</p>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter" aria-label="Newsletter signup">
+          <div class="newsletter-inner">
+            <div class="newsletter-copy">
+              <h2>Stay in the <span class="accent">loop</span></h2>
+              <p>Weekly roundups of the best tech, entertainment, and productivity content — direct to your inbox. No spam. Unsubscribe anytime.</p>
+            </div>
+            <form class="newsletter-form" onsubmit="return false;">
+              <div class="newsletter-form-row">
+                <input type="email" placeholder="your@email.com" aria-label="Email address">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+              </div>
+              <p class="newsletter-disclaimer">Join our readers. Unsubscribe anytime.</p>
+            </form>
+          </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report" width="140">
+          <p>Your premier source for technology news, entertainment reviews, and productivity insights.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Technology</h4>
+          <ul>
+            <li><a href="smartphones.html">Smartphones</a></li>
+            <li><a href="ai.html">AI Tools</a></li>
+            <li><a href="smart_home.html">Smart Home</a></li>
+            <li><a href="android_apps.html">Apps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Entertainment</h4>
+          <ul>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="tv_shows.html">TV Shows</a></li>
+            <li><a href="music.html">Music</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Productivity</h4>
+          <ul>
+            <li><a href="office.html">Office Tools</a></li>
+            <li><a href="workflows.html">Workflows</a></li>
+            <li><a href="productivity_apps.html">Apps</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 TechFusion Report. All rights reserved.</p>
+        <p><a href="about.html">About</a> · <a href="contact.html">Contact</a></p>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">↑</button>
+
+    <script>
+      // ── Posts loader ─────────────────────────────────────────
+      (function () {
+        const layout  = document.getElementById('posts-layout');
+        const empty   = document.getElementById('posts-empty');
+        const loading = document.getElementById('posts-loading');
+
+        function badgeClass(cat) {
+          if (cat === 'Entertainment') return ' lime';
+          if (cat === 'Productivity')  return ' white';
+          return '';
+        }
+
+        function formatDate(d) {
+          return new Date(d + 'T00:00:00').toLocaleDateString('en-US', {
+            month: 'short', day: 'numeric', year: 'numeric'
+          });
+        }
+
+        function renderPosts(posts) {
+          if (!posts || !posts.length) {
+            loading.style.display = 'none';
+            empty.style.display = 'block';
+            return;
+          }
+          const featured = posts[0];
+          const sidebar  = posts.slice(1, 4);
+          const url = p => p.url || ('/_posts/' + p.slug + '.html');
+
+          layout.innerHTML =
+            '<a class="post-featured" href="' + url(featured) + '">' +
+              '<div class="post-featured-body">' +
+                '<span class="post-badge' + badgeClass(featured.category) + '">' + featured.category + '</span>' +
+                '<span class="post-title">' + featured.title + '</span>' +
+                '<p class="post-excerpt">' + (featured.excerpt || '') + '</p>' +
+                '<span class="post-meta">' + formatDate(featured.date) + '</span>' +
+              '</div>' +
+            '</a>' +
+            '<div class="posts-sidebar">' +
+              sidebar.map(function(p) {
+                return '<a class="post-mini" href="' + url(p) + '">' +
+                  '<span class="post-badge' + badgeClass(p.category) + '">' + p.category + '</span>' +
+                  '<span class="post-title">' + p.title + '</span>' +
+                  '<span class="post-meta">' + formatDate(p.date) + '</span>' +
+                '</a>';
+              }).join('') +
+            '</div>';
+
+          loading.style.display = 'none';
+          layout.style.display  = 'grid';
+        }
+
+        fetch('/posts.json')
+          .then(function(r) { return r.ok ? r.json() : []; })
+          .then(renderPosts)
+          .catch(function() {
+            loading.style.display = 'none';
+            empty.style.display   = 'block';
+          });
+      })();
+
+      // ── Nav dropdowns ────────────────────────────────────────
+      document.querySelectorAll('.nav-toggle').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var expanded = this.getAttribute('aria-expanded') === 'true';
+          document.querySelectorAll('.nav-toggle').forEach(function(b) {
+            b.setAttribute('aria-expanded', 'false');
+            var m = document.getElementById(b.getAttribute('aria-controls'));
+            if (m) m.setAttribute('hidden', '');
+          });
+          if (!expanded) {
+            this.setAttribute('aria-expanded', 'true');
+            var menu = document.getElementById(this.getAttribute('aria-controls'));
+            if (menu) menu.removeAttribute('hidden');
+          }
+        });
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.has-dropdown')) {
+          document.querySelectorAll('.nav-toggle').forEach(function(b) {
+            b.setAttribute('aria-expanded', 'false');
+            var m = document.getElementById(b.getAttribute('aria-controls'));
+            if (m) m.setAttribute('hidden', '');
+          });
+        }
+      });
+
+      // ── Search overlay ───────────────────────────────────────
+      var searchTrigger = document.getElementById('search-trigger');
+      var searchOverlay = document.getElementById('search-overlay');
+      var searchClose   = document.getElementById('search-close');
+      var searchInput   = document.getElementById('search-input');
+
+      if (searchTrigger) searchTrigger.addEventListener('click', function() {
+        searchOverlay.classList.add('active');
+        if (searchInput) searchInput.focus();
+      });
+      if (searchClose) searchClose.addEventListener('click', function() {
+        searchOverlay.classList.remove('active');
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') searchOverlay.classList.remove('active');
+      });
+
+      // ── Reading progress ─────────────────────────────────────
+      var bar = document.getElementById('progress-bar');
+      if (bar) {
+        window.addEventListener('scroll', function() {
+          var pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+          bar.style.width = Math.min(pct, 100) + '%';
+          bar.setAttribute('aria-valuenow', Math.round(pct));
+        }, { passive: true });
+      }
+
+      // ── Scroll to top ────────────────────────────────────────
+      var scrollTopBtn = document.getElementById('scroll-top');
+      if (scrollTopBtn) {
+        window.addEventListener('scroll', function() {
+          scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+        scrollTopBtn.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | TechFusion Report</title>
+  <meta name="description" content="Latest articles on technology, entertainment, and productivity from TechFusion Report.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.techfusionreport.com/blog.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --cyan: #00D4FF;
+      --lime: #A4FF00;
+      --dark: #0A0A0A;
+      --dark2: #0F0F0F;
+      --dark3: #151515;
+      --border: #1E1E1E;
+      --muted: #888;
+      --text: #E8E8E8;
+      --font-display: 'Rajdhani', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    body { font-family: var(--font-body); background: var(--dark); color: var(--text); margin: 0; }
+    h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0.02em; }
+    a { text-decoration: none; }
+
+    /* ── Nav ──────────────────────────────────────────────── */
+    nav {
+      background: rgba(10,10,10,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: stretch;
+    }
+    .nav-logo {
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid var(--border);
+    }
+    .nav-logo img { height: 40px; display: block; }
+    .main-nav {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex: 1;
+    }
+    .main-nav > li > a,
+    .main-nav > li > button {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 20px;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      background: none;
+      border: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .main-nav > li > a:hover,
+    .main-nav > li > button:hover { color: var(--cyan); border-bottom-color: var(--cyan); }
+    .main-nav > li > a[aria-current="page"] { color: var(--cyan); border-bottom-color: var(--cyan); }
+
+    .has-dropdown { position: relative; }
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      min-width: 200px;
+      list-style: none;
+      margin: 0;
+      padding: 8px 0;
+      z-index: 100;
+    }
+    .dropdown a {
+      display: block;
+      padding: 10px 20px;
+      color: #aaa;
+      font-size: 0.87rem;
+      transition: color 0.15s;
+    }
+    .dropdown a:hover { color: var(--cyan); }
+    .search-trigger {
+      margin-left: auto;
+      padding: 0 20px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    /* ── Page header ──────────────────────────────────────── */
+    .blog-header {
+      border-bottom: 1px solid var(--border);
+      padding: 48px 40px 40px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .blog-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 8px;
+    }
+    .blog-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    .blog-header .accent { color: var(--cyan); }
+
+    /* ── Filter tabs ──────────────────────────────────────── */
+    .filter-bar {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 40px 0;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { color: var(--text); border-color: #444; }
+    .filter-btn.active { background: var(--cyan); color: var(--dark); border-color: var(--cyan); }
+    .filter-btn.active.lime { background: var(--lime); border-color: var(--lime); }
+    .filter-btn.active.white { background: #fff; border-color: #fff; }
+
+    /* ── Posts grid ───────────────────────────────────────── */
+    .blog-body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .post-card {
+      background: var(--dark3);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 28px;
+      gap: 12px;
+      transition: border-color 0.2s;
+      color: var(--text);
+    }
+    .post-card:hover { border-color: var(--cyan); }
+    .post-badge {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dark);
+      background: var(--cyan);
+      padding: 2px 8px;
+      border-radius: 2px;
+      width: fit-content;
+    }
+    .post-badge.lime  { background: var(--lime); }
+    .post-badge.white { background: #fff; }
+    .post-card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.35;
+      transition: color 0.2s;
+    }
+    .post-card:hover .post-card-title { color: var(--cyan); }
+    .post-card-excerpt {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .post-card-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .post-card-meta::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Empty / loading states */
+    .blog-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      grid-column: 1 / -1;
+    }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    footer {
+      background: var(--dark2);
+      border-top: 1px solid var(--border);
+    }
+    .footer-main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 56px 40px 40px;
+      display: grid;
+      grid-template-columns: 280px 1fr 1fr 1fr;
+      gap: 48px;
+    }
+    .footer-brand img { height: 36px; margin-bottom: 16px; }
+    .footer-brand p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+    .footer-col h4 {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a { font-size: 0.88rem; color: #aaa; transition: color 0.15s; }
+    .footer-col a:hover { color: var(--cyan); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding: 20px 40px;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; }
+    .footer-bottom a { color: var(--muted); transition: color 0.2s; }
+    .footer-bottom a:hover { color: var(--cyan); }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .posts-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .blog-header, .filter-bar, .blog-body { padding-left: 24px; padding-right: 24px; }
+      .posts-grid { grid-template-columns: 1fr; }
+      .main-nav { display: none; }
+      .footer-main { grid-template-columns: 1fr; padding: 40px 24px; }
+      .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav aria-label="Main Navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="TechFusion Report Home">
+        <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report Logo" width="150" height="50">
+      </a>
+      <ul class="main-nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="has-dropdown">
+          <button aria-expanded="false" aria-controls="tech-menu" class="nav-toggle">Technology</button>
+          <ul id="tech-menu" class="dropdown" hidden>
+            <li><a href="ai.html">AI Tools</a></li>
+            <li><a href="smartphones.html">Smartphones</a></li>
+            <li><a href="smart_home.html">Smart Home</a></li>
+            <li><a href="android_apps.html">Android Apps</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <button aria-expanded="false" aria-controls="ent-menu" class="nav-toggle">Entertainment</button>
+          <ul id="ent-menu" class="dropdown" hidden>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="tv_shows.html">TV Shows</a></li>
+            <li><a href="music.html">Music</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <button aria-expanded="false" aria-controls="prod-menu" class="nav-toggle">Productivity</button>
+          <ul id="prod-menu" class="dropdown" hidden>
+            <li><a href="office.html">Office Tools</a></li>
+            <li><a href="workflows.html">Workflows</a></li>
+            <li><a href="productivity_apps.html">Productivity Apps</a></li>
+          </ul>
+        </li>
+        <li><a href="blog.html" aria-current="page">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="search-trigger" aria-label="Search">🔍</button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="blog-header">
+    <h1>The <span class="accent">Blog</span></h1>
+    <p>Technology, entertainment, and productivity — all in one place.</p>
+  </div>
+
+  <!-- Category Filters -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="Technology">Technology</button>
+    <button class="filter-btn lime" data-filter="Entertainment">Entertainment</button>
+    <button class="filter-btn white" data-filter="Productivity">Productivity</button>
+  </div>
+
+  <!-- Posts Grid -->
+  <div class="blog-body">
+    <div class="posts-grid" id="posts-grid">
+      <div class="blog-state" id="blog-loading">Loading articles...</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img src="graphics/tfr_header_logo_nb.png" alt="TechFusion Report" width="140">
+        <p>Your premier source for technology news, entertainment reviews, and productivity insights.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Technology</h4>
+        <ul>
+          <li><a href="smartphones.html">Smartphones</a></li>
+          <li><a href="ai.html">AI Tools</a></li>
+          <li><a href="smart_home.html">Smart Home</a></li>
+          <li><a href="android_apps.html">Apps</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Entertainment</h4>
+        <ul>
+          <li><a href="movies.html">Movies</a></li>
+          <li><a href="tv_shows.html">TV Shows</a></li>
+          <li><a href="music.html">Music</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Productivity</h4>
+        <ul>
+          <li><a href="office.html">Office Tools</a></li>
+          <li><a href="workflows.html">Workflows</a></li>
+          <li><a href="productivity_apps.html">Apps</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 TechFusion Report. All rights reserved.</p>
+      <p><a href="about.html">About</a> · <a href="contact.html">Contact</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // ── Posts loader ─────────────────────────────────────────
+    var allPosts = [];
+    var activeFilter = 'all';
+    var grid = document.getElementById('posts-grid');
+
+    function badgeClass(cat) {
+      if (cat === 'Entertainment') return ' lime';
+      if (cat === 'Productivity')  return ' white';
+      return '';
+    }
+
+    function formatDate(d) {
+      return new Date(d + 'T00:00:00').toLocaleDateString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric'
+      });
+    }
+
+    function renderGrid(posts) {
+      if (!posts.length) {
+        grid.innerHTML = '<div class="blog-state">No posts in this category yet.</div>';
+        return;
+      }
+      grid.innerHTML = posts.map(function(p) {
+        var url = p.url || ('/_posts/' + p.slug + '.html');
+        return '<a class="post-card" href="' + url + '">' +
+          '<span class="post-badge' + badgeClass(p.category) + '">' + p.category + '</span>' +
+          '<span class="post-card-title">' + p.title + '</span>' +
+          '<p class="post-card-excerpt">' + (p.excerpt || '') + '</p>' +
+          '<span class="post-card-meta">' + formatDate(p.date) + '</span>' +
+        '</a>';
+      }).join('');
+    }
+
+    fetch('/posts.json')
+      .then(function(r) { return r.ok ? r.json() : []; })
+      .then(function(posts) {
+        allPosts = posts;
+        renderGrid(allPosts);
+      })
+      .catch(function() {
+        grid.innerHTML = '<div class="blog-state">Could not load posts.</div>';
+      });
+
+    // ── Filter buttons ───────────────────────────────────────
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        activeFilter = this.getAttribute('data-filter');
+        var filtered = activeFilter === 'all'
+          ? allPosts
+          : allPosts.filter(function(p) { return p.category === activeFilter; });
+        renderGrid(filtered);
+      });
+    });
+
+    // ── Nav dropdowns ────────────────────────────────────────
+    document.querySelectorAll('.nav-toggle').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var expanded = this.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.nav-toggle').forEach(function(b) {
+          b.setAttribute('aria-expanded', 'false');
+          var m = document.getElementById(b.getAttribute('aria-controls'));
+          if (m) m.setAttribute('hidden', '');
+        });
+        if (!expanded) {
+          this.setAttribute('aria-expanded', 'true');
+          var menu = document.getElementById(this.getAttribute('aria-controls'));
+          if (menu) menu.removeAttribute('hidden');
+        }
+      });
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.has-dropdown')) {
+        document.querySelectorAll('.nav-toggle').forEach(function(b) {
+          b.setAttribute('aria-expanded', 'false');
+          var m = document.getElementById(b.getAttribute('aria-controls'));
+          if (m) m.setAttribute('hidden', '');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
