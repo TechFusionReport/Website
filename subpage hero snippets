@@ -1,0 +1,480 @@
+<!--
+  ============================================================
+  TECHFUSION REPORT — SUBCATEGORY HERO SNIPPETS
+  Copy the relevant block into each page's <main> section.
+  Each hero uses the 800x320 branded artwork automatically.
+  Add the matching class to <body> for section color theming.
+  ============================================================
+
+  BODY CLASS MAP:
+    technology.html      → <body class="page-technology">
+    ai.html              → <body class="page-ai">
+    smartphones.html     → <body class="page-smartphones">
+    smart_home.html      → <body class="page-smart-home">
+    android_apps.html    → <body class="page-android-apps">
+    mac-apps.html        → <body class="page-mac-apps">
+    gtk_websites.html    → <body class="page-gtk-websites">
+    tips_tricks.html     → <body class="page-tips-tricks">
+    entertainment.html   → <body class="page-entertainment">
+    movies.html          → <body class="page-movies">
+    tv_shows.html        → <body class="page-tv-shows">
+    music.html           → <body class="page-music">
+    productivity.html    → <body class="page-productivity">
+    office.html          → <body class="page-office">
+    workflows.html       → <body class="page-workflows">
+    productivity_apps.html → <body class="page-productivity-apps">
+    tips_tricks.html     → <body class="page-tips-tricks">
+    blog.html            → <body class="page-blog">
+    about.html           → <body class="page-about">
+    contact.html         → <body class="page-contact">
+-->
+
+<!-- ============================
+     TECHNOLOGY
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <span>Technology</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/technology_800x320.webp"
+           alt="Technology" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">⚡</div>
+    <h1 id="cat-heading">Technology</h1>
+    <p class="category-hero-subtitle">The latest in tech — smartphones, AI, smart home, apps, and more.</p>
+  </div>
+</section>
+
+<!-- ============================
+     AI TOOLS
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="technology.html">Technology</a>
+      <span aria-hidden="true">›</span>
+      <span>AI Tools</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/ai_800x320.webp"
+           alt="AI Tools" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">🤖</div>
+    <h1 id="cat-heading">AI Tools</h1>
+    <p class="category-hero-subtitle">Reviews, guides, and breakdowns of the AI tools actually worth your time.</p>
+  </div>
+</section>
+
+<!-- ============================
+     SMARTPHONES
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="technology.html">Technology</a>
+      <span aria-hidden="true">›</span>
+      <span>Smartphones</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/smartphones_800x320.webp"
+           alt="Smartphones" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">📱</div>
+    <h1 id="cat-heading">Smartphones</h1>
+    <p class="category-hero-subtitle">Reviews, comparisons, and buying guides for the latest handsets.</p>
+  </div>
+</section>
+
+<!-- ============================
+     SMART HOME
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="technology.html">Technology</a>
+      <span aria-hidden="true">›</span>
+      <span>Smart Home</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/smart_home_800x320.webp"
+           alt="Smart Home" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">🏠</div>
+    <h1 id="cat-heading">Smart Home</h1>
+    <p class="category-hero-subtitle">Automations, devices, and setups for a smarter living space.</p>
+  </div>
+</section>
+
+<!-- ============================
+     ANDROID APPS
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="technology.html">Technology</a>
+      <span aria-hidden="true">›</span>
+      <span>Android Apps</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/android_apps_800x320.webp"
+           alt="Android Apps" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">🤖</div>
+    <h1 id="cat-heading">Android Apps</h1>
+    <p class="category-hero-subtitle">The best Android apps across productivity, media, utilities, and more.</p>
+  </div>
+</section>
+
+<!-- ============================
+     MAC APPS
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="technology.html">Technology</a>
+      <span aria-hidden="true">›</span>
+      <span>Mac Apps</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/mac_apps_800x320.webp"
+           alt="Mac Apps" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">🖥️</div>
+    <h1 id="cat-heading">Mac Apps</h1>
+    <p class="category-hero-subtitle">Mac software worth installing — creative tools, utilities, and workflow boosters.</p>
+  </div>
+</section>
+
+<!-- ============================
+     GTK WEBSITES
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="technology.html">Technology</a>
+      <span aria-hidden="true">›</span>
+      <span>Good to Know Websites</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/gtk_websites_800x320.webp"
+           alt="Good to Know Websites" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">🌐</div>
+    <h1 id="cat-heading">Good to Know Websites</h1>
+    <p class="category-hero-subtitle">Hidden gems and useful web tools most people haven't found yet.</p>
+  </div>
+</section>
+
+<!-- ============================
+     TIPS & TRICKS
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="technology.html">Technology</a>
+      <span aria-hidden="true">›</span>
+      <span>Tips &amp; Tricks</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/tips_tricks_800x320.webp"
+           alt="Tips and Tricks" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">💡</div>
+    <h1 id="cat-heading">Tips &amp; Tricks</h1>
+    <p class="category-hero-subtitle">Quick wins, power-user moves, and shortcuts you didn't know you needed.</p>
+  </div>
+</section>
+
+<!-- ============================
+     ENTERTAINMENT
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <span>Entertainment</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/entertainment_800x320.webp"
+           alt="Entertainment" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">🎬</div>
+    <h1 id="cat-heading">Entertainment</h1>
+    <p class="category-hero-subtitle">Reviews and recommendations for movies, TV, and music worth your time.</p>
+  </div>
+</section>
+
+<!-- ============================
+     MOVIES
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="entertainment.html">Entertainment</a>
+      <span aria-hidden="true">›</span>
+      <span>Movies</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/movies_800x320.webp"
+           alt="Movies" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">🎬</div>
+    <h1 id="cat-heading">Movies</h1>
+    <p class="category-hero-subtitle">Reviews, rankings, and must-watch picks across every genre.</p>
+  </div>
+</section>
+
+<!-- ============================
+     TV SHOWS
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="entertainment.html">Entertainment</a>
+      <span aria-hidden="true">›</span>
+      <span>TV Shows</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/tv_shows_800x320.webp"
+           alt="TV Shows" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">📺</div>
+    <h1 id="cat-heading">TV Shows</h1>
+    <p class="category-hero-subtitle">What to binge, what to skip, and what's coming next.</p>
+  </div>
+</section>
+
+<!-- ============================
+     MUSIC
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="entertainment.html">Entertainment</a>
+      <span aria-hidden="true">›</span>
+      <span>Music</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/music_800x320.webp"
+           alt="Music" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">🎵</div>
+    <h1 id="cat-heading">Music</h1>
+    <p class="category-hero-subtitle">New releases, artist spotlights, and playlist picks worth hitting play on.</p>
+  </div>
+</section>
+
+<!-- ============================
+     PRODUCTIVITY
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <span>Productivity</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/productivity_800x320.webp"
+           alt="Productivity" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">⚙️</div>
+    <h1 id="cat-heading">Productivity</h1>
+    <p class="category-hero-subtitle">Tools, workflows, and systems to get more done without burning out.</p>
+  </div>
+</section>
+
+<!-- ============================
+     OFFICE TOOLS (DeskSteps)
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="productivity.html">Productivity</a>
+      <span aria-hidden="true">›</span>
+      <span>Office Tools</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/office_800x320.webp"
+           alt="Office Tools" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">🗂️</div>
+    <h1 id="cat-heading">Office Tools</h1>
+    <p class="category-hero-subtitle">The software and setups that make desk work less painful.</p>
+  </div>
+</section>
+
+<!-- ============================
+     WORKFLOWS
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="productivity.html">Productivity</a>
+      <span aria-hidden="true">›</span>
+      <span>Workflows</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/workflows_800x320.webp"
+           alt="Workflows" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">🔄</div>
+    <h1 id="cat-heading">Workflows</h1>
+    <p class="category-hero-subtitle">Automations, systems, and processes that run while you focus on what matters.</p>
+  </div>
+</section>
+
+<!-- ============================
+     PRODUCTIVITY APPS
+     ============================ -->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="productivity.html">Productivity</a>
+      <span aria-hidden="true">›</span>
+      <span>Productivity Apps</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/productivity_apps_800x320.webp"
+           alt="Productivity Apps" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">✅</div>
+    <h1 id="cat-heading">Productivity Apps</h1>
+    <p class="category-hero-subtitle">Apps that actually change how you work — tested and ranked.</p>
+  </div>
+</section>
+
+<!--
+  SMARTPHONE APPS — references smartphone-apps.html
+-->
+<section class="category-hero" aria-labelledby="cat-heading">
+  <div class="category-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="technology.html">Technology</a>
+      <span aria-hidden="true">›</span>
+      <span>Smartphone Apps</span>
+    </nav>
+    <div class="subpage-cover-wrap">
+      <img src="graphics/smartphone_apps_800x320.webp"
+           alt="Smartphone Apps" width="800" height="320" loading="lazy"
+           onerror="this.closest('.subpage-cover-wrap').style.display='none'">
+      <div class="subpage-cover-tint"></div>
+    </div>
+    <div class="category-icon-large">📲</div>
+    <h1 id="cat-heading">Smartphone Apps</h1>
+    <p class="category-hero-subtitle">Cross-platform picks for iOS and Android — the apps that earn a permanent spot.</p>
+  </div>
+</section>
+
+<!--
+  ============================================================
+  FULL IMAGE FILENAME REFERENCE
+  ============================================================
+  Homepage hero:
+    graphics/TFR-Hero-Background.png     — hero section bg at 22% opacity
+
+  Homepage category cards (800x320):
+    graphics/technology_800x320.webp
+    graphics/entertainment_800x320.webp
+    graphics/productivity_800x320.webp
+
+  Subcategory page covers (800x320):
+    graphics/ai_800x320.webp
+    graphics/smartphones_800x320.webp
+    graphics/smart_home_800x320.webp
+    graphics/android_apps_800x320.webp
+    graphics/mac_apps_800x320.webp
+    graphics/gtk_websites_800x320.webp
+    graphics/tips_tricks_800x320.webp
+    graphics/movies_800x320.webp
+    graphics/tv_shows_800x320.webp
+    graphics/music_800x320.webp
+    graphics/office_800x320.webp
+    graphics/workflows_800x320.webp
+    graphics/productivity_apps_800x320.webp
+    graphics/smartphone_apps_800x320.webp
+    graphics/blog_800x320.webp
+    graphics/about_800x320.webp
+    graphics/contact_800x320.webp
+    graphics/featured_articles_800x320.webp
+    graphics/trending_800x320.webp
+    graphics/videos_800x320.webp
+    graphics/discord_800x320.webp
+    graphics/newsletter_800x320.webp
+
+  Brand identity assets:
+    graphics/tfr_header_logo_nb.png      — nav + footer logo
+    graphics/banner_NB.png              — social banner reference
+    graphics/tech_nb.png               — tech category icon
+    graphics/ent_nb.png                — entertainment category icon
+    graphics/prod_nb.png               — productivity category icon
+
+  All img tags use onerror="this.closest('.subpage-cover-wrap').style.display='none'"
+  so missing images fail silently with no broken image icon.
+  ============================================================
+-->
