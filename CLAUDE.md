@@ -143,14 +143,14 @@ he will launch Claude Code from `~/homelab/` instead.
 ---
 
 ## ⚠️ Known Open Issues (as of 2026-03-28)
-- `blog.html` index auto-population not yet working
+- `blog.html` index auto-population~~ ✅ Fixed 2026-03-29
 - Category pages (`/technology/`, `/entertainment/`, `/productivity/`) not yet built (Phase 2)
 - `posts.json` may not reflect all published posts — verify before adding new entries
 
 ---
 
 ## 🎯 Current Priority Order
-1. Fix `blog.html` index auto-population from `posts.json`
-2. Verify all published posts are in `posts.json`
+1. ~~Fix `blog.html` index auto-population~~ ✅ Done
+2. Keep `posts.json` updated as new posts publish — homepage depends on it
 3. Phase 2: Build category pages for Technology, Entertainment, Productivity
 4. Phase 3: Google Analytics, affiliate links, AdSense groundwork
