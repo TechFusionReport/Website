@@ -92,6 +92,15 @@ graphics/                   — Brand assets (logo, category images)
 - **Update `posts.json`** whenever a new post is added to `_posts/` — the homepage
   will not show the new post otherwise
 - **Never hardcode API keys or secrets** — this repo is public
+- ### Branch Strategy
+- `main` — production. Every push auto-deploys to techfusionreport.com. Never push untested design changes here.
+- `preview` — staging branch for design work. Push here to preview via Cloudflare Pages before merging to main.
+
+**Workflow for design changes:**
+1. Make changes on `preview` branch
+2. Preview on Cloudflare Pages preview URL
+3. Merge to `main` only when approved
+4. Never commit directly to `main` for design work
 
 ### Post File Format
 New posts go in `_posts/` as:
