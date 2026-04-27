@@ -149,6 +149,56 @@ he will launch Claude Code from `~/homelab/` instead.
 
 ---
 
+## TFR Template Library & Nano Banana Artwork
+
+The TFR Template Library is a Notion doc that defines the canonical design specs for all TFR branding assets. Nano Banana is the Canva AI design tool used to generate assets. All generated assets must conform to the specs below.
+
+### Circuit board background — standard element
+
+The PCB circuit board background is TFR's defining background
+texture. Every branding asset includes it unless explicitly excluded
+(favicons only — too fine to render at small sizes).
+
+Always use one of the two locked variants. Do not freestyle the
+opacity, colors, or glow positions.
+
+VARIANT A — Full brand elements (three-category wordmarks):
+  Use when all three TFR pillars appear together in one asset
+  (banners, covers, "Technology · Entertainment · Productivity"
+  headers, hero backgrounds).
+  Word 1 (Technology): Cyan glow (#00D4FF at 15-20% opacity)
+    on traces in the zone behind/near the first word
+  Word 2 (Entertainment): Lime glow (#A4FF00 at 12% opacity)
+    on traces in the zone behind/near the second word
+  Word 3 (Productivity): Grey-white glow (#B3B3B3 at 12% opacity)
+    on traces in the zone behind/near the third word
+  If only two words are present (no Productivity element):
+    omit the grey-white glow zone and place a thin white
+    horizontal rule directly beneath the two words present.
+  All three glow zones blend smoothly — no hard edges.
+  PCB background always included. All color is glow/halo at
+  low opacity only — atmospheric, never neon.
+
+VARIANT B — Category specific (single-category assets):
+  Use for website cards, subcategory headers, category-specific
+  Notion covers, section labels. One glow color only — match
+  to the asset's category:
+  Technology (all subcategories)  → #00D4FF at 15-20% opacity
+  Entertainment (all subcategories) → #A4FF00 at 12% opacity
+  Productivity (all subcategories)  → #B3B3B3 at 12% opacity
+  Utility pages                   → #FFFFFF at 10% opacity
+  PCB background always included. Same trace rules as Variant A —
+  orthogonal lines, small solder pads, ~8% above base black.
+  Glow is atmospheric, not neon. Densest at corners, thins
+  toward center.
+
+CONSISTENCY RULE: If Nano Banana output drifts from spec, append:
+"The circuit glow must be subtle and atmospheric — maximum 15-20%
+opacity. Background must remain predominantly near-black. Do not
+increase saturation or brightness beyond what is described."
+
+---
+
 ## 🎯 Current Priority Order
 1. Fix `blog.html` index auto-population from `posts.json`
 2. Verify all published posts are in `posts.json`
