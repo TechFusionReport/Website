@@ -24,7 +24,8 @@ l<!DOCTYPE html>
     :root {
       --cyan: #00D4FF;
       --lime: #A4FF00;
-      --dark: #0A0A0A;
+      --grey: #B3B3B3;
+      --dark: #0A0C10;
       --dark2: #0F0F0F;
       --dark3: #151515;
       --border: #1E1E1E;
@@ -541,6 +542,9 @@ l<!DOCTYPE html>
     a.category-card-inner {
       text-decoration: none;
       color: inherit;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
     /* colored top accent */
@@ -1052,45 +1056,54 @@ l<!DOCTYPE html>
 
     /* ── QUICK LINKS ────────────────────────────────────────── */
     .quick-links {
-      position: static;
       background: var(--dark2);
-      backdrop-filter: none;
       border-bottom: 1px solid var(--border);
-      z-index: auto;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
-
+    .quick-links::-webkit-scrollbar { display: none; }
     .quick-links-inner {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 40px;
       display: flex;
       align-items: stretch;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .quick-links-inner::-webkit-scrollbar { display: none; }
-
-    .quick-links a {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 11px 18px;
-      border-right: 1px solid var(--border);
       white-space: nowrap;
-      transition: color 0.2s, background 0.2s;
+    }
+    .quick-link-sep {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 11px 14px 11px 20px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
+      border-right: 1px solid var(--border);
     }
-
-    .quick-links a:first-child { border-left: 1px solid var(--border); }
-
-    .quick-links a:hover {
-      color: var(--cyan);
-      background: rgba(0,212,255,0.04);
+    .quick-link-sep.tech { color: var(--cyan); }
+    .quick-link-sep.ent  { color: var(--lime); }
+    .quick-link-sep.prod { color: #B3B3B3; }
+    .quick-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 11px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.15s;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+    }
+    .quick-link:last-child { border-right: none; }
+    .quick-link:hover { color: var(--text); }
+    @media (max-width: 768px) {
+      .quick-links-inner { padding: 0 0 0 16px; }
     }
   </style>
 
@@ -1214,49 +1227,51 @@ l<!DOCTYPE html>
     <main id="main-content">
         <!-- Hero Section -->
         <section class="hero" aria-labelledby="hero-heading">
-            <div class="hero-bg"></div>
-            <div class="hero-content">
-                <p class="hero-eyebrow">TechFusion Report</p>
-                <h1 id="hero-heading">The signal through<br>the noise.</h1>
-                <p class="hero-subtitle">Technology, entertainment, and productivity — covered without the fluff.</p>
-                <div class="hero-cta">
-                    <a href="blog.html" class="btn btn-primary">Read the Blog</a>
-                    <a href="about.html" class="btn btn-outline">About TFR</a>
-                </div>
+          <div class="hero-bg" aria-hidden="true"></div>
+          <div class="hero-content">
+            <p class="hero-eyebrow">TechFusion Report</p>
+            <h1 id="hero-heading">The signal through<br>
+              <span class="accent-cyan">the noise.</span></h1>
+            <p class="hero-subtitle">Independent coverage of AI, smartphones,
+              and the tools redefining how you work and live.</p>
+            <div class="hero-cta">
+              <a href="blog.html" class="btn btn-primary">Latest Articles</a>
+              <a href="about.html" class="btn btn-outline">About TFR</a>
             </div>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <span class="hero-stat-num">3</span>
-                    <span class="hero-stat-label">Content Verticals</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-num">Weekly</span>
-                    <span class="hero-stat-label">New Coverage</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-num">Zero</span>
-                    <span class="hero-stat-label">Corporate Fluff</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-num">100%</span>
-                    <span class="hero-stat-label">Independent</span>
-                </div>
+          </div>
+          <div class="hero-stats" aria-hidden="true">
+            <div class="hero-stat">
+              <span class="hero-stat-num">3</span>
+              <span class="hero-stat-label">Coverage areas</span>
             </div>
+            <div class="hero-stat">
+              <span class="hero-stat-num">12</span>
+              <span class="hero-stat-label">Subcategories</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-num">Weekly</span>
+              <span class="hero-stat-label">New content</span>
+            </div>
+          </div>
         </section>
         
         <!-- Quick Links -->
-        <nav class="quick-links" aria-label="Quick navigation">
-            <div class="quick-links-inner">
-                <a href="smartphones.html">Smartphones</a>
-                <a href="ai.html">AI Tools</a>
-                <a href="smart_home.html">Smart Home</a>
-                <a href="android_apps.html">Apps</a>
-                <a href="movies.html">Movies</a>
-                <a href="tv_shows.html">TV Shows</a>
-                <a href="music.html">Music</a>
-                <a href="office.html">Office Tools</a>
-                <a href="workflows.html">Workflows</a>
-            </div>
+        <nav class="quick-links" aria-label="Topic quick links">
+          <div class="quick-links-inner">
+            <span class="quick-link-sep tech">Tech</span>
+            <a href="ai.html" class="quick-link">AI Tools</a>
+            <a href="smartphones.html" class="quick-link">Smartphones</a>
+            <a href="smart_home.html" class="quick-link">Smart Home</a>
+            <a href="android_apps.html" class="quick-link">Apps</a>
+            <span class="quick-link-sep ent">Entertainment</span>
+            <a href="movies.html" class="quick-link">Movies</a>
+            <a href="tv_shows.html" class="quick-link">TV Shows</a>
+            <a href="music.html" class="quick-link">Music</a>
+            <span class="quick-link-sep prod">Productivity</span>
+            <a href="workflows.html" class="quick-link">Workflows</a>
+            <a href="office.html" class="quick-link">Office Tools</a>
+            <a href="productivity_apps.html" class="quick-link">Apps</a>
+          </div>
         </nav>
 
         <!-- Featured Categories -->
@@ -1268,57 +1283,60 @@ l<!DOCTYPE html>
                 </div>
 
                 <div class="category-grid">
-                    <!-- Technology Card -->
-                    <article class="category-card">
-                        <a class="category-card-inner" href="technology.html">
-                            <div class="cat-image-wrap">
-                                <img src="graphics/technology_800x320.webp" alt="" loading="lazy" width="800" height="320">
-                            </div>
-                            <span class="cat-label">Vertical 01</span>
-                            <h3 class="cat-title">Technology</h3>
-                            <p class="cat-desc">The latest on smartphones, AI, smart home, and the apps shaping how we live and work.</p>
-                        </a>
-                        <ul class="cat-links">
-                            <li><a href="smartphones.html">Smartphones</a></li>
-                            <li><a href="smart_home.html">Smart Home</a></li>
-                            <li><a href="ai.html">AI Tools</a></li>
-                            <li><a href="android_apps.html">Apps</a></li>
-                        </ul>
-                    </article>
+                  <article class="category-card">
+                    <a href="technology.html" class="category-card-inner">
+                      <div class="cat-image-wrap">
+                        <img src="graphics/technology_800x320.webp" alt=""
+                          loading="lazy" width="800" height="320">
+                      </div>
+                      <span class="cat-label">Technology</span>
+                      <h3 class="cat-title">Technology</h3>
+                      <p class="cat-desc">Stay updated with the latest tech news,
+                        reviews, and guides</p>
+                    </a>
+                    <ul class="cat-links">
+                      <li><a href="smartphones.html">Smartphones</a></li>
+                      <li><a href="smart_home.html">Smart Home</a></li>
+                      <li><a href="ai.html">AI Tools</a></li>
+                      <li><a href="android_apps.html">Apps</a></li>
+                    </ul>
+                  </article>
 
-                    <!-- Entertainment Card -->
-                    <article class="category-card">
-                        <a class="category-card-inner" href="entertainment.html">
-                            <div class="cat-image-wrap">
-                                <img src="graphics/entertainment_800x320.webp" alt="" loading="lazy" width="800" height="320">
-                            </div>
-                            <span class="cat-label">Vertical 02</span>
-                            <h3 class="cat-title">Entertainment</h3>
-                            <p class="cat-desc">Movies, TV, and music coverage with actual opinions — not algorithmic filler.</p>
-                        </a>
-                        <ul class="cat-links">
-                            <li><a href="movies.html">Movies</a></li>
-                            <li><a href="tv_shows.html">TV Shows</a></li>
-                            <li><a href="music.html">Music</a></li>
-                        </ul>
-                    </article>
+                  <article class="category-card">
+                    <a href="entertainment.html" class="category-card-inner">
+                      <div class="cat-image-wrap">
+                        <img src="graphics/entertainment_800x320.webp" alt=""
+                          loading="lazy" width="800" height="320">
+                      </div>
+                      <span class="cat-label">Entertainment</span>
+                      <h3 class="cat-title">Entertainment</h3>
+                      <p class="cat-desc">Discover reviews and recommendations for
+                        movies, TV shows, and music</p>
+                    </a>
+                    <ul class="cat-links">
+                      <li><a href="movies.html">Movies</a></li>
+                      <li><a href="tv_shows.html">TV Shows</a></li>
+                      <li><a href="music.html">Music</a></li>
+                    </ul>
+                  </article>
 
-                    <!-- Productivity Card -->
-                    <article class="category-card">
-                        <a class="category-card-inner" href="productivity.html">
-                            <div class="cat-image-wrap">
-                                <img src="graphics/productivity_800x320.webp" alt="" loading="lazy" width="800" height="320">
-                            </div>
-                            <span class="cat-label">Vertical 03</span>
-                            <h3 class="cat-title">Productivity</h3>
-                            <p class="cat-desc">Tools, workflows, and systems that cut the friction and get more done.</p>
-                        </a>
-                        <ul class="cat-links">
-                            <li><a href="office.html">Office Tools</a></li>
-                            <li><a href="workflows.html">Workflows</a></li>
-                            <li><a href="productivity_apps.html">Productivity Apps</a></li>
-                        </ul>
-                    </article>
+                  <article class="category-card">
+                    <a href="productivity.html" class="category-card-inner">
+                      <div class="cat-image-wrap">
+                        <img src="graphics/productivity_800x320.webp" alt=""
+                          loading="lazy" width="800" height="320">
+                      </div>
+                      <span class="cat-label">Productivity</span>
+                      <h3 class="cat-title">Productivity</h3>
+                      <p class="cat-desc">Boost your efficiency with tools,
+                        tips, and workflows</p>
+                    </a>
+                    <ul class="cat-links">
+                      <li><a href="office.html">Office Tools</a></li>
+                      <li><a href="workflows.html">Workflows</a></li>
+                      <li><a href="productivity_apps.html">Productivity Apps</a></li>
+                    </ul>
+                  </article>
                 </div>
             </div>
         </section>

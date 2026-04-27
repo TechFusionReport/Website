@@ -4,12 +4,13 @@
    Fonts: Rajdhani (display), DM Sans (body)
    =================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@400;500&display=swap');
 
 /* === DESIGN TOKENS === */
 :root {
   --cyan:         #00D4FF;
   --lime:         #A4FF00;
+  --grey:         #B3B3B3;
   --dark:         #0A0C10;
   --dark-2:       #0F1117;
   --dark-3:       #161B24;
@@ -23,6 +24,7 @@
   --glow-lime:    0 0 24px rgba(164, 255, 0, 0.22);
   --font-display: 'Rajdhani', sans-serif;
   --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    'DM Mono', monospace;
   --nav-h:        64px;
   --radius:       8px;
   --radius-lg:    14px;
@@ -706,6 +708,25 @@ nav::after {
 .post-excerpt { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.65; }
 .post-card time { font-size: 0.8rem; color: var(--text-muted); }
 .section-cta { text-align: center; }
+
+/* ===================================
+   POST BADGE (category pill)
+   =================================== */
+.post-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--cyan);
+  color: var(--dark);
+  padding: 2px 8px;
+  display: inline-block;
+  border-radius: 2px;
+  width: fit-content;
+}
+.post-badge.lime  { background: var(--lime); }
+.post-badge.white { background: #fff; }
 
 .empty-state {
   text-align: center;
