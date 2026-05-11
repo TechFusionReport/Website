@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Socket Inventory</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark:   #0A0C10;
+    --panel:  #12151C;
+    --border: #1E2530;
+    --muted:  #3A4255;
+    --text:   #C8D0E0;
+    --black-drive: #2A2D35;
+    --black-border: #5A5E6A;
+    --black-text: #D0D4E0;
+    --blue-drive: #1B4FCC;
+    --blue-border: #4D7FFF;
+    --red-drive: #B91C1C;
+    --red-border: #EF4444;
+    --justin: #FFD700;
+    --justin-glow: rgba(255,215,0,0.35);
+    --greg: #FF7A00;
+    --greg-glow: rgba(255,122,0,0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 16px 12px 48px;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .page { max-width: 960px; margin: 0 auto; }
+
+  /* HEADER */
+  header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header-icon {
+    width: 38px; height: 38px; background: #2A2D35;
+    border: 1px solid var(--border); border-radius: 7px;
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .header-icon svg { width: 20px; height: 20px; fill: var(--text); }
+  h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(16px, 4vw, 24px);
+    font-weight: 700; color: #fff; letter-spacing: 0.04em; line-height: 1;
+  }
+  .subtitle { font-size: 10px; color: var(--muted); margin-top: 2px; font-family: 'DM Mono', monospace; }
+
+  /* PROFILE TABS */
+  .profile-bar {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 6px;
+  }
+
+  .profile-tab {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    gap: 8px; padding: 10px 14px; border-radius: 7px;
+    cursor: pointer; transition: all 0.2s;
+    border: 1px solid transparent;
+    touch-action: manipulation;
+  }
+
+  .profile-tab .tab-dot {
+    width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+  }
+  .profile-tab .tab-name {
+    font-family: 'Rajdhani', sans-serif; font-size: 16px;
+    font-weight: 700; letter-spacing: 0.08em;
+  }
+  .profile-tab .tab-count {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 10px;
+  }
+
+  /* Justin tab */
+  .tab-justin .tab-dot  { background: var(--justin); box-shadow: 0 0 6px var(--justin-glow); }
+  .tab-justin.active    { background: rgba(255,215,0,0.08); border-color: rgba(255,215,0,0.3); }
+  .tab-justin.active .tab-name  { color: var(--justin); }
+  .tab-justin.active .tab-count { color: var(--justin); background: rgba(255,215,0,0.12); }
+  .tab-justin:not(.active) .tab-name  { color: var(--muted); }
+  .tab-justin:not(.active) .tab-count { color: var(--muted); }
+
+  /* Greg tab */
+  .tab-greg .tab-dot  { background: var(--greg); box-shadow: 0 0 6px var(--greg-glow); }
+  .tab-greg.active    { background: rgba(255,122,0,0.08); border-color: rgba(255,122,0,0.3); }
+  .tab-greg.active .tab-name  { color: var(--greg); }
+  .tab-greg.active .tab-count { color: var(--greg); background: rgba(255,122,0,0.12); }
+  .tab-greg:not(.active) .tab-name  { color: var(--muted); }
+  .tab-greg:not(.active) .tab-count { color: var(--muted); }
+
+  /* ACTIVE PROFILE BANNER */
+  .active-banner {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 13px; border-radius: 8px; margin-bottom: 12px;
+    border: 1px solid; font-family: 'Rajdhani', sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+  }
+  .banner-justin { background: rgba(255,215,0,0.06); border-color: rgba(255,215,0,0.2); color: var(--justin); }
+  .banner-greg   { background: rgba(255,122,0,0.06);  border-color: rgba(255,122,0,0.2);  color: var(--greg); }
+  .banner-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .banner-justin .banner-dot { background: var(--justin); }
+  .banner-greg   .banner-dot { background: var(--greg); }
+  .banner-hint { margin-left: auto; font-size: 10px; opacity: 0.5; letter-spacing: 0.05em; }
+
+  /* CLEAR button */
+  .btn-clear {
+    font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 5px;
+    border: 1px solid var(--border);
+    color: var(--muted); background: transparent; cursor: pointer;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .btn-clear.armed { color: #FF4444; border-color: #FF4444; }
+
+  /* SUMMARY */
+  .summary-bar { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-bottom: 14px; }
+  .sc { background: var(--panel); border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px; }
+  .sc-label { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing:.07em; text-transform: uppercase; margin-bottom: 2px; }
+  .sc-num { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700; line-height: 1; }
+  .sc-sub { font-size: 9px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 1px; }
+  .sc-q  .sc-num { color: var(--black-text); }
+  .sc-te .sc-num { color: #6B9FFF; }
+  .sc-h  .sc-num { color: #FF7070; }
+
+  /* DRIVE SECTIONS */
+  .drive-section { margin-bottom: 16px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+
+  .drive-header { display: flex; align-items: center; gap: 10px; padding: 10px 13px; border-bottom: 1px solid var(--border); }
+  .quarter     .drive-header { background: #16171D; border-left: 4px solid var(--black-border); }
+  .three-eight .drive-header { background: #0C1526; border-left: 4px solid var(--blue-border); }
+  .half        .drive-header { background: #190C0C; border-left: 4px solid var(--red-border); }
+
+  .drive-badge {
+    font-family: 'Rajdhani', sans-serif; font-size: 17px; font-weight: 700;
+    padding: 3px 9px; border-radius: 5px; white-space: nowrap;
+  }
+  .quarter     .drive-badge { background: var(--black-drive); border: 1px solid var(--black-border); color: var(--black-text); }
+  .three-eight .drive-badge { background: var(--blue-drive);  border: 1px solid var(--blue-border);  color: #fff; }
+  .half        .drive-badge { background: var(--red-drive);   border: 1px solid var(--red-border);   color: #fff; }
+
+  .drive-meta { font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; opacity: 0.5; letter-spacing:.05em; }
+  .drive-owned { margin-left: auto; font-family: 'DM Mono', monospace; font-size: 10px; padding: 2px 8px; border-radius: 20px; border: 1px solid; }
+
+  .type-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .type-col { padding: 11px; background: var(--dark); }
+  .type-col:first-child { border-right: 1px solid var(--border); }
+  .type-label {
+    font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing:.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 9px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .type-label::after { content:''; flex:1; height:1px; background: var(--border); }
+  .sub-section { margin-bottom: 9px; }
+  .sub-section:last-child { margin-bottom: 0; }
+  .sub-label { font-size: 9px; font-family: 'DM Mono', monospace; letter-spacing:.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .socket-grid { display: flex; flex-wrap: wrap; gap: 4px; }
+
+  /* SOCKET CHIP */
+  .socket {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; font-weight: 500;
+    padding: 6px 8px; border-radius: 5px; border: 1px solid;
+    line-height: 1; white-space: nowrap; cursor: pointer;
+    transition: transform 0.08s, box-shadow 0.12s, background 0.12s, color 0.12s, border-color 0.12s, opacity 0.12s;
+    touch-action: manipulation;
+    position: relative; z-index: 1;
+  }
+
+  /* Drive base colors */
+  .quarter     .socket { background: var(--black-drive); border-color: var(--black-border); color: var(--black-text); }
+  .three-eight .socket { background: var(--blue-drive);  border-color: var(--blue-border);  color: #fff; }
+  .half        .socket { background: var(--red-drive);   border-color: var(--red-border);   color: #fff; }
+
+  .deep-col .socket:not(.s-owned) { opacity: 0.45; }
+  .deep-col .socket.s-owned { opacity: 1; }
+
+  .socket:active { transform: scale(0.86); }
+
+  /* OWNED — color depends on active profile, set by JS */
+  .socket.s-owned {
+    font-weight: 700;
+    opacity: 1 !important;
+  }
+
+  /* Color classes applied by JS based on active profile */
+  .socket.s-owned.c-justin {
+    background: var(--justin) !important;
+    border-color: var(--justin) !important;
+    color: #1a1400 !important;
+    box-shadow: 0 0 10px var(--justin-glow) !important;
+  }
+  .socket.s-owned.c-greg {
+    background: var(--greg) !important;
+    border-color: var(--greg) !important;
+    color: #1a0900 !important;
+    box-shadow: 0 0 10px var(--greg-glow) !important;
+  }
+
+  /* COLOR KEY */
+  .color-key { display: flex; gap: 7px; margin-bottom: 12px; flex-wrap: wrap; }
+  .key-group {
+    display: flex; gap: 5px; align-items: center; flex-wrap: wrap;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 7px; padding: 7px 11px; flex: 1; min-width: 110px;
+  }
+  .key-title { font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 700; letter-spacing:.1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .key-chip { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 600; padding: 3px 7px; border-radius: 4px; border: 1px solid; white-space: nowrap; }
+  .k-black { background: var(--black-drive); border-color: var(--black-border); color: var(--black-text); }
+  .k-blue  { background: var(--blue-drive);  border-color: var(--blue-border);  color: #fff; }
+  .k-red   { background: var(--red-drive);   border-color: var(--red-border);   color: #fff; }
+
+  /* LEGEND */
+  .legend {
+    display: flex; gap: 10px; margin-top: 14px; padding: 10px 13px;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 8px; flex-wrap: wrap; align-items: center;
+  }
+  .leg-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .leg-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  @media (max-width: 560px) {
+    .type-grid { grid-template-columns: 1fr; }
+    .type-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+    .socket { font-size: 10px; padding: 5px 6px; }
+    .profile-tab .tab-name { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="header-icon">
+      <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+    </div>
+    <div>
+      <h1>SOCKET INVENTORY</h1>
+      <div class="subtitle">TWO KITS · INDEPENDENT INVENTORIES</div>
+    </div>
+  </header>
+
+  <!-- PROFILE TABS -->
+  <div class="profile-bar">
+    <div class="profile-tab tab-justin active" id="tab-justin">
+      <div class="tab-dot"></div>
+      <span class="tab-name">JUSTIN</span>
+      <span class="tab-count" id="tab-justin-count">0</span>
+    </div>
+    <div class="profile-tab tab-greg" id="tab-greg">
+      <div class="tab-dot"></div>
+      <span class="tab-name">GREG</span>
+      <span class="tab-count" id="tab-greg-count">0</span>
+    </div>
+  </div>
+
+  <!-- ACTIVE BANNER -->
+  <div class="active-banner banner-justin" id="active-banner">
+    <div class="banner-dot"></div>
+    <span id="banner-text">Editing JUSTIN's inventory</span>
+    <button class="btn-clear" id="clearBtn">CLEAR KIT</button>
+    <span class="banner-hint">TAP = owned · TAP again = unmark</span>
+  </div>
+
+  <!-- COLOR KEY -->
+  <div class="color-key">
+    <div class="key-group">
+      <span class="key-title">Drive</span>
+      <span class="key-chip k-black">⬛ 1/4"</span>
+      <span class="key-chip k-blue">🔵 3/8"</span>
+      <span class="key-chip k-red">🔴 1/2"</span>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-bar">
+    <div class="sc sc-q">
+      <div class="sc-label">1/4" Drive</div>
+      <div class="sc-num" id="cnt-q">0</div>
+      <div class="sc-sub" id="sub-q">of 0</div>
+    </div>
+    <div class="sc sc-te">
+      <div class="sc-label">3/8" Drive</div>
+      <div class="sc-num" id="cnt-te">0</div>
+      <div class="sc-sub" id="sub-te">of 0</div>
+    </div>
+    <div class="sc sc-h">
+      <div class="sc-label">1/2" Drive</div>
+      <div class="sc-num" id="cnt-h">0</div>
+      <div class="sc-sub" id="sub-h">of 0</div>
+    </div>
+  </div>
+
+  <!-- 1/4" DRIVE -->
+  <div class="drive-section quarter" data-drive="q">
+    <div class="drive-header">
+      <span class="drive-badge">1/4"</span>
+      <span class="drive-meta">BLACK</span>
+      <span class="drive-owned" id="q-owned">0 owned</span>
+    </div>
+    <div class="type-grid">
+      <div class="type-col short-col">
+        <div class="type-label">Short / Standard</div>
+        <div class="sub-section">
+          <div class="sub-label">SAE (in)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="q-sh-sae-532">5/32</span><span class="socket" data-id="q-sh-sae-316">3/16</span><span class="socket" data-id="q-sh-sae-732">7/32</span><span class="socket" data-id="q-sh-sae-14">1/4</span><span class="socket" data-id="q-sh-sae-932">9/32</span><span class="socket" data-id="q-sh-sae-516">5/16</span><span class="socket" data-id="q-sh-sae-1132">11/32</span><span class="socket" data-id="q-sh-sae-38">3/8</span><span class="socket" data-id="q-sh-sae-716">7/16</span><span class="socket" data-id="q-sh-sae-12">1/2</span><span class="socket" data-id="q-sh-sae-916">9/16</span>
+          </div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">Metric (mm)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="q-sh-m-4">4</span><span class="socket" data-id="q-sh-m-5">5</span><span class="socket" data-id="q-sh-m-6">6</span><span class="socket" data-id="q-sh-m-7">7</span><span class="socket" data-id="q-sh-m-8">8</span><span class="socket" data-id="q-sh-m-9">9</span><span class="socket" data-id="q-sh-m-10">10</span><span class="socket" data-id="q-sh-m-11">11</span><span class="socket" data-id="q-sh-m-12">12</span><span class="socket" data-id="q-sh-m-13">13</span><span class="socket" data-id="q-sh-m-14">14</span>
+          </div>
+        </div>
+      </div>
+      <div class="type-col deep-col">
+        <div class="type-label">Deep Well</div>
+        <div class="sub-section">
+          <div class="sub-label">SAE (in)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="q-dw-sae-532">5/32</span><span class="socket" data-id="q-dw-sae-316">3/16</span><span class="socket" data-id="q-dw-sae-732">7/32</span><span class="socket" data-id="q-dw-sae-14">1/4</span><span class="socket" data-id="q-dw-sae-932">9/32</span><span class="socket" data-id="q-dw-sae-516">5/16</span><span class="socket" data-id="q-dw-sae-1132">11/32</span><span class="socket" data-id="q-dw-sae-38">3/8</span><span class="socket" data-id="q-dw-sae-716">7/16</span><span class="socket" data-id="q-dw-sae-12">1/2</span><span class="socket" data-id="q-dw-sae-916">9/16</span>
+          </div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">Metric (mm)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="q-dw-m-4">4</span><span class="socket" data-id="q-dw-m-5">5</span><span class="socket" data-id="q-dw-m-6">6</span><span class="socket" data-id="q-dw-m-7">7</span><span class="socket" data-id="q-dw-m-8">8</span><span class="socket" data-id="q-dw-m-9">9</span><span class="socket" data-id="q-dw-m-10">10</span><span class="socket" data-id="q-dw-m-11">11</span><span class="socket" data-id="q-dw-m-12">12</span><span class="socket" data-id="q-dw-m-13">13</span><span class="socket" data-id="q-dw-m-14">14</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3/8" DRIVE -->
+  <div class="drive-section three-eight" data-drive="te">
+    <div class="drive-header">
+      <span class="drive-badge">3/8"</span>
+      <span class="drive-meta">BLUE</span>
+      <span class="drive-owned" id="te-owned">0 owned</span>
+    </div>
+    <div class="type-grid">
+      <div class="type-col short-col">
+        <div class="type-label">Short / Standard</div>
+        <div class="sub-section">
+          <div class="sub-label">SAE (in)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="te-sh-sae-14">1/4</span><span class="socket" data-id="te-sh-sae-516">5/16</span><span class="socket" data-id="te-sh-sae-38">3/8</span><span class="socket" data-id="te-sh-sae-716">7/16</span><span class="socket" data-id="te-sh-sae-12">1/2</span><span class="socket" data-id="te-sh-sae-916">9/16</span><span class="socket" data-id="te-sh-sae-58">5/8</span><span class="socket" data-id="te-sh-sae-1116">11/16</span><span class="socket" data-id="te-sh-sae-34">3/4</span><span class="socket" data-id="te-sh-sae-1316">13/16</span><span class="socket" data-id="te-sh-sae-78">7/8</span><span class="socket" data-id="te-sh-sae-1516">15/16</span><span class="socket" data-id="te-sh-sae-1">1"</span>
+          </div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">Metric (mm)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="te-sh-m-8">8</span><span class="socket" data-id="te-sh-m-9">9</span><span class="socket" data-id="te-sh-m-10">10</span><span class="socket" data-id="te-sh-m-11">11</span><span class="socket" data-id="te-sh-m-12">12</span><span class="socket" data-id="te-sh-m-13">13</span><span class="socket" data-id="te-sh-m-14">14</span><span class="socket" data-id="te-sh-m-15">15</span><span class="socket" data-id="te-sh-m-16">16</span><span class="socket" data-id="te-sh-m-17">17</span><span class="socket" data-id="te-sh-m-18">18</span><span class="socket" data-id="te-sh-m-19">19</span><span class="socket" data-id="te-sh-m-20">20</span><span class="socket" data-id="te-sh-m-21">21</span><span class="socket" data-id="te-sh-m-22">22</span>
+          </div>
+        </div>
+      </div>
+      <div class="type-col deep-col">
+        <div class="type-label">Deep Well</div>
+        <div class="sub-section">
+          <div class="sub-label">SAE (in)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="te-dw-sae-14">1/4</span><span class="socket" data-id="te-dw-sae-516">5/16</span><span class="socket" data-id="te-dw-sae-38">3/8</span><span class="socket" data-id="te-dw-sae-716">7/16</span><span class="socket" data-id="te-dw-sae-12">1/2</span><span class="socket" data-id="te-dw-sae-916">9/16</span><span class="socket" data-id="te-dw-sae-58">5/8</span><span class="socket" data-id="te-dw-sae-1116">11/16</span><span class="socket" data-id="te-dw-sae-34">3/4</span><span class="socket" data-id="te-dw-sae-1316">13/16</span><span class="socket" data-id="te-dw-sae-78">7/8</span><span class="socket" data-id="te-dw-sae-1516">15/16</span><span class="socket" data-id="te-dw-sae-1">1"</span>
+          </div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">Metric (mm)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="te-dw-m-8">8</span><span class="socket" data-id="te-dw-m-9">9</span><span class="socket" data-id="te-dw-m-10">10</span><span class="socket" data-id="te-dw-m-11">11</span><span class="socket" data-id="te-dw-m-12">12</span><span class="socket" data-id="te-dw-m-13">13</span><span class="socket" data-id="te-dw-m-14">14</span><span class="socket" data-id="te-dw-m-15">15</span><span class="socket" data-id="te-dw-m-16">16</span><span class="socket" data-id="te-dw-m-17">17</span><span class="socket" data-id="te-dw-m-18">18</span><span class="socket" data-id="te-dw-m-19">19</span><span class="socket" data-id="te-dw-m-20">20</span><span class="socket" data-id="te-dw-m-21">21</span><span class="socket" data-id="te-dw-m-22">22</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1/2" DRIVE -->
+  <div class="drive-section half" data-drive="h">
+    <div class="drive-header">
+      <span class="drive-badge">1/2"</span>
+      <span class="drive-meta">RED</span>
+      <span class="drive-owned" id="h-owned">0 owned</span>
+    </div>
+    <div class="type-grid">
+      <div class="type-col short-col">
+        <div class="type-label">Short / Standard</div>
+        <div class="sub-section">
+          <div class="sub-label">SAE (in)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="h-sh-sae-38">3/8</span><span class="socket" data-id="h-sh-sae-716">7/16</span><span class="socket" data-id="h-sh-sae-12">1/2</span><span class="socket" data-id="h-sh-sae-916">9/16</span><span class="socket" data-id="h-sh-sae-58">5/8</span><span class="socket" data-id="h-sh-sae-1116">11/16</span><span class="socket" data-id="h-sh-sae-34">3/4</span><span class="socket" data-id="h-sh-sae-1316">13/16</span><span class="socket" data-id="h-sh-sae-78">7/8</span><span class="socket" data-id="h-sh-sae-1516">15/16</span><span class="socket" data-id="h-sh-sae-1">1"</span><span class="socket" data-id="h-sh-sae-1116i">1-1/16</span><span class="socket" data-id="h-sh-sae-118">1-1/8</span><span class="socket" data-id="h-sh-sae-1316i">1-3/16</span><span class="socket" data-id="h-sh-sae-114">1-1/4</span><span class="socket" data-id="h-sh-sae-1516i">1-5/16</span><span class="socket" data-id="h-sh-sae-138">1-3/8</span><span class="socket" data-id="h-sh-sae-1716">1-7/16</span><span class="socket" data-id="h-sh-sae-112">1-1/2</span>
+          </div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">Metric (mm)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="h-sh-m-10">10</span><span class="socket" data-id="h-sh-m-11">11</span><span class="socket" data-id="h-sh-m-12">12</span><span class="socket" data-id="h-sh-m-13">13</span><span class="socket" data-id="h-sh-m-14">14</span><span class="socket" data-id="h-sh-m-15">15</span><span class="socket" data-id="h-sh-m-16">16</span><span class="socket" data-id="h-sh-m-17">17</span><span class="socket" data-id="h-sh-m-18">18</span><span class="socket" data-id="h-sh-m-19">19</span><span class="socket" data-id="h-sh-m-20">20</span><span class="socket" data-id="h-sh-m-21">21</span><span class="socket" data-id="h-sh-m-22">22</span><span class="socket" data-id="h-sh-m-24">24</span><span class="socket" data-id="h-sh-m-27">27</span><span class="socket" data-id="h-sh-m-29">29</span><span class="socket" data-id="h-sh-m-30">30</span><span class="socket" data-id="h-sh-m-32">32</span><span class="socket" data-id="h-sh-m-34">34</span><span class="socket" data-id="h-sh-m-36">36</span>
+          </div>
+        </div>
+      </div>
+      <div class="type-col deep-col">
+        <div class="type-label">Deep Well</div>
+        <div class="sub-section">
+          <div class="sub-label">SAE (in)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="h-dw-sae-38">3/8</span><span class="socket" data-id="h-dw-sae-716">7/16</span><span class="socket" data-id="h-dw-sae-12">1/2</span><span class="socket" data-id="h-dw-sae-916">9/16</span><span class="socket" data-id="h-dw-sae-58">5/8</span><span class="socket" data-id="h-dw-sae-1116">11/16</span><span class="socket" data-id="h-dw-sae-34">3/4</span><span class="socket" data-id="h-dw-sae-1316">13/16</span><span class="socket" data-id="h-dw-sae-78">7/8</span><span class="socket" data-id="h-dw-sae-1516">15/16</span><span class="socket" data-id="h-dw-sae-1">1"</span><span class="socket" data-id="h-dw-sae-1116i">1-1/16</span><span class="socket" data-id="h-dw-sae-118">1-1/8</span><span class="socket" data-id="h-dw-sae-1316i">1-3/16</span><span class="socket" data-id="h-dw-sae-114">1-1/4</span><span class="socket" data-id="h-dw-sae-1516i">1-5/16</span><span class="socket" data-id="h-dw-sae-138">1-3/8</span><span class="socket" data-id="h-dw-sae-1716">1-7/16</span><span class="socket" data-id="h-dw-sae-112">1-1/2</span>
+          </div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">Metric (mm)</div>
+          <div class="socket-grid">
+            <span class="socket" data-id="h-dw-m-10">10</span><span class="socket" data-id="h-dw-m-11">11</span><span class="socket" data-id="h-dw-m-12">12</span><span class="socket" data-id="h-dw-m-13">13</span><span class="socket" data-id="h-dw-m-14">14</span><span class="socket" data-id="h-dw-m-15">15</span><span class="socket" data-id="h-dw-m-16">16</span><span class="socket" data-id="h-dw-m-17">17</span><span class="socket" data-id="h-dw-m-18">18</span><span class="socket" data-id="h-dw-m-19">19</span><span class="socket" data-id="h-dw-m-20">20</span><span class="socket" data-id="h-dw-m-21">21</span><span class="socket" data-id="h-dw-m-22">22</span><span class="socket" data-id="h-dw-m-24">24</span><span class="socket" data-id="h-dw-m-27">27</span><span class="socket" data-id="h-dw-m-29">29</span><span class="socket" data-id="h-dw-m-30">30</span><span class="socket" data-id="h-dw-m-32">32</span><span class="socket" data-id="h-dw-m-34">34</span><span class="socket" data-id="h-dw-m-36">36</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--black-drive);border:1px solid var(--black-border)"></div>1/4" Black</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--blue-drive)"></div>3/8" Blue</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--red-drive)"></div>1/2" Red</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--justin)"></div>Yellow = Justin</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--greg)"></div>Orange = Greg</div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  // Two separate state objects, one per profile
+  var profiles = { justin: {}, greg: {} };
+  var activeProfile = 'justin';
+
+  // Load from localStorage
+  function loadState() {
+    try {
+      var s = localStorage.getItem('socket-inv-dual-v1');
+      if (s) profiles = JSON.parse(s);
+      if (!profiles.justin) profiles.justin = {};
+      if (!profiles.greg)   profiles.greg   = {};
+    } catch (e) {}
+  }
+
+  function saveState() {
+    try { localStorage.setItem('socket-inv-dual-v1', JSON.stringify(profiles)); } catch (e) {}
+  }
+
+  function getState() { return profiles[activeProfile]; }
+
+  // Render all chips for current profile
+  function renderAll() {
+    var state = getState();
+    var colorClass = 'c-' + activeProfile;
+    document.querySelectorAll('.socket').forEach(function (el) {
+      var owned = !!state[el.getAttribute('data-id')];
+      el.classList.remove('s-owned', 'c-justin', 'c-greg');
+      if (owned) { el.classList.add('s-owned', colorClass); }
+    });
+  }
+
+  // Update summary counts
+  function updateCounts() {
+    var state = getState();
+    var drives = {
+      q:  { owned: 0, total: 0 },
+      te: { owned: 0, total: 0 },
+      h:  { owned: 0, total: 0 }
+    };
+    document.querySelectorAll('.socket').forEach(function (el) {
+      var drive = el.getAttribute('data-id').split('-')[0];
+      drives[drive].total++;
+      if (state[el.getAttribute('data-id')]) drives[drive].owned++;
+    });
+
+    ['q','te','h'].forEach(function (k) {
+      document.getElementById('cnt-' + k).textContent   = drives[k].owned;
+      document.getElementById('sub-' + k).textContent   = 'of ' + drives[k].total;
+      document.getElementById(k + '-owned').textContent = drives[k].owned + ' owned';
+    });
+
+    // Tab counts
+    ['justin','greg'].forEach(function (p) {
+      var total = 0;
+      var pState = profiles[p];
+      Object.keys(pState).forEach(function (k) { if (pState[k]) total++; });
+      document.getElementById('tab-' + p + '-count').textContent = total;
+    });
+
+    // Drive owned badge color
+    var color = activeProfile === 'justin' ? 'rgba(255,215,0,0.3)' : 'rgba(255,122,0,0.3)';
+    var bg    = activeProfile === 'justin' ? 'rgba(255,215,0,0.08)' : 'rgba(255,122,0,0.08)';
+    var txt   = activeProfile === 'justin' ? '#FFD700' : '#FF7A00';
+    document.querySelectorAll('.drive-owned').forEach(function (el) {
+      el.style.borderColor = color;
+      el.style.background  = bg;
+      el.style.color       = txt;
+    });
+  }
+
+  // Switch profile
+  function switchProfile(p) {
+    activeProfile = p;
+
+    // Tabs
+    document.getElementById('tab-justin').classList.toggle('active', p === 'justin');
+    document.getElementById('tab-greg').classList.toggle('active',   p === 'greg');
+
+    // Banner
+    var banner = document.getElementById('active-banner');
+    banner.className = 'active-banner banner-' + p;
+    document.getElementById('banner-text').textContent = 'Editing ' + p.toUpperCase() + "'s inventory";
+
+    renderAll();
+    updateCounts();
+  }
+
+  // Socket toggle
+  function handleSocket(el) {
+    var id = el.getAttribute('data-id');
+    var state = getState();
+    if (state[id]) { delete state[id]; } else { state[id] = true; }
+    var colorClass = 'c-' + activeProfile;
+    el.classList.remove('s-owned', 'c-justin', 'c-greg');
+    if (state[id]) { el.classList.add('s-owned', colorClass); }
+    saveState();
+    updateCounts();
+  }
+
+  // Wire sockets
+  document.querySelectorAll('.socket').forEach(function (el) {
+    var touched = false;
+    el.addEventListener('touchend', function (e) {
+      e.preventDefault();
+      touched = true;
+      handleSocket(el);
+      setTimeout(function () { touched = false; }, 500);
+    }, { passive: false });
+    el.addEventListener('click', function () {
+      if (touched) return;
+      handleSocket(el);
+    });
+  });
+
+  // Wire tabs
+  ['justin','greg'].forEach(function (p) {
+    var tab = document.getElementById('tab-' + p);
+    var touched = false;
+    tab.addEventListener('touchend', function (e) {
+      e.preventDefault(); touched = true;
+      switchProfile(p);
+      setTimeout(function () { touched = false; }, 500);
+    }, { passive: false });
+    tab.addEventListener('click', function () {
+      if (touched) return;
+      switchProfile(p);
+    });
+  });
+
+  // Clear current kit — two-tap, no confirm()
+  var clearArmed = false;
+  var clearTimer = null;
+  var clearBtn = document.getElementById('clearBtn');
+  clearBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (!clearArmed) {
+      clearArmed = true;
+      clearBtn.textContent = 'CONFIRM?';
+      clearBtn.classList.add('armed');
+      clearTimer = setTimeout(function () {
+        clearArmed = false;
+        clearBtn.textContent = 'CLEAR KIT';
+        clearBtn.classList.remove('armed');
+      }, 2500);
+    } else {
+      clearTimeout(clearTimer);
+      clearArmed = false;
+      clearBtn.textContent = 'CLEAR KIT';
+      clearBtn.classList.remove('armed');
+      profiles[activeProfile] = {};
+      saveState();
+      renderAll();
+      updateCounts();
+    }
+  });
+
+  // Init
+  loadState();
+  renderAll();
+  updateCounts();
+})();
+</script>
+</body>
+</html>
