@@ -1,6 +1,6 @@
 # CLAUDE.md — TechFusion Report Website
 
-This file provides persistent context for Claude Code sessions in this repository.
+This file provides persistent context for Claude Code and Codex sessions in this repository.
 Read this before taking any action in the codebase.
 
 ---
@@ -9,46 +9,32 @@ Read this before taking any action in the codebase.
 
 | What Justin Says | What It Means |
 |---|---|
-| **the site** / **the website** | techfusionreport.com — GitHub Pages static site (this repo) |
-| **the blog** | The blog listing page (`blog.html`) and individual post pages |
+| **the site / the website** | techfusionreport.com — GitHub Pages static site (this repo) |
+| **the blog** | `blog.html` and individual post pages |
 | **posts** | HTML files in `_posts/YYYY-MM-DD-slug.html` |
-| **posts.json** | The JSON index file the homepage reads to auto-populate blog previews |
-| **the homepage** | `index.html` — the main landing page |
+| **posts.json** | JSON index the homepage reads to auto-populate blog previews |
+| **the homepage** | `index.html` |
 | **category pages** | `/technology/`, `/entertainment/`, `/productivity/` — Phase 2 |
-| **the pipeline** | The Cloudflare Workers automation backend in the Automations repo — NOT this repo |
-| **deploy it** | Commit to main → GitHub Pages auto-deploys. No build step needed. |
-| **brand assets** | Images hosted at `https://techfusionreport.github.io/graphics/` |
-| **task tracker** | 📋 Master Task Tracker database in TechFusion OS — https://www.notion.so/techfusionreport/9a75e952ff6140c786a1e364ce60eea6?v=31cbd080de9280cba772000c3ac26b91 |
-| **dev log** | 🛠️ Blog Automation Dev Log in Notion (`313bd080-de92-8159-bcee-c3fc4ed83462`) |
+| **the pipeline** | Cloudflare Workers backend in the Automations repo — NOT this repo |
+| **deploy it** | Commit to main → GitHub Pages auto-deploys. No build step. |
+| **brand assets** | Images at `https://techfusionreport.github.io/graphics/` |
+| **task tracker** | ⚡ TFR Task Tracker (`30e1920a-4e2e-4dfc-8715-77aedd2115f8`) |
+| **dev log** | 🛠️ Blog Automation Dev Log (`313bd080-de92-8159-bcee-c3fc4ed83462`) |
 
 ---
 
 ## 🏢 Project Identity
 
-**TechFusion Report (TFR)** is a professional tech-focused publication at `techfusionreport.com`.
-It covers three content verticals: **Technology**, **Entertainment**, and **Productivity**.
-
-This is a **business project** — not a personal or homelab experiment. All decisions here
-should reflect production stability, design quality, and publication professionalism.
+TechFusion Report is a professional tech publication at `techfusionreport.com` covering **Technology**, **Entertainment**, and **Productivity**. This is a business project — all decisions should reflect production stability, design quality, and publication professionalism.
 
 ---
 
 ## 🏗️ Stack Overview
 
-- **Command center:** ⚡ TechFusion OS in Notion (`31cbd080-de92-81e3-aa4c-d1aed5a4c05a`)
-- **Hosting:** GitHub Pages (static, no server-side rendering)
+- **Hosting:** GitHub Pages (static, no SSR)
 - **Domain:** techfusionreport.com (Cloudflare DNS → GitHub Pages)
-- **Deployment:** Push to `main` branch → auto-deploys within ~1 minute
+- **Deployment:** Push to `main` → auto-deploys in ~1 min
 - **No build step** — pure HTML/CSS/JS, no Node.js, no bundler
-
-### GitHub Structure
-**TechFusionReport org** = TFR business only. All repos are peers — no hierarchy:
-- `Website` — GitHub Pages frontend (this repo)
-- `Automations` — Cloudflare Workers backend, agents, pipeline logic
-- `Master` — reference/docs
-- `DiscordBot` — Discord integration
-
-**Personal account (`jmsmith1003`)** = homelab scripts, personal projects, experiments. Nothing personal belongs in the TechFusionReport org.
 
 ### Key Files
 ```
@@ -57,57 +43,48 @@ blog.html                   — Blog listing page with category filters
 blog-post-template.html     — Individual post template
 style.css                   — Global stylesheet
 blog-post.css               — Post-specific styles
-posts.json                  — Blog post index (homepage reads this)
-_posts/                     — Individual blog post HTML files (YYYY-MM-DD-slug.html)
-graphics/                   — Brand assets (logo, category images)
+posts.json                  — Blog post index
+_posts/                     — Individual post HTML files (YYYY-MM-DD-slug.html)
+graphics/                   — Brand assets
 ```
 
 ### Brand & Design System
-- **Primary color:** Cyan `#00D4FF`
-- **Accent color:** Lime `#A4FF00`
-- **Background:** Dark theme
-- **Fonts:** Rajdhani (headlines) + DM Sans (body)
-- **Logo:** `https://techfusionreport.github.io/graphics/tfr_header_logo_nb.png`
-- **Category graphics:**
-  - Tech: `tech_nb.png`
-  - Entertainment: `ent_nb.png`
-  - Productivity: `prod_nb.png`
+
+| Property | Value |
+|---|---|
+| Primary | Cyan `#00D4FF` |
+| Accent | Lime `#A4FF00` |
+| Background | Dark `#0A0C10` |
+| Display font | Rajdhani |
+| Body font | DM Sans |
+| Logo | `https://techfusionreport.github.io/graphics/tfr_header_logo_nb.png` |
+| Category images | `tech_nb.png`, `ent_nb.png`, `prod_nb.png` |
 
 ### Homepage Features (live)
-- Editorial hero with `TFR-Hero-Background.png` at 25% opacity + scanline overlay
-- News ticker
-- Stats strip
-- Magazine-style category cards with accent bars
-- Featured/sidebar blog post layout (auto-populates from `posts.json`)
-- Two-column newsletter section
-- Publication footer
+- Editorial hero — `TFR-Hero-Background.png` at 25% opacity + scanline overlay
+- News ticker, stats strip, magazine-style category cards
+- Featured/sidebar blog layout (auto-populates from `posts.json`)
+- Two-column newsletter section, publication footer
 
 ---
 
 ## 🚀 Deployment Rules
 
-- **Always commit to `main`** — GitHub Pages serves from main branch
-- **No wrangler, no npm, no build commands** — this is a static site
-- **Test HTML/CSS changes** by previewing locally before committing if possible
-- **Update `posts.json`** whenever a new post is added to `_posts/` — the homepage
-  will not show the new post otherwise
-- **Never hardcode API keys or secrets** — this repo is public
-- ### Branch Strategy
-- `main` — production. Every push auto-deploys to techfusionreport.com. Never push untested design changes here.
-- `preview` — staging branch for design work. Push here to preview via Cloudflare Pages before merging to main.
+- Always commit to `main` — GitHub Pages serves from main
+- No wrangler, no npm, no build commands
+- Update `posts.json` whenever a new post is added to `_posts/`
+- Never hardcode API keys — this repo is public
 
-**Workflow for design changes:**
-1. Make changes on `preview` branch
-2. Preview on Cloudflare Pages preview URL
-3. Merge to `main` only when approved
-4. Never commit directly to `main` for design work
+### Branch Strategy
+- `main` — production. Every push auto-deploys to techfusionreport.com.
+- `preview` — staging branch. All Codex and design changes go here first.
 
 ### Post File Format
-New posts go in `_posts/` as:
 ```
-YYYY-MM-DD-slug.html
+_posts/YYYY-MM-DD-slug.html
 ```
-And a corresponding entry must be added to `posts.json`:
+
+Corresponding `posts.json` entry:
 ```json
 {
   "title": "Post Title",
@@ -121,23 +98,50 @@ And a corresponding entry must be added to `posts.json`:
 
 ---
 
-## 📓 Notion Logging — MANDATORY (no prompting needed)
+## 🤖 Codex Agent — Rules & Known Walls
 
-**TFR Task Tracker** — update TFR task status whenever something starts, completes, blocks, or is discovered.
-URL: https://www.notion.so/techfusionreport/9a75e952ff6140c786a1e364ce60eea6?v=31cbd080de9280cba772000c3ac26b91
+Codex operates in a sandboxed cloud environment. These rules are non-negotiable.
 
-**Dev Log** — add a dated session entry after every session. What was done, what failed, how it was fixed, what's next. Update the Known Issues table (`## 🐛 Known Issues`) in the same pass.
-Page ID: `313bd080-de92-8159-bcee-c3fc4ed83462`
+**What Codex CAN do in this repo:**
+- Read and edit all HTML, CSS, and JS files
+- Build new category pages and subcategory pages
+- Create GitHub Actions workflows (e.g. SVG → PNG conversion)
+- Fix layout bugs, update brand colors, add analytics tags
+- Add new posts to `_posts/` and update `posts.json`
+- Update `blog-post-template.html` and `style.css`
 
-**CLAUDE.md** — update in the same commit as any site change. Never let it go stale.
+**What Codex CANNOT do — hard walls:**
+- Push directly to `main` — all changes must go to `preview` branch
+- Deploy or trigger GitHub Pages — human merges preview → main
+- Access any live service, API, or external URL during build
+- Use Node.js, npm, or any build tooling — pure HTML/CSS/JS only, no bundler
+- Hardcode API keys — this repo is public
+
+**Branch rules for Codex — MANDATORY:**
+- ALL changes go to `preview` branch — one branch, all tasks
+- Never push to `main` under any circumstances
+- Never create additional branches
+- Human reviews preview and decides when to push to main
+- Main auto-deploys to techfusionreport.com within ~1 min of merge
+
+**Design system — never deviate:**
+- Cyan `#00D4FF`, Lime `#A4FF00`, Dark `#0A0C10`
+- Fonts: Rajdhani (headlines), DM Sans (body)
+- Match existing page structure exactly before adding new elements
+- Check `style.css` for existing classes before writing any new CSS
 
 ---
 
-## 🏠 Scope Boundaries — Website vs. Homelab
+## ⚠️ Known Open Issues (as of 2026-05-14)
 
-### Server User Structure
-This repo is worked on as the `tfr` user on TFR-Prod. Personal homelab work
-(Docker, n8n, Vaultwarden) belongs to the `justin` user and a separate directory.
+- Category pages not yet built (Phase 2)
+- Keep `posts.json` updated as new posts publish — homepage depends on it
+- GA4 analytics tag not yet added to templates
+- SVG → PNG GitHub Actions workflow not yet built
+
+---
+
+## 🏠 Scope Boundaries
 
 | ❌ Not This Repo | ✅ This Repo |
 |---|---|
@@ -146,20 +150,22 @@ This repo is worked on as the `tfr` user on TFR-Prod. Personal homelab work
 | Docker / homelab services | Brand assets and design system |
 | Personal n8n experiments | Category pages (Phase 2) |
 
-The homelab has its own CLAUDE.md. If Justin switches to homelab work,
-he will launch Claude Code from `~/homelab/` instead.
+---
+
+## 📓 Notion Logging — MANDATORY
+
+**TFR Task Tracker** — update status when tasks start, complete, or block.
+**Dev Log** — dated entry after every session. What was done, what failed, how fixed, what's next.
+**CLAUDE.md** — update in the same commit as any site change. Never let it go stale.
 
 ---
 
-## ⚠️ Known Open Issues (as of 2026-03-28)
-- `blog.html` index auto-population~~ ✅ Fixed 2026-03-29
-- Category pages (`/technology/`, `/entertainment/`, `/productivity/`) not yet built (Phase 2)
-- `posts.json` may not reflect all published posts — verify before adding new entries
+## 🎯 Current Priority Order (as of 2026-05-14)
 
----
-
-## 🎯 Current Priority Order
 1. ~~Fix `blog.html` index auto-population~~ ✅ Done
-2. Keep `posts.json` updated as new posts publish — homepage depends on it
-3. Phase 2: Build category pages for Technology, Entertainment, Productivity
-4. Phase 3: Google Analytics, affiliate links, AdSense groundwork
+2. Keep `posts.json` updated as new posts publish
+3. Build SVG → PNG GitHub Actions workflow
+4. Wire GA4 tag into `index.html` and `blog-post-template.html`
+5. Phase 2: Build category pages (Technology, Entertainment, Productivity)
+6. Phase 3: Affiliate links, AdSense groundwork
+7. Phase 3: Add media kit page
