@@ -1,0 +1,12 @@
+.git
+Archived
+graphics/Archived
+graphics/svg
+graphics/png-final
+*.old
+*.py
+CLAUDE.md
+nojekyll-file.md
+category-template-guide,md
+.DS_Store
+.github
