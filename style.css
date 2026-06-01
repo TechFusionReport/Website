@@ -172,7 +172,7 @@ nav::after {
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background-image: url('graphics/TFR-Hero-Background.png');
+  background-image: url('graphics/tfr-logo-full_1500x600.png');
   background-size: cover; background-position: center; opacity: 0.22;
 }
 /* CRT scanlines */
