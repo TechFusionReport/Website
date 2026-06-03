@@ -1,8 +1,9 @@
-# CLAUDE.md — TechFusion Report Website
+# Agents.md — TechFusion Report Website
 
-This file provides persistent context for Claude Code and Codex sessions in this repository.
+This file provides persistent context for Codex sessions in this repository.
 Read this before taking any action in the codebase.
 
+Always commit and push changes to the `preview` branch only. Never push directly to `main`.
 ---
 
 ## 🗣️ Terminology & Shorthand
