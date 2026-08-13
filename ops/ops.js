@@ -43,9 +43,12 @@ const COLOR_BY_STATUS = {
 };
 
 // ── pure helpers (exported for tests) ────────────────────────────────────────
+/** Returns the visual color token associated with a workflow status. */
 export function statusColor(statusName) {
   return COLOR_BY_STATUS[statusName] || 'gray';
 }
+
+/** Finds the active pipeline stage with the largest record count. */
 
 export function bottleneckStage(counts = {}) {
   let best = null;
@@ -55,6 +58,8 @@ export function bottleneckStage(counts = {}) {
   }
   return best;
 }
+
+/** Formats an ISO timestamp as a compact relative age. */
 
 export function timeAgo(iso, now = Date.now) {
   if (!iso) return '—';
@@ -69,6 +74,8 @@ export function timeAgo(iso, now = Date.now) {
   return `${Math.floor(h / 24)}d`;
 }
 
+/** Formats a millisecond duration for dashboard display. */
+
 export function fmtDuration(ms) {
   if (ms == null || Number.isNaN(ms)) return '—';
   const totalMin = Math.floor(ms / 60000);
@@ -78,6 +85,8 @@ export function fmtDuration(ms) {
   return m ? `${h}h ${m}m` : `${h}h`;
 }
 
+/** Escapes untrusted text before interpolation into dashboard markup. */
+
 export function escapeHtml(s) {
   return String(s ?? '')
     .replace(/&/g, '&amp;')
@@ -86,6 +95,8 @@ export function escapeHtml(s) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 }
+
+/** Converts a supported YouTube URL into a privacy-enhanced embed URL. */
 
 export function youtubeEmbedUrl(rawUrl) {
   try {
@@ -105,6 +116,8 @@ export function youtubeEmbedUrl(rawUrl) {
     return null;
   }
 }
+
+/** Builds safe media markup for YouTube, Vimeo, direct video, or link fallback. */
 
 function videoEmbed(url) {
   let embed = youtubeEmbedUrl(url);
@@ -148,8 +161,12 @@ if (typeof document !== 'undefined') {
     draftQuery: { q: '', sort: 'oldest', featured: '' },
     dirtyDraft: false,
   };
+  /** Returns the first matching element within an optional root. */
   const $ = (sel, root = document) => root.querySelector(sel);
+  /** Returns the root element for a named dashboard view. */
   const view = (name) => $(`#view-${name}`);
+
+  /** Sends an authenticated same-origin request to the Ops Worker API. */
 
   async function api(path, opts = {}) {
     const res = await fetch(`${API}${path}`, {
@@ -163,12 +180,18 @@ if (typeof document !== 'undefined') {
     return body;
   }
 
+  /** Builds a loading-state fragment. */
+
   const loading = (msg = 'Loading…') => `<div class="state loading"><span class="spinner"></span>${escapeHtml(msg)}</div>`;
+  /** Builds an empty-state fragment. */
   const empty = (msg) => `<div class="state empty">${escapeHtml(msg)}</div>`;
+  /** Builds an escaped error-state fragment. */
   const errorState = (msg) => `<div class="state error">⚠ ${escapeHtml(msg)}</div>`;
+  /** Builds monospace markup for a nullable numeric value. */
   const num = (n) => `<span class="mono">${n == null ? '—' : n}</span>`;
 
   // ── navigation ─────────────────────────────────────────────────────────────
+  /** Activates a dashboard view and loads its current data. */
   function switchView(name) {
     document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach((n) => n.classList.toggle('current', n.dataset.view === name));
@@ -180,6 +203,8 @@ if (typeof document !== 'undefined') {
     if (name === 'errors') loadErrors();
   }
 
+  /** Refreshes navigation badges from the cached overview response. */
+
   function setBadges() {
     const k = state.overview?.kpis;
     if (!k) return;
@@ -189,6 +214,7 @@ if (typeof document !== 'undefined') {
   }
 
   // ── dashboard ──────────────────────────────────────────────────────────────
+  /** Loads and renders the operations overview. */
   async function loadDashboard() {
     const root = view('dashboard');
     root.innerHTML = loading('Loading operations…');
@@ -202,10 +228,14 @@ if (typeof document !== 'undefined') {
     }
   }
 
+  /** Builds the markup for one key-performance indicator card. */
+
   function kpiCard(label, value, sub) {
     return `<div class="kpi"><div class="kpi-label">${escapeHtml(label)}</div>
       <div class="kpi-value mono">${value}</div>${sub ? `<div class="kpi-sub">${sub}</div>` : ''}</div>`;
   }
+
+  /** Builds the operations-overview markup from API data. */
 
   function renderDashboard(o) {
     const k = o.kpis;
@@ -281,6 +311,7 @@ if (typeof document !== 'undefined') {
   }
 
   // ── review queue (Gate 1) ───────────────────────────────────────────────────
+  /** Loads the transcription approval queue from Notion through the Worker. */
   async function loadQueue() {
     const root = view('queue');
     root.innerHTML = `<div class="split"><div class="list-pane">${loading('Loading queue…')}</div><div class="detail-pane"></div></div>`;
@@ -292,6 +323,8 @@ if (typeof document !== 'undefined') {
       $('.list-pane', root).innerHTML = errorState(e.message);
     }
   }
+
+  /** Renders the Gate 1 review list and selects a default record. */
 
   function renderQueue() {
     const root = view('queue');
@@ -305,6 +338,8 @@ if (typeof document !== 'undefined') {
     if (state.selectedQueue == null) state.selectedQueue = 0;
     renderQueueDetail();
   }
+
+  /** Renders the selected Gate 1 record and its source video. */
 
   function renderQueueDetail() {
     const root = view('queue');
@@ -329,12 +364,15 @@ if (typeof document !== 'undefined') {
   }
 
   // ── draft review (Gate 2) ──────────────────────────────────────────────────
+  /** Builds the encoded query string for draft filters and pagination. */
   function draftParams(cursor = '') {
     const p = new URLSearchParams();
     Object.entries(state.draftQuery).forEach(([k, v]) => { if (v !== '') p.set(k, v); });
     if (cursor) p.set('cursor', cursor);
     return p.toString() ? `?${p}` : '';
   }
+
+  /** Loads the first filtered page of records awaiting draft review. */
 
   async function loadDrafts() {
     const root = view('drafts');
@@ -353,6 +391,8 @@ if (typeof document !== 'undefined') {
     } catch (e) { $('.list-pane', root).innerHTML = errorState(e.message); }
   }
 
+  /** Derives a compact editorial risk indicator from a comparison report. */
+
   function riskSummary(text = '') {
     const estimate = text.match(/(\d{1,3})\s*%/)?.[1];
     const unsupported = (text.match(/POSSIBLY UNSUPPORTED[\s\S]*?(?=CHANGED DETAILS|COVERAGE ESTIMATE|$)/i)?.[0].match(/^-/gm) || []).length;
@@ -360,6 +400,8 @@ if (typeof document !== 'undefined') {
     const level = unsupported + changed > 4 ? 'high' : unsupported + changed ? 'medium' : 'low';
     return `<div class="risk ${level}"><strong>${level.toUpperCase()} RISK</strong> · Coverage ${estimate ? estimate + '%' : 'not scored'} · ${unsupported} unsupported · ${changed} changed</div>`;
   }
+
+  /** Renders draft filters, selectable records, pagination, and bulk controls. */
 
   function renderDrafts() {
     const root = view('drafts'), listPane = $('.list-pane', root);
@@ -385,6 +427,8 @@ if (typeof document !== 'undefined') {
     renderDraftDetail();
   }
 
+  /** Appends the next cursor page of draft-review records. */
+
   async function loadMoreDrafts() {
     if (state.draftsLoading || !state.draftsHasMore || !state.draftsCursor) return;
     state.draftsLoading = true;
@@ -396,6 +440,8 @@ if (typeof document !== 'undefined') {
     } catch (e) { alert(e.message); } finally { state.draftsLoading = false; renderDrafts(); }
   }
 
+  /** Loads the transcript, draft, comparison, notes, and audit data for one record. */
+
   async function loadDraftDetail(pageId) {
     if (!pageId || state.draftDetails[pageId] || state.draftDetailLoading === pageId) return;
     state.draftDetailLoading = pageId; renderDraftDetail();
@@ -403,6 +449,8 @@ if (typeof document !== 'undefined') {
     catch (e) { state.draftDetails[pageId] = { error: e.message }; }
     finally { state.draftDetailLoading = null; renderDraftDetail(); }
   }
+
+  /** Renders the complete Gate 2 comparison and editing workspace. */
 
   function renderDraftDetail() {
     const root = view('drafts'), summary = state.drafts[state.selectedDraft], pane = $('.detail-pane', root);
@@ -429,6 +477,7 @@ if (typeof document !== 'undefined') {
   }
 
   // ── board ──────────────────────────────────────────────────────────────────
+  /** Loads and renders the Content Catalog pipeline board. */
   async function loadBoard() {
     const root = view('board');
     root.innerHTML = loading('Loading catalog…');
@@ -446,6 +495,7 @@ if (typeof document !== 'undefined') {
   }
 
   // ── errors ─────────────────────────────────────────────────────────────────
+  /** Loads and renders rejected records and automation errors. */
   async function loadErrors() {
     const root = view('errors');
     root.innerHTML = loading('Loading errors…');
@@ -465,12 +515,15 @@ if (typeof document !== 'undefined') {
   }
 
   // ── action handling (event delegation) ─────────────────────────────────────
+  /** Shows persistent success or error feedback after a dashboard action. */
   function toast(message, bad = false) {
     let el = $('#ops-toast');
     if (!el) { el = document.createElement('div'); el.id = 'ops-toast'; document.body.appendChild(el); }
     el.className = `toast ${bad ? 'bad' : 'ok'}`; el.textContent = message; el.hidden = false;
     clearTimeout(el._timer); el._timer = setTimeout(() => { el.hidden = true; }, 5000);
   }
+
+  /** Validates and submits a single governed review action. */
 
   async function runAction(btn) {
     const act = btn.dataset.act, pageId = btn.dataset.id;
@@ -500,6 +553,8 @@ if (typeof document !== 'undefined') {
     } catch (e) { btn.disabled = false; toast(e.message, true); }
   }
 
+  /** Validates and submits a guarded non-publishing bulk action. */
+
   async function runBulk() {
     const ids = [...state.selectedDraftIds], action = $('#bulk-action')?.value;
     if (!ids.length) return toast('Select at least one draft', true);
@@ -511,6 +566,8 @@ if (typeof document !== 'undefined') {
       state.selectedDraftIds.clear(); toast(r.message); await loadDrafts();
     } catch (e) { toast(e.message, true); }
   }
+
+  /** Registers dashboard event handlers and opens the overview. */
 
   function init() {
     document.body.addEventListener('input', (ev) => {
@@ -552,3 +609,4 @@ if (typeof document !== 'undefined') {
 
   document.addEventListener('DOMContentLoaded', init);
 }
+
