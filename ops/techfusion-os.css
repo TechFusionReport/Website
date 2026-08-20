@@ -1,0 +1,19 @@
+/* TechFusion OS shell additions. Keep module-specific styles in their owning files. */
+.nav-item.planned {
+  color: var(--muted);
+  cursor: default;
+  opacity: .72;
+}
+.nav-item.planned:hover {
+  background: transparent;
+  text-decoration: none;
+}
+.planned-tag {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 1px 6px;
+  font: 500 9px 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: var(--gray);
+}
