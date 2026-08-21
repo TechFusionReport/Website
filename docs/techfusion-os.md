@@ -30,3 +30,13 @@ Cross-system architecture and ownership rules are maintained in Notion under **T
 ## Safety
 
 Human confirmation remains required for publishing, destructive operations, bulk actions, security changes, credential changes, and AI regeneration where the operating contract requires it. Never render secret values in the frontend.
+## Command Center data contract
+
+The Command Center consumes `GET /ops/api/command-center` from Automations. The response normalizes read-only state from:
+
+- TFR Task Tracker for professional work and priority/status.
+- GitHub for open TechFusionReport pull requests.
+- Cloudflare for Workers, Access applications, and tunnel state when the backend runtime has the required read credential.
+- Direct service probes for TechFusion API, the public Website, and OmniRoute.
+
+Every source returns an explicit `status` value. Missing credentials and upstream failures render as `unavailable` or `error`; the frontend must never replace them with assumed healthy state. Links always return operators to the authoritative record.
