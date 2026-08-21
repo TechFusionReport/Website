@@ -96,6 +96,16 @@ export function escapeHtml(s) {
     .replace(/'/g, '&#39;');
 }
 
+export function safeDashboardUrl(rawUrl, baseUrl = 'https://techfusionreport.com/') {
+  try {
+    const base = new URL(baseUrl);
+    const url = new URL(rawUrl, base);
+    return url.protocol === 'https:' || url.origin === base.origin ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Converts a supported YouTube URL into a privacy-enhanced embed URL. */
 
 export function youtubeEmbedUrl(rawUrl) {
@@ -257,17 +267,23 @@ if (typeof document !== 'undefined') {
 
     const sourceBadge = (label, source) =>
       `<span class="badge ${escapeHtml(source.status || 'error')}">${escapeHtml(label)} · ${escapeHtml(source.status || 'error')}</span>`;
+    const safeLink = (url, label, className = '') => {
+      const href = safeDashboardUrl(url, window.location.href);
+      return href
+        ? `<a${className ? ` class="${escapeHtml(className)}"` : ''} href="${escapeHtml(href)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`
+        : `<span${className ? ` class="${escapeHtml(className)}"` : ''}>${escapeHtml(label)}</span>`;
+    };
     const taskRows = tasks.items?.length
-      ? tasks.items.map((item) => `<li><a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a><span class="mono muted">${escapeHtml(item.priority || '')} · ${escapeHtml(item.status || '')}</span></li>`).join('')
+      ? tasks.items.map((item) => `<li>${safeLink(item.url, item.title)}<span class="mono muted">${escapeHtml(item.priority || '')} · ${escapeHtml(item.status || '')}</span></li>`).join('')
       : '<li class="muted">No task records available.</li>';
     const prRows = pullRequests.items?.length
-      ? pullRequests.items.slice(0, 8).map((item) => `<li><a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.repository || 'repo')} #${item.number}: ${escapeHtml(item.title)}</a><span class="mono muted">${item.draft ? 'draft' : 'open'} · ${timeAgo(item.updatedAt)}</span></li>`).join('')
+      ? pullRequests.items.slice(0, 8).map((item) => `<li>${safeLink(item.url, `${item.repository || 'repo'} #${item.number}: ${item.title}`)}<span class="mono muted">${item.draft ? 'draft' : 'open'} · ${timeAgo(item.updatedAt)}</span></li>`).join('')
       : '<li class="muted">No open pull requests available.</li>';
     const serviceRows = services.length
       ? services.map((item) => `<li>${escapeHtml(item.name)} <span class="badge ${escapeHtml(item.status)}">${escapeHtml(item.status)}</span><span class="mono muted">${item.httpStatus ?? '—'} · ${item.latencyMs ?? '—'}ms</span></li>`).join('')
       : '<li class="muted">No service probes available.</li>';
     const attentionRows = attention.length
-      ? attention.slice(0, 8).map((item) => `<li><a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a><span class="mono muted">${escapeHtml(item.source)}</span></li>`).join('')
+      ? attention.slice(0, 8).map((item) => `<li>${safeLink(item.url, item.title)}<span class="mono muted">${escapeHtml(item.source)}</span></li>`).join('')
       : '<li class="muted">Nothing currently requires attention.</li>';
     const cfSummary = cloudflare.status === 'ok'
       ? `${cloudflare.summary.workers} Workers · ${cloudflare.summary.accessApplications} Access apps · ${cloudflare.summary.healthyTunnels} healthy / ${cloudflare.summary.downTunnels} down tunnels`
@@ -330,9 +346,9 @@ if (typeof document !== 'undefined') {
       </div>
       <div class="cols command-grid">
         <section class="panel"><h2>Authoritative Tasks</h2><ul class="list">${taskRows}</ul>
-          ${tasks.authoritativeUrl ? `<a class="source-link" href="${escapeHtml(tasks.authoritativeUrl)}" target="_blank" rel="noopener">Open Task Tracker ↗</a>` : ''}</section>
+          ${tasks.authoritativeUrl ? safeLink(tasks.authoritativeUrl, 'Open Task Tracker ↗', 'source-link') : ''}</section>
         <section class="panel"><h2>Open Pull Requests</h2><ul class="list">${prRows}</ul>
-          ${pullRequests.authoritativeUrl ? `<a class="source-link" href="${escapeHtml(pullRequests.authoritativeUrl)}" target="_blank" rel="noopener">Open GitHub PRs ↗</a>` : ''}</section>
+          ${pullRequests.authoritativeUrl ? safeLink(pullRequests.authoritativeUrl, 'Open GitHub PRs ↗', 'source-link') : ''}</section>
       </div>
       <section class="kpi-strip">${kpis}</section>
       <section class="panel"><h2>Pipeline — Active Stages</h2>
