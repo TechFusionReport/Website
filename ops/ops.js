@@ -220,10 +220,15 @@ if (typeof document !== 'undefined') {
     const root = view('dashboard');
     root.innerHTML = loading('Loading operations…');
     try {
-      const [o, commandCenter] = await Promise.all([
-        api('/overview'),
-        api('/command-center'),
-      ]);
+      const o = await api('/overview');
+      const commandCenter = await api('/command-center').catch((error) => ({
+        generatedAt: o.generatedAt,
+        tasks: { status: 'error', reason: error.message, items: [] },
+        pullRequests: { status: 'error', reason: error.message, items: [] },
+        cloudflare: { status: 'error', reason: error.message },
+        services: [],
+        attention: [],
+      }));
       state.overview = o;
       state.commandCenter = commandCenter;
       setBadges();
