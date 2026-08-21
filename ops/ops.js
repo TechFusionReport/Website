@@ -96,6 +96,16 @@ export function escapeHtml(s) {
     .replace(/'/g, '&#39;');
 }
 
+export function safeDashboardUrl(rawUrl, baseUrl = 'https://techfusionreport.com/') {
+  try {
+    const base = new URL(baseUrl);
+    const url = new URL(rawUrl, base);
+    return url.protocol === 'https:' || url.origin === base.origin ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Converts a supported YouTube URL into a privacy-enhanced embed URL. */
 
 export function youtubeEmbedUrl(rawUrl) {
@@ -148,6 +158,7 @@ if (typeof document !== 'undefined') {
 
   const state = {
     overview: null,
+    commandCenter: null,
     queue: [],
     drafts: [],
     draftDetails: {},
@@ -220,9 +231,18 @@ if (typeof document !== 'undefined') {
     root.innerHTML = loading('Loading operations…');
     try {
       const o = await api('/overview');
+      const commandCenter = await api('/command-center').catch((error) => ({
+        generatedAt: o.generatedAt,
+        tasks: { status: 'error', reason: error.message, items: [] },
+        pullRequests: { status: 'error', reason: error.message, items: [] },
+        cloudflare: { status: 'error', reason: error.message },
+        services: [],
+        attention: [],
+      }));
       state.overview = o;
+      state.commandCenter = commandCenter;
       setBadges();
-      root.innerHTML = renderDashboard(o);
+      root.innerHTML = renderDashboard(o, commandCenter);
     } catch (e) {
       root.innerHTML = errorState(e.message);
     }
@@ -237,8 +257,37 @@ if (typeof document !== 'undefined') {
 
   /** Builds the operations-overview markup from API data. */
 
-  function renderDashboard(o) {
+  function renderDashboard(o, commandCenter) {
     const k = o.kpis;
+    const tasks = commandCenter?.tasks || { status: 'error', items: [] };
+    const pullRequests = commandCenter?.pullRequests || { status: 'error', items: [] };
+    const cloudflare = commandCenter?.cloudflare || { status: 'error' };
+    const services = commandCenter?.services || [];
+    const attention = commandCenter?.attention || [];
+
+    const sourceBadge = (label, source) =>
+      `<span class="badge ${escapeHtml(source.status || 'error')}">${escapeHtml(label)} · ${escapeHtml(source.status || 'error')}</span>`;
+    const safeLink = (url, label, className = '') => {
+      const href = safeDashboardUrl(url, window.location.href);
+      return href
+        ? `<a${className ? ` class="${escapeHtml(className)}"` : ''} href="${escapeHtml(href)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`
+        : `<span${className ? ` class="${escapeHtml(className)}"` : ''}>${escapeHtml(label)}</span>`;
+    };
+    const taskRows = tasks.items?.length
+      ? tasks.items.map((item) => `<li>${safeLink(item.url, item.title)}<span class="mono muted">${escapeHtml(item.priority || '')} · ${escapeHtml(item.status || '')}</span></li>`).join('')
+      : '<li class="muted">No task records available.</li>';
+    const prRows = pullRequests.items?.length
+      ? pullRequests.items.slice(0, 8).map((item) => `<li>${safeLink(item.url, `${item.repository || 'repo'} #${item.number}: ${item.title}`)}<span class="mono muted">${item.draft ? 'draft' : 'open'} · ${timeAgo(item.updatedAt)}</span></li>`).join('')
+      : '<li class="muted">No open pull requests available.</li>';
+    const serviceRows = services.length
+      ? services.map((item) => `<li>${escapeHtml(item.name)} <span class="badge ${escapeHtml(item.status)}">${escapeHtml(item.status)}</span><span class="mono muted">${item.httpStatus ?? '—'} · ${item.latencyMs ?? '—'}ms</span></li>`).join('')
+      : '<li class="muted">No service probes available.</li>';
+    const attentionRows = attention.length
+      ? attention.slice(0, 8).map((item) => `<li>${safeLink(item.url, item.title)}<span class="mono muted">${escapeHtml(item.source)}</span></li>`).join('')
+      : '<li class="muted">Nothing currently requires attention.</li>';
+    const cfSummary = cloudflare.status === 'ok'
+      ? `${cloudflare.summary.workers} Workers · ${cloudflare.summary.accessApplications} Access apps · ${cloudflare.summary.healthyTunnels} healthy / ${cloudflare.summary.downTunnels} down tunnels`
+      : escapeHtml(cloudflare.reason || 'Cloudflare state unavailable');
     const kpis = [
       kpiCard('In Pipeline', k.inPipeline),
       kpiCard('Gate 1 Backlog', k.gate1Backlog, `oldest ${fmtDuration(k.gate1OldestAgeMs)} · target &lt;4h`),
@@ -282,9 +331,25 @@ if (typeof document !== 'undefined') {
       : `<li class="muted">No errors. Clean board.</li>`;
 
     return `
-      <header class="page-head"><h1>Operations Dashboard</h1>
-        <span class="mono muted">${new Date(o.generatedAt).toLocaleString()}</span></header>
+      <header class="page-head"><h1>Command Center</h1>
+        <span class="mono muted">${new Date(commandCenter?.generatedAt || o.generatedAt).toLocaleString()}</span></header>
       ${warn}
+      <section class="source-strip">
+        ${sourceBadge('Task Tracker', tasks)}
+        ${sourceBadge('GitHub PRs', pullRequests)}
+        ${sourceBadge('Cloudflare', cloudflare)}
+      </section>
+      <div class="cols command-grid">
+        <section class="panel"><h2>Action Required</h2><ul class="list">${attentionRows}</ul></section>
+        <section class="panel"><h2>System Health</h2><ul class="health">${serviceRows}</ul>
+          <div class="source-note">${cfSummary}</div></section>
+      </div>
+      <div class="cols command-grid">
+        <section class="panel"><h2>Authoritative Tasks</h2><ul class="list">${taskRows}</ul>
+          ${tasks.authoritativeUrl ? safeLink(tasks.authoritativeUrl, 'Open Task Tracker ↗', 'source-link') : ''}</section>
+        <section class="panel"><h2>Open Pull Requests</h2><ul class="list">${prRows}</ul>
+          ${pullRequests.authoritativeUrl ? safeLink(pullRequests.authoritativeUrl, 'Open GitHub PRs ↗', 'source-link') : ''}</section>
+      </div>
       <section class="kpi-strip">${kpis}</section>
       <section class="panel"><h2>Pipeline — Active Stages</h2>
         <div class="chart">${bars}</div>
