@@ -1,10 +1,111 @@
 [
   {
-    "title": "Apple iPhone Air Review – A REAL Day In The Life Test!",
+    "title": "Apple iPhone Air Review - A Real Day In The Life Test",
     "slug": "2026-03-28-apple-iphone-air-review-a-real-day-in-the-life-test",
     "date": "2026-03-28",
     "category": "Technology",
-    "excerpt": "A hands-on real-world test of the Apple iPhone Air — covering performance, battery life, camera, and whether the slim form factor holds up day to day.",
-    "url": "/_posts/2026-03-28-apple-iphone-air-review-a-real-day-in-the-life-test.html"
+    "subcategory": "Smartphones",
+    "readTime": "4 min read",
+    "excerpt": "A practical field test of the iPhone Air, with battery, camera, thermals, and daily carry judged like normal people actually use phones.",
+    "thumbnail": "https://www.techfusionreport.com/graphics/smartphones_800x320.webp",
+    "image": "https://www.techfusionreport.com/graphics/smartphones_800x320.webp",
+    "url": "/_posts/2026-03-28-apple-iphone-air-review-a-real-day-in-the-life-test.html",
+    "feature": true
+  },
+  {
+    "title": "AI Tools Are Starting To Feel Like Real Workflow Software",
+    "slug": "2026-03-27-ai-tools-real-workflow-software",
+    "date": "2026-03-27",
+    "category": "Technology",
+    "subcategory": "AI Tools",
+    "readTime": "5 min read",
+    "excerpt": "The useful AI tools are moving away from novelty demos and toward quiet systems that remove steps from daily work.",
+    "thumbnail": "https://www.techfusionreport.com/graphics/ai_tools_800x320.webp",
+    "image": "https://www.techfusionreport.com/graphics/ai_tools_800x320.webp",
+    "url": "/_posts/2026-03-27-ai-tools-real-workflow-software.html"
+  },
+  {
+    "title": "Streaming Services Need Fewer Universes And Better Shows",
+    "slug": "2026-03-26-streaming-services-better-shows",
+    "date": "2026-03-26",
+    "category": "Entertainment",
+    "subcategory": "TV Shows",
+    "readTime": "3 min read",
+    "excerpt": "Bigger franchises do not fix thinner stories. The next streaming win comes from sharper releases and fewer filler seasons.",
+    "thumbnail": "https://www.techfusionreport.com/graphics/tv_shows_800x320.webp",
+    "image": "https://www.techfusionreport.com/graphics/tv_shows_800x320.webp",
+    "url": "/_posts/2026-03-26-streaming-services-better-shows.html"
+  },
+  {
+    "title": "The Weekly Workflow Reset That Actually Sticks",
+    "slug": "2026-03-25-weekly-workflow-reset",
+    "date": "2026-03-25",
+    "category": "Productivity",
+    "subcategory": "Workflows",
+    "readTime": "4 min read",
+    "excerpt": "A small Friday system for clearing task debt, rebuilding focus, and keeping Monday from starting in a fog.",
+    "thumbnail": "https://www.techfusionreport.com/graphics/workflows_800x320.webp",
+    "image": "https://www.techfusionreport.com/graphics/workflows_800x320.webp",
+    "url": "/_posts/2026-03-25-weekly-workflow-reset.html"
+  },
+  {
+    "title": "Smart Home Gear Works Best When It Stops Asking For Attention",
+    "slug": "2026-03-24-smart-home-gear-attention",
+    "date": "2026-03-24",
+    "category": "Technology",
+    "subcategory": "Smart Home",
+    "readTime": "4 min read",
+    "excerpt": "The best connected devices fade into the room. Lights, sensors, and automations win when nobody has to think about them.",
+    "thumbnail": "https://www.techfusionreport.com/graphics/smart_home_800x320.webp",
+    "image": "https://www.techfusionreport.com/graphics/smart_home_800x320.webp",
+    "url": "/_posts/2026-03-24-smart-home-gear-attention.html"
+  },
+  {
+    "title": "Movie Nights Are Better When The App Gets Out Of The Way",
+    "slug": "2026-03-23-movie-night-app-design",
+    "date": "2026-03-23",
+    "category": "Entertainment",
+    "subcategory": "Movies",
+    "readTime": "3 min read",
+    "excerpt": "Recommendation rows, autoplay, and endless hubs keep getting louder. A good entertainment app should help the room pick faster.",
+    "thumbnail": "https://www.techfusionreport.com/graphics/movies_800x320.webp",
+    "image": "https://www.techfusionreport.com/graphics/movies_800x320.webp",
+    "url": "/_posts/2026-03-23-movie-night-app-design.html"
+  },
+  {
+    "title": "Music Discovery Needs Taste, Not Infinite Skips",
+    "slug": "2026-03-22-music-discovery-needs-taste",
+    "date": "2026-03-22",
+    "category": "Entertainment",
+    "subcategory": "Music",
+    "readTime": "4 min read",
+    "excerpt": "The best music apps feel edited. Discovery improves when algorithms behave more like a trusted record shop and less like a slot machine.",
+    "thumbnail": "https://www.techfusionreport.com/graphics/music_800x320.webp",
+    "image": "https://www.techfusionreport.com/graphics/music_800x320.webp",
+    "url": "/_posts/2026-03-22-music-discovery-needs-taste.html"
+  },
+  {
+    "title": "Office Tools Should Save Decisions, Not Create More Tabs",
+    "slug": "2026-03-21-office-tools-save-decisions",
+    "date": "2026-03-21",
+    "category": "Productivity",
+    "subcategory": "Office Tools",
+    "readTime": "5 min read",
+    "excerpt": "A useful office app reduces choices, remembers context, and keeps the next action obvious without turning work into dashboard upkeep.",
+    "thumbnail": "https://www.techfusionreport.com/graphics/desksteps_800x320.webp",
+    "image": "https://www.techfusionreport.com/graphics/desksteps_800x320.webp",
+    "url": "/_posts/2026-03-21-office-tools-save-decisions.html"
+  },
+  {
+    "title": "The Notes App Test: Can You Find The Thought Later?",
+    "slug": "2026-03-20-notes-app-find-the-thought",
+    "date": "2026-03-20",
+    "category": "Productivity",
+    "subcategory": "Productivity Apps",
+    "readTime": "4 min read",
+    "excerpt": "Capture is the easy part. A notes app earns trust when old ideas come back with context, source, and next step intact.",
+    "thumbnail": "https://www.techfusionreport.com/graphics/productivity_apps_800x320.webp",
+    "image": "https://www.techfusionreport.com/graphics/productivity_apps_800x320.webp",
+    "url": "/_posts/2026-03-20-notes-app-find-the-thought.html"
   }
 ]
