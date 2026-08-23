@@ -1,171 +1,131 @@
 # CLAUDE.md — TechFusion Report Website
 
-This file provides persistent context for Claude Code and Codex sessions in this repository.
-Read this before taking any action in the codebase.
+This file provides persistent context for Claude Code and Codex sessions in this repository. Read this before taking any action in the codebase.
 
 ---
 
-## 🗣️ Terminology & Shorthand
+## Project Identity
 
-| What Justin Says | What It Means |
-|---|---|
-| **the site / the website** | techfusionreport.com — GitHub Pages static site (this repo) |
-| **the blog** | `blog.html` and individual post pages |
-| **posts** | HTML files in `_posts/YYYY-MM-DD-slug.html` |
-| **posts.json** | JSON index the homepage reads to auto-populate blog previews |
-| **the homepage** | `index.html` |
-| **category pages** | `/technology/`, `/entertainment/`, `/productivity/` — Phase 2 |
-| **the pipeline** | Cloudflare Workers backend in the Automations repo — NOT this repo |
-| **deploy it** | Commit to main → GitHub Pages auto-deploys. No build step. |
-| **brand assets** | Images at `https://techfusionreport.github.io/graphics/` |
-| **task tracker** | ⚡ TFR Task Tracker (`30e1920a-4e2e-4dfc-8715-77aedd2115f8`) |
-| **dev log** | 🛠️ Blog Automation Dev Log (`313bd080-de92-8159-bcee-c3fc4ed83462`) |
+TechFusion Report is a professional publication at `techfusionreport.com` covering **Technology**, **Entertainment**, and **Productivity**. Public site decisions should favor production stability, editorial clarity, design quality, and pipeline compatibility.
 
 ---
 
-## 🏢 Project Identity
+## Stack Overview
 
-TechFusion Report is a professional tech publication at `techfusionreport.com` covering **Technology**, **Entertainment**, and **Productivity**. This is a business project — all decisions should reflect production stability, design quality, and publication professionalism.
-
----
-
-## 🏗️ Stack Overview
-
-- **Hosting:** GitHub Pages (static, no SSR)
-- **Domain:** techfusionreport.com (Cloudflare DNS → GitHub Pages)
-- **Deployment:** Push to `main` → auto-deploys in ~1 min
-- **No build step** — pure HTML/CSS/JS, no Node.js, no bundler
-
-### Key Files
-```
-index.html                  — Homepage (auto-populates from posts.json)
-blog.html                   — Blog listing page with category filters
-blog-post-template.html     — Individual post template
-style.css                   — Global stylesheet
-blog-post.css               — Post-specific styles
-posts.json                  — Blog post index
-_posts/                     — Individual post HTML files (YYYY-MM-DD-slug.html)
-graphics/                   — Brand assets
-```
-
-### Brand & Design System
-
-| Property | Value |
-|---|---|
-| Primary | Cyan `#00D4FF` |
-| Accent | Lime `#A4FF00` |
-| Background | Dark `#0A0C10` |
-| Display font | Rajdhani |
-| Body font | DM Sans |
-| Logo | `https://techfusionreport.github.io/graphics/tfr_header_logo_nb.png` |
-| Category images | `tech_nb.png`, `ent_nb.png`, `prod_nb.png` |
-
-### Homepage Features (live)
-- Editorial hero — `TFR-Hero-Background.png` at 25% opacity + scanline overlay
-- News ticker, stats strip, magazine-style category cards
-- Featured/sidebar blog layout (auto-populates from `posts.json`)
-- Two-column newsletter section, publication footer
+- **Hosting:** GitHub Pages static site
+- **Domain:** `techfusionreport.com` / `www.techfusionreport.com` through Cloudflare DNS to GitHub Pages
+- **Deployment:** human-reviewed merge from `preview` to `main`; GitHub Pages deploys `main`
+- **Build tooling:** none for this repo; pure HTML/CSS/JS only
+- **Pipeline owner:** Cloudflare Workers in the Automations repo, not this repo
+- **Editorial source of truth:** Notion `Content Catalog v2`
+- **Published files:** GitHub `_posts/*.html` plus `posts.json`
 
 ---
 
-## 🚀 Deployment Rules
+## Current Frontend Direction
 
-- Always commit to `main` — GitHub Pages serves from main
-- No wrangler, no npm, no build commands
-- Update `posts.json` whenever a new post is added to `_posts/`
-- Never hardcode API keys — this repo is public
+As of 2026-08-23, the `preview` branch contains the replacement public-facing blog frontend:
 
-### Branch Strategy
-- `main` — production. Every push auto-deploys to techfusionreport.com.
-- `preview` — staging branch. All Codex and design changes go here first.
+- Homepage: large animated TechFusion Report logo hero, simplified first viewport, latest-9 horizontal carousel.
+- Blog page: category hub for Technology, Entertainment, and Productivity.
+- Category pages: `technology.html`, `entertainment.html`, `productivity.html`, each showing only relevant section articles.
+- Articles: static HTML files in `_posts/YYYY-MM-DD-slug.html`.
+- Shared styles: `style.css` using Rajdhani, DM Sans, cyan `#00D4FF`, lime `#A4FF00`, white, and dark `#0A0C10`.
+- Brand artwork uses existing files under `/graphics/` or canonical `https://www.techfusionreport.com/graphics/...` URLs.
 
-### Post File Format
-```
+Do not replace this with a command-center/dashboard UI. The public site is a reader-facing blog.
+
+---
+
+## Pipeline Publication Contract
+
+When the pipeline publishes a Notion record, it should create or update:
+
+```text
 _posts/YYYY-MM-DD-slug.html
+posts.json
 ```
 
-Corresponding `posts.json` entry:
+Each `posts.json` entry should keep this shape:
+
 ```json
 {
   "title": "Post Title",
   "slug": "YYYY-MM-DD-slug",
   "date": "YYYY-MM-DD",
   "category": "Technology",
+  "subcategory": "AI Tools",
+  "readTime": "4 min read",
   "excerpt": "Brief description...",
-  "thumbnail": "optional-image-url"
+  "thumbnail": "https://www.techfusionreport.com/graphics/example_800x320.webp",
+  "image": "https://www.techfusionreport.com/graphics/example_800x320.webp",
+  "url": "/_posts/YYYY-MM-DD-slug.html",
+  "feature": false
 }
+```
+
+Rules:
+
+- Notion remains the durable editorial source of truth.
+- GitHub is the publication record and delivery source.
+- `posts.json` is the frontend index for homepage/category/blog surfaces.
+- Category values should be exactly `Technology`, `Entertainment`, or `Productivity` unless the frontend taxonomy is intentionally changed.
+- Keep dates as ISO `YYYY-MM-DD` for sorting.
+- Use `thumbnail` for backward compatibility and `image` for the new frontend.
+- Do not hardcode secrets or API keys in this public repo.
+
+---
+
+## Key Files
+
+```text
+index.html                  — Homepage
+blog.html                   — Category hub / blog entry
+technology.html             — Technology category page
+entertainment.html          — Entertainment category page
+productivity.html           — Productivity category page
+style.css                   — Global stylesheet
+posts.json                  — Blog post index consumed by frontend/pipeline
+_posts/                     — Individual post HTML files
+graphics/                   — Brand assets
+CNAME                       — GitHub Pages custom domain
 ```
 
 ---
 
-## 🤖 Codex Agent — Rules & Known Walls
+## Branch Rules
 
-Codex operates in a sandboxed cloud environment. These rules are non-negotiable.
-
-**What Codex CAN do in this repo:**
-- Read and edit all HTML, CSS, and JS files
-- Build new category pages and subcategory pages
-- Create GitHub Actions workflows (e.g. SVG → PNG conversion)
-- Fix layout bugs, update brand colors, add analytics tags
-- Add new posts to `_posts/` and update `posts.json`
-- Update `blog-post-template.html` and `style.css`
-
-**What Codex CANNOT do — hard walls:**
-- Push directly to `main` — all changes must go to `preview` branch
-- Deploy or trigger GitHub Pages — human merges preview → main
-- Access any live service, API, or external URL during build
-- Use Node.js, npm, or any build tooling — pure HTML/CSS/JS only, no bundler
-- Hardcode API keys — this repo is public
-
-**Branch rules for Codex — MANDATORY:**
-- ALL changes go to `preview` branch — one branch, all tasks
-- Never push to `main` under any circumstances
-- Never create additional branches
-- Human reviews preview and decides when to push to main
-- Main auto-deploys to techfusionreport.com within ~1 min of merge
-
-**Design system — never deviate:**
-- Cyan `#00D4FF`, Lime `#A4FF00`, Dark `#0A0C10`
-- Fonts: Rajdhani (headlines), DM Sans (body)
-- Match existing page structure exactly before adding new elements
-- Check `style.css` for existing classes before writing any new CSS
+- All Codex and design changes go to `preview`.
+- Never push directly to `main`.
+- Human reviews `preview`, then merges to `main` when ready.
+- `main` auto-deploys to `techfusionreport.com` through GitHub Pages.
 
 ---
 
-## ⚠️ Known Open Issues (as of 2026-05-14)
+## Design System
 
-- Category pages not yet built (Phase 2)
-- Keep `posts.json` updated as new posts publish — homepage depends on it
-- GA4 analytics tag not yet added to templates
-- SVG → PNG GitHub Actions workflow not yet built
+- Primary cyan: `#00D4FF`
+- Accent lime: `#A4FF00`
+- White: `#FFFFFF`
+- Dark: `#0A0C10`
+- Display font: Rajdhani
+- Body font: DM Sans
+- Cards use 8px radius unless an existing component requires otherwise.
+- Keep the public experience editorial, not operational.
 
 ---
 
-## 🏠 Scope Boundaries
+## Scope Boundaries
 
-| ❌ Not This Repo | ✅ This Repo |
+| Not This Repo | This Repo |
 |---|---|
-| Cloudflare Workers / agents | HTML/CSS/JS for techfusionreport.com |
-| Notion database management | Blog post files and post index |
-| Docker / homelab services | Brand assets and design system |
-| Personal n8n experiments | Category pages (Phase 2) |
+| Cloudflare Workers / agents | Static HTML/CSS/JS for public site |
+| Notion database management | Published post files and post index |
+| Ops dashboard backend | Public blog/category/article surfaces |
+| Secrets and API keys | Brand assets and presentation layer |
 
 ---
 
-## 📓 Notion Logging — MANDATORY
+## Notion Logging
 
-**TFR Task Tracker** — update status when tasks start, complete, or block.
-**Dev Log** — dated entry after every session. What was done, what failed, how fixed, what's next.
-**CLAUDE.md** — update in the same commit as any site change. Never let it go stale.
-
----
-
-## 🎯 Current Priority Order (as of 2026-05-14)
-
-1. ~~Fix `blog.html` index auto-population~~ ✅ Done
-2. Keep `posts.json` updated as new posts publish
-3. Build SVG → PNG GitHub Actions workflow
-4. Wire GA4 tag into `index.html` and `blog-post-template.html`
-5. Phase 2: Build category pages (Technology, Entertainment, Productivity)
-6. Phase 3: Affiliate links, AdSense groundwork
-7. Phase 3: Add media kit page
+When possible, update the TFR Task Tracker and Dev Log after material site changes. Do not create a second source of truth for content or workflow state.
