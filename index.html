@@ -1,362 +1,59 @@
-﻿<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TechFusion Report | Technology, Entertainment &amp; Productivity News</title>
-  <meta name="description" content="Your premier source for technology, entertainment, and productivity insights. AI tools, smartphones, movies, workflows, and more." />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechFusion Report | Technology, Entertainment & Productivity</title>
+  <meta name="description" content="A sharp blog covering technology, entertainment, and productivity.">
+  <meta property="og:title" content="TechFusion Report | Technology, Entertainment & Productivity">
+  <meta property="og:description" content="A sharp blog covering technology, entertainment, and productivity.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0A0C10">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=7">
 </head>
 <body>
-
-<a href="#main-content" class="skip-link">Skip to main content</a>
-
-<!-- ── Navigation ── -->
-<nav aria-label="Main navigation">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo" aria-label="TechFusion Report home">
-      <img src="https://www.techfusionreport.com/graphics/tfr-logo-clean_transparent.png" alt="TechFusion Report" />
+  <a class="skip" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="TechFusion Report home">
+      <img src="https://www.techfusionreport.com/graphics/tfr-logo-clean_transparent.png" alt="TechFusion Report">
     </a>
-
-    <ul class="nav-links" role="list">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li class="dropdown">
-        <a href="technology.html">Technology <span aria-hidden="true">▾</span></a>
-        <ul class="dropdown-menu" role="list">
-          <li><a href="ai.html">AI Tools</a></li>
-          <li><a href="smartphones.html">Smartphones</a></li>
-          <li><a href="smart_home.html">Smart Home</a></li>
-          <li><a href="android_apps.html">Android Apps</a></li>
-          <li><a href="mac-apps.html">Mac Apps</a></li>
-          <li><a href="smartphone-apps.html">Smartphone Apps</a></li>
-          <li><a href="tips_tricks.html">Tips &amp; Tricks</a></li>
-          <li><a href="gtk_websites.html">Good to Know Websites</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a href="entertainment.html">Entertainment <span aria-hidden="true">▾</span></a>
-        <ul class="dropdown-menu" role="list">
-          <li><a href="movies.html">Movies</a></li>
-          <li><a href="tv_shows.html">TV Shows</a></li>
-          <li><a href="music.html">Music</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a href="productivity.html">Productivity <span aria-hidden="true">▾</span></a>
-        <ul class="dropdown-menu" role="list">
-          <li><a href="office.html">Office Tools</a></li>
-          <li><a href="workflows.html">Workflows</a></li>
-          <li><a href="productivity_apps.html">Productivity Apps</a></li>
-        </ul>
-      </li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-
-    <div class="nav-actions">
-      <button class="btn-icon" id="search-btn" aria-label="Search">🔍</button>
-      <button class="btn-icon saved-btn" id="saved-btn" aria-label="Saved articles">
-        🔖
-        <span class="saved-badge" id="saved-count">0</span>
-      </button>
-      <button class="btn-icon mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
-    </div>
+    <nav aria-label="Primary"><a class="nav-link home active" href="/">Home</a><a class="nav-link technology" href="/technology.html">Technology<div class="nav-submenu" style="display:grid" aria-label="Technology subcategories"><span>AI Tools</span><span>Smartphones</span><span>Smart Home</span><span>Android Apps</span><span>Mac Apps</span><span>Tips & Tricks</span></div></a><a class="nav-link entertainment" href="/entertainment.html">Entertainment<div class="nav-submenu" style="display:grid" aria-label="Entertainment subcategories"><span>Movies</span><span>TV Shows</span><span>Music</span><span>Streaming</span></div></a><a class="nav-link productivity" href="/productivity.html">Productivity<div class="nav-submenu" style="display:grid" aria-label="Productivity subcategories"><span>Office Tools</span><span>Workflows</span><span>Productivity Apps</span></div></a><a class="nav-link blog" href="/blog.html">Blog</a></nav>
+  </header>
+  <div class="ticker" aria-label="Latest topics">
+    <span>Latest</span>
+    <p>AI tools reshape daily workflows</p>
+    <p>iPhone Air field test published</p>
+    <p>Streaming needs sharper releases</p>
   </div>
-
-  <!-- Mobile nav -->
-  <ul class="nav-mobile" id="nav-mobile" role="list">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="technology.html">Technology</a></li>
-    <li><a href="ai.html">&nbsp;&nbsp;↳ AI Tools</a></li>
-    <li><a href="smartphones.html">&nbsp;&nbsp;↳ Smartphones</a></li>
-    <li><a href="smart_home.html">&nbsp;&nbsp;↳ Smart Home</a></li>
-    <li><a href="entertainment.html">Entertainment</a></li>
-    <li><a href="movies.html">&nbsp;&nbsp;↳ Movies</a></li>
-    <li><a href="tv_shows.html">&nbsp;&nbsp;↳ TV Shows</a></li>
-    <li><a href="productivity.html">Productivity</a></li>
-    <li><a href="workflows.html">&nbsp;&nbsp;↳ Workflows</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- Saved drawer -->
-<div class="saved-drawer" id="saved-drawer" role="dialog" aria-label="Saved articles">
-  <h4>🔖 Saved Articles</h4>
-  <div id="saved-list">
-    <p style="font-size:13px;color:var(--text-muted);">No saved articles yet. Click the bookmark icon on any article to save it for later.</p>
-  </div>
-</div>
-
-<!-- ── News Ticker ── -->
-<div class="ticker-bar" aria-label="Latest headlines">
-  <span class="ticker-label">LATEST</span>
-  <div class="ticker-track" id="ticker-track">
-    <span class="ticker-item">AI tools reshape the productivity landscape in 2026</span>
-    <span class="ticker-item">Samsung Galaxy S25 Ultra camera benchmarks released</span>
-    <span class="ticker-item">Apple Vision Pro 2 leak: thinner, lighter, same price</span>
-    <span class="ticker-item">Google's Gemini 2.5 Flash now available to all developers</span>
-    <span class="ticker-item">Netflix Q1 subscriber numbers beat expectations</span>
-    <span class="ticker-item">Cloudflare Workers now support real-time AI inference</span>
-    <span class="ticker-item">The best productivity apps of 2026 — our annual roundup</span>
-    <span class="ticker-item">Smart home ecosystems: Matter 2.0 lands this quarter</span>
-    <span class="ticker-item">AI tools reshape the productivity landscape in 2026</span>
-    <span class="ticker-item">Samsung Galaxy S25 Ultra camera benchmarks released</span>
-    <span class="ticker-item">Apple Vision Pro 2 leak: thinner, lighter, same price</span>
-    <span class="ticker-item">Google's Gemini 2.5 Flash now available to all developers</span>
-    <span class="ticker-item">Netflix Q1 subscriber numbers beat expectations</span>
-    <span class="ticker-item">Cloudflare Workers support real-time AI inference</span>
-    <span class="ticker-item">The best productivity apps of 2026 — our annual roundup</span>
-    <span class="ticker-item">Smart home ecosystems: Matter 2.0 lands this quarter</span>
-  </div>
-</div>
-
-<!-- ── Hero ── -->
-<main id="main-content">
-  <section class="hero" aria-label="Hero">
-    <div class="hero-bg" role="presentation"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">TechFusion Report</p>
-      <h1>Technology. Entertainment.<br>Productivity.</h1>
-      <p>Cutting through the noise on AI tools, smartphones, movies, and the workflows that actually work.</p>
+  <main id="main-content"><section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">TechFusion Report</span>
+      <h1 class="visually-hidden">Technology, Entertainment, and Productivity</h1>
+      <figure class="hero-logo-focus" aria-label="TechFusion Report">
+        <img src="https://www.techfusionreport.com/graphics/tfr-logo-full_transparent.png" alt="TechFusion Report">
+      </figure>
+      <p>Sharp coverage of the devices, shows, tools, and workflows that earn a place in real life.</p>
       <div class="hero-actions">
-        <a href="blog.html" class="btn-primary">Read Our Blog</a>
-        <a href="about.html" class="btn-secondary">Learn More</a>
+        <a class="button primary" href="/blog.html">Read The Blog</a>
+        <a class="button ghost" href="/_posts/2026-03-28-apple-iphone-air-review-a-real-day-in-the-life-test.html">Top Story</a>
       </div>
     </div>
   </section>
-
-  <!-- ── Category Cards ── -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-label">Coverage</p>
-      <h2 class="section-title">Explore Our Content</h2>
-    </div>
-    <div class="category-grid">
-
-      <article class="category-card">
-        <div class="card-cover">
-          <img src="https://www.techfusionreport.com/graphics/technology_transparent.png" alt="Technology" loading="lazy" onerror="this.style.display='none'" />
-          <div class="card-cover-gradient"></div>
-          <span class="card-badge cyan">Technology</span>
-        </div>
-        <div class="card-body">
-          <h3><a href="technology.html">Technology</a></h3>
-          <p>The latest in AI tools, smartphones, smart home, and apps — with opinions, not just specs.</p>
-          <ul class="card-links">
-            <li><a href="smartphones.html">Smartphones</a></li>
-            <li><a href="smart_home.html">Smart Home</a></li>
-            <li><a href="ai.html">AI Tools</a></li>
-            <li><a href="android_apps.html">Apps</a></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="category-card">
-        <div class="card-cover">
-          <img src="https://www.techfusionreport.com/graphics/entertainment_transparent.png" alt="Entertainment" loading="lazy" onerror="this.style.display='none'" />
-          <div class="card-cover-gradient"></div>
-          <span class="card-badge lime">Entertainment</span>
-        </div>
-        <div class="card-body">
-          <h3><a href="entertainment.html">Entertainment</a></h3>
-          <p>Reviews and recommendations for movies, TV shows, and music — what's worth your time.</p>
-          <ul class="card-links">
-            <li><a href="movies.html">Movies</a></li>
-            <li><a href="tv_shows.html">TV Shows</a></li>
-            <li><a href="music.html">Music</a></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="category-card">
-        <div class="card-cover">
-          <img src="https://www.techfusionreport.com/graphics/productivity_1500x600.png" alt="Productivity" loading="lazy" onerror="this.style.display='none'" />
-          <div class="card-cover-gradient"></div>
-          <span class="card-badge white">Productivity</span>
-        </div>
-        <div class="card-body">
-          <h3><a href="productivity.html">Productivity</a></h3>
-          <p>Tools, workflows, and systems that actually boost your efficiency — no fluff.</p>
-          <ul class="card-links">
-            <li><a href="office.html">Office Tools</a></li>
-            <li><a href="workflows.html">Workflows</a></li>
-            <li><a href="productivity_apps.html">Productivity Apps</a></li>
-          </ul>
-        </div>
-      </article>
-
-    </div>
-  </div>
-
-  <!-- ── Latest Blog Posts ── -->
-  <section class="blog-section">
-    <div class="section">
-      <div class="section-header">
-        <p class="section-label">Blog</p>
-        <h2 class="section-title">Latest from TFR</h2>
-      </div>
-      <div class="blog-grid" id="blog-grid">
-        <div class="blog-empty" id="blog-loading">
-          <p>Loading latest posts…</p>
-        </div>
-      </div>
-    </div>
+  <section class="section-head">
+    <span class="eyebrow">Latest From TFR</span>
+    <h2>Latest 9 by date</h2>
+    <p>Swipe or scroll through the newest stories across Technology, Entertainment, and Productivity.</p>
   </section>
-
-  <!-- ── Newsletter ── -->
-  <section class="newsletter-section">
-    <div class="section">
-      <div class="newsletter-card">
-        <h2>Stay in the Loop</h2>
-        <p>Weekly roundups of the best tech, entertainment, and productivity content — direct to your inbox. No spam. Unsubscribe anytime.</p>
-        <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
-          <input type="email" placeholder="your@email.com" required aria-label="Email address" />
-          <button type="submit">Subscribe</button>
-        </form>
-        <p class="newsletter-note">Join our readers. Unsubscribe anytime.</p>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<!-- ── Footer ── -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <img src="https://www.techfusionreport.com/graphics/tfr-logo-clean_transparent.png" alt="TechFusion Report" />
-        <p>Your premier source for technology news, entertainment reviews, and productivity insights.</p>
-      </div>
-      <div class="footer-col">
-        <h5>Technology</h5>
-        <ul>
-          <li><a href="smartphones.html">Smartphones</a></li>
-          <li><a href="ai.html">AI Tools</a></li>
-          <li><a href="smart_home.html">Smart Home</a></li>
-          <li><a href="android_apps.html">Apps</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Entertainment</h5>
-        <ul>
-          <li><a href="movies.html">Movies</a></li>
-          <li><a href="tv_shows.html">TV Shows</a></li>
-          <li><a href="music.html">Music</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Productivity</h5>
-        <ul>
-          <li><a href="office.html">Office Tools</a></li>
-          <li><a href="workflows.html">Workflows</a></li>
-          <li><a href="productivity_apps.html">Apps</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 TechFusion Report. All rights reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<button class="btt" id="btt" aria-label="Back to top">↑</button>
-
-<script>
-  const mobileBtn = document.getElementById('mobile-menu-btn');
-  const navMobile = document.getElementById('nav-mobile');
-  mobileBtn.addEventListener('click', () => {
-    const open = navMobile.classList.toggle('open');
-    mobileBtn.setAttribute('aria-expanded', open);
-    mobileBtn.textContent = open ? '✕' : '☰';
-  });
-
-  const savedBtn = document.getElementById('saved-btn');
-  const savedDrawer = document.getElementById('saved-drawer');
-  savedBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    savedDrawer.classList.toggle('open');
-  });
-  document.addEventListener('click', () => savedDrawer.classList.remove('open'));
-  savedDrawer.addEventListener('click', e => e.stopPropagation());
-
-  function updateSavedCount() {
-    try {
-      const saved = JSON.parse(localStorage.getItem('tfrSaved') || '[]');
-      document.getElementById('saved-count').textContent = saved.length || '0';
-    } catch(e) {}
-  }
-  updateSavedCount();
-
-  const btt = document.getElementById('btt');
-  window.addEventListener('scroll', () => {
-    btt.classList.toggle('visible', window.scrollY > 400);
-  }, { passive: true });
-  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  function handleNewsletterSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    btn.textContent = '✓ Subscribed!';
-    btn.disabled = true;
-    btn.style.background = 'var(--lime)';
-  }
-
-  async function loadBlogPosts() {
-    const grid = document.getElementById('blog-grid');
-    try {
-      const res = await fetch('posts.json');
-      if (!res.ok) throw new Error('No posts.json');
-      const posts = await res.json();
-      if (!posts || !posts.length) throw new Error('Empty');
-      const sorted = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-      const featured = sorted[0];
-      const sidebar = sorted.slice(1, 4);
-      grid.innerHTML = `
-        <article class="featured-post">
-          <div class="featured-post-img">
-            ${featured.image ? `<img src="${featured.image}" alt="" loading="lazy" />` : ''}
-          </div>
-          <div class="featured-post-body">
-            <div class="post-meta">
-              <span class="category">${featured.category || 'Blog'}</span>
-              <span>${featured.date || ''}</span>
-            </div>
-            <h3><a href="${featured.url || '#'}">${featured.title}</a></h3>
-            <p>${featured.excerpt || ''}</p>
-          </div>
-        </article>
-        <div class="sidebar-posts">
-          ${sidebar.map(p => `
-            <a href="${p.url || '#'}" class="sidebar-post">
-              ${p.image ? `<img src="${p.image}" alt="" class="sidebar-post-thumb" loading="lazy" />` : '<div class="sidebar-post-thumb"></div>'}
-              <div class="sidebar-post-text">
-                <h4>${p.title}</h4>
-                <span>${p.date || ''}</span>
-              </div>
-            </a>
-          `).join('')}
-        </div>
-      `;
-    } catch(e) {
-      grid.innerHTML = `<div class="blog-empty"><p>No posts yet — check back soon.</p></div>`;
-    }
-  }
-  loadBlogPosts();
-</script>
-
+  <section class="carousel-shell" aria-label="Latest TFR articles carousel">
+    <div class="latest-carousel"><article class="carousel-card technology"><a href="/_posts/2026-03-28-apple-iphone-air-review-a-real-day-in-the-life-test.html"><img src="https://www.techfusionreport.com/graphics/smartphones_800x320.webp" alt=""><span class="label">Technology</span><h3>Apple iPhone Air Review - A Real Day In The Life Test</h3><p>A practical field test of the iPhone Air, with battery, camera, thermals, and daily carry judged like normal people actually use phones.</p><div class="meta"><span>Smartphones</span><span>Mar 28, 2026</span></div></a></article><article class="carousel-card technology"><a href="/_posts/2026-03-27-ai-tools-real-workflow-software.html"><img src="https://www.techfusionreport.com/graphics/ai_tools_800x320.webp" alt=""><span class="label">Technology</span><h3>AI Tools Are Starting To Feel Like Real Workflow Software</h3><p>The useful AI tools are moving away from novelty demos and toward quiet systems that remove steps from daily work.</p><div class="meta"><span>AI Tools</span><span>Mar 27, 2026</span></div></a></article><article class="carousel-card technology"><a href="/_posts/2026-03-24-smart-home-gear-attention.html"><img src="https://www.techfusionreport.com/graphics/smart_home_800x320.webp" alt=""><span class="label">Technology</span><h3>Smart Home Gear Works Best When It Stops Asking For Attention</h3><p>The best connected devices fade into the room. Lights, sensors, and automations win when nobody has to think about them.</p><div class="meta"><span>Smart Home</span><span>Mar 24, 2026</span></div></a></article><article class="carousel-card entertainment"><a href="/_posts/2026-03-26-streaming-services-better-shows.html"><img src="https://www.techfusionreport.com/graphics/tv_shows_800x320.webp" alt=""><span class="label">Entertainment</span><h3>Streaming Services Need Fewer Universes And Better Shows</h3><p>Bigger franchises do not fix thinner stories. The next streaming win comes from sharper releases and fewer filler seasons.</p><div class="meta"><span>TV Shows</span><span>Mar 26, 2026</span></div></a></article><article class="carousel-card entertainment"><a href="/_posts/2026-03-23-movie-night-app-design.html"><img src="https://www.techfusionreport.com/graphics/movies_800x320.webp" alt=""><span class="label">Entertainment</span><h3>Movie Nights Are Better When The App Gets Out Of The Way</h3><p>Recommendation rows, autoplay, and endless hubs keep getting louder. A good entertainment app should help the room pick faster.</p><div class="meta"><span>Movies</span><span>Mar 23, 2026</span></div></a></article><article class="carousel-card entertainment"><a href="/_posts/2026-03-22-music-discovery-needs-taste.html"><img src="https://www.techfusionreport.com/graphics/music_800x320.webp" alt=""><span class="label">Entertainment</span><h3>Music Discovery Needs Taste, Not Infinite Skips</h3><p>The best music apps feel edited. Discovery improves when algorithms behave more like a trusted record shop and less like a slot machine.</p><div class="meta"><span>Music</span><span>Mar 22, 2026</span></div></a></article><article class="carousel-card productivity"><a href="/_posts/2026-03-25-weekly-workflow-reset.html"><img src="https://www.techfusionreport.com/graphics/workflows_800x320.webp" alt=""><span class="label">Productivity</span><h3>The Weekly Workflow Reset That Actually Sticks</h3><p>A small Friday system for clearing task debt, rebuilding focus, and keeping Monday from starting in a fog.</p><div class="meta"><span>Workflows</span><span>Mar 25, 2026</span></div></a></article><article class="carousel-card productivity"><a href="/_posts/2026-03-21-office-tools-save-decisions.html"><img src="https://www.techfusionreport.com/graphics/desksteps_800x320.webp" alt=""><span class="label">Productivity</span><h3>Office Tools Should Save Decisions, Not Create More Tabs</h3><p>A useful office app reduces choices, remembers context, and keeps the next action obvious without turning work into dashboard upkeep.</p><div class="meta"><span>Office Tools</span><span>Mar 21, 2026</span></div></a></article><article class="carousel-card productivity"><a href="/_posts/2026-03-20-notes-app-find-the-thought.html"><img src="https://www.techfusionreport.com/graphics/productivity_apps_800x320.webp" alt=""><span class="label">Productivity</span><h3>The Notes App Test: Can You Find The Thought Later?</h3><p>Capture is the easy part. A notes app earns trust when old ideas come back with context, source, and next step intact.</p><div class="meta"><span>Productivity Apps</span><span>Mar 20, 2026</span></div></a></article></div>
+  </section></main>
+  <footer class="site-footer">
+    <img src="https://www.techfusionreport.com/graphics/tfr-logo-clean_transparent.png" alt="TechFusion Report">
+    <p>Technology, entertainment, and productivity without the filler.</p>
+    <div><a href="/technology.html">Technology</a><a href="/entertainment.html">Entertainment</a><a href="/productivity.html">Productivity</a><a href="/blog.html">Blog</a></div>
+  </footer>
 </body>
 </html>
