@@ -1,0 +1,132 @@
+name: Rebuild posts.json
+
+on:
+  push:
+    paths:
+      - '_posts/**'
+
+jobs:
+  rebuild-index:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Rebuild posts.json from _posts/
+        run: |
+          node << 'SCRIPT'
+          const fs   = require('fs');
+          const path = require('path');
+
+          const postsDir = '_posts';
+          const outFile  = 'posts.json';
+
+          // indexOf-based JSON-LD extractor (no eval, no regex multiline)
+          function extractJsonLD(html) {
+            const open  = '<script type="application/ld+json">';
+            const close = '</script>';
+            const start = html.indexOf(open);
+            if (start === -1) return null;
+            const end = html.indexOf(close, start + open.length);
+            if (end === -1) return null;
+            try {
+              return JSON.parse(html.slice(start + open.length, end).trim());
+            } catch (_e) {
+              return null;
+            }
+          }
+
+          // Extract a <meta> content value by property name
+          function metaContent(html, prop) {
+            const needle = 'property="' + prop + '" content="';
+            const start  = html.indexOf(needle);
+            if (start === -1) return '';
+            const from = start + needle.length;
+            const end  = html.indexOf('"', from);
+            return end === -1 ? '' : html.slice(from, end);
+          }
+
+          function metaName(html, name) {
+            const needle = 'name="' + name + '" content="';
+            const start  = html.indexOf(needle);
+            if (start === -1) return '';
+            const from = start + needle.length;
+            const end  = html.indexOf('"', from);
+            return end === -1 ? '' : html.slice(from, end);
+          }
+
+          if (!fs.existsSync(postsDir)) {
+            fs.writeFileSync(outFile, '[]');
+            console.log('No _posts/ directory found, wrote empty posts.json');
+            process.exit(0);
+          }
+
+          const files = fs.readdirSync(postsDir)
+            .filter(f => f.endsWith('.html') || f.endsWith('.md'))
+            .sort()
+            .reverse(); // newest first (filenames are YYYY-MM-DD-slug.*)
+
+          const posts = [];
+          let skipped = 0;
+
+          for (const file of files) {
+            const filePath = path.join(postsDir, file);
+            let html;
+            try { html = fs.readFileSync(filePath, 'utf8'); }
+            catch (_e) { skipped++; continue; }
+
+            // Parse date and slug from filename: YYYY-MM-DD-slug.html
+            const match = file.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.(html|md)$/);
+            const date  = match ? match[1] : '';
+            const slug  = match ? match[2] : file.replace(/\.[^.]+$/, '');
+
+            // Prefer JSON-LD for structured data
+            const ld = extractJsonLD(html);
+
+            const title       = ld?.headline    || metaContent(html, 'og:title')       || slug;
+            const description = ld?.description || metaContent(html, 'og:description') || '';
+            const image       = ld?.image       || metaContent(html, 'og:image')       || '';
+            const url         = ld?.url         || metaContent(html, 'og:url')         || '';
+            const keywords    = ld?.keywords    || metaName(html, 'keywords')          || '';
+
+            // Category from breadcrumb href or OG url path
+            let category = 'Technology';
+            const catHref = html.indexOf('/category/');
+            if (catHref !== -1) {
+              const catStart = catHref + '/category/'.length;
+              const catEnd   = html.indexOf('/', catStart);
+              if (catEnd !== -1) {
+                const raw = html.slice(catStart, catEnd);
+                category  = raw.charAt(0).toUpperCase() + raw.slice(1);
+              }
+            }
+
+            posts.push({
+              title,
+              slug,
+              date: date || (ld?.datePublished || ''),
+              category,
+              tags: keywords ? keywords.split(',').map(k => k.trim()).filter(Boolean) : [],
+              description,
+              image,
+              url: url || ('https://techfusionreport.com/' + slug + '/'),
+              file
+            });
+          }
+
+          fs.writeFileSync(outFile, JSON.stringify(posts, null, 2));
+          console.log('Rebuilt posts.json: ' + posts.length + ' posts (' + skipped + ' skipped)');
+          SCRIPT
+
+      - name: Commit updated posts.json
+        run: |
+          git config user.name  "TFR Publisher Bot"
+          git config user.email "bot@techfusionreport.com"
+          git add posts.json
+          git diff --staged --quiet && echo "posts.json unchanged" && exit 0
+          git commit -m "index: rebuild posts.json [skip ci]"
+          git push
