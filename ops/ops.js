@@ -49,7 +49,6 @@ export function statusColor(statusName) {
 }
 
 /** Finds the active pipeline stage with the largest record count. */
-
 export function bottleneckStage(counts = {}) {
   let best = null;
   for (const stage of STAGES) {
@@ -60,7 +59,6 @@ export function bottleneckStage(counts = {}) {
 }
 
 /** Formats an ISO timestamp as a compact relative age. */
-
 export function timeAgo(iso, now = Date.now) {
   if (!iso) return '—';
   const ms = now() - Date.parse(iso);
@@ -75,7 +73,6 @@ export function timeAgo(iso, now = Date.now) {
 }
 
 /** Formats a millisecond duration for dashboard display. */
-
 export function fmtDuration(ms) {
   if (ms == null || Number.isNaN(ms)) return '—';
   const totalMin = Math.floor(ms / 60000);
@@ -86,7 +83,6 @@ export function fmtDuration(ms) {
 }
 
 /** Escapes untrusted text before interpolation into dashboard markup. */
-
 export function escapeHtml(s) {
   return String(s ?? '')
     .replace(/&/g, '&amp;')
@@ -107,7 +103,6 @@ export function safeDashboardUrl(rawUrl, baseUrl = 'https://techfusionreport.com
 }
 
 /** Converts a supported YouTube URL into a privacy-enhanced embed URL. */
-
 export function youtubeEmbedUrl(rawUrl) {
   try {
     const url = new URL(rawUrl);
@@ -128,21 +123,21 @@ export function youtubeEmbedUrl(rawUrl) {
 }
 
 /** Builds safe media markup for YouTube, Vimeo, direct video, or link fallback. */
-
 function videoEmbed(url) {
   let embed = youtubeEmbedUrl(url);
+  const safeMediaUrl = safeDashboardUrl(url);
   try {
     const u = new URL(url);
     if (!embed && /(^|\.)vimeo\.com$/i.test(u.hostname)) {
       const id = u.pathname.split('/').filter(Boolean).find(x => /^\d+$/.test(x));
       if (id) embed = `https://player.vimeo.com/video/${id}`;
     }
-    if (!embed && /\.(mp4|webm|ogg)$/i.test(u.pathname)) {
-      return `<video class="video-direct" controls preload="metadata" src="${escapeHtml(url)}"></video>`;
+    if (!embed && safeMediaUrl && /\.(mp4|webm|ogg)$/i.test(u.pathname)) {
+      return `<video class="video-direct" controls preload="metadata" src="${escapeHtml(safeMediaUrl)}"></video>`;
     }
   } catch { /* fallback below */ }
-  if (!embed) return url
-    ? `<div class="video-fallback"><a href="${escapeHtml(url)}" target="_blank" rel="noopener">Open original video ↗</a></div>`
+  if (!embed) return safeMediaUrl
+    ? `<div class="video-fallback"><a href="${escapeHtml(safeMediaUrl)}" target="_blank" rel="noopener">Open original video ↗</a></div>`
     : '<div class="state empty">No original video URL available.</div>';
   return `<div class="video-frame"><iframe src="${embed}" title="Original source video" loading="lazy"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -178,7 +173,6 @@ if (typeof document !== 'undefined') {
   const view = (name) => $(`#view-${name}`);
 
   /** Sends an authenticated same-origin request to the Ops Worker API. */
-
   async function api(path, opts = {}) {
     const res = await fetch(`${API}${path}`, {
       credentials: 'same-origin',
@@ -192,7 +186,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Builds a loading-state fragment. */
-
   const loading = (msg = 'Loading…') => `<div class="state loading"><span class="spinner"></span>${escapeHtml(msg)}</div>`;
   /** Builds an empty-state fragment. */
   const empty = (msg) => `<div class="state empty">${escapeHtml(msg)}</div>`;
@@ -200,6 +193,16 @@ if (typeof document !== 'undefined') {
   const errorState = (msg) => `<div class="state error">⚠ ${escapeHtml(msg)}</div>`;
   /** Builds monospace markup for a nullable numeric value. */
   const num = (n) => `<span class="mono">${n == null ? '—' : n}</span>`;
+  /** Normalizes browser links to HTTP(S) URLs or same-origin relative URLs. */
+  const safeHref = (url) => safeDashboardUrl(url, window.location.href);
+  /** Builds an external-link element when the URL is valid, otherwise inert text. */
+  const externalLink = (url, label, className = '') => {
+    const href = safeHref(url);
+    const cls = className ? ` class="${escapeHtml(className)}"` : '';
+    return href
+      ? `<a${cls} href="${escapeHtml(href)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`
+      : `<span${cls}>${escapeHtml(label)}</span>`;
+  };
 
   // ── navigation ─────────────────────────────────────────────────────────────
   /** Activates a dashboard view and loads its current data. */
@@ -215,7 +218,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Refreshes navigation badges from the cached overview response. */
-
   function setBadges() {
     const k = state.overview?.kpis;
     if (!k) return;
@@ -249,14 +251,12 @@ if (typeof document !== 'undefined') {
   }
 
   /** Builds the markup for one key-performance indicator card. */
-
   function kpiCard(label, value, sub) {
     return `<div class="kpi"><div class="kpi-label">${escapeHtml(label)}</div>
       <div class="kpi-value mono">${value}</div>${sub ? `<div class="kpi-sub">${sub}</div>` : ''}</div>`;
   }
 
   /** Builds the operations-overview markup from API data. */
-
   function renderDashboard(o, commandCenter) {
     const k = o.kpis;
     const tasks = commandCenter?.tasks || { status: 'error', items: [] };
@@ -267,23 +267,17 @@ if (typeof document !== 'undefined') {
 
     const sourceBadge = (label, source) =>
       `<span class="badge ${escapeHtml(source.status || 'error')}">${escapeHtml(label)} · ${escapeHtml(source.status || 'error')}</span>`;
-    const safeLink = (url, label, className = '') => {
-      const href = safeDashboardUrl(url, window.location.href);
-      return href
-        ? `<a${className ? ` class="${escapeHtml(className)}"` : ''} href="${escapeHtml(href)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`
-        : `<span${className ? ` class="${escapeHtml(className)}"` : ''}>${escapeHtml(label)}</span>`;
-    };
     const taskRows = tasks.items?.length
-      ? tasks.items.map((item) => `<li>${safeLink(item.url, item.title)}<span class="mono muted">${escapeHtml(item.priority || '')} · ${escapeHtml(item.status || '')}</span></li>`).join('')
+      ? tasks.items.map((item) => `<li>${externalLink(item.url, item.title)}<span class="mono muted">${escapeHtml(item.priority || '')} · ${escapeHtml(item.status || '')}</span></li>`).join('')
       : '<li class="muted">No task records available.</li>';
     const prRows = pullRequests.items?.length
-      ? pullRequests.items.slice(0, 8).map((item) => `<li>${safeLink(item.url, `${item.repository || 'repo'} #${item.number}: ${item.title}`)}<span class="mono muted">${item.draft ? 'draft' : 'open'} · ${timeAgo(item.updatedAt)}</span></li>`).join('')
+      ? pullRequests.items.slice(0, 8).map((item) => `<li>${externalLink(item.url, `${item.repository || 'repo'} #${item.number}: ${item.title}`)}<span class="mono muted">${item.draft ? 'draft' : 'open'} · ${timeAgo(item.updatedAt)}</span></li>`).join('')
       : '<li class="muted">No open pull requests available.</li>';
     const serviceRows = services.length
       ? services.map((item) => `<li>${escapeHtml(item.name)} <span class="badge ${escapeHtml(item.status)}">${escapeHtml(item.status)}</span><span class="mono muted">${item.httpStatus ?? '—'} · ${item.latencyMs ?? '—'}ms</span></li>`).join('')
       : '<li class="muted">No service probes available.</li>';
     const attentionRows = attention.length
-      ? attention.slice(0, 8).map((item) => `<li>${safeLink(item.url, item.title)}<span class="mono muted">${escapeHtml(item.source)}</span></li>`).join('')
+      ? attention.slice(0, 8).map((item) => `<li>${externalLink(item.url, item.title)}<span class="mono muted">${escapeHtml(item.source)}</span></li>`).join('')
       : '<li class="muted">Nothing currently requires attention.</li>';
     const cfSummary = cloudflare.status === 'ok'
       ? `${cloudflare.summary.workers} Workers · ${cloudflare.summary.accessApplications} Access apps · ${cloudflare.summary.healthyTunnels} healthy / ${cloudflare.summary.downTunnels} down tunnels`
@@ -320,7 +314,7 @@ if (typeof document !== 'undefined') {
 
     const recent = o.recentPublished.length
       ? o.recentPublished.map((r) =>
-          `<li><a href="${escapeHtml(r.publishedUrl || r.notionUrl)}" target="_blank" rel="noopener">${escapeHtml(r.title || 'Untitled')}</a>
+          `<li>${externalLink(r.publishedUrl || r.notionUrl, r.title || 'Untitled')}
             <span class="mono muted">${escapeHtml(r.publishedDate || '')}</span></li>`).join('')
       : `<li class="muted">Nothing published yet.</li>`;
 
@@ -346,9 +340,9 @@ if (typeof document !== 'undefined') {
       </div>
       <div class="cols command-grid">
         <section class="panel"><h2>Authoritative Tasks</h2><ul class="list">${taskRows}</ul>
-          ${tasks.authoritativeUrl ? safeLink(tasks.authoritativeUrl, 'Open Task Tracker ↗', 'source-link') : ''}</section>
+          ${tasks.authoritativeUrl ? externalLink(tasks.authoritativeUrl, 'Open Task Tracker ↗', 'source-link') : ''}</section>
         <section class="panel"><h2>Open Pull Requests</h2><ul class="list">${prRows}</ul>
-          ${pullRequests.authoritativeUrl ? safeLink(pullRequests.authoritativeUrl, 'Open GitHub PRs ↗', 'source-link') : ''}</section>
+          ${pullRequests.authoritativeUrl ? externalLink(pullRequests.authoritativeUrl, 'Open GitHub PRs ↗', 'source-link') : ''}</section>
       </div>
       <section class="kpi-strip">${kpis}</section>
       <section class="panel"><h2>Pipeline — Active Stages</h2>
@@ -390,7 +384,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Renders the Gate 1 review list and selects a default record. */
-
   function renderQueue() {
     const root = view('queue');
     const listPane = $('.list-pane', root);
@@ -405,7 +398,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Renders the selected Gate 1 record and its source video. */
-
   function renderQueueDetail() {
     const root = view('queue');
     const it = state.queue[state.selectedQueue];
@@ -418,12 +410,12 @@ if (typeof document !== 'undefined') {
         <dt>Category</dt><dd>${escapeHtml(it.category || '—')} / ${escapeHtml(it.subcategory || '—')}</dd>
         <dt>Tags</dt><dd>${(it.tags || []).map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join(' ') || '—'}</dd>
         <dt>Added</dt><dd class="mono">${timeAgo(it.createdTime)} ago</dd>
-        <dt>Video</dt><dd>${it.videoUrl ? `<a href="${escapeHtml(it.videoUrl)}" target="_blank" rel="noopener">Open video ↗</a>` : '—'}</dd>
+        <dt>Video</dt><dd>${it.videoUrl ? externalLink(it.videoUrl, 'Open video ↗') : '—'}</dd>
       </dl>
       <div class="actions">
         <button class="btn green" data-act="approve-transcription" data-id="${escapeHtml(it.id)}">Approve for Transcription</button>
         <button class="btn red" data-act="reject" data-id="${escapeHtml(it.id)}">Reject</button>
-        <a class="btn ghost" href="${escapeHtml(it.notionUrl)}" target="_blank" rel="noopener">Open in Notion ↗</a>
+        ${externalLink(it.notionUrl, 'Open in Notion ↗', 'btn ghost')}
       </div>
       <div class="act-msg"></div>`;
   }
@@ -438,7 +430,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Loads the first filtered page of records awaiting draft review. */
-
   async function loadDrafts() {
     const root = view('drafts');
     state.draftDetails = {};
@@ -457,7 +448,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Derives a compact editorial risk indicator from a comparison report. */
-
   function riskSummary(text = '') {
     const estimate = text.match(/(\d{1,3})\s*%/)?.[1];
     const unsupported = (text.match(/POSSIBLY UNSUPPORTED[\s\S]*?(?=CHANGED DETAILS|COVERAGE ESTIMATE|$)/i)?.[0].match(/^-/gm) || []).length;
@@ -467,7 +457,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Renders draft filters, selectable records, pagination, and bulk controls. */
-
   function renderDrafts() {
     const root = view('drafts'), listPane = $('.list-pane', root);
     const tools = `<div class="review-tools">
@@ -493,7 +482,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Appends the next cursor page of draft-review records. */
-
   async function loadMoreDrafts() {
     if (state.draftsLoading || !state.draftsHasMore || !state.draftsCursor) return;
     state.draftsLoading = true;
@@ -506,7 +494,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Loads the transcript, draft, comparison, notes, and audit data for one record. */
-
   async function loadDraftDetail(pageId) {
     if (!pageId || state.draftDetails[pageId] || state.draftDetailLoading === pageId) return;
     state.draftDetailLoading = pageId; renderDraftDetail();
@@ -516,7 +503,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Renders the complete Gate 2 comparison and editing workspace. */
-
   function renderDraftDetail() {
     const root = view('drafts'), summary = state.drafts[state.selectedDraft], pane = $('.detail-pane', root);
     if (!summary || !pane) { if (pane) pane.innerHTML = ''; return; }
@@ -533,7 +519,7 @@ if (typeof document !== 'undefined') {
       <section class="review-section"><div class="section-head"><h3>Editable Blog Draft</h3><span id="draft-count" class="mono muted">${detail.wordCount} words</span></div><textarea id="draft-editor" class="draft-editor">${escapeHtml(detail.blogDraft || '')}</textarea><details><summary>Rendered HTML preview</summary><iframe id="draft-preview" class="draft-preview" sandbox srcdoc="${escapeHtml(detail.blogDraft || '')}"></iframe></details></section></div>
       <label class="review-notes">Reviewer notes<textarea id="reviewer-notes">${escapeHtml(detail.reviewerNotes || '')}</textarea></label>
       <details class="audit"><summary>Review audit history</summary><pre>${escapeHtml(detail.reviewAuditLog || 'No dashboard actions recorded yet.')}</pre></details>
-      <div class="actions"><a class="btn ghost" href="${escapeHtml(detail.notionUrl)}" target="_blank" rel="noopener">Open in Notion ↗</a>
+      <div class="actions">${externalLink(detail.notionUrl, 'Open in Notion ↗', 'btn ghost')}
       <button class="btn purple" data-act="save-draft" data-id="${detail.id}">Save Draft</button>
       <button class="btn amber" data-act="return-revision" data-id="${detail.id}">Return for Revision</button>
       <button class="btn red" data-act="reject" data-id="${detail.id}">Reject</button>
@@ -570,7 +556,7 @@ if (typeof document !== 'undefined') {
       root.innerHTML = `<header class="page-head"><h1>Errors &amp; Exceptions</h1></header>
         <table class="tbl"><thead><tr><th>Title</th><th>Status</th><th>Last Error</th><th>Source</th></tr></thead>
         <tbody>${data.items.map((e) => `<tr>
-          <td><a href="${escapeHtml(e.notionUrl)}" target="_blank" rel="noopener">${escapeHtml(e.title || 'Untitled')}</a></td>
+          <td>${externalLink(e.notionUrl, e.title || 'Untitled')}</td>
           <td><span class="pill ${statusColor(e.status)}"></span>${escapeHtml(e.status || '')}</td>
           <td class="muted">${escapeHtml(e.lastError || '—')}</td>
           <td>${escapeHtml((e.source || []).join(', '))}</td></tr>`).join('')}</tbody></table>`;
@@ -589,7 +575,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Validates and submits a single governed review action. */
-
   async function runAction(btn) {
     const act = btn.dataset.act, pageId = btn.dataset.id;
     const destructive = ['reject', 'return-revision', 'approve-publish', 'generate-comparison'];
@@ -619,7 +604,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Validates and submits a guarded non-publishing bulk action. */
-
   async function runBulk() {
     const ids = [...state.selectedDraftIds], action = $('#bulk-action')?.value;
     if (!ids.length) return toast('Select at least one draft', true);
@@ -633,7 +617,6 @@ if (typeof document !== 'undefined') {
   }
 
   /** Registers dashboard event handlers and opens the overview. */
-
   function init() {
     document.body.addEventListener('input', (ev) => {
       if (ev.target.id === 'draft-editor') {
@@ -674,4 +657,3 @@ if (typeof document !== 'undefined') {
 
   document.addEventListener('DOMContentLoaded', init);
 }
-
