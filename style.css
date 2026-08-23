@@ -120,6 +120,43 @@ h1, h2, h3 { font-family: Rajdhani, "DM Sans", sans-serif; line-height: 1; margi
 .technology .label, .technology .eyebrow { color: var(--cyan); }
 .entertainment .label, .entertainment .eyebrow { color: var(--lime); }
 .productivity .label, .productivity .eyebrow { color: #FFFFFF; }
+.article-template-shell { width: min(var(--max), calc(100% - 2rem)); }
+.article-lede { max-width: 940px; }
+.article-lede .dek { max-width: 780px; margin: 1.2rem 0 0; }
+.article-hero-media { margin: 2rem 0 3.2rem; }
+.article-hero-media .article-image { margin: 0; aspect-ratio: 16 / 7; }
+.article-hero-media figcaption, .article-inline-art figcaption { margin-top: .7rem; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+.article-grid { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.article-main-column { min-width: 0; }
+.article-side-rail { position: sticky; top: 108px; display: grid; gap: 1rem; }
+.rail-card { border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)), var(--panel); padding: 1rem; }
+.rail-card h2 { margin: .5rem 0; font-size: 2rem; }
+.rail-card p { color: var(--muted); line-height: 1.6; margin: 0 0 1rem; }
+.rail-card a { color: var(--cyan); font-weight: 900; text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; }
+.rail-card.compact p { margin-bottom: 0; }
+.tldr-box { border: 1px solid var(--line); border-left: 4px solid var(--cyan); border-radius: var(--radius); background: rgba(17,21,27,.82); padding: 1.1rem 1.25rem; box-shadow: 0 20px 44px rgba(0,0,0,.2); }
+.tldr-box strong { display: block; color: var(--cyan); font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .45rem; }
+.tldr-box p { margin: 0; color: #DDE2EA; line-height: 1.7; }
+.article-content h3 { margin-top: 1.6rem; font-size: 1.55rem; color: var(--cyan); }
+.article-content p, .article-content li { color: #DDE2EA; }
+.article-content ul, .article-content ol { padding-left: 1.25rem; }
+.article-content blockquote { margin: 2rem 0; padding: 1.1rem 1.25rem; border-left: 4px solid var(--lime); background: rgba(164,255,0,.06); color: var(--white); font-size: 1.25rem; line-height: 1.65; }
+.article-content a { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+.article-content code { background: rgba(255,255,255,.08); color: var(--lime); border: 1px solid var(--line); border-radius: 4px; padding: .12rem .35rem; }
+.article-content pre { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: #080A0D; padding: 1rem; }
+.article-inline-art { margin: 2.5rem 0; }
+.article-inline-art img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 22px 48px rgba(0,0,0,.24); }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.related-grid .post-card a { min-height: 280px; }
+.entertainment .dek, .entertainment .tldr-box { border-left-color: var(--lime); }
+.productivity .dek, .productivity .tldr-box { border-left-color: var(--white); }
+.entertainment .tldr-box strong, .entertainment .rail-card a, .entertainment .article-content h3 { color: var(--lime); }
+.productivity .tldr-box strong, .productivity .rail-card a, .productivity .article-content h3 { color: var(--white); }
+@media (max-width: 980px) {
+  .article-grid { grid-template-columns: 1fr; }
+  .article-side-rail { position: static; grid-template-columns: repeat(2, 1fr); }
+  .related-grid { grid-template-columns: 1fr; }
+}
 @media (max-width: 820px) {
   .site-header { position: static; align-items: flex-start; flex-direction: column; }
   nav { gap: .9rem; }
@@ -133,4 +170,6 @@ h1, h2, h3 { font-family: Rajdhani, "DM Sans", sans-serif; line-height: 1; margi
   .post-card.feature-card { grid-column: span 1; }
   .ticker { gap: 1rem; }
   .ticker p:nth-of-type(n+3) { display: none; }
+  .article-side-rail { grid-template-columns: 1fr; }
+  .article-lede .dek { font-size: 1.15rem; }
 }
