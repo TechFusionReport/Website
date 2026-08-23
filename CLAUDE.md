@@ -29,7 +29,7 @@ As of 2026-08-23, the `preview` branch contains the replacement public-facing bl
 - Homepage: large animated TechFusion Report logo hero, simplified first viewport, latest-9 horizontal carousel.
 - Blog page: category hub for Technology, Entertainment, and Productivity.
 - Category pages: `technology.html`, `entertainment.html`, `productivity.html`, each showing only relevant section articles.
-- Articles: static HTML files in `_posts/YYYY-MM-DD-slug.html`.
+- Articles: static HTML files in `_posts/YYYY-MM-DD-slug.html` generated from `blog-post-template.html`.
 - Shared styles: `style.css` using Rajdhani, DM Sans, cyan `#00D4FF`, lime `#A4FF00`, white, and dark `#0A0C10`.
 - Brand artwork uses existing files under `/graphics/` or canonical `https://www.techfusionreport.com/graphics/...` URLs.
 
@@ -45,6 +45,45 @@ When the pipeline publishes a Notion record, it should create or update:
 _posts/YYYY-MM-DD-slug.html
 posts.json
 ```
+
+Each generated post should use `blog-post-template.html` as the canonical shell. The legacy `article-template..html.html` has been aligned to the same layout for compatibility, but new automation should target `blog-post-template.html`.
+
+The article template expects these fields:
+
+```text
+TITLE
+META_DESCRIPTION
+SLUG
+IMAGE
+IMAGE_ALT
+IMAGE_CAPTION
+CATEGORY
+CATEGORY_SLUG
+SUBCATEGORY
+TAGS
+DATE
+UPDATED_DATE
+DISPLAY_DATE
+READ_TIME
+AUTHOR
+DEK
+TLDR
+BODY_HTML
+INLINE_IMAGE
+INLINE_IMAGE_ALT
+INLINE_IMAGE_CAPTION
+BODY_CONTINUED_HTML
+CATEGORY_DESCRIPTION
+RELATED_ARTICLES
+```
+
+Template rules:
+
+- `CATEGORY_SLUG` should be `technology`, `entertainment`, or `productivity`.
+- Use the primary article artwork in `IMAGE`; it drives the hero image, Open Graph image, Twitter card image, and schema image.
+- If there is no second artwork piece, the publisher can omit the inline figure block before writing the final HTML.
+- `RELATED_ARTICLES` should render small `.post-card` links, preferably from the same category first.
+- Keep the public article page editorial and readable; avoid dashboard, command surface, or pipeline language in reader-facing copy.
 
 Each `posts.json` entry should keep this shape:
 
@@ -84,6 +123,8 @@ blog.html                   — Category hub / blog entry
 technology.html             — Technology category page
 entertainment.html          — Entertainment category page
 productivity.html           — Productivity category page
+blog-post-template.html     — Canonical pipeline article template
+article-template..html.html — Legacy template kept aligned for compatibility
 style.css                   — Global stylesheet
 posts.json                  — Blog post index consumed by frontend/pipeline
 _posts/                     — Individual post HTML files
