@@ -29,7 +29,8 @@ nav { display: flex; align-items: center; gap: clamp(.75rem, 2.2vw, 2rem); flex-
 .nav-link.technology:hover, .nav-link.technology.active { color: var(--cyan); }
 .nav-link.entertainment:hover, .nav-link.entertainment.active { color: var(--lime); }
 .nav-link.productivity:hover, .nav-link.productivity.active { color: var(--white); }
-.nav-link.home:hover, .nav-link.blog:hover, .nav-link.home.active, .nav-link.blog.active { color: var(--cyan); }
+.nav-link.home:hover, .nav-link.blog:hover, .nav-link.about:hover, .nav-link.contact:hover, .nav-link.home.active, .nav-link.blog.active, .nav-link.about.active, .nav-link.contact.active { color: var(--cyan); }
+.empty-note { width: min(var(--max), calc(100% - 2rem)); margin: 0 auto 2.5rem; color: var(--muted); line-height: 1.65; }
 .nav-submenu, .nav-panel { position: absolute; top: 100%; left: 50%; width: max-content; min-width: 190px; transform: translateX(-50%) translateY(-6px); display: grid; gap: .35rem; padding: .8rem; background: rgba(8,10,13,.98); border: 1px solid var(--line); border-top: 2px solid currentColor; border-radius: 0 0 var(--radius) var(--radius); box-shadow: 0 20px 40px rgba(0,0,0,.38); opacity: 0; pointer-events: none; transition: .16s ease; }
 .nav-panel { grid-template-columns: 1fr; width: 230px; min-width: 230px; gap: .5rem; }
 .nav-group.technology .nav-panel { color: var(--cyan); }
