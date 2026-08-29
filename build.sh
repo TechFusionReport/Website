@@ -11,3 +11,4 @@ done
 # Subdirectories with web content
 cp -r graphics dist/
 [ -d "_posts" ] && cp -r _posts dist/ || true
+[ -d "ops" ] && cp -r ops dist/ || true
