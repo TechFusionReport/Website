@@ -159,6 +159,7 @@ if (typeof document !== 'undefined') {
   const state = {
     overview: null,
     commandCenter: null,
+    observability: null,
     queue: [],
     drafts: [],
     draftDetails: {},
@@ -208,6 +209,7 @@ if (typeof document !== 'undefined') {
     document.querySelectorAll('.nav-item').forEach((n) => n.classList.toggle('current', n.dataset.view === name));
     view(name)?.classList.add('active');
     if (name === 'dashboard') loadDashboard();
+    if (name === 'infrastructure') loadInfrastructure();
     if (name === 'queue') loadQueue();
     if (name === 'drafts') loadDrafts();
     if (name === 'board') loadBoard();
@@ -253,6 +255,46 @@ if (typeof document !== 'undefined') {
   function kpiCard(label, value, sub) {
     return `<div class="kpi"><div class="kpi-label">${escapeHtml(label)}</div>
       <div class="kpi-value mono">${value}</div>${sub ? `<div class="kpi-sub">${sub}</div>` : ''}</div>`;
+  }
+
+  // ── infrastructure / observability ───────────────────────────────────────────
+  async function loadInfrastructure() {
+    const root = view('infrastructure');
+    root.innerHTML = loading('Loading Prometheus telemetry…');
+    try {
+      state.observability = await api('/observability');
+      root.innerHTML = renderInfrastructure(state.observability);
+    } catch (e) {
+      root.innerHTML = `<header class="page-head"><h1>Infrastructure</h1></header>${errorState(e.message)}`;
+    }
+  }
+
+  function metricValue(points = []) {
+    const values = points.map((point) => point.value).filter(Number.isFinite);
+    if (!values.length) return '—';
+    return `${(values.reduce((sum, value) => sum + value, 0) / values.length).toFixed(1)}%`;
+  }
+
+  function renderInfrastructure(data) {
+    const targets = data?.targets || { total: 0, healthy: 0, down: 0, items: [] };
+    const alerts = data?.alerts || { firing: 0, items: [] };
+    const status = data?.status || 'unavailable';
+    const grafana = safeDashboardUrl(data?.grafana?.url, window.location.href);
+    const rows = targets.items?.length
+      ? targets.items.map((target) => `<tr><td>${escapeHtml(target.job || 'unknown')}</td><td class="mono">${escapeHtml(target.instance || '—')}</td><td><span class="pill ${target.health === 'up' ? 'green' : 'red'}"></span>${escapeHtml(target.health)}</td><td class="muted">${escapeHtml(target.lastError || '—')}</td><td class="mono muted">${timeAgo(target.lastScrape)}</td></tr>`).join('')
+      : '<tr><td colspan="5" class="muted">No scrape-target data available.</td></tr>';
+    return `<header class="page-head"><div><h1>Infrastructure</h1><p class="muted">Prometheus telemetry · Grafana dashboards</p></div>
+      <div class="header-actions"><span class="badge ${escapeHtml(status)}">${escapeHtml(status)}</span>${grafana ? `<a class="btn ghost" href="${escapeHtml(grafana)}" target="_blank" rel="noopener">Open Grafana ↗</a>` : ''}</div></header>
+      ${data?.reason ? `<div class="state error">⚠ ${escapeHtml(data.reason)}</div>` : ''}
+      <div class="kpis infra-kpis">
+        ${kpiCard('Targets healthy', `${targets.healthy}/${targets.total}`, targets.down ? `${targets.down} down` : 'All reporting')}
+        ${kpiCard('Firing alerts', alerts.firing ?? 0, alerts.firing ? 'Needs attention' : 'None firing')}
+        ${kpiCard('Average CPU', metricValue(data?.metrics?.cpu), '5-minute rate')}
+        ${kpiCard('Average memory', metricValue(data?.metrics?.memory), 'Current utilization')}
+        ${kpiCard('Average disk', metricValue(data?.metrics?.disk), 'Non-temporary filesystems')}
+      </div>
+      <section class="panel"><div class="section-head"><h2>Prometheus scrape targets</h2><span class="mono muted">Updated ${timeAgo(data?.generatedAt)}</span></div>
+        <table class="tbl"><thead><tr><th>Job</th><th>Instance</th><th>Health</th><th>Last error</th><th>Last scrape</th></tr></thead><tbody>${rows}</tbody></table></section>`;
   }
 
   /** Builds the operations-overview markup from API data. */
