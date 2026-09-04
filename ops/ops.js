@@ -97,6 +97,7 @@ export function escapeHtml(s) {
 }
 
 export function safeDashboardUrl(rawUrl, baseUrl = 'https://techfusionreport.com/') {
+  if (typeof rawUrl !== 'string' || !rawUrl.trim()) return null;
   try {
     const base = new URL(baseUrl);
     const url = new URL(rawUrl, base);
@@ -258,6 +259,7 @@ if (typeof document !== 'undefined') {
   }
 
   // ── infrastructure / observability ───────────────────────────────────────────
+  /** Loads the authenticated Prometheus summary for the Infrastructure view. */
   async function loadInfrastructure() {
     const root = view('infrastructure');
     root.innerHTML = loading('Loading Prometheus telemetry…');
@@ -269,26 +271,43 @@ if (typeof document !== 'undefined') {
     }
   }
 
+  /** Formats an average percentage from a possibly missing metric series. */
   function metricValue(points = []) {
-    const values = points.map((point) => point.value).filter(Number.isFinite);
+    const values = (Array.isArray(points) ? points : []).flatMap((point) => {
+      const rawValue = point?.value;
+      if (rawValue === null || rawValue === undefined || rawValue === '') return [];
+      const value = Number(rawValue);
+      return Number.isFinite(value) ? [value] : [];
+    });
     if (!values.length) return '—';
     return `${(values.reduce((sum, value) => sum + value, 0) / values.length).toFixed(1)}%`;
   }
 
+  /** Builds the Infrastructure view without turning unavailable data into health. */
   function renderInfrastructure(data) {
-    const targets = data?.targets || { total: 0, healthy: 0, down: 0, items: [] };
-    const alerts = data?.alerts || { firing: 0, items: [] };
+    const targets = data?.targets || { items: [] };
+    const alerts = data?.alerts || { items: [] };
     const status = data?.status || 'unavailable';
     const grafana = safeDashboardUrl(data?.grafana?.url, window.location.href);
-    const rows = targets.items?.length
-      ? targets.items.map((target) => `<tr><td>${escapeHtml(target.job || 'unknown')}</td><td class="mono">${escapeHtml(target.instance || '—')}</td><td><span class="pill ${target.health === 'up' ? 'green' : 'red'}"></span>${escapeHtml(target.health)}</td><td class="muted">${escapeHtml(target.lastError || '—')}</td><td class="mono muted">${timeAgo(target.lastScrape)}</td></tr>`).join('')
+    const hasNumber = (value) => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value));
+    const hasTargetCounts = hasNumber(targets.healthy) && hasNumber(targets.total);
+    const hasAlertCount = hasNumber(alerts.firing);
+    const targetValue = hasTargetCounts ? `${Number(targets.healthy)}/${Number(targets.total)}` : '—';
+    const targetSub = hasTargetCounts
+      ? (hasNumber(targets.down) && Number(targets.down) > 0 ? `${Number(targets.down)} down` : 'All reporting')
+      : 'Unavailable';
+    const alertValue = hasAlertCount ? Number(alerts.firing) : '—';
+    const alertSub = hasAlertCount ? (Number(alerts.firing) > 0 ? 'Needs attention' : 'None firing') : 'Unavailable';
+    const targetItems = Array.isArray(targets.items) ? targets.items : [];
+    const rows = targetItems.length
+      ? targetItems.map((target) => `<tr><td>${escapeHtml(target.job || 'unknown')}</td><td class="mono">${escapeHtml(target.instance || '—')}</td><td><span class="pill ${target.health === 'up' ? 'green' : 'red'}"></span>${escapeHtml(target.health)}</td><td class="muted">${escapeHtml(target.lastError || '—')}</td><td class="mono muted">${timeAgo(target.lastScrape)}</td></tr>`).join('')
       : '<tr><td colspan="5" class="muted">No scrape-target data available.</td></tr>';
     return `<header class="page-head"><div><h1>Infrastructure</h1><p class="muted">Prometheus telemetry · Grafana dashboards</p></div>
       <div class="header-actions"><span class="badge ${escapeHtml(status)}">${escapeHtml(status)}</span>${grafana ? `<a class="btn ghost" href="${escapeHtml(grafana)}" target="_blank" rel="noopener">Open Grafana ↗</a>` : ''}</div></header>
       ${data?.reason ? `<div class="state error">⚠ ${escapeHtml(data.reason)}</div>` : ''}
       <div class="kpis infra-kpis">
-        ${kpiCard('Targets healthy', `${targets.healthy}/${targets.total}`, targets.down ? `${targets.down} down` : 'All reporting')}
-        ${kpiCard('Firing alerts', alerts.firing ?? 0, alerts.firing ? 'Needs attention' : 'None firing')}
+        ${kpiCard('Targets healthy', targetValue, targetSub)}
+        ${kpiCard('Firing alerts', alertValue, alertSub)}
         ${kpiCard('Average CPU', metricValue(data?.metrics?.cpu), '5-minute rate')}
         ${kpiCard('Average memory', metricValue(data?.metrics?.memory), 'Current utilization')}
         ${kpiCard('Average disk', metricValue(data?.metrics?.disk), 'Non-temporary filesystems')}
@@ -716,4 +735,3 @@ if (typeof document !== 'undefined') {
 
   document.addEventListener('DOMContentLoaded', init);
 }
-
