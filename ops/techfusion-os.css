@@ -81,3 +81,13 @@
     text-align: center;
   }
 }
+
+
+.header-actions { display: flex; align-items: center; gap: .65rem; flex-wrap: wrap; }
+.infra-kpis { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.badge.healthy { color: #4ade80; border-color: #26633d; background: #10271b; }
+.badge.degraded { color: #fbbf24; border-color: #6d591d; background: #2c2510; }
+.badge.unavailable { color: #fb7185; border-color: #71303b; background: #30151a; }
+
+@media (max-width: 1100px) { .infra-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .infra-kpis { grid-template-columns: 1fr; } }
