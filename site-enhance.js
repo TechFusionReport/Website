@@ -38,3 +38,37 @@
   window.addEventListener("resize", requestUpdate);
   update();
 }());
+
+(function () {
+  // Mobile nav toggle: every static page shares the same generated header
+  // markup (no per-page hamburger button), so inject one at runtime. CSS in
+  // style.css hides/collapses .primary-nav under 820px and only shows this
+  // button at that width, so this is a no-op above 820px.
+  const header = document.querySelector(".site-header");
+  const nav = header ? header.querySelector(".primary-nav") : null;
+  if (!header || !nav) return;
+
+  if (!nav.id) nav.id = "primary-nav";
+
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "nav-toggle";
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("aria-controls", nav.id);
+  toggle.setAttribute("aria-label", "Toggle navigation menu");
+  toggle.innerHTML = "<span></span><span></span><span></span>";
+
+  header.insertBefore(toggle, nav);
+
+  toggle.addEventListener("click", () => {
+    const open = header.classList.toggle("nav-open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 820 && header.classList.contains("nav-open")) {
+      header.classList.remove("nav-open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
+}());
