@@ -40,3 +40,10 @@ The Command Center consumes `GET /ops/api/command-center` from Automations. The 
 - Direct service probes for TechFusion API, the public Website, and OmniRoute.
 
 Every source returns an explicit `status` value. Missing credentials and upstream failures render as `unavailable` or `error`; the frontend must never replace them with assumed healthy state. Links always return operators to the authoritative record.
+
+
+## Observability data contract
+
+The Infrastructure view consumes the Access-gated `GET /ops/api/observability` endpoint from Automations. Prometheus remains the authoritative metric source and Grafana remains the detailed dashboard. The frontend renders normalized target health, firing-alert counts, and CPU/memory/disk utilization; it never connects to Prometheus directly or receives Cloudflare Access service-token credentials.
+
+Prometheus and Grafana must both be protected by Cloudflare Access before production rollout. Public Status uses a separate sanitized aggregate contract and never receives target identities, internal addresses, raw labels, scrape URLs, or detailed metrics.
