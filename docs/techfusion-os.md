@@ -40,3 +40,11 @@ The Command Center consumes `GET /ops/api/command-center` from Automations. The 
 - Direct service probes for TechFusion API, the public Website, and OmniRoute.
 
 Every source returns an explicit `status` value. Missing credentials and upstream failures render as `unavailable` or `error`; the frontend must never replace them with assumed healthy state. Links always return operators to the authoritative record.
+
+## Unified action queue
+
+The dashboard consumes `GET /ops/api/attention` as its operator-first “Action Required” view. The backend normalizes editorial review work, quality exceptions, capped transcription/publishing failures, critical tasks, draft pull requests, and service-health failures into one priority-ordered response.
+
+The response is a projection only. Notion remains authoritative for content state, the Task Tracker remains authoritative for work state, GitHub remains authoritative for PR state, and runtime systems remain authoritative for health. Direct actions use the existing governed `/ops/api/actions/*` endpoints; human authorization checkboxes and the Status ownership contract remain unchanged.
+
+Every content projection includes `jobId: tfr:<normalized Notion page id>`. This identifier is the cross-system correlation key; it does not create a second record or replace the Notion page ID.

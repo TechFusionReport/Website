@@ -72,6 +72,29 @@
   margin-top: 10px;
   font-size: 12px;
 }
+.attention-list .attention-item {
+  align-items: flex-start;
+  padding: 12px 0;
+}
+.attention-copy {
+  display: grid;
+  flex: 1;
+  gap: 4px;
+  min-width: 0;
+}
+.attention-copy > a,
+.attention-copy > span:not(.badge) {
+  overflow-wrap: anywhere;
+}
+.btn.compact {
+  font-size: 11px;
+  padding: 5px 9px;
+  white-space: nowrap;
+}
+.compact-actions {
+  flex-wrap: nowrap;
+  margin-left: auto;
+}
 @media (max-width: 820px) {
   .source-strip {
     align-items: stretch;
@@ -79,5 +102,11 @@
   }
   .source-strip .badge {
     text-align: center;
+  }
+  .attention-list .attention-item {
+    flex-direction: column;
+  }
+  .compact-actions {
+    margin-left: 0;
   }
 }

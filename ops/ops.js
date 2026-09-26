@@ -159,6 +159,7 @@ if (typeof document !== 'undefined') {
   const state = {
     overview: null,
     commandCenter: null,
+    attention: null,
     queue: [],
     drafts: [],
     draftDetails: {},
@@ -239,10 +240,18 @@ if (typeof document !== 'undefined') {
         services: [],
         attention: [],
       }));
+      const attention = await api('/attention').catch((error) => ({
+        generatedAt: o.generatedAt,
+        count: 0,
+        criticalCount: 0,
+        items: [],
+        error: error.message,
+      }));
       state.overview = o;
       state.commandCenter = commandCenter;
+      state.attention = attention;
       setBadges();
-      root.innerHTML = renderDashboard(o, commandCenter);
+      root.innerHTML = renderDashboard(o, commandCenter, attention);
     } catch (e) {
       root.innerHTML = errorState(e.message);
     }
@@ -257,13 +266,13 @@ if (typeof document !== 'undefined') {
 
   /** Builds the operations-overview markup from API data. */
 
-  function renderDashboard(o, commandCenter) {
+  function renderDashboard(o, commandCenter, unifiedAttention = {}) {
     const k = o.kpis;
     const tasks = commandCenter?.tasks || { status: 'error', items: [] };
     const pullRequests = commandCenter?.pullRequests || { status: 'error', items: [] };
     const cloudflare = commandCenter?.cloudflare || { status: 'error' };
     const services = commandCenter?.services || [];
-    const attention = commandCenter?.attention || [];
+    const attention = unifiedAttention?.items || commandCenter?.attention || [];
 
     const sourceBadge = (label, source) =>
       `<span class="badge ${escapeHtml(source.status || 'error')}">${escapeHtml(label)} · ${escapeHtml(source.status || 'error')}</span>`;
@@ -283,8 +292,24 @@ if (typeof document !== 'undefined') {
       ? services.map((item) => `<li>${escapeHtml(item.name)} <span class="badge ${escapeHtml(item.status)}">${escapeHtml(item.status)}</span><span class="mono muted">${item.httpStatus ?? '—'} · ${item.latencyMs ?? '—'}ms</span></li>`).join('')
       : '<li class="muted">No service probes available.</li>';
     const attentionRows = attention.length
-      ? attention.slice(0, 8).map((item) => `<li>${safeLink(item.url, item.title)}<span class="mono muted">${escapeHtml(item.source)}</span></li>`).join('')
-      : '<li class="muted">Nothing currently requires attention.</li>';
+      ? attention.slice(0, 12).map((item) => {
+        const destination = item.externalUrl || item.notionUrl;
+        const title = destination ? safeLink(destination, item.title) : escapeHtml(item.title);
+        const inspect = item.targetView
+          ? `<button class="btn ghost compact" data-view="${escapeHtml(item.targetView)}">Inspect</button>`
+          : destination ? safeLink(destination, 'Open ↗', 'btn ghost compact') : '';
+        const directAction = item.action
+          ? `<button class="btn amber compact" data-act="${escapeHtml(item.action)}" data-id="${escapeHtml(item.id)}">Re-authorize</button>`
+          : '';
+        return `<li class="attention-item">
+          <div class="attention-copy"><span class="badge ${item.priority === 'critical' ? 'error' : 'degraded'}">${escapeHtml(item.priority || 'high')}</span>
+          ${title}<span class="muted">${escapeHtml(item.recommendedAction || '')}</span>
+          ${item.reason ? `<span class="mono muted">${escapeHtml(item.reason)}</span>` : ''}
+          ${item.jobId ? `<span class="mono muted">${escapeHtml(item.jobId)} · attempt ${item.attemptCount ?? 0}</span>` : ''}</div>
+          <div class="actions compact-actions">${inspect}${directAction}</div>
+        </li>`;
+      }).join('')
+      : `<li class="muted">${unifiedAttention?.error ? `Action queue unavailable: ${escapeHtml(unifiedAttention.error)}` : 'Nothing currently requires attention.'}</li>`;
     const cfSummary = cloudflare.status === 'ok'
       ? `${cloudflare.summary.workers} Workers · ${cloudflare.summary.accessApplications} Access apps · ${cloudflare.summary.healthyTunnels} healthy / ${cloudflare.summary.downTunnels} down tunnels`
       : escapeHtml(cloudflare.reason || 'Cloudflare state unavailable');
@@ -340,7 +365,7 @@ if (typeof document !== 'undefined') {
         ${sourceBadge('Cloudflare', cloudflare)}
       </section>
       <div class="cols command-grid">
-        <section class="panel"><h2>Action Required</h2><ul class="list">${attentionRows}</ul></section>
+        <section class="panel"><div class="section-head"><h2>Action Required</h2><span class="mono muted">${unifiedAttention?.criticalCount ?? 0} critical · ${unifiedAttention?.count ?? attention.length} total</span></div><ul class="list attention-list">${attentionRows}</ul></section>
         <section class="panel"><h2>System Health</h2><ul class="health">${serviceRows}</ul>
           <div class="source-note">${cfSummary}</div></section>
       </div>
@@ -613,7 +638,9 @@ if (typeof document !== 'undefined') {
       } else {
         const o = await api('/overview'); state.overview = o; setBadges();
         if (view('queue').classList.contains('active')) { state.selectedQueue = null; await loadQueue(); }
-        else await loadDrafts();
+        else if (view('drafts').classList.contains('active')) await loadDrafts();
+        else if (view('errors').classList.contains('active')) await loadErrors();
+        else await loadDashboard();
       }
     } catch (e) { btn.disabled = false; toast(e.message, true); }
   }
