@@ -97,6 +97,7 @@ export function escapeHtml(s) {
 }
 
 export function safeDashboardUrl(rawUrl, baseUrl = 'https://techfusionreport.com/') {
+  if (typeof rawUrl !== 'string' || !rawUrl.trim()) return null;
   try {
     const base = new URL(baseUrl);
     const url = new URL(rawUrl, base);
@@ -159,6 +160,7 @@ if (typeof document !== 'undefined') {
   const state = {
     overview: null,
     commandCenter: null,
+    observability: null,
     attention: null,
     queue: [],
     drafts: [],
@@ -209,6 +211,7 @@ if (typeof document !== 'undefined') {
     document.querySelectorAll('.nav-item').forEach((n) => n.classList.toggle('current', n.dataset.view === name));
     view(name)?.classList.add('active');
     if (name === 'dashboard') loadDashboard();
+    if (name === 'infrastructure') loadInfrastructure();
     if (name === 'queue') loadQueue();
     if (name === 'drafts') loadDrafts();
     if (name === 'board') loadBoard();
@@ -222,7 +225,7 @@ if (typeof document !== 'undefined') {
     if (!k) return;
     $('#badge-queue').textContent = k.gate1Backlog ?? 0;
     $('#badge-drafts').textContent = k.gate2Backlog ?? 0;
-    $('#badge-errors').textContent = (k.errorCount ?? 0) + (k.rejectionCount ?? 0);
+    $('#badge-errors').textContent = k.errorCount ?? 0;
   }
 
   // ── dashboard ──────────────────────────────────────────────────────────────
@@ -262,6 +265,64 @@ if (typeof document !== 'undefined') {
   function kpiCard(label, value, sub) {
     return `<div class="kpi"><div class="kpi-label">${escapeHtml(label)}</div>
       <div class="kpi-value mono">${value}</div>${sub ? `<div class="kpi-sub">${sub}</div>` : ''}</div>`;
+  }
+
+  // ── infrastructure / observability ───────────────────────────────────────────
+  /** Loads the authenticated Prometheus summary for the Infrastructure view. */
+  async function loadInfrastructure() {
+    const root = view('infrastructure');
+    root.innerHTML = loading('Loading Prometheus telemetry…');
+    try {
+      state.observability = await api('/observability');
+      root.innerHTML = renderInfrastructure(state.observability);
+    } catch (e) {
+      root.innerHTML = `<header class="page-head"><h1>Infrastructure</h1></header>${errorState(e.message)}`;
+    }
+  }
+
+  /** Formats an average percentage from a possibly missing metric series. */
+  function metricValue(points = []) {
+    const values = (Array.isArray(points) ? points : []).flatMap((point) => {
+      const rawValue = point?.value;
+      if (rawValue === null || rawValue === undefined || rawValue === '') return [];
+      const value = Number(rawValue);
+      return Number.isFinite(value) ? [value] : [];
+    });
+    if (!values.length) return '—';
+    return `${(values.reduce((sum, value) => sum + value, 0) / values.length).toFixed(1)}%`;
+  }
+
+  /** Builds the Infrastructure view without turning unavailable data into health. */
+  function renderInfrastructure(data) {
+    const targets = data?.targets || { items: [] };
+    const alerts = data?.alerts || { items: [] };
+    const status = data?.status || 'unavailable';
+    const grafana = safeDashboardUrl(data?.grafana?.url, window.location.href);
+    const hasNumber = (value) => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value));
+    const hasTargetCounts = hasNumber(targets.healthy) && hasNumber(targets.total);
+    const hasAlertCount = hasNumber(alerts.firing);
+    const targetValue = hasTargetCounts ? `${Number(targets.healthy)}/${Number(targets.total)}` : '—';
+    const targetSub = hasTargetCounts
+      ? (hasNumber(targets.down) && Number(targets.down) > 0 ? `${Number(targets.down)} down` : 'All reporting')
+      : 'Unavailable';
+    const alertValue = hasAlertCount ? Number(alerts.firing) : '—';
+    const alertSub = hasAlertCount ? (Number(alerts.firing) > 0 ? 'Needs attention' : 'None firing') : 'Unavailable';
+    const targetItems = Array.isArray(targets.items) ? targets.items : [];
+    const rows = targetItems.length
+      ? targetItems.map((target) => `<tr><td>${escapeHtml(target.job || 'unknown')}</td><td class="mono">${escapeHtml(target.instance || '—')}</td><td><span class="pill ${target.health === 'up' ? 'green' : 'red'}"></span>${escapeHtml(target.health)}</td><td class="muted">${escapeHtml(target.lastError || '—')}</td><td class="mono muted">${timeAgo(target.lastScrape)}</td></tr>`).join('')
+      : '<tr><td colspan="5" class="muted">No scrape-target data available.</td></tr>';
+    return `<header class="page-head"><div><h1>Infrastructure</h1><p class="muted">Prometheus telemetry · Grafana dashboards</p></div>
+      <div class="header-actions"><span class="badge ${escapeHtml(status)}">${escapeHtml(status)}</span>${grafana ? `<a class="btn ghost" href="${escapeHtml(grafana)}" target="_blank" rel="noopener">Open Grafana ↗</a>` : ''}</div></header>
+      ${data?.reason ? `<div class="state error">⚠ ${escapeHtml(data.reason)}</div>` : ''}
+      <div class="kpis infra-kpis">
+        ${kpiCard('Targets healthy', targetValue, targetSub)}
+        ${kpiCard('Firing alerts', alertValue, alertSub)}
+        ${kpiCard('Average CPU', metricValue(data?.metrics?.cpu), '5-minute rate')}
+        ${kpiCard('Average memory', metricValue(data?.metrics?.memory), 'Current utilization')}
+        ${kpiCard('Average disk', metricValue(data?.metrics?.disk), 'Non-temporary filesystems')}
+      </div>
+      <section class="panel"><div class="section-head"><h2>Prometheus scrape targets</h2><span class="mono muted">Updated ${timeAgo(data?.generatedAt)}</span></div>
+        <table class="tbl"><thead><tr><th>Job</th><th>Instance</th><th>Health</th><th>Last error</th><th>Last scrape</th></tr></thead><tbody>${rows}</tbody></table></section>`;
   }
 
   /** Builds the operations-overview markup from API data. */
@@ -319,7 +380,7 @@ if (typeof document !== 'undefined') {
       kpiCard('Gate 2 Backlog', k.gate2Backlog, `oldest ${fmtDuration(k.gate2OldestAgeMs)} · target &lt;8h`),
       kpiCard('Published', k.publishedTotal, `${k.publishedThisMonth} this month`),
       kpiCard('Errors', k.errorCount, `${k.rejectionCount} rejected`),
-      kpiCard('Featured', k.featuredRate == null ? '—' : `${Math.round(k.featuredRate * 100)}%`, `${k.featuredCount ?? '—'} flagged`),
+      kpiCard('Featured', k.featuredRate == null ? '—' : `${Math.round(k.featuredRate * 100)}%`, `${k.featuredCount ?? '—'} published articles`),
     ].join('');
 
     const warn = (o.warnings && o.warnings.length)
@@ -701,4 +762,3 @@ if (typeof document !== 'undefined') {
 
   document.addEventListener('DOMContentLoaded', init);
 }
-
