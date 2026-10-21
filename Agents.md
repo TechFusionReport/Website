@@ -17,7 +17,14 @@ to the client-rendering restriction below, scoped to article lists only.
 Mixed index schemas are normalized at display time. Published article headings,
 breadcrumbs and metadata supply missing fields and resolve category conflicts,
 with console warnings. No editorial records are rewritten. The index rebuild
-workflow still needs repair; see `docs/publishing-discovery-audit.md`.
+workflow repair is prepared on `fix/post-metadata-index`, continuing the same
+user-authorized branch/PR workflow from merged main. See
+`docs/publishing-metadata-repair.md` for verification and remaining cleanup.
+
+The index rebuild uses `scripts/rebuild_posts_index.py` (Python standard library,
+CI/maintenance only; the public site still has no runtime dependencies or bundler).
+It reads published HTML and preserves existing custom/curation fields and slugs,
+without rewriting article files. Run with `--check` for read-only validation.
 
 This file provides persistent context for AI agents (Claude Code, Codex, ChatGPT, or
 any other assistant) working in this repository. Read this before taking
