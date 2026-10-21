@@ -10,8 +10,9 @@ rule below; production changes still require human review and merge.
 article lists from `posts.json`. Static navigation, category tiles, and curated
 homepage selections remain baked. Existing article HTML is retained if the index
 cannot load; static CES cards provide initial discovery on Latest/Blog/Technology/
-AI Tools. Future posts require JavaScript for immediate discovery until static
-listing regeneration is integrated with publication. This is an explicit exception
+AI Tools. Static listing regeneration is prepared on `fix/static-post-listings`,
+continuing the user-authorized audit branch/PR workflow from merged main. This
+remains an explicit exception
 to the client-rendering restriction below, scoped to article lists only.
 
 Mixed index schemas are normalized at display time. Published article headings,
@@ -25,6 +26,13 @@ The index rebuild uses `scripts/rebuild_posts_index.py` (Python standard library
 CI/maintenance only; the public site still has no runtime dependencies or bundler).
 It reads published HTML and preserves existing custom/curation fields and slugs,
 without rewriting article files. Run with `--check` for read-only validation.
+
+`scripts/render_post_listings.py` regenerates only article-list container contents
+on all 19 listing pages. The publishing-index workflow runs it after extraction
+and commits the generated HTML with posts.json. Navigation, hero sections, tiles
+and the curated homepage carousel stay untouched. JavaScript remains a freshness
+enhancement, while generated HTML supplies listings for readers without it.
+See `docs/static-listing-regeneration.md` for verification and delivery caveats.
 
 This file provides persistent context for AI agents (Claude Code, Codex, ChatGPT, or
 any other assistant) working in this repository. Read this before taking

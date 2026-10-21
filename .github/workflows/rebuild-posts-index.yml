@@ -5,12 +5,14 @@ on:
     paths:
       - '_posts/**'
       - 'scripts/rebuild_posts_index.py'
+      - 'scripts/render_post_listings.py'
       - '.github/workflows/rebuild-posts-index.yml'
   workflow_dispatch:
   pull_request:
     paths:
       - '_posts/**'
       - 'scripts/rebuild_posts_index.py'
+      - 'scripts/render_post_listings.py'
       - '.github/workflows/rebuild-posts-index.yml'
 
 permissions:
@@ -29,6 +31,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/rebuild_posts_index.py --check
+      - run: python scripts/render_post_listings.py --check
 
   rebuild-index:
     if: github.event_name != 'pull_request' && github.event.deleted != true
@@ -50,16 +53,19 @@ jobs:
       - name: Rebuild posts.json from published HTML
         run: python scripts/rebuild_posts_index.py
 
+      - name: Refresh static article listings
+        run: python scripts/render_post_listings.py
+
       - name: Commit updated posts.json
         env:
           INDEX_BRANCH: ${{ github.ref_name }}
         run: |
           git config user.name "TFR Publisher Bot"
           git config user.email "bot@techfusionreport.com"
-          git add posts.json
+          git add posts.json index.html blog.html technology.html entertainment.html productivity.html ai.html smartphones.html smart_home.html android_apps.html mac-apps.html smartphone-apps.html tips_tricks.html gtk_websites.html movies.html tv_shows.html music.html office.html workflows.html productivity_apps.html
           if git diff --staged --quiet; then
             echo "posts.json unchanged"
             exit 0
           fi
-          git commit -m "index: rebuild posts.json [skip ci]"
+          git commit -m "index: refresh published metadata and static listings [skip ci]"
           git push origin "HEAD:$INDEX_BRANCH"
