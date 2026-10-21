@@ -1,5 +1,24 @@
 # Agents.md — TechFusion Report Website
 
+## Publishing-discovery exception (2026-10-21)
+
+The authorized P0 audit work uses `fix/posts-discovery`, based on current
+`main`, for review in a PR. This task-specific branch overrides the preview-only
+rule below; production changes still require human review and merge.
+
+`post-listings.js` progressively refreshes Latest, Blog, category and subcategory
+article lists from `posts.json`. Static navigation, category tiles, and curated
+homepage selections remain baked. Existing article HTML is retained if the index
+cannot load; static CES cards provide initial discovery on Latest/Blog/Technology/
+AI Tools. Future posts require JavaScript for immediate discovery until static
+listing regeneration is integrated with publication. This is an explicit exception
+to the client-rendering restriction below, scoped to article lists only.
+
+Mixed index schemas are normalized at display time. Published article headings,
+breadcrumbs and metadata supply missing fields and resolve category conflicts,
+with console warnings. No editorial records are rewritten. The index rebuild
+workflow still needs repair; see `docs/publishing-discovery-audit.md`.
+
 This file provides persistent context for AI agents (Claude Code, Codex, ChatGPT, or
 any other assistant) working in this repository. Read this before taking
 any action in the codebase.
