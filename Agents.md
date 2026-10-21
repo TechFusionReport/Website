@@ -76,13 +76,18 @@ treat it that way.
 
 - **Domain:** `techfusionreport.com` / `www.techfusionreport.com` via
   Cloudflare DNS
-- **Delivery:** documented as GitHub Pages serving `main`. **Unconfirmed
-  as of 2026-08-23** — a Cloudflare Worker named `website` also builds
-  from every push (via `wrangler versions upload`), but those builds are
-  not auto-promoted to production traffic. Verify the actual production
-  source in the Cloudflare dashboard (Workers & Pages → `website` →
-  Settings → Build) before assuming either path is definitively the live
-  one. Don't silently "fix" this note without checking first.
+- **Delivery (verified 2026-10-21):** the public apex/www site is GitHub
+  Pages behind Cloudflare DNS/proxy. DNS and public GitHub response headers
+  confirm this; no route or custom domain assigns apex/www to `website`.
+  A separate Cloudflare Worker `website` automatically deploys `main` and
+  uploads non-main versions, but is not the public-domain origin. Its build
+  history explicitly skipped the index bot's `[skip ci]` commit. GitHub Pages
+  also does not rebuild from `GITHUB_TOKEN` pushes automatically. PR 30 adds
+  an explicit main-only Pages-build request after generated files change,
+  first verifying the Pages API reports legacy main/root publishing.
+  The connected GitHub tool cannot read Pages settings, so that exact source
+  configuration and the first real handoff still require workflow verification.
+  See `docs/production-delivery-audit.md` for evidence and boundaries.
 - **Build tooling:** none — pure HTML/CSS/JS, no Node.js, no bundler
 - **Pipeline owner:** Cloudflare Workers in the Automations repo, not
   this repo
@@ -322,8 +327,8 @@ CNAME                       — GitHub Pages custom domain
 
 ## Open Items (as of 2026-08-23)
 
-- Confirm the actual production delivery path (GitHub Pages vs.
-  Cloudflare Worker `website`) — see Stack Overview.
+- Verify the first main-branch generated commit's explicit Pages-build handoff
+  and subsequent public output — see `docs/production-delivery-audit.md`.
 - `article-template..html.html` filename typo — known, unfixed, flagged
   for a future cleanup pass.
 - PR #19 (this redesign, `preview` → `main`) pending merge.

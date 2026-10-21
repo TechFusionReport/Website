@@ -43,13 +43,14 @@ workflow. Generated HTML is tracked so delivery does not need a Python runtime.
 
 ## Remaining boundaries
 
-This prepares fresh static HTML in the Git publication record. Confirm the actual
-production delivery source and its response to bot-generated commits before
-claiming automatic end-to-end deployment. GitHub Actions-generated commits do not
-necessarily start another deployment workflow; the current rebuild commit also
-retains its existing skip-ci marker. This PR does not change or promote production
-deployments. The runtime enhancement still provides immediate discovery from the
-live index while the static output awaits delivery.
+The delivery audit now confirms GitHub Pages as the public origin, behind
+Cloudflare. PR 30 also adds an explicit main-only Pages-build request after a
+generated commit, because workflow-token pushes do not automatically rebuild
+Pages. The source configuration is verified before requesting a build. See
+`docs/production-delivery-audit.md` for evidence, source-setting access limitations
+and the required first real post-deployment verification. No production API write
+was used to test this change. The runtime enhancement remains available while
+static output awaits delivery.
 
 Griply placeholder article content, missing Griply/CES images, CES truncation and
 template issues, and upstream pre-publication quality gates remain separate work.
