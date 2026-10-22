@@ -7,6 +7,8 @@ on:
       - 'scripts/rebuild_posts_index.py'
       - 'scripts/render_post_listings.py'
       - 'scripts/request_pages_build.py'
+      - 'scripts/generate_sitemap.py'
+      - '*.html'
       - '.github/workflows/rebuild-posts-index.yml'
   workflow_dispatch:
   pull_request:
@@ -15,6 +17,8 @@ on:
       - 'scripts/rebuild_posts_index.py'
       - 'scripts/render_post_listings.py'
       - 'scripts/request_pages_build.py'
+      - 'scripts/generate_sitemap.py'
+      - '*.html'
       - '.github/workflows/rebuild-posts-index.yml'
 
 permissions:
@@ -35,6 +39,7 @@ jobs:
       - run: python scripts/rebuild_posts_index.py --check
       - run: python scripts/render_post_listings.py --check
       - run: python -m py_compile scripts/request_pages_build.py
+      - run: python scripts/generate_sitemap.py --check
 
   rebuild-index:
     if: github.event_name != 'pull_request' && github.event.deleted != true
@@ -62,6 +67,9 @@ jobs:
       - name: Refresh static article listings
         run: python scripts/render_post_listings.py
 
+      - name: Refresh canonical URLs and XML sitemap
+        run: python scripts/generate_sitemap.py
+
       - name: Commit updated posts.json
         id: publish
         env:
@@ -70,6 +78,7 @@ jobs:
           git config user.name "TFR Publisher Bot"
           git config user.email "bot@techfusionreport.com"
           git add posts.json index.html blog.html technology.html entertainment.html productivity.html ai.html smartphones.html smart_home.html android_apps.html mac-apps.html smartphone-apps.html tips_tricks.html gtk_websites.html movies.html tv_shows.html music.html office.html workflows.html productivity_apps.html
+          git add sitemap.xml _posts blog-post-template.html article-template..html.html
           if git diff --staged --quiet; then
             echo "Published metadata and listings unchanged"
             echo "changed=false" >> "$GITHUB_OUTPUT"
