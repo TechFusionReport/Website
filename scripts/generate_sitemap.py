@@ -1,4 +1,5 @@
 import argparse
+import json
 import re
 import sys
 from pathlib import Path
@@ -57,7 +58,10 @@ def generate(root):
         urls.append(url)
     articles = sorted((root / "_posts").glob("*.html"), reverse=True)
     if not articles:
-        raise ValueError("No published articles; refusing to generate an incomplete sitemap")
+        posts_index = root / "posts.json"
+        previous = json.loads(posts_index.read_text(encoding="utf-8")) if posts_index.exists() else []
+        if previous:
+            raise ValueError("No published articles but posts.json is not empty; refusing to generate an incomplete sitemap")
     for path in articles:
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}-[a-z0-9][a-z0-9_-]*\.html", path.name):
             raise ValueError(f"Unsupported published article filename: {path.name}")
