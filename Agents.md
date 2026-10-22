@@ -325,10 +325,20 @@ CNAME                       — GitHub Pages custom domain
 
 ---
 
-## Open Items (as of 2026-08-23)
+## Open Items (as of 2026-10-22)
 
 - Verify the first main-branch generated commit's explicit Pages-build handoff
   and subsequent public output — see `docs/production-delivery-audit.md`.
 - `article-template..html.html` filename typo — known, unfixed, flagged
   for a future cleanup pass.
-- PR #19 (this redesign, `preview` → `main`) pending merge.
+- `scripts/rebuild_posts_index.py` and `scripts/render_post_listings.py` both
+  hard-refuse ("No published HTML files; refusing to replace the index") when
+  `_posts/` has zero published `.html` files. This is a deliberate guard
+  against an accidental empty directory wiping `posts.json`, but it also
+  blocks the scripts on a legitimate zero-post state (see the seed-article
+  removal in `chore/repo-cleanup`). No fix proposed yet — flagging for
+  whoever next needs to run these scripts against an empty index.
+- PR #31's `sitemap.xml` was generated while the 10 March seed posts + the
+  CES test post still existed in `_posts/`; `chore/repo-cleanup` removes
+  those files. Whichever of the two merges second should regenerate
+  `sitemap.xml` via `scripts/generate_sitemap.py` to drop the dead entries.
