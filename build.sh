@@ -4,7 +4,7 @@ rm -rf dist
 mkdir -p dist
 
 # Root web files
-for f in *.html *.css *.js *.json CNAME .nojekyll; do
+for f in *.html *.css *.js *.json sitemap.xml robots.txt CNAME .nojekyll; do
   [ -f "$f" ] && cp "$f" dist/ || true
 done
 
