@@ -34,6 +34,12 @@ and the curated homepage carousel stay untouched. JavaScript remains a freshness
 enhancement, while generated HTML supplies listings for readers without it.
 See `docs/static-listing-regeneration.md` for verification and delivery caveats.
 
+The authorized audit continues on `fix/seo-discovery` from merged main. The
+publishing maintenance workflow also runs `scripts/generate_sitemap.py` to keep
+`sitemap.xml` and article/template head canonical URLs aligned with the public
+www host. Article bodies are not rewritten. `robots.txt` advertises the sitemap;
+Cloudflare-managed crawler policies are unchanged. See `docs/technical-seo-audit.md`.
+
 This file provides persistent context for AI agents (Claude Code, Codex, ChatGPT, or
 any other assistant) working in this repository. Read this before taking
 any action in the codebase.
