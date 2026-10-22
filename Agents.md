@@ -10,8 +10,9 @@ rule below; production changes still require human review and merge.
 article lists from `posts.json`. Static navigation, category tiles, and curated
 homepage selections remain baked. Existing article HTML is retained if the index
 cannot load; static CES cards provide initial discovery on Latest/Blog/Technology/
-AI Tools. Future posts require JavaScript for immediate discovery until static
-listing regeneration is integrated with publication. This is an explicit exception
+AI Tools. Static listing regeneration is prepared on `fix/static-post-listings`,
+continuing the user-authorized audit branch/PR workflow from merged main. This
+remains an explicit exception
 to the client-rendering restriction below, scoped to article lists only.
 
 Mixed index schemas are normalized at display time. Published article headings,
@@ -25,6 +26,13 @@ The index rebuild uses `scripts/rebuild_posts_index.py` (Python standard library
 CI/maintenance only; the public site still has no runtime dependencies or bundler).
 It reads published HTML and preserves existing custom/curation fields and slugs,
 without rewriting article files. Run with `--check` for read-only validation.
+
+`scripts/render_post_listings.py` regenerates only article-list container contents
+on all 19 listing pages. The publishing-index workflow runs it after extraction
+and commits the generated HTML with posts.json. Navigation, hero sections, tiles
+and the curated homepage carousel stay untouched. JavaScript remains a freshness
+enhancement, while generated HTML supplies listings for readers without it.
+See `docs/static-listing-regeneration.md` for verification and delivery caveats.
 
 This file provides persistent context for AI agents (Claude Code, Codex, ChatGPT, or
 any other assistant) working in this repository. Read this before taking
@@ -68,13 +76,18 @@ treat it that way.
 
 - **Domain:** `techfusionreport.com` / `www.techfusionreport.com` via
   Cloudflare DNS
-- **Delivery:** documented as GitHub Pages serving `main`. **Unconfirmed
-  as of 2026-08-23** — a Cloudflare Worker named `website` also builds
-  from every push (via `wrangler versions upload`), but those builds are
-  not auto-promoted to production traffic. Verify the actual production
-  source in the Cloudflare dashboard (Workers & Pages → `website` →
-  Settings → Build) before assuming either path is definitively the live
-  one. Don't silently "fix" this note without checking first.
+- **Delivery (verified 2026-10-21):** the public apex/www site is GitHub
+  Pages behind Cloudflare DNS/proxy. DNS and public GitHub response headers
+  confirm this; no route or custom domain assigns apex/www to `website`.
+  A separate Cloudflare Worker `website` automatically deploys `main` and
+  uploads non-main versions, but is not the public-domain origin. Its build
+  history explicitly skipped the index bot's `[skip ci]` commit. GitHub Pages
+  also does not rebuild from `GITHUB_TOKEN` pushes automatically. PR 30 adds
+  an explicit main-only Pages-build request after generated files change,
+  first verifying the Pages API reports legacy main/root publishing.
+  The connected GitHub tool cannot read Pages settings, so that exact source
+  configuration and the first real handoff still require workflow verification.
+  See `docs/production-delivery-audit.md` for evidence and boundaries.
 - **Build tooling:** none — pure HTML/CSS/JS, no Node.js, no bundler
 - **Pipeline owner:** Cloudflare Workers in the Automations repo, not
   this repo
@@ -314,8 +327,8 @@ CNAME                       — GitHub Pages custom domain
 
 ## Open Items (as of 2026-08-23)
 
-- Confirm the actual production delivery path (GitHub Pages vs.
-  Cloudflare Worker `website`) — see Stack Overview.
+- Verify the first main-branch generated commit's explicit Pages-build handoff
+  and subsequent public output — see `docs/production-delivery-audit.md`.
 - `article-template..html.html` filename typo — known, unfixed, flagged
   for a future cleanup pass.
 - PR #19 (this redesign, `preview` → `main`) pending merge.
