@@ -174,13 +174,15 @@ def extract_post(file, html, previous):
 def rebuild(root):
     posts_dir = root / "_posts"
     files = sorted(posts_dir.glob("*.html"), reverse=True)
-    if not files:
-        raise ValueError("No published HTML files; refusing to replace the index")
-    if list(posts_dir.glob("*.md")):
-        raise ValueError("Markdown posts require an HTML publication step before indexing")
     previous = json.loads((root / "posts.json").read_text(encoding="utf-8")) if (root / "posts.json").exists() else []
     if not isinstance(previous, list) or any(not isinstance(post, dict) for post in previous):
         raise ValueError("Existing index must be an array of post objects")
+    if not files:
+        if previous:
+            raise ValueError("No published HTML files but posts.json is not empty; refusing to replace the index")
+        return json.dumps([], ensure_ascii=False, indent=2) + "\n"
+    if list(posts_dir.glob("*.md")):
+        raise ValueError("Markdown posts require an HTML publication step before indexing")
     indexed = {}
     for post in previous:
         file = clean(post.get("file")) or Path(urlsplit(clean(post.get("url"))).path).name
