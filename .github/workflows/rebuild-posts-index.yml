@@ -4,129 +4,108 @@ on:
   push:
     paths:
       - '_posts/**'
+      - 'scripts/rebuild_posts_index.py'
+      - 'scripts/render_post_listings.py'
+      - 'scripts/request_pages_build.py'
+      - 'scripts/generate_sitemap.py'
+      - '*.html'
+      - '.github/workflows/rebuild-posts-index.yml'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '_posts/**'
+      - 'scripts/rebuild_posts_index.py'
+      - 'scripts/render_post_listings.py'
+      - 'scripts/request_pages_build.py'
+      - 'scripts/generate_sitemap.py'
+      - '*.html'
+      - '.github/workflows/rebuild-posts-index.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: post-index-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  rebuild-index:
+  validate-index:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/rebuild_posts_index.py --check
+      - run: python scripts/render_post_listings.py --check
+      - run: python -m py_compile scripts/request_pages_build.py
+      - run: python scripts/generate_sitemap.py --check
+
+  rebuild-index:
+    if: github.event_name != 'pull_request' && github.event.deleted != true
+    needs: validate-index
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.publish.outputs.changed }}
+      commit: ${{ steps.publish.outputs.commit }}
     permissions:
       contents: write
 
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.ref_name }}
           fetch-depth: 1
 
-      - name: Rebuild posts.json from _posts/
-        run: |
-          node << 'SCRIPT'
-          const fs   = require('fs');
-          const path = require('path');
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-          const postsDir = '_posts';
-          const outFile  = 'posts.json';
+      - name: Rebuild posts.json from published HTML
+        run: python scripts/rebuild_posts_index.py
 
-          // indexOf-based JSON-LD extractor (no eval, no regex multiline)
-          function extractJsonLD(html) {
-            const open  = '<script type="application/ld+json">';
-            const close = '</script>';
-            const start = html.indexOf(open);
-            if (start === -1) return null;
-            const end = html.indexOf(close, start + open.length);
-            if (end === -1) return null;
-            try {
-              return JSON.parse(html.slice(start + open.length, end).trim());
-            } catch (_e) {
-              return null;
-            }
-          }
+      - name: Refresh static article listings
+        run: python scripts/render_post_listings.py
 
-          // Extract a <meta> content value by property name
-          function metaContent(html, prop) {
-            const needle = 'property="' + prop + '" content="';
-            const start  = html.indexOf(needle);
-            if (start === -1) return '';
-            const from = start + needle.length;
-            const end  = html.indexOf('"', from);
-            return end === -1 ? '' : html.slice(from, end);
-          }
-
-          function metaName(html, name) {
-            const needle = 'name="' + name + '" content="';
-            const start  = html.indexOf(needle);
-            if (start === -1) return '';
-            const from = start + needle.length;
-            const end  = html.indexOf('"', from);
-            return end === -1 ? '' : html.slice(from, end);
-          }
-
-          if (!fs.existsSync(postsDir)) {
-            fs.writeFileSync(outFile, '[]');
-            console.log('No _posts/ directory found, wrote empty posts.json');
-            process.exit(0);
-          }
-
-          const files = fs.readdirSync(postsDir)
-            .filter(f => f.endsWith('.html') || f.endsWith('.md'))
-            .sort()
-            .reverse(); // newest first (filenames are YYYY-MM-DD-slug.*)
-
-          const posts = [];
-          let skipped = 0;
-
-          for (const file of files) {
-            const filePath = path.join(postsDir, file);
-            let html;
-            try { html = fs.readFileSync(filePath, 'utf8'); }
-            catch (_e) { skipped++; continue; }
-
-            // Parse date and slug from filename: YYYY-MM-DD-slug.html
-            const match = file.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.(html|md)$/);
-            const date  = match ? match[1] : '';
-            const slug  = match ? match[2] : file.replace(/\.[^.]+$/, '');
-
-            // Prefer JSON-LD for structured data
-            const ld = extractJsonLD(html);
-
-            const title       = ld?.headline    || metaContent(html, 'og:title')       || slug;
-            const description = ld?.description || metaContent(html, 'og:description') || '';
-            const image       = ld?.image       || metaContent(html, 'og:image')       || '';
-            const url         = ld?.url         || metaContent(html, 'og:url')         || '';
-            const keywords    = ld?.keywords    || metaName(html, 'keywords')          || '';
-
-            // Category from breadcrumb href or OG url path
-            let category = 'Technology';
-            const catHref = html.indexOf('/category/');
-            if (catHref !== -1) {
-              const catStart = catHref + '/category/'.length;
-              const catEnd   = html.indexOf('/', catStart);
-              if (catEnd !== -1) {
-                const raw = html.slice(catStart, catEnd);
-                category  = raw.charAt(0).toUpperCase() + raw.slice(1);
-              }
-            }
-
-            posts.push({
-              title,
-              slug,
-              date: date || (ld?.datePublished || ''),
-              category,
-              tags: keywords ? keywords.split(',').map(k => k.trim()).filter(Boolean) : [],
-              description,
-              image,
-              url: url || ('https://techfusionreport.com/' + slug + '/'),
-              file
-            });
-          }
-
-          fs.writeFileSync(outFile, JSON.stringify(posts, null, 2));
-          console.log('Rebuilt posts.json: ' + posts.length + ' posts (' + skipped + ' skipped)');
-          SCRIPT
+      - name: Refresh canonical URLs and XML sitemap
+        run: python scripts/generate_sitemap.py
 
       - name: Commit updated posts.json
+        id: publish
+        env:
+          INDEX_BRANCH: ${{ github.ref_name }}
         run: |
-          git config user.name  "TFR Publisher Bot"
+          git config user.name "TFR Publisher Bot"
           git config user.email "bot@techfusionreport.com"
-          git add posts.json
-          git diff --staged --quiet && echo "posts.json unchanged" && exit 0
-          git commit -m "index: rebuild posts.json [skip ci]"
-          git push
+          git add posts.json index.html blog.html technology.html entertainment.html productivity.html ai.html smartphones.html smart_home.html android_apps.html mac-apps.html smartphone-apps.html tips_tricks.html gtk_websites.html movies.html tv_shows.html music.html office.html workflows.html productivity_apps.html
+          git add sitemap.xml _posts blog-post-template.html article-template..html.html
+          if git diff --staged --quiet; then
+            echo "Published metadata and listings unchanged"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "index: refresh published metadata and static listings [skip ci]"
+          git push origin "HEAD:$INDEX_BRANCH"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  request-pages-build:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.rebuild-index.outputs.changed == 'true'
+    needs: rebuild-index
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pages: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.rebuild-index.outputs.commit }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Request Pages rebuild after generated publication
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python scripts/request_pages_build.py --request
