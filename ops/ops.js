@@ -1,3 +1,4 @@
+import { renderMonitoring } from './monitoring.js';
 // TechFusion Ops Center — dashboard client.
 // Loaded as <script type="module">. Talks to the Access-gated Worker API at
 // /ops/api/* (same origin, so the Cloudflare Access cookie rides along).
@@ -275,6 +276,12 @@ if (typeof document !== 'undefined') {
     try {
       state.observability = await api('/observability');
       root.innerHTML = renderInfrastructure(state.observability);
+      try {
+        const monitoring = await api('/legacy-monitoring');
+        root.insertAdjacentHTML('beforeend', renderMonitoring(monitoring));
+      } catch (monitorError) {
+        root.insertAdjacentHTML('beforeend', renderMonitoring({ status: 'unavailable', reason: monitorError.message }));
+      }
     } catch (e) {
       root.innerHTML = `<header class="page-head"><h1>Infrastructure</h1></header>${errorState(e.message)}`;
     }
