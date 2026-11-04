@@ -1,3 +1,5 @@
 # Generator script used to bake static pages — not part of the shipped site.
 # Repo convention is "no build step" (see Agents.md); this stays local only.
 _build/
+
+.DS_Store
