@@ -1,3 +1,4 @@
+import { renderMonitoring } from './monitoring.js';
 // TechFusion Ops Center — dashboard client.
 // Loaded as <script type="module">. Talks to the Access-gated Worker API at
 // /ops/api/* (same origin, so the Cloudflare Access cookie rides along).
@@ -132,18 +133,19 @@ export function youtubeEmbedUrl(rawUrl) {
 
 function videoEmbed(url) {
   let embed = youtubeEmbedUrl(url);
+  const safeMediaUrl = safeDashboardUrl(url);
   try {
     const u = new URL(url);
     if (!embed && /(^|\.)vimeo\.com$/i.test(u.hostname)) {
       const id = u.pathname.split('/').filter(Boolean).find(x => /^\d+$/.test(x));
       if (id) embed = `https://player.vimeo.com/video/${id}`;
     }
-    if (!embed && /\.(mp4|webm|ogg)$/i.test(u.pathname)) {
-      return `<video class="video-direct" controls preload="metadata" src="${escapeHtml(url)}"></video>`;
+    if (!embed && safeMediaUrl && /\.(mp4|webm|ogg)$/i.test(u.pathname)) {
+      return `<video class="video-direct" controls preload="metadata" src="${escapeHtml(safeMediaUrl)}"></video>`;
     }
   } catch { /* fallback below */ }
-  if (!embed) return url
-    ? `<div class="video-fallback"><a href="${escapeHtml(url)}" target="_blank" rel="noopener">Open original video ↗</a></div>`
+  if (!embed) return safeMediaUrl
+    ? `<div class="video-fallback"><a href="${escapeHtml(safeMediaUrl)}" target="_blank" rel="noopener">Open original video ↗</a></div>`
     : '<div class="state empty">No original video URL available.</div>';
   return `<div class="video-frame"><iframe src="${embed}" title="Original source video" loading="lazy"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -161,6 +163,7 @@ if (typeof document !== 'undefined') {
     overview: null,
     commandCenter: null,
     observability: null,
+    attention: null,
     queue: [],
     drafts: [],
     draftDetails: {},
@@ -202,6 +205,14 @@ if (typeof document !== 'undefined') {
   const errorState = (msg) => `<div class="state error">⚠ ${escapeHtml(msg)}</div>`;
   /** Builds monospace markup for a nullable numeric value. */
   const num = (n) => `<span class="mono">${n == null ? '—' : n}</span>`;
+  /** Builds a new-tab link for a valid URL, otherwise inert text (same URL rules as safeDashboardUrl). */
+  const externalLink = (url, label, className = '') => {
+    const href = safeDashboardUrl(url, window.location.href);
+    const cls = className ? ` class="${escapeHtml(className)}"` : '';
+    return href
+      ? `<a${cls} href="${escapeHtml(href)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`
+      : `<span${cls}>${escapeHtml(label)}</span>`;
+  };
 
   // ── navigation ─────────────────────────────────────────────────────────────
   /** Activates a dashboard view and loads its current data. */
@@ -242,10 +253,18 @@ if (typeof document !== 'undefined') {
         services: [],
         attention: [],
       }));
+      const attention = await api('/attention').catch((error) => ({
+        generatedAt: o.generatedAt,
+        count: 0,
+        criticalCount: 0,
+        items: [],
+        error: error.message,
+      }));
       state.overview = o;
       state.commandCenter = commandCenter;
+      state.attention = attention;
       setBadges();
-      root.innerHTML = renderDashboard(o, commandCenter);
+      root.innerHTML = renderDashboard(o, commandCenter, attention);
     } catch (e) {
       root.innerHTML = errorState(e.message);
     }
@@ -266,6 +285,12 @@ if (typeof document !== 'undefined') {
     try {
       state.observability = await api('/observability');
       root.innerHTML = renderInfrastructure(state.observability);
+      try {
+        const monitoring = await api('/legacy-monitoring');
+        root.insertAdjacentHTML('beforeend', renderMonitoring(monitoring));
+      } catch (monitorError) {
+        root.insertAdjacentHTML('beforeend', renderMonitoring({ status: 'unavailable', reason: monitorError.message }));
+      }
     } catch (e) {
       root.innerHTML = `<header class="page-head"><h1>Infrastructure</h1></header>${errorState(e.message)}`;
     }
@@ -318,13 +343,13 @@ if (typeof document !== 'undefined') {
 
   /** Builds the operations-overview markup from API data. */
 
-  function renderDashboard(o, commandCenter) {
+  function renderDashboard(o, commandCenter, unifiedAttention = {}) {
     const k = o.kpis;
     const tasks = commandCenter?.tasks || { status: 'error', items: [] };
     const pullRequests = commandCenter?.pullRequests || { status: 'error', items: [] };
     const cloudflare = commandCenter?.cloudflare || { status: 'error' };
     const services = commandCenter?.services || [];
-    const attention = commandCenter?.attention || [];
+    const attention = unifiedAttention?.items || commandCenter?.attention || [];
 
     const sourceBadge = (label, source) =>
       `<span class="badge ${escapeHtml(source.status || 'error')}">${escapeHtml(label)} · ${escapeHtml(source.status || 'error')}</span>`;
@@ -344,8 +369,24 @@ if (typeof document !== 'undefined') {
       ? services.map((item) => `<li>${escapeHtml(item.name)} <span class="badge ${escapeHtml(item.status)}">${escapeHtml(item.status)}</span><span class="mono muted">${item.httpStatus ?? '—'} · ${item.latencyMs ?? '—'}ms</span></li>`).join('')
       : '<li class="muted">No service probes available.</li>';
     const attentionRows = attention.length
-      ? attention.slice(0, 8).map((item) => `<li>${safeLink(item.url, item.title)}<span class="mono muted">${escapeHtml(item.source)}</span></li>`).join('')
-      : '<li class="muted">Nothing currently requires attention.</li>';
+      ? attention.slice(0, 12).map((item) => {
+        const destination = item.externalUrl || item.notionUrl;
+        const title = destination ? safeLink(destination, item.title) : escapeHtml(item.title);
+        const inspect = item.targetView
+          ? `<button class="btn ghost compact" data-view="${escapeHtml(item.targetView)}">Inspect</button>`
+          : destination ? safeLink(destination, 'Open ↗', 'btn ghost compact') : '';
+        const directAction = item.action
+          ? `<button class="btn amber compact" data-act="${escapeHtml(item.action)}" data-id="${escapeHtml(item.id)}">Re-authorize</button>`
+          : '';
+        return `<li class="attention-item">
+          <div class="attention-copy"><span class="badge ${item.priority === 'critical' ? 'error' : 'degraded'}">${escapeHtml(item.priority || 'high')}</span>
+          ${title}<span class="muted">${escapeHtml(item.recommendedAction || '')}</span>
+          ${item.reason ? `<span class="mono muted">${escapeHtml(item.reason)}</span>` : ''}
+          ${item.jobId ? `<span class="mono muted">${escapeHtml(item.jobId)} · attempt ${item.attemptCount ?? 0}</span>` : ''}</div>
+          <div class="actions compact-actions">${inspect}${directAction}</div>
+        </li>`;
+      }).join('')
+      : `<li class="muted">${unifiedAttention?.error ? `Action queue unavailable: ${escapeHtml(unifiedAttention.error)}` : 'Nothing currently requires attention.'}</li>`;
     const cfSummary = cloudflare.status === 'ok'
       ? `${cloudflare.summary.workers} Workers · ${cloudflare.summary.accessApplications} Access apps · ${cloudflare.summary.healthyTunnels} healthy / ${cloudflare.summary.downTunnels} down tunnels`
       : escapeHtml(cloudflare.reason || 'Cloudflare state unavailable');
@@ -381,7 +422,7 @@ if (typeof document !== 'undefined') {
 
     const recent = o.recentPublished.length
       ? o.recentPublished.map((r) =>
-          `<li><a href="${escapeHtml(r.publishedUrl || r.notionUrl)}" target="_blank" rel="noopener">${escapeHtml(r.title || 'Untitled')}</a>
+          `<li>${externalLink(r.publishedUrl || r.notionUrl, r.title || 'Untitled')}
             <span class="mono muted">${escapeHtml(r.publishedDate || '')}</span></li>`).join('')
       : `<li class="muted">Nothing published yet.</li>`;
 
@@ -401,7 +442,7 @@ if (typeof document !== 'undefined') {
         ${sourceBadge('Cloudflare', cloudflare)}
       </section>
       <div class="cols command-grid">
-        <section class="panel"><h2>Action Required</h2><ul class="list">${attentionRows}</ul></section>
+        <section class="panel"><div class="section-head"><h2>Action Required</h2><span class="mono muted">${unifiedAttention?.criticalCount ?? 0} critical · ${unifiedAttention?.count ?? attention.length} total</span></div><ul class="list attention-list">${attentionRows}</ul></section>
         <section class="panel"><h2>System Health</h2><ul class="health">${serviceRows}</ul>
           <div class="source-note">${cfSummary}</div></section>
       </div>
@@ -479,12 +520,12 @@ if (typeof document !== 'undefined') {
         <dt>Category</dt><dd>${escapeHtml(it.category || '—')} / ${escapeHtml(it.subcategory || '—')}</dd>
         <dt>Tags</dt><dd>${(it.tags || []).map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join(' ') || '—'}</dd>
         <dt>Added</dt><dd class="mono">${timeAgo(it.createdTime)} ago</dd>
-        <dt>Video</dt><dd>${it.videoUrl ? `<a href="${escapeHtml(it.videoUrl)}" target="_blank" rel="noopener">Open video ↗</a>` : '—'}</dd>
+        <dt>Video</dt><dd>${it.videoUrl ? externalLink(it.videoUrl, 'Open video ↗') : '—'}</dd>
       </dl>
       <div class="actions">
         <button class="btn green" data-act="approve-transcription" data-id="${escapeHtml(it.id)}">Approve for Transcription</button>
         <button class="btn red" data-act="reject" data-id="${escapeHtml(it.id)}">Reject</button>
-        <a class="btn ghost" href="${escapeHtml(it.notionUrl)}" target="_blank" rel="noopener">Open in Notion ↗</a>
+        ${externalLink(it.notionUrl, 'Open in Notion ↗', 'btn ghost')}
       </div>
       <div class="act-msg"></div>`;
   }
@@ -594,7 +635,7 @@ if (typeof document !== 'undefined') {
       <section class="review-section"><div class="section-head"><h3>Editable Blog Draft</h3><span id="draft-count" class="mono muted">${detail.wordCount} words</span></div><textarea id="draft-editor" class="draft-editor">${escapeHtml(detail.blogDraft || '')}</textarea><details><summary>Rendered HTML preview</summary><iframe id="draft-preview" class="draft-preview" sandbox srcdoc="${escapeHtml(detail.blogDraft || '')}"></iframe></details></section></div>
       <label class="review-notes">Reviewer notes<textarea id="reviewer-notes">${escapeHtml(detail.reviewerNotes || '')}</textarea></label>
       <details class="audit"><summary>Review audit history</summary><pre>${escapeHtml(detail.reviewAuditLog || 'No dashboard actions recorded yet.')}</pre></details>
-      <div class="actions"><a class="btn ghost" href="${escapeHtml(detail.notionUrl)}" target="_blank" rel="noopener">Open in Notion ↗</a>
+      <div class="actions">${externalLink(detail.notionUrl, 'Open in Notion ↗', 'btn ghost')}
       <button class="btn purple" data-act="save-draft" data-id="${detail.id}">Save Draft</button>
       <button class="btn amber" data-act="return-revision" data-id="${detail.id}">Return for Revision</button>
       <button class="btn red" data-act="reject" data-id="${detail.id}">Reject</button>
@@ -631,7 +672,7 @@ if (typeof document !== 'undefined') {
       root.innerHTML = `<header class="page-head"><h1>Errors &amp; Exceptions</h1></header>
         <table class="tbl"><thead><tr><th>Title</th><th>Status</th><th>Last Error</th><th>Source</th></tr></thead>
         <tbody>${data.items.map((e) => `<tr>
-          <td><a href="${escapeHtml(e.notionUrl)}" target="_blank" rel="noopener">${escapeHtml(e.title || 'Untitled')}</a></td>
+          <td>${externalLink(e.notionUrl, e.title || 'Untitled')}</td>
           <td><span class="pill ${statusColor(e.status)}"></span>${escapeHtml(e.status || '')}</td>
           <td class="muted">${escapeHtml(e.lastError || '—')}</td>
           <td>${escapeHtml((e.source || []).join(', '))}</td></tr>`).join('')}</tbody></table>`;
@@ -674,7 +715,9 @@ if (typeof document !== 'undefined') {
       } else {
         const o = await api('/overview'); state.overview = o; setBadges();
         if (view('queue').classList.contains('active')) { state.selectedQueue = null; await loadQueue(); }
-        else await loadDrafts();
+        else if (view('drafts').classList.contains('active')) await loadDrafts();
+        else if (view('errors').classList.contains('active')) await loadErrors();
+        else await loadDashboard();
       }
     } catch (e) { btn.disabled = false; toast(e.message, true); }
   }

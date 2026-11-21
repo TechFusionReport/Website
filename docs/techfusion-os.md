@@ -47,3 +47,11 @@ Every source returns an explicit `status` value. Missing credentials and upstrea
 The Infrastructure view consumes the Access-gated `GET /ops/api/observability` endpoint from Automations. Prometheus remains the authoritative metric source and Grafana remains the detailed dashboard. The frontend renders normalized target health, firing-alert counts, and CPU/memory/disk utilization; it never connects to Prometheus directly or receives Cloudflare Access service-token credentials.
 
 Prometheus and Grafana must both be protected by Cloudflare Access before production rollout. Public Status uses a separate sanitized aggregate contract and never receives target identities, internal addresses, raw labels, scrape URLs, or detailed metrics.
+
+## Unified action queue
+
+The dashboard consumes `GET /ops/api/attention` as its operator-first “Action Required” view. The backend normalizes editorial review work, quality exceptions, capped transcription/publishing failures, critical tasks, draft pull requests, and service-health failures into one priority-ordered response.
+
+The response is a projection only. Notion remains authoritative for content state, the Task Tracker remains authoritative for work state, GitHub remains authoritative for PR state, and runtime systems remain authoritative for health. Direct actions use the existing governed `/ops/api/actions/*` endpoints; human authorization checkboxes and the Status ownership contract remain unchanged.
+
+Every content projection includes `jobId: tfr:<normalized Notion page id>`. This identifier is the cross-system correlation key; it does not create a second record or replace the Notion page ID.
