@@ -331,10 +331,13 @@ CNAME                       — GitHub Pages custom domain
 
 ---
 
-## Open Items (as of 2026-08-23)
+## Open Items (as of 2026-10-22)
 
 - Verify the first main-branch generated commit's explicit Pages-build handoff
   and subsequent public output — see `docs/production-delivery-audit.md`.
 - `article-template..html.html` filename typo — known, unfixed, flagged
   for a future cleanup pass.
-- PR #19 (this redesign, `preview` → `main`) pending merge.
+- PR #31's `sitemap.xml` was generated while the 10 March seed posts + the
+  CES test post still existed in `_posts/`; `chore/repo-cleanup` removes
+  those files. Whichever of the two merges second should regenerate
+  `sitemap.xml` via `scripts/generate_sitemap.py` to drop the dead entries.
