@@ -7,7 +7,17 @@
  */
 
 import assert from 'node:assert/strict';
-import {
+import { readFileSync, writeFileSync, mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join, dirname } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
+// db-search.js is a browser ES module but the repo has no package.json "type": "module",
+// so Node would treat the .js file as CommonJS. Import a temporary .mjs copy instead.
+const here = dirname(fileURLToPath(import.meta.url));
+const tmp = mkdtempSync(join(tmpdir(), 'db-search-'));
+writeFileSync(join(tmp, 'db-search.mjs'), readFileSync(join(here, '..', 'db-search.js'), 'utf8'));
+const {
   sanitizeUrl,
   isDevFixturesEnabled,
   getDataUrl,
@@ -19,7 +29,7 @@ import {
   paginateItems,
   parseUrlState,
   buildUrlSearchParams,
-} from '../db-search.js';
+} = await import(pathToFileURL(join(tmp, 'db-search.mjs')).href);
 
 console.log('--- Running db-search pure function tests ---');
 
@@ -135,7 +145,7 @@ console.log('--- Running db-search pure function tests ---');
 
   const opts = extractFilterOptions(items);
   assert.deepEqual(opts.categories, ['Media', 'Tools']);
-  assert.deepEqual(opts.platforms, ['Android', 'Web', 'iOS'].sort());
+  assert.deepEqual(opts.platforms, ['Android', 'iOS', 'Web']); // locale-aware, case-insensitive order
   assert.deepEqual(opts.tags, ['T1', 'T2', 'T3']);
   console.log('✓ extractFilterOptions tests passed');
 }
