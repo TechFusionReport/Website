@@ -285,11 +285,11 @@ CNAME                       — GitHub Pages custom domain
 
 ## Design System
 
-- Cyan `#33C0F6`, Lime `#B8DA14`, White `#FFFFFF`, Dark `#0A0C10` —
-  **final**, sampled directly from the logo file on 2026-08-26
-  (supersedes the `#00D4FF`/`#A4FF00` values previously documented here
-  — those are stale, don't reintroduce them). Do not propose alternate
-  values.
+- Cyan `#00D4FF`, Lime `#A4FF00`, White `#FFFFFF`, Dark `#0A0C10` —
+  **final**, confirmed by Justin on 2026-11-21 (matches `--cyan` and
+  `--lime` in `style.css`). The `#33C0F6`/`#B8DA14` values sampled from the
+  logo file on 2026-08-26 are stale — don't reintroduce them. Do not
+  propose alternate values.
 - Body/UI font: DM Sans.
 - Display font: **Delcom** — decided, and scoped narrowly to titles,
   section headings, and elements immediately adjacent to them, not a
