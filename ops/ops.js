@@ -133,18 +133,19 @@ export function youtubeEmbedUrl(rawUrl) {
 
 function videoEmbed(url) {
   let embed = youtubeEmbedUrl(url);
+  const safeMediaUrl = safeDashboardUrl(url);
   try {
     const u = new URL(url);
     if (!embed && /(^|\.)vimeo\.com$/i.test(u.hostname)) {
       const id = u.pathname.split('/').filter(Boolean).find(x => /^\d+$/.test(x));
       if (id) embed = `https://player.vimeo.com/video/${id}`;
     }
-    if (!embed && /\.(mp4|webm|ogg)$/i.test(u.pathname)) {
-      return `<video class="video-direct" controls preload="metadata" src="${escapeHtml(url)}"></video>`;
+    if (!embed && safeMediaUrl && /\.(mp4|webm|ogg)$/i.test(u.pathname)) {
+      return `<video class="video-direct" controls preload="metadata" src="${escapeHtml(safeMediaUrl)}"></video>`;
     }
   } catch { /* fallback below */ }
-  if (!embed) return url
-    ? `<div class="video-fallback"><a href="${escapeHtml(url)}" target="_blank" rel="noopener">Open original video ↗</a></div>`
+  if (!embed) return safeMediaUrl
+    ? `<div class="video-fallback"><a href="${escapeHtml(safeMediaUrl)}" target="_blank" rel="noopener">Open original video ↗</a></div>`
     : '<div class="state empty">No original video URL available.</div>';
   return `<div class="video-frame"><iframe src="${embed}" title="Original source video" loading="lazy"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -204,6 +205,14 @@ if (typeof document !== 'undefined') {
   const errorState = (msg) => `<div class="state error">⚠ ${escapeHtml(msg)}</div>`;
   /** Builds monospace markup for a nullable numeric value. */
   const num = (n) => `<span class="mono">${n == null ? '—' : n}</span>`;
+  /** Builds a new-tab link for a valid URL, otherwise inert text (same URL rules as safeDashboardUrl). */
+  const externalLink = (url, label, className = '') => {
+    const href = safeDashboardUrl(url, window.location.href);
+    const cls = className ? ` class="${escapeHtml(className)}"` : '';
+    return href
+      ? `<a${cls} href="${escapeHtml(href)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`
+      : `<span${cls}>${escapeHtml(label)}</span>`;
+  };
 
   // ── navigation ─────────────────────────────────────────────────────────────
   /** Activates a dashboard view and loads its current data. */
@@ -413,7 +422,7 @@ if (typeof document !== 'undefined') {
 
     const recent = o.recentPublished.length
       ? o.recentPublished.map((r) =>
-          `<li><a href="${escapeHtml(r.publishedUrl || r.notionUrl)}" target="_blank" rel="noopener">${escapeHtml(r.title || 'Untitled')}</a>
+          `<li>${externalLink(r.publishedUrl || r.notionUrl, r.title || 'Untitled')}
             <span class="mono muted">${escapeHtml(r.publishedDate || '')}</span></li>`).join('')
       : `<li class="muted">Nothing published yet.</li>`;
 
@@ -511,12 +520,12 @@ if (typeof document !== 'undefined') {
         <dt>Category</dt><dd>${escapeHtml(it.category || '—')} / ${escapeHtml(it.subcategory || '—')}</dd>
         <dt>Tags</dt><dd>${(it.tags || []).map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join(' ') || '—'}</dd>
         <dt>Added</dt><dd class="mono">${timeAgo(it.createdTime)} ago</dd>
-        <dt>Video</dt><dd>${it.videoUrl ? `<a href="${escapeHtml(it.videoUrl)}" target="_blank" rel="noopener">Open video ↗</a>` : '—'}</dd>
+        <dt>Video</dt><dd>${it.videoUrl ? externalLink(it.videoUrl, 'Open video ↗') : '—'}</dd>
       </dl>
       <div class="actions">
         <button class="btn green" data-act="approve-transcription" data-id="${escapeHtml(it.id)}">Approve for Transcription</button>
         <button class="btn red" data-act="reject" data-id="${escapeHtml(it.id)}">Reject</button>
-        <a class="btn ghost" href="${escapeHtml(it.notionUrl)}" target="_blank" rel="noopener">Open in Notion ↗</a>
+        ${externalLink(it.notionUrl, 'Open in Notion ↗', 'btn ghost')}
       </div>
       <div class="act-msg"></div>`;
   }
@@ -626,7 +635,7 @@ if (typeof document !== 'undefined') {
       <section class="review-section"><div class="section-head"><h3>Editable Blog Draft</h3><span id="draft-count" class="mono muted">${detail.wordCount} words</span></div><textarea id="draft-editor" class="draft-editor">${escapeHtml(detail.blogDraft || '')}</textarea><details><summary>Rendered HTML preview</summary><iframe id="draft-preview" class="draft-preview" sandbox srcdoc="${escapeHtml(detail.blogDraft || '')}"></iframe></details></section></div>
       <label class="review-notes">Reviewer notes<textarea id="reviewer-notes">${escapeHtml(detail.reviewerNotes || '')}</textarea></label>
       <details class="audit"><summary>Review audit history</summary><pre>${escapeHtml(detail.reviewAuditLog || 'No dashboard actions recorded yet.')}</pre></details>
-      <div class="actions"><a class="btn ghost" href="${escapeHtml(detail.notionUrl)}" target="_blank" rel="noopener">Open in Notion ↗</a>
+      <div class="actions">${externalLink(detail.notionUrl, 'Open in Notion ↗', 'btn ghost')}
       <button class="btn purple" data-act="save-draft" data-id="${detail.id}">Save Draft</button>
       <button class="btn amber" data-act="return-revision" data-id="${detail.id}">Return for Revision</button>
       <button class="btn red" data-act="reject" data-id="${detail.id}">Reject</button>
@@ -663,7 +672,7 @@ if (typeof document !== 'undefined') {
       root.innerHTML = `<header class="page-head"><h1>Errors &amp; Exceptions</h1></header>
         <table class="tbl"><thead><tr><th>Title</th><th>Status</th><th>Last Error</th><th>Source</th></tr></thead>
         <tbody>${data.items.map((e) => `<tr>
-          <td><a href="${escapeHtml(e.notionUrl)}" target="_blank" rel="noopener">${escapeHtml(e.title || 'Untitled')}</a></td>
+          <td>${externalLink(e.notionUrl, e.title || 'Untitled')}</td>
           <td><span class="pill ${statusColor(e.status)}"></span>${escapeHtml(e.status || '')}</td>
           <td class="muted">${escapeHtml(e.lastError || '—')}</td>
           <td>${escapeHtml((e.source || []).join(', '))}</td></tr>`).join('')}</tbody></table>`;
