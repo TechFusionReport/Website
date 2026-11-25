@@ -184,7 +184,7 @@ if (typeof document !== 'undefined') {
 
   /** Sends an authenticated same-origin request to the Ops Worker API. */
 
-  async function api(path, opts = {}) {
+  async function api(path, opts = {}, expectedStatus = null) {
     const res = await fetch(`${API}${path}`, {
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
@@ -192,7 +192,7 @@ if (typeof document !== 'undefined') {
     });
     let body = null;
     try { body = await res.json(); } catch { /* non-JSON */ }
-    if (!res.ok) throw new Error(body?.error || `Request failed (${res.status})`);
+    if (!res.ok || (expectedStatus !== null && res.status !== expectedStatus)) throw new Error(body?.error || `Request failed (${res.status})`);
     return body;
   }
 
@@ -206,11 +206,11 @@ if (typeof document !== 'undefined') {
   /** Builds monospace markup for a nullable numeric value. */
   const num = (n) => `<span class="mono">${n == null ? '—' : n}</span>`;
   /** Builds a new-tab link for a valid URL, otherwise inert text (same URL rules as safeDashboardUrl). */
-  const externalLink = (url, label, className = '') => {
+  const externalLink = (url, label, className = '', { noreferrer = false } = {}) => {
     const href = safeDashboardUrl(url, window.location.href);
     const cls = className ? ` class="${escapeHtml(className)}"` : '';
     return href
-      ? `<a${cls} href="${escapeHtml(href)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`
+      ? `<a${cls} href="${escapeHtml(href)}" target="_blank" rel="noopener${noreferrer ? ' noreferrer' : ''}">${escapeHtml(label)}</a>`
       : `<span${cls}>${escapeHtml(label)}</span>`;
   };
 
@@ -736,9 +736,30 @@ if (typeof document !== 'undefined') {
     } catch (e) { toast(e.message, true); }
   }
 
+  async function loadEnvironment() {
+    const config = await api('/config', {}, 200).catch(() => null);
+    const label = config?.environment;
+    if (label !== 'PREVIEW' && label !== 'LIVE') return;
+
+    const { siteUrl } = config;
+    if (siteUrl !== null && typeof siteUrl !== 'string') return;
+    const safeUrl = siteUrl?.startsWith('https://') ? safeDashboardUrl(siteUrl, window.location.href) : null;
+
+    const badge = $('#ops-environment');
+    badge.textContent = label;
+    badge.dataset.environment = label;
+    badge.hidden = false;
+    document.title = `[${label}] TechFusion OS`;
+    if (safeUrl) {
+      $('#editorial-site-link').insertAdjacentHTML('afterend',
+        externalLink(safeUrl, `View ${label} site`, 'nav-item ext', { noreferrer: true }));
+    }
+  }
+
   /** Registers dashboard event handlers and opens the overview. */
 
   function init() {
+    void loadEnvironment();
     document.body.addEventListener('input', (ev) => {
       if (ev.target.id === 'draft-editor') {
         state.dirtyDraft = true;
